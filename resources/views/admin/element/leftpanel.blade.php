@@ -35,7 +35,7 @@
           </ul>
         </li>
 
-        <li class="treeview {{ Request::segment(2) === 'event-category' || Request::segment(2) === 'event' || Request::segment(2) === 'tag' || Request::segment(2) === 'news' ? 'active' : null }}">
+        <li class="treeview {{ Request::segment(2) === 'event-category' || Request::segment(2) === 'event' || Request::segment(2) === 'tag' || Request::segment(2) === 'news'  || Request::segment(2) === 'notice' ? 'active' : null }}">
           <a href="javascript:void(0)">
             <i class="fa fa-cog"></i> <span>Events management</span>
             <span class="pull-right-container">
@@ -50,6 +50,8 @@
             <li class="{{ Request::segment(2) === 'tag' ? 'active' : null }}"><a href="{!!URL::to('/admin/tag')!!}"><i class="fa fa-language"></i>Tag</a></li>
 
             <li class="{{ Request::segment(2) === 'news' ? 'active' : null }}"><a href="{!!URL::to('/admin/news')!!}"><i class="fa fa-language"></i>News</a></li>
+
+            <li class="{{ Request::segment(2) === 'notice' ? 'active' : null }}"><a href="{!!URL::to('/admin/notice')!!}"><i class="fa fa-language"></i>Notice</a></li>
                                 
           </ul>
         </li>

@@ -312,6 +312,7 @@ class ComposerStaticInit26ac6f531c7dc343a38a6557cc1ca91b
         'CreateLocalBranchesTable' => __DIR__ . '/../..' . '/database/migrations/2017_05_25_072614_create_local_branches_table.php',
         'CreateNewsTable' => __DIR__ . '/../..' . '/database/migrations/2017_05_25_122251_create_news_table.php',
         'CreateNewsTagTable' => __DIR__ . '/../..' . '/database/migrations/2017_05_25_130643_create_news_tag_table.php',
+        'CreateNoticesTable' => __DIR__ . '/../..' . '/database/migrations/2017_05_29_052234_create_notices_table.php',
         'CreateOrganizationsTable' => __DIR__ . '/../..' . '/database/migrations/2017_05_23_110115_create_organizations_table.php',
         'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
         'CreateTagsTable' => __DIR__ . '/../..' . '/database/migrations/2017_05_25_110222_create_tags_table.php',
