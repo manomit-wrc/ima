@@ -1,0 +1,106 @@
+<?php
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+Route::get('/', function () {
+    return view('welcome');
+});
+Route::get('/admin', 'LoginController@index');
+Route::post('/admin/login', 'LoginController@checkLogin');
+
+Route::group(['middleware'=>['admin']], function(){
+	Route::get('/admin/logout', array('uses' => 'LoginController@logout'));
+    Route::get('/admin/dashboard', 'DashboardController@index');
+    Route::get('/admin/profile','DashboardController@profile');
+    Route::post('/admin/update-profile','DashboardController@update_profile');
+    Route::get('/admin/organization','DashboardController@organization');
+    Route::post('/admin/update-organization','DashboardController@update_organization');
+
+
+    Route::get('/admin/designation','DesignationController@index');
+    Route::get('/admin/designation/add','DesignationController@add');
+    Route::post('/admin/designation/store','DesignationController@store');
+    Route::get('/admin/designation/edit/{id}','DesignationController@edit');
+    Route::post('/admin/designation/update','DesignationController@update');
+    Route::get('/admin/designation/delete/{id}','DesignationController@delete');
+
+
+    Route::get('/admin/team','TeamController@index');
+    Route::get('/admin/team/add','TeamController@add');
+    Route::post('/admin/team/store','TeamController@store');
+    Route::get('/admin/team/edit/{id}','TeamController@edit');
+    Route::post('/admin/team/update','TeamController@update');
+    Route::get('/admin/team/delete/{id}','TeamController@delete');
+
+
+    Route::get('/admin/event-category','EventCategoryController@index');
+    Route::get('/admin/event-category/add','EventCategoryController@add');
+    Route::post('/admin/event-category/store','EventCategoryController@store');
+    Route::get('/admin/event-category/edit/{id}','EventCategoryController@edit');
+    Route::post('/admin/event-category/update','EventCategoryController@update');
+    Route::get('/admin/event-category/delete/{id}','EventCategoryController@delete');
+
+
+    Route::get('/admin/event','EventController@index');
+    Route::get('/admin/event/add','EventController@add');
+    Route::post('/admin/event/store','EventController@store');
+    Route::get('/admin/event/edit/{id}','EventController@edit');
+    Route::post('/admin/event/update','EventController@update');
+    Route::get('/admin/event/delete/{id}','EventController@delete');
+    Route::get('/admin/event/gallery/{id}','EventController@gallery');
+    Route::post('/admin/event/store-gallery','EventController@store_gallery');
+    Route::get('/admin/event/get-gallery/{id}','EventController@get_gallery');
+    Route::post('/admin/event/remove-gallery-image/','EventController@remove_gallery_image');
+
+
+    Route::get('/admin/banner','BannerController@index');
+    Route::get('/admin/banner/add','BannerController@add');
+    Route::post('/admin/banner/store','BannerController@store');
+    Route::get('/admin/banner/edit/{id}','BannerController@edit');
+    Route::post('/admin/banner/update/{id}','BannerController@update');
+    Route::get('/admin/banner/delete/{id}','BannerController@delete');
+
+    Route::get('/admin/bulletin','BulletinController@index');
+    Route::get('/admin/bulletin/add','BulletinController@add');
+    Route::post('/admin/bulletin/store','BulletinController@store');
+    Route::get('/admin/bulletin/edit/{id}','BulletinController@edit');
+    Route::post('/admin/bulletin/update/{id}','BulletinController@update');
+    Route::get('/admin/bulletin/delete/{id}','BulletinController@delete');
+
+    Route::get('/admin/local-branch','LocalBranchController@index');
+    Route::get('/admin/local-branch/add','LocalBranchController@add');
+    Route::post('/admin/local-branch/store','LocalBranchController@store');
+    Route::get('/admin/local-branch/edit/{id}','LocalBranchController@edit');
+    Route::post('/admin/local-branch/update/{id}','LocalBranchController@update');
+    Route::get('/admin/local-branch/delete/{id}','LocalBranchController@delete');
+
+    Route::get('/admin/tag','TagController@index');
+    Route::get('/admin/tag/add','TagController@add');
+    Route::post('/admin/tag/store','TagController@store');
+    Route::get('/admin/tag/edit/{id}','TagController@edit');
+    Route::post('/admin/tag/update/{id}','TagController@update');
+    Route::get('/admin/tag/delete/{id}','TagController@delete');
+
+    Route::get('/admin/news','NewsController@index');
+    Route::get('/admin/news/add','NewsController@add');
+    Route::post('/admin/news/store','NewsController@store');
+    Route::get('/admin/news/edit/{id}','NewsController@edit');
+    Route::post('/admin/news/update/{id}','NewsController@update');
+    Route::get('/admin/news/delete/{id}','NewsController@delete');
+
+    Route::get('/admin/cms','CMSController@index');
+    Route::get('/admin/cms/add','CMSController@add');
+    Route::post('/admin/cms/store','CMSController@store');
+    Route::get('/admin/cms/edit/{id}','CMSController@edit');
+    Route::post('/admin/cms/update/{id}','CMSController@update');
+    Route::get('/admin/cms/delete/{id}','CMSController@delete');
+});
