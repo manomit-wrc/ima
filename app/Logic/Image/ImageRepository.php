@@ -112,7 +112,7 @@ class ImageRepository
         $full_size_dir = public_path().'/uploads/event/gallery/original/';
         $icon_size_dir = public_path().'/uploads/event/gallery/resize/';
 
-        $sessionImage = EventGallery::where('original_name', 'like', $originalFilename)->first();
+        $sessionImage = EventGallery::where('filename', 'like', $originalFilename)->first();
 
 
         if(empty($sessionImage))

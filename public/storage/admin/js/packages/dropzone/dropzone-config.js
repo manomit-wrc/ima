@@ -34,9 +34,9 @@ Dropzone.options.realDropzone = {
         this.on("removedfile", function(file) {
 
             $.ajax({
-                type: 'POST',
+                type: 'GET',
                 url: '/admin/event/remove-gallery-image/',
-                data: {file_name: $('.serverfilename', file.previewElement).val() , _token: $('#csrf-token').val(),event_id:$("#event_id").val()},
+                data: {file_name: $('.serverfilename', file.previewElement).val() , event_id:$("#event_id").val()},
                 dataType: 'html',
                 success: function(data){
                     var rep = JSON.parse(data);
