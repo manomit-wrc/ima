@@ -59,7 +59,7 @@ Route::group(['middleware'=>['admin']], function(){
     Route::get('/admin/event/gallery/{id}','EventController@gallery');
     Route::post('/admin/event/store-gallery','EventController@store_gallery');
     Route::get('/admin/event/get-gallery/{id}','EventController@get_gallery');
-    Route::post('/admin/event/remove-gallery-image/','EventController@remove_gallery_image');
+    Route::get('/admin/event/remove-gallery-image/','EventController@remove_gallery_image');
 
 
     Route::get('/admin/banner','BannerController@index');
