@@ -1,0 +1,43 @@
+<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+    <div class="top-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 ol-md-12">
+                    <p class="text-right" ng-if="!user.id">
+                        <a href="#" class="top_link" data-toggle="modal" data-target="#LoginModal">Login</a>
+                        <a href="#" class="top_link" data-toggle="modal" data-target="#RegModal">Registration</a>
+                    </p>
+                    <p class="text-right" ng-if="user.id">
+                        Welcome <a href="#" class="top_link">{{user.first_name}}</a>
+                        <a href="javascript:void(0)" ng-click="doLogout()" class="top_link">Logout</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container navigation">
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                <i class="fa fa-bars"></i>
+            </button>
+            <a class="navbar-brand newlogo" href="index.html">
+                <img src="/storage/frontend/img/logo1.png" alt="" />
+            </a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/">Home</a></li>
+                <li><a href="javascript:void(0)">About us</a></li>
+                <li><a href="javascript:void(0)">Our Branches</a></li>
+                <li><a href="javascript:void(0)">Contact Us</a></li>
+                <li><a href="javascript:void(0)">News And Events</a></li>
+                <li><a href="javascript:void(0)">Newsletter</a></li>
+                <li><a href="javascript:void(0)">Donor registration</a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>

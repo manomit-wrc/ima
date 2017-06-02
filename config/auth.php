@@ -49,6 +49,10 @@ return [
             'driver' => 'session',
             'provider' => 'users'
         ],
+        'jwt.auth' => [
+            'driver' => 'token',
+            'provider' => 'doctors'
+        ]
     ],
 
     /*
@@ -72,6 +76,10 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
+        ],
+        'doctors' => [
+            'driver' => 'eloquent',
+            'model' => App\Doctor::class,
         ],
 
         // 'users' => [

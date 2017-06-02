@@ -1,0 +1,134 @@
+<div ng-init="getToken()">
+<div class="container">
+            <div class="row">
+                <div class="innertopB">
+                    <div class="col-md-4">
+                        <div class="leftP">
+                            <div class="Leftimgbox">
+                                <div class="imgLbox">
+                                    <span class="btn-file">
+                                        <input type="file">
+                                    </span>
+                                <img src="/storage/frontend/img/doc.jpg" alt="" />
+                                </div>
+                                <h3>Dr. {{user.first_name}}&nbsp;{{user.last_name}}</h3>
+                                <!--<h4>National President</h4>-->
+                                <h5 class="user_address"><i class="fa fa-map-marker" aria-hidden="true"></i> Kolkata,&nbsp;West Bengal, &nbsp;India</h5>
+                            </div>
+
+                            <button type="button" class="LeftBtnActive"><i class="fa fa-user" aria-hidden="true"></i> Edit profile</button>
+                            <button type="button" class="LeftBtn"><i class="fa fa-user" aria-hidden="true"></i> Change Password</button>
+                            <button type="button" class="LeftBtn"><i class="fa fa-user" aria-hidden="true"></i> Upload Journal</button>
+                        </div>
+                    </div>
+                    <div class="col-md-8 Clear-991" ng-controller="AuthController">
+                        <div class="Rpanel">
+                            <h2>Edit Profile</h2>
+                            <form name="frmProfile" ng-submit="doProfile(frmProfile.$valid)" method="post" novalidate="novalidate" >
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="fieldbox">
+                                        <label>First Name </label>
+                                        <input type="text" name="first_name"  class="editF"  required="required" ng-model="first_name" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="fieldbox">
+                                        <label>Last Name</label>
+                                        <input type="text" name="last_name" id="last_name"  ng-model="last_name" class="editF">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="fieldbox">
+                                        <label>Email</label>
+                                        <input type="text" name="email" id="email" ng-model="email"  class="editF">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="fieldbox">
+                                        <label>Mobile</label>
+                                        <input type="text" name="mobile" id="mobile" ng-model="mobile"  class="editF">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="fieldbox">
+                                        <label>Sex</label>
+                                        <select name="sex" id="sex"  class="fieldboxSel">
+                                              <option value="">Select</option>
+                                              <option value="M">Male</option>
+                                              <option value="F">Female</option>
+                                          </select>
+                                    </div>
+                                </div>
+
+                                
+
+                                <div class="col-md-3">
+                                    <div class="fieldbox">
+                                        <label>State</label>
+                                        <select name="state_id"  class="fieldboxSel">
+                                              <option value="">Select</option>
+                                          </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="fieldbox">
+                                        <label>City</label>
+                                        <input type="text" name="city" id="city" ng-model="city"  class="editF">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="fieldbox">
+                                        <label>Pincode</label>
+                                        <input type="text" name="pincode" id="pincode" ng-model="pincode"  class="editF">
+                                    </div>
+                                </div>
+                                
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="fieldbox">
+                                        <label>Birthday</label>
+                                        <input type="text" name="" class="editF" placeholder="DD/MM/YYYY">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="fieldbox">
+                                        <label>Doctor's License</label>
+                                        <input type="text" name="" class="editF">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="fieldbox">
+                                        <label>Biography</label>
+                                        <textarea name="" cols="" rows="5" class="editF"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="fieldbox">
+                                        <button class="button" type="submit">SAVE</button>
+                                    </div>
+                                </div>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

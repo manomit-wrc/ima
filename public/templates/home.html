@@ -1,0 +1,201 @@
+<!-- Section: intro -->
+ <div ng-init="homeContent()">       
+        <div class="container-fluid">
+            <div class="row">
+                <div id="carousel-example-genericA" class="carousel slide slidetop" data-ride="carousel">
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner" role="listbox">
+                        <div class="item " ng-repeat="bn in banners track by $index" ng-class="{active: $index == 0}">
+                            <img src="/uploads/banner/{{bn.banner_image}}" alt="{{bn.banner_image}}" />
+                            <div class="carousel-caption">
+                                <h2>{{bn.name}}</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Controls -->
+                    <a class="left carousel-control" target="_self" href="#carousel-example-genericA" role="button" data-slide="prev">
+                        <img src="/storage/frontend/img/al.png" alt="" />
+                    </a>
+                    <a class="right carousel-control" target="_self" href="#carousel-example-genericA" role="button" data-slide="next">
+                        <img src="/storage/frontend/img/ar.png" alt="" />
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- /Section: intro -->
+        <!-- Section: boxes -->
+        <section id="boxes" class="home-section paddingtop-80">
+            <div class="container">
+                <div class="row">
+                    <div class="section-heading text-center">
+                        <h2 class="h-bold">Team</h2>
+                        <p>Indian Medical Association</p>
+                    </div>
+                    <div class="divider-short"></div>
+                    <div id="carousel-reviewsA" class="carousel slide multi-item-carousel" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="item" ng-repeat="team in teams track by $index" ng-class="{active: $index == 0}">
+                                <div class="col-md-4 col-sm-6" ng-repeat="ind_details in team.team_list track by $index">
+                                    <div class="person-textN rel text-light">
+                                        <img src="/uploads/teams/thumb/{{ind_details.image}}" alt="{{ind_details.image}}" class="person img-circle" />
+                                        <a title="" href="javascript:void(0)">Dr. {{ind_details.name}}</a>
+                                        <span>{{ind_details.designation_name}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <a class="left carousel-control" target="_self" href="#carousel-reviewsA" role="button" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left color_black"></span>
+                        </a>
+                        <a class="right carousel-control" target="_self" href="#carousel-reviewsA" role="button" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right color_black"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Section: team -->
+        <section id="doctor" class="home-section bg-gray paddingbot-60">
+            <div class="container">
+                <div class="row">
+                    <div class="section-heading text-center">
+                        <h2 class="h-bold">News & Events</h2>
+                    </div>
+                    <div class="col-lg-12">
+                        <div>
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs addP" role="tablist">
+                                <li role="presentation" class="active"><a href="#news" target="_self" aria-controls="news" role="tab" data-toggle="tab">News</a></li>
+                                <li role="presentation"><a href="#events" target="_self" aria-controls="events" role="tab" data-toggle="tab">Events</a></li>
+                            </ul>
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="news">
+                                    <div class="row">
+                                        <div class="col-md-4" ng-repeat="n in news track by $index">
+                                            <div class="news_box">
+                                                <a href="javascript:void(0)" target="_self">{{n.title}}</a>
+                                                <span>{{n.published_date}}</span>
+                                                <p>{{n.description | htmlToPlaintext}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="events">
+                                    <div class="row">
+                                        <div class="col-md-4" ng-repeat="ev in events track by $index">
+                                            <div class="news_box">
+                                                <a href="javascript:void(0)" target="_self">{{ev.name}}</a>
+                                                <span>{{ev.event_date}}</span>
+                                                <p>{{ev.description | htmlToPlaintext}}</p>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /Section: team -->
+        <!-- Section: testimonial -->
+        <section id="testimonial" class="home-section paddingbot-60 parallax" data-stellar-background-ratio="0.5">
+            <div class="carousel-reviews broun-block">
+                <div class="container">
+                    <div class="row">
+                        <div id="carousel-reviews" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="item active">
+                                    <div class="col-md-4 col-sm-6">
+                                        <div class="block-text rel zmin">
+                                            <a title="" href="javascript:void(0)" target="_self">Emergency Contraception</a>
+                                            <p>Ne eam errem semper. Laudem detracto phaedrum cu vim, pri cu errem fierent fabellas. Quis magna in ius, pro vidit nonumy te, nostrud ...</p>
+                                            <ins class="ab zmin sprite sprite-i-triangle block"></ins>
+                                        </div>
+                                        <div class="person-text rel text-light">
+                                            <img src="/storage/frontend/img/testimonials/1.jpg" alt="" class="person img-circle" />
+                                            <a title="" href="javascript:void(0)" target="_self">Anna</a>
+                                            <span>Chicago, Illinois</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6 hidden-xs">
+                                        <div class="block-text rel zmin">
+                                            <a title="" href="javascript:void(0)" target="_self">Orthopedic Surgery</a>
+                                            <p>Ne eam errem semper. Laudem detracto phaedrum cu vim, pri cu errem fierent fabellas. Quis magna in ius, pro vidit nonumy te, nostrud ...</p>
+                                            <ins class="ab zmin sprite sprite-i-triangle block"></ins>
+                                        </div>
+                                        <div class="person-text rel text-light">
+                                            <img src="/storage/frontend/img/testimonials/2.jpg" alt="" class="person img-circle" />
+                                            <a title="" href="javascript:void(0)" target="_self">Matthew G</a>
+                                            <span>San Antonio, Texas</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6 hidden-sm hidden-xs">
+                                        <div class="block-text rel zmin">
+                                            <a title="" href="javascript:void(0)" target="_self">Medical consultation</a>
+                                            <p>Ne eam errem semper. Laudem detracto phaedrum cu vim, pri cu errem fierent fabellas. Quis magna in ius, pro vidit nonumy te, nostrud ...</p>
+                                            <ins class="ab zmin sprite sprite-i-triangle block"></ins>
+                                        </div>
+                                        <div class="person-text rel text-light">
+                                            <img src="/storage/frontend/img/testimonials/3.jpg" alt="" class="person img-circle" />
+                                            <a title="" href="javascript:void(0)" target="_self">Scarlet Smith</a>
+                                            <span>Dallas, Texas</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="col-md-4 col-sm-6">
+                                        <div class="block-text rel zmin">
+                                            <a title="" href="javascript:void(0)" target="_self">Birth control pills</a>
+                                            <p>Ne eam errem semper. Laudem detracto phaedrum cu vim, pri cu errem fierent fabellas. Quis magna in ius, pro vidit nonumy te, nostrud ...</p>
+                                            <ins class="ab zmin sprite sprite-i-triangle block"></ins>
+                                        </div>
+                                        <div class="person-text rel text-light">
+                                            <img src="/storage/frontend/img/testimonials/4.jpg" alt="" class="person img-circle" />
+                                            <a title="" href="javascript:void(0)" target="_self">Lucas Thompson</a>
+                                            <span>Austin, Texas</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6 hidden-xs">
+                                        <div class="block-text rel zmin">
+                                            <a title="" href="javascript:void(0)" target="_self">Radiology</a>
+                                            <p>Ne eam errem semper. Laudem detracto phaedrum cu vim, pri cu errem fierent fabellas. Quis magna in ius, pro vidit nonumy te, nostrud ...</p>
+                                            <ins class="ab zmin sprite sprite-i-triangle block"></ins>
+                                        </div>
+                                        <div class="person-text rel text-light">
+                                            <img src="/storage/frontend/img/testimonials/5.jpg" alt="" class="person img-circle" />
+                                            <a title="" href="javascript:void(0)" target="_self">Ella Mentree</a>
+                                            <span>Fort Worth, Texas</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6 hidden-sm hidden-xs">
+                                        <div class="block-text rel zmin">
+                                            <a title="" href="javascript:void(0)">Cervical Lesions</a>
+                                            <p>Ne eam errem semper. Laudem detracto phaedrum cu vim, pri cu errem fierent fabellas. Quis magna in ius, pro vidit nonumy te, nostrud ...</p>
+                                            <ins class="ab zmin sprite sprite-i-triangle block"></ins>
+                                        </div>
+                                        <div class="person-text rel text-light">
+                                            <img src="/storage/frontend/img/testimonials/6.jpg" alt="" class="person img-circle" />
+                                            <a title="" href="javascript:void(0)" target="_self">Suzanne Adam</a>
+                                            <span>Detroit, Michigan</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a class="left carousel-control" href="#carousel-reviews" role="button" data-slide="prev" target="_self">
+                                <span class="glyphicon glyphicon-chevron-left"></span>
+                            </a>
+                            <a class="right carousel-control" href="#carousel-reviews" role="button" data-slide="next" target="_self">
+                                <span class="glyphicon glyphicon-chevron-right"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+</div>
+        <!-- /Section: testimonial -->
+        

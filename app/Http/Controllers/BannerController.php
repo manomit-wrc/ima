@@ -42,7 +42,7 @@ class BannerController extends Controller
               $constraint->aspectRatio();
           })->save($destinationPath_1.'/'.$fileName);
 
-          $img->resize(800, 600, function ($constraint){
+          $img->resize(1349, 351, function ($constraint){
               $constraint->aspectRatio();
           })->save($destinationPath_2.'/'.$fileName);
 
@@ -94,7 +94,7 @@ class BannerController extends Controller
               $constraint->aspectRatio();
           })->save($destinationPath_1.'/'.$fileName);
 
-          $img->resize(800, 600, function ($constraint){
+          $img->resize(1349, 351, function ($constraint){
               $constraint->aspectRatio();
           })->save($destinationPath_2.'/'.$fileName);
 

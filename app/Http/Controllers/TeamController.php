@@ -44,7 +44,7 @@ class TeamController extends Controller
 
           $img = Image::make($file->getRealPath());
 
-          $img->resize(150, 150, function ($constraint){
+          $img->resize(200, 200, function ($constraint){
               $constraint->aspectRatio();
           })->save($destinationPath.'/'.$fileName);
 
@@ -104,7 +104,7 @@ class TeamController extends Controller
 
           $img = Image::make($file->getRealPath());
 
-          $img->resize(150, 150, function ($constraint){
+          $img->resize(200, 200, function ($constraint){
               $constraint->aspectRatio();
           })->save($destinationPath.'/'.$fileName);
 

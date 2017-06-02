@@ -13,6 +13,7 @@ class ComposerStaticInit26ac6f531c7dc343a38a6557cc1ca91b
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
         '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
         'bd9634f2d41831496de0d3dfe4c94881' => __DIR__ . '/..' . '/symfony/polyfill-php56/bootstrap.php',
+        '3919eeb97e98d4648304477f8ef734ba' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/Crypt/Random.php',
         'e7223560d890eab89cda23685e711e2c' => __DIR__ . '/..' . '/psy/psysh/src/Psy/functions.php',
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
@@ -32,6 +33,10 @@ class ComposerStaticInit26ac6f531c7dc343a38a6557cc1ca91b
         'W' => 
         array (
             'Webmozart\\Assert\\' => 17,
+        ),
+        'T' => 
+        array (
+            'Tymon\\JWTAuth\\' => 14,
         ),
         'S' => 
         array (
@@ -118,6 +123,10 @@ class ComposerStaticInit26ac6f531c7dc343a38a6557cc1ca91b
         'Webmozart\\Assert\\' => 
         array (
             0 => __DIR__ . '/..' . '/webmozart/assert/src',
+        ),
+        'Tymon\\JWTAuth\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/tymon/jwt-auth/src',
         ),
         'Symfony\\Polyfill\\Util\\' => 
         array (
@@ -266,6 +275,13 @@ class ComposerStaticInit26ac6f531c7dc343a38a6557cc1ca91b
     );
 
     public static $prefixesPsr0 = array (
+        'S' => 
+        array (
+            'System' => 
+            array (
+                0 => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib',
+            ),
+        ),
         'P' => 
         array (
             'Prophecy\\' => 
@@ -273,11 +289,26 @@ class ComposerStaticInit26ac6f531c7dc343a38a6557cc1ca91b
                 0 => __DIR__ . '/..' . '/phpspec/prophecy/src',
             ),
         ),
+        'N' => 
+        array (
+            'Net' => 
+            array (
+                0 => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib',
+            ),
+            'Namshi\\JOSE' => 
+            array (
+                0 => __DIR__ . '/..' . '/namshi/jose/src',
+            ),
+        ),
         'M' => 
         array (
             'Mockery' => 
             array (
                 0 => __DIR__ . '/..' . '/mockery/mockery/library',
+            ),
+            'Math' => 
+            array (
+                0 => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib',
             ),
         ),
         'J' => 
@@ -291,6 +322,13 @@ class ComposerStaticInit26ac6f531c7dc343a38a6557cc1ca91b
                 0 => __DIR__ . '/..' . '/jakub-onderka/php-console-color/src',
             ),
         ),
+        'F' => 
+        array (
+            'File' => 
+            array (
+                0 => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib',
+            ),
+        ),
         'D' => 
         array (
             'Doctrine\\Common\\Inflector\\' => 
@@ -298,14 +336,23 @@ class ComposerStaticInit26ac6f531c7dc343a38a6557cc1ca91b
                 0 => __DIR__ . '/..' . '/doctrine/inflector/lib',
             ),
         ),
+        'C' => 
+        array (
+            'Crypt' => 
+            array (
+                0 => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib',
+            ),
+        ),
     );
 
     public static $classMap = array (
+        'AddOtherFieldsToDoctorsTable' => __DIR__ . '/../..' . '/database/migrations/2017_06_01_125543_add_other_fields_to_doctors_table.php',
         'AddSomeFieldsToUsersTable' => __DIR__ . '/../..' . '/database/migrations/2017_05_23_073322_add_some_fields_to_users_table.php',
         'CreateBannersTable' => __DIR__ . '/../..' . '/database/migrations/2017_05_25_045124_create_banners_table.php',
         'CreateBulletinsTable' => __DIR__ . '/../..' . '/database/migrations/2017_05_25_060920_create_bulletins_table.php',
         'CreateCMSTable' => __DIR__ . '/../..' . '/database/migrations/2017_05_26_130520_create_c_m_s_table.php',
         'CreateDesignationsTable' => __DIR__ . '/../..' . '/database/migrations/2017_05_23_114447_create_designations_table.php',
+        'CreateDoctorsTable' => __DIR__ . '/../..' . '/database/migrations/2017_06_01_063637_create_doctors_table.php',
         'CreateEventCategoriesTable' => __DIR__ . '/../..' . '/database/migrations/2017_05_24_071023_create_event_categories_table.php',
         'CreateEventGalleriesTable' => __DIR__ . '/../..' . '/database/migrations/2017_05_24_125225_create_event_galleries_table.php',
         'CreateEventsTable' => __DIR__ . '/../..' . '/database/migrations/2017_05_24_084238_create_events_table.php',

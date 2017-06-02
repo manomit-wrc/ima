@@ -6,11 +6,13 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AddOtherFieldsToDoctorsTable' => $baseDir . '/database/migrations/2017_06_01_125543_add_other_fields_to_doctors_table.php',
     'AddSomeFieldsToUsersTable' => $baseDir . '/database/migrations/2017_05_23_073322_add_some_fields_to_users_table.php',
     'CreateBannersTable' => $baseDir . '/database/migrations/2017_05_25_045124_create_banners_table.php',
     'CreateBulletinsTable' => $baseDir . '/database/migrations/2017_05_25_060920_create_bulletins_table.php',
     'CreateCMSTable' => $baseDir . '/database/migrations/2017_05_26_130520_create_c_m_s_table.php',
     'CreateDesignationsTable' => $baseDir . '/database/migrations/2017_05_23_114447_create_designations_table.php',
+    'CreateDoctorsTable' => $baseDir . '/database/migrations/2017_06_01_063637_create_doctors_table.php',
     'CreateEventCategoriesTable' => $baseDir . '/database/migrations/2017_05_24_071023_create_event_categories_table.php',
     'CreateEventGalleriesTable' => $baseDir . '/database/migrations/2017_05_24_125225_create_event_galleries_table.php',
     'CreateEventsTable' => $baseDir . '/database/migrations/2017_05_24_084238_create_events_table.php',
