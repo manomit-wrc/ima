@@ -79,11 +79,12 @@ class PageController extends Controller
     }
 
      public function login(Request $request){
-        Config::set('jwt.auth', Doctor::class);
+        Config::set('tymon.jwt.provider.jwt', '\App\Doctor');
         $credentials = $request->only('email', 'password');
         $token = null;
         try {
            if (!$token = JWTAuth::attempt($credentials)) {
+            
             return response()->json(['msg' => 'Invalid Email Or Password','status_code'=>404]);
            }
         } catch (JWTAuthException $e) {

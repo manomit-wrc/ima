@@ -20,7 +20,7 @@ class VerifyJWTToken
     public function handle($request, Closure $next)
     {
             try{
-                Config::set('jwt.user', Doctor::class);
+                
                 $user = JWTAuth::toUser($request->header('token'));
             }catch (JWTException $e) {
                 if($e instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException) {

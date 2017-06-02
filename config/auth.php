@@ -15,7 +15,7 @@ return [
 
     'defaults' => [
         'guard' => 'web',
-        'passwords' => 'users',
+        'passwords' => 'doctors',
     ],
 
     /*
@@ -38,7 +38,7 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'doctors',
         ],
 
         'api' => [
@@ -49,10 +49,7 @@ return [
             'driver' => 'session',
             'provider' => 'users'
         ],
-        'jwt.auth' => [
-            'driver' => 'token',
-            'provider' => 'doctors'
-        ]
+        
     ],
 
     /*
