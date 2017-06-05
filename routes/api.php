@@ -22,4 +22,7 @@ Route::post('/registration','PageController@registration');
 Route::post('/login', 'PageController@login');
 Route::group(['middleware' => 'jwt.auth'], function () {
     Route::get('/doctors', 'PageController@getAuthUser');
+    Route::get('/state-list', 'PageController@get_state_list');
+    Route::post('/update-profile', 'PageController@update_profile');
+    Route::post('/update-profile-photo','PageController@update_profile_photo');
 });

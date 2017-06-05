@@ -62,6 +62,17 @@ authService.factory('Auth', function($http,$q,AuthToken){
 			return $q.reject({message: 'No Token Found'});
 		}
 		
+	};
+
+	authFactory.getState = function() {
+		var defer = $q.defer();
+		$http.get('/api/state-list').then(function(response){
+			defer.resolve(response);
+		}).catch(function(reason){
+			defer.resolve(reason);
+		});
+
+		return defer.promise;
 	}
 
 	return authFactory;

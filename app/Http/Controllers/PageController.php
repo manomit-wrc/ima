@@ -13,6 +13,7 @@ use App\Doctor;
 use JWTAuth;
 use JWTAuthException;
 use Config;
+use Image;
 
 class PageController extends Controller
 {
@@ -98,5 +99,68 @@ class PageController extends Controller
         
         $user = JWTAuth::toUser($request->token);
         return response()->json(['result' => $user]);
+    }
+
+    public function get_state_list() {
+        $state_list = \App\State::where('status','1')->orderBy('name')->get()->pluck('name','id')->toArray();
+        return response()->json(['state_list' => $state_list]);
+    }
+
+    public function update_profile(Request $request) {
+        $doctors = Doctor::find($request->doctor_id);
+        if($doctors) {
+            $doctors->first_name = $request->first_name;
+            $doctors->last_name = $request->last_name;
+            $doctors->email = $request->email;
+            $doctors->mobile = $request->mobile;
+            $doctors->sex = $request->sex;
+            $doctors->state_id = $request->state_id;
+            $doctors->city = $request->city;
+            $doctors->pincode = $request->pincode;
+            $doctors->dob = date('Y-m-d',strtotime($request->dob));
+            $doctors->license = $request->license;
+            $doctors->biography = $request->biography;
+
+            $doctors->save();
+            
+            return response()->json(['status_code'=>200]);
+        }
+        else {
+            return response()->json(['status_code'=>500]);
+        }
+    }
+
+    public function update_profile_photo(Request $request) {
+        if($request->hasFile('avators')) {
+        $file = $request->file('avators') ;
+
+        $fileName = time().'_'.$file->getClientOriginalName() ;
+
+        //thumb destination path
+        $destinationPath = public_path().'/uploads/doctors/thumb' ;
+
+        $img = Image::make($file->getRealPath());
+
+        $img->resize(200, 200, function ($constraint){
+            $constraint->aspectRatio();
+        })->save($destinationPath.'/'.$fileName);
+
+        //original destination path
+        $destinationPath = public_path().'/uploads/doctors/' ;
+        $file->move($destinationPath,$fileName);
+        $doctors = Doctor::find($request->doctor_id);
+        if($doctors) {
+            $doctors->avators = $fileName;
+            $doctors->save();
+            return response()->json(['status_code'=>200]);
+        }
+        else {
+            return response()->json(['status_code'=>404]);
+        }        
+
+      }
+      else {
+        return response()->json(['status_code'=>500]);
+      }
     }
 }

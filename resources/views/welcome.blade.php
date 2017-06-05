@@ -8,6 +8,10 @@
     <title>Indian Medical Associations</title>
     <base href="/">
     <!-- css -->
+     {!! Html::script('storage/frontend/js/jquery.min.js') !!}
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css" />
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-route.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.11/ngStorage.js"></script>
@@ -287,5 +291,7 @@
     {!! Html::script('storage/frontend/js/nivo-lightbox.min.js') !!}
     
     {!! Html::script('storage/frontend/js/custom.js') !!}
+    
+    
 </body>
 </html>

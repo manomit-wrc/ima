@@ -348,6 +348,7 @@ class ComposerStaticInit26ac6f531c7dc343a38a6557cc1ca91b
     public static $classMap = array (
         'AddOtherFieldsToDoctorsTable' => __DIR__ . '/../..' . '/database/migrations/2017_06_01_125543_add_other_fields_to_doctors_table.php',
         'AddSomeFieldsToUsersTable' => __DIR__ . '/../..' . '/database/migrations/2017_05_23_073322_add_some_fields_to_users_table.php',
+        'AddStateIdToDoctorsTabel' => __DIR__ . '/../..' . '/database/migrations/2017_06_05_131649_add_state_id_to_doctors_tabel.php',
         'CreateBannersTable' => __DIR__ . '/../..' . '/database/migrations/2017_05_25_045124_create_banners_table.php',
         'CreateBulletinsTable' => __DIR__ . '/../..' . '/database/migrations/2017_05_25_060920_create_bulletins_table.php',
         'CreateCMSTable' => __DIR__ . '/../..' . '/database/migrations/2017_05_26_130520_create_c_m_s_table.php',
@@ -362,6 +363,7 @@ class ComposerStaticInit26ac6f531c7dc343a38a6557cc1ca91b
         'CreateNoticesTable' => __DIR__ . '/../..' . '/database/migrations/2017_05_29_052234_create_notices_table.php',
         'CreateOrganizationsTable' => __DIR__ . '/../..' . '/database/migrations/2017_05_23_110115_create_organizations_table.php',
         'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
+        'CreateStatesTable' => __DIR__ . '/../..' . '/database/migrations/2017_06_05_054329_create_states_table.php',
         'CreateTagsTable' => __DIR__ . '/../..' . '/database/migrations/2017_05_25_110222_create_tags_table.php',
         'CreateTeamsTable' => __DIR__ . '/../..' . '/database/migrations/2017_05_24_045605_create_teams_table.php',
         'CreateUsersTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_000000_create_users_table.php',
