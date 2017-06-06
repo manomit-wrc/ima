@@ -20,6 +20,7 @@ Route::get('/user', function (Request $request) {
 Route::get('/home-content','PageController@home_content');
 Route::post('/registration','PageController@registration');
 Route::post('/login', 'PageController@login');
+Route::post('/get-news','PageController@get_news');
 Route::group(['middleware' => 'jwt.auth'], function () {
     Route::get('/doctors', 'PageController@getAuthUser');
     Route::get('/state-list', 'PageController@get_state_list');
@@ -28,4 +29,5 @@ Route::group(['middleware' => 'jwt.auth'], function () {
     Route::post('/update-password','PageController@update_password');
     Route::get('/categories','PageController@categories');
     Route::post('/submit-journal','PageController@submit_journal');
+
 });
