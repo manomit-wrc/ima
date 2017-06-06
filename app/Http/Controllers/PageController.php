@@ -14,6 +14,7 @@ use JWTAuth;
 use JWTAuthException;
 use Config;
 use Image;
+use Hash;
 
 class PageController extends Controller
 {
@@ -162,5 +163,102 @@ class PageController extends Controller
       else {
         return response()->json(['status_code'=>500]);
       }
+    }
+
+    public function update_password(Request $request) {
+        $doctor_id = $request->doctor_id;
+        $old_password = $request->old_password;
+        $new_password = $request->new_password;
+        
+        $doctors = Doctor::find($request->doctor_id);
+        
+        if($doctors) {
+
+            if (Hash::check($old_password, $doctors->password)) { 
+                $doctors->password = bcrypt($new_password);
+
+                $doctors->save();
+
+                return response()->json(['error' => true,
+                'message' => "Password Change Successfully",
+                'code' => 200]);                
+            }
+            else {
+                return response()->json(['error' => false,
+                'message' => "Old Password Not Matched",
+                'code' => 403]);
+            }
+        }
+        else {
+            return response()->json(['error' => false,
+            'message' => "Password not changed.Please try again",
+            'code' => 500]);
+        }
+    }
+
+    public function categories() {
+        $categories = \App\Category::all();
+        if($categories) {
+            foreach ($categories as $value) {
+                $cat_arr[] = array('label'=>$value->name,'value'=>$value->id);
+            }
+            return response()->json(['error' => false,
+                'categories' => $cat_arr,
+                'code' => 200]);
+        }
+        else {
+            return response()->json(['error' => true,
+                'categories' => array(),
+                'code' => 404]);
+        }
+    }
+
+    public function submit_journal(Request $request) {
+        $validator = Validator::make($request->all(),[
+            'title' => 'required|max:40',
+            'description' => 'required',
+            'published_date' => 'required|date_format:d-m-Y|before_or_equal:today',
+            'category_id' => 'required',
+            'journal_file' => 'required|mimes:pdf|max:100000'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => true,
+                'message' => $validator->messages()->first(),
+                'code' => 500]);
+        }
+        else {
+            if($request->hasFile('journal_file')) {
+            $file = $request->file('journal_file') ;
+
+            $fileName = time().'_'.$file->getClientOriginalName() ;
+
+            $destinationPath = public_path().'/uploads/doctors/journal/' ;
+            $file->move($destinationPath,$fileName);
+            
+            $journal = new \App\Journal();
+
+            $journal->title = $request->title;
+            $journal->description = $request->description;
+            $journal->published_date = date('Y-m-d',strtotime($request->published_date));
+            $journal->category_id = $request->category_id;
+            $journal->doctor_id = $request->doctor_id;
+            $journal->journal_file = $fileName;
+
+            $journal->save();
+
+            return response()->json(['error' => false,
+            'message' => 'Journal uploaded successfully',
+            'code' => 200]);
+            
+                
+
+          }
+          else {
+            return response()->json(['error' => true,
+                'message' => 'Something not right. Try again',
+                'code' => 500]);
+          }
+        }
     }
 }

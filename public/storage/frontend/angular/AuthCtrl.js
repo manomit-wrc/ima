@@ -9,6 +9,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location){
 	$scope.news = {};
 	$scope.events = {};
 	$scope.doctor_id = '';
+	$scope.journal_file = {};
 
 	$scope.homeContent = function() {
 		$http.get('/api/home-content').then(function(response){
@@ -74,6 +75,16 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location){
 		}
 	};
 
+	$scope.doPassword = function(valid) {
+		if(valid) {
+
+			Auth.do_change_password($scope.old_password,$scope.auth_id,$scope.new_password).then(function(response){
+				$scope.message = response.data.message;
+				$scope.status_code = response.data.code;
+			});
+		}
+	};
+
 	$scope.getToken = function() {
 		Auth.getUser().then(function(response){
 			$scope.user = response.data.result;
@@ -103,6 +114,12 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location){
 		Auth.getState().then(function(response){
 			$scope.state_list = response.data.state_list;
 
+		});
+	};
+
+	$scope.getCategory = function() {
+		Auth.get_category().then(function(response){
+			$scope.categories = response.data.categories;
 		});
 	};
 
@@ -154,6 +171,8 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location){
 		}
 	};
 
+
+
 	$scope.uploadedFile = function(element) {
 
 	    $scope.currentFile = element.files[0];
@@ -185,5 +204,41 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location){
 	    }
 	   reader.readAsDataURL(element.files[0]);
 	   
-	  }
+	  };
+
+	$scope.uploadedJournalDoc = function(element) {
+		 $scope.$apply(function($scope) {
+	       $scope.journal_file = element.files[0];
+	       
+	      });
+	};
+
+    $scope.loadProfile = function() {
+    	$location.path("/profile");
+    };
+
+    $scope.loadChangePassword = function() {
+    	$location.path("/change-password");
+    };
+    $scope.loadJournal = function() {
+    	$location.path("/upload-journal");
+    };
+
+    $scope.doUploadJournal = function(valid) {
+    	if(valid) {
+    		
+    		Auth.submit_journal($scope).then(function(response){
+    			$scope.message = response.data.message;
+				$scope.status_code = response.data.code;
+				if($scope.status_code != 500) {
+					$scope.title = null;
+					$scope.description = null;
+					$scope.published_date = null;
+					$scope.category_id = null;
+					$scope.journal_file = null;
+				}
+				
+    		});
+    	}
+    }
 });

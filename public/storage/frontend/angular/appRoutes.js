@@ -7,6 +7,12 @@ imaRoute.config(function($routeProvider,$locationProvider){
 	}).when('/profile', {
 		templateUrl: '/templates/profile.html',
 		authenticated: true
+	}).when('/change-password',{
+		templateUrl: '/templates/change-password.html',
+		authenticated: true
+	}).when('/upload-journal',{
+		templateUrl: '/templates/upload-journal.html',
+		authenticated: true
 	});
 });
 

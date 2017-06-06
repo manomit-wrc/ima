@@ -25,4 +25,7 @@ Route::group(['middleware' => 'jwt.auth'], function () {
     Route::get('/state-list', 'PageController@get_state_list');
     Route::post('/update-profile', 'PageController@update_profile');
     Route::post('/update-profile-photo','PageController@update_profile_photo');
+    Route::post('/update-password','PageController@update_password');
+    Route::get('/categories','PageController@categories');
+    Route::post('/submit-journal','PageController@submit_journal');
 });

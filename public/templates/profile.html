@@ -22,9 +22,9 @@
                                 <h5 class="user_address"><i class="fa fa-map-marker" aria-hidden="true"></i> Kolkata,&nbsp;West Bengal, &nbsp;India</h5>
                             </div>
 
-                            <button type="button" class="LeftBtnActive"><i class="fa fa-user" aria-hidden="true"></i> Edit profile</button>
-                            <button type="button" class="LeftBtn"><i class="fa fa-user" aria-hidden="true"></i> Change Password</button>
-                            <button type="button" class="LeftBtn"><i class="fa fa-user" aria-hidden="true"></i> Upload Journal</button>
+                            <button type="button" class="LeftBtnActive" ng-click="loadProfile()"><i class="fa fa-user" aria-hidden="true"></i> Edit profile</button>
+                            <button type="button" class="LeftBtn" ng-click="loadChangePassword()"><i class="fa fa-user" aria-hidden="true"></i> Change Password</button>
+                            <button type="button" class="LeftBtn" ng-click="loadJournal()"><i class="fa fa-user" aria-hidden="true"></i> Upload Journal</button>
                         </div>
                     </div>
                     <div class="col-md-8 Clear-991" ng-controller="AuthController">
@@ -41,6 +41,8 @@
                                         <label>First Name </label>
                                         <input type="text" name="first_name"  class="editF"  required="required" ng-model="first_name" />
                                         <span class="help-block" ng-show="frmProfile.first_name.$error.required && (!frmProfile.$pristine || frmProfile.$submitted)">Please Enter First Name</span>
+
+                                        
                                     </div>
                                 </div>
                                 <div class="col-md-6" >

@@ -17,6 +17,13 @@ Route::get('/', function () {
 Route::get('/profile', function () {
     return view('welcome');
 });
+Route::get('/change-password', function () {
+    return view('welcome');
+});
+
+Route::get('/upload-journal', function () {
+    return view('welcome');
+});
     
 
 Route::get('/admin', 'LoginController@index');

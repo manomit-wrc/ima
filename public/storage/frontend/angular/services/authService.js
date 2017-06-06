@@ -36,6 +36,32 @@ authService.factory('Auth', function($http,$q,AuthToken){
 		return defer.promise;
 	};
 
+	authFactory.get_category = function() {
+		var defer = $q.defer();
+		$http.get('/api/categories').then(function(response){
+			defer.resolve(response);
+		}).catch(function(reason){
+			defer.resolve(response);
+		});
+
+		return defer.promise;
+	};
+
+	authFactory.do_change_password = function(old_password,auth_id,new_password) {
+		var defer = $q.defer();
+		console.log(old_password+"-"+auth_id+"-"+new_password);
+		$http.post('/api/update-password', {
+			old_password:old_password,
+			doctor_id:auth_id,
+			new_password:new_password
+		}).then(function(response) {
+			defer.resolve(response);
+		}).catch(function(reason) {
+			defer.resolve(reason);
+		});
+		return defer.promise;
+	};
+
 	authFactory.logout = function() {
 		AuthToken.setToken();
 	};
@@ -73,6 +99,35 @@ authService.factory('Auth', function($http,$q,AuthToken){
 		});
 
 		return defer.promise;
+	};
+
+	authFactory.submit_journal = function(journal) {
+		var defer = $q.defer();
+		$http({
+		  method  : 'POST',
+		  url     : 'api/submit-journal',
+		  processData: false,
+		  transformRequest: function (data) {
+		      var formData = new FormData();
+		      formData.append("journal_file", journal.journal_file); 
+		      formData.append("doctor_id", journal.auth_id);  
+		      formData.append("title", journal.title);
+		      formData.append("description", journal.description);
+		      formData.append("published_date", journal.published_date);
+		      formData.append("category_id", journal.category_id);
+		      return formData;  
+		  },  
+		  data : journal,
+		  headers: {
+		         'Content-Type': undefined
+		  }
+	   }).then(function (response) {
+	   		defer.resolve(response);
+       }).catch(function(reason){
+       		defer.resolve(reason);
+       });
+
+       return defer.promise;
 	}
 
 	return authFactory;

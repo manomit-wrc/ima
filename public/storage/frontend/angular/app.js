@@ -60,9 +60,36 @@ imaApp.directive('jqdatepicker', function () {
                 dateFormat: 'dd-mm-yy',
                 onSelect: function (date) {
                     scope.dob = date;
+                    scope.published_date = date;
                     scope.$apply();
                 }
             });
+        }
+    };
+});
+
+imaApp.directive('ngMatch', function($parse){
+  return {
+        restrict: 'A',
+        require: '?ngModel',
+        link: function (scope, elem, attrs, ctrl) {
+            if (!ctrl) return;
+            if (!attrs['ngMatch']) return;
+
+            var firstPassword = $parse(attrs['ngMatch']);
+
+            var validator = function (value) {
+              var temp = firstPassword(scope),
+              v = value === temp;
+              ctrl.$setValidity('match', v);
+              return value;
+          }
+
+          ctrl.$parsers.unshift(validator);
+          ctrl.$formatters.push(validator);
+          attrs.$observe('ngMatch', function () {
+          validator(ctrl.$viewValue);
+          });
         }
     };
 });
