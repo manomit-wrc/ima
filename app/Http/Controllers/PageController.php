@@ -17,6 +17,7 @@ use Image;
 use Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\RegistrationEmail;
+use App\Mail\NewPasswordEmail;
 
 class PageController extends Controller
 {
@@ -307,10 +308,20 @@ class PageController extends Controller
 
     public function check_user_email(Request $request) {
         $email = $request->email;
-        $check_email = Doctor::where('email',$email)->get()->toArray();
+        $check_email = Doctor::where('email',$email)->get();
         if($check_email) {
             //return response()->json(['msg' => 'Invalid Email Or Password','status_code'=>404]);
-            return response()->json(['msg' => 'Email ID  Exists','status_code'=>200]);
+            //return response()->json(['msg' => 'Email ID  Exists','status_code'=>200]);
+            $random_password = str_random(8);
+            $hashed_random_password = Hash::make($random_password);
+            
+            
+            Doctor::where('email',$email)->update(['password' => $hashed_random_password]);
+
+            Mail::to($request->input('email'))->send(new NewPasswordEmail($random_password));
+            return response()->json(['error' => false,
+            'message' => "New generated password is sent to your registered email.",
+            'code' => 200]);
         }
         else {
             return response()->json(['msg' => 'Email ID Not Exists','status_code'=>404]);

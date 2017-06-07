@@ -190,7 +190,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                            <button type="submit" class="viewmoreBTN" id="btnLogin">SIGNIN</button>
+                            <button type="submit" class="viewmoreBTN" id="btnLogin" ng-disabled="isDisabled">SIGNIN</button>
                         </div>
                         </form>
                         
@@ -262,7 +262,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                            <button type="submit" class="viewmoreBTN" id="btnRegistration">SIGN UP</button>
+                            <button type="submit" class="viewmoreBTN" id="btnRegistration" ng-disabled="isDisabled">SIGN UP</button>
                         </div>
                         </form>
                         

@@ -10,6 +10,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 	$scope.events = {};
 	$scope.doctor_id = '';
 	$scope.journal_file = {};
+	$scope.isDisabled = false;
 
 	$scope.homeContent = function() {
 		$http.get('/api/home-content').then(function(response){
@@ -25,6 +26,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 	}
 	$scope.doRegistration = function(valid) {
 		if(valid) {
+				$scope.isDisabled = true;
 				Auth.do_registration($scope.registration.first_name, 
 				$scope.registration.last_name,
 				$scope.registration.email_id,
@@ -43,6 +45,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 					$scope.code = 0;
 					$scope.message = '';
 				}
+				$scope.isDisabled = false;
 			});
 		}
 		
@@ -50,10 +53,10 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 
 	$scope.doLogin = function(valid) {
 		if(valid) {
-
+			$scope.isDisabled = true;
 			Auth.do_login($scope.login.login_email_id, 
 				$scope.login.login_password,$scope.login.remember_me).then(function(response){
-				
+				$scope.isDisabled = false;
 				if(response.data.status_code == 404) {
 					$scope.code = 1;
 					$scope.message = response.data.msg;
@@ -68,6 +71,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 					Auth.getUser().then(function(response){
 				
 					$scope.user = response.data.result;
+					
 					$scope.dismiss();
 					$location.path('/profile');
 				});
