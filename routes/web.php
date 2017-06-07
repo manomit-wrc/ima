@@ -28,6 +28,10 @@ Route::get('/upload-journal', function () {
 Route::get('/news/{id}/{slug}', function () {
     return view('welcome');
 });
+
+Route::get('/activate/{active_token}/{active_time}', function () {
+    return view('welcome');
+});
     
 
 Route::get('/admin', 'LoginController@index');

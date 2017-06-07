@@ -28,6 +28,17 @@ imaApp.directive('loginModal', function() {
    } 
 });
 
+imaApp.directive('forgotModal', function() {
+   return {
+     restrict: 'A',
+     link: function(scope, element, attr) {
+       scope.dismiss = function() {
+           $(element).modal('hide');
+       };
+     }
+   } 
+});
+
 imaApp.directive('fileinput', function() {
   return {
       scope: {

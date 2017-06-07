@@ -1,6 +1,6 @@
 var AuthCtrl = angular.module('AuthCtrl',[]);
 
-AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$routeParams){
+AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$routeParams,$cookieStore,$window){
 	$scope.code = '';
 	$scope.message = '';
 	$scope.user = {};
@@ -50,8 +50,9 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 
 	$scope.doLogin = function(valid) {
 		if(valid) {
+
 			Auth.do_login($scope.login.login_email_id, 
-				$scope.login.login_password).then(function(response){
+				$scope.login.login_password,$scope.login.remember_me).then(function(response){
 				
 				if(response.data.status_code == 404) {
 					$scope.code = 1;
@@ -73,6 +74,24 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 				}
 			});
 		}
+	};
+
+	$scope.doForgotPassword = function(valid) {
+		if(valid) {
+			Auth.forgot_password($scope.email_id).then(function(response){
+
+				$scope.code = 1;
+				$scope.message = response.data.msg;
+			});
+		}
+	};
+
+	$scope.closeLogin = function() {
+		$scope.dismiss();
+	};
+
+	$scope.closeForgot = function() {
+		$scope.dismiss();
 	};
 
 	$scope.doPassword = function(valid) {
@@ -103,18 +122,21 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 			$scope.auth_id = $scope.user.id;
 			$scope.avators = $scope.user.avators;
 			
-			if($scope.user.avators != "") {
+			if($scope.user.avators != null) {
 				$scope.image_source = '/uploads/doctors/thumb/'+$scope.user.avators;
 			}
 			else {
 				$scope.image_source = '/uploads/doctors/noimage_user.jpg';
 			}
+
 		});
 
 		Auth.getState().then(function(response){
 			$scope.state_list = response.data.state_list;
 
 		});
+
+
 	};
 
 	$scope.getCategory = function() {
@@ -251,6 +273,14 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     		
     		$scope.news_details = response.data.news_arr;
     		$scope.tag_details = response.data.tags_arr;
+    	});
+    };
+
+    $scope.activateAccount = function() {
+    	$http.get('/api/activate-account',{
+    		params: { active_token: $routeParams.active_token,active_time: $routeParams.active_time}
+    	}).then(function(response){
+    		$scope.message = response.data.msg;
     	});
     }
 });

@@ -15,6 +15,8 @@ use JWTAuthException;
 use Config;
 use Image;
 use Hash;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\RegistrationEmail;
 
 class PageController extends Controller
 {
@@ -71,12 +73,26 @@ class PageController extends Controller
                 'code' => 500]);
         }
         else {
-            $input = $request->all();
-            $input['password'] = bcrypt($input['password']);
-            Doctor::create($input);
-            return response()->json(['error' => false,
+            $doctor = new Doctor();
+            $doctor->first_name = $request->first_name;
+            $doctor->last_name = $request->last_name;
+            $doctor->email = $request->email;
+            $doctor->mobile = $request->mobile;
+            $doctor->password = bcrypt($request->password);
+            $doctor->address = '';
+            $doctor->state_id = 24;
+            
+            $doctor->active_token = str_replace("/","",Hash::make(str_random(30)));
+            $doctor->status = "0";
+            
+            if($doctor->save()) {
+                $activation_link = config('app.url').'activate/'.$doctor->active_token."/".time();
+                Mail::to($request->input('email'))->send(new RegistrationEmail($activation_link));
+                return response()->json(['error' => false,
                 'message' => "Successfully registered. Please check your email to activate yout account.",
                 'code' => 200]);
+            }
+            
         }
     }
 
@@ -85,6 +101,7 @@ class PageController extends Controller
         $credentials = $request->only('email', 'password');
         $token = null;
         try {
+
            if (!$token = JWTAuth::attempt($credentials)) {
             
             return response()->json(['msg' => 'Invalid Email Or Password','status_code'=>404]);
@@ -92,7 +109,14 @@ class PageController extends Controller
         } catch (JWTAuthException $e) {
             return response()->json(['msg' => 'Failed to create token','status_code'=>500]);
         }
-        return response()->json(['msg' => 'Successfully Login','status_code'=>200,'token'=>$token]);
+        $user = JWTAuth::toUser($token);
+        if($user->status == 0) {
+            return response()->json(['msg' => 'Account Not Activated.','status_code'=>404]);
+        }
+        else {
+            return response()->json(['msg' => 'Successfully Login','status_code'=>200,'token'=>$token]);
+        }
+        
         
     }
 
@@ -279,5 +303,43 @@ class PageController extends Controller
 
         return response()->json(['tags_arr' => $tags_arr,
                 'news_arr' => $news_arr]);
+    }
+
+    public function check_user_email(Request $request) {
+        $email = $request->email;
+        $check_email = Doctor::where('email',$email)->get()->toArray();
+        if($check_email) {
+            //return response()->json(['msg' => 'Invalid Email Or Password','status_code'=>404]);
+            return response()->json(['msg' => 'Email ID  Exists','status_code'=>200]);
+        }
+        else {
+            return response()->json(['msg' => 'Email ID Not Exists','status_code'=>404]);
+        }
+    }
+
+    public function activate_account(Request $request) {
+        $start_time = time();
+        $time_diff = ($start_time-$request->active_time)/60/1000;
+        if(number_format((float)$time_diff, 2, '.', '') > 1440) {
+          $message = "Activation link is expired";
+        }
+        else {
+          $doctor_details = Doctor::where('active_token',$request->active_token)->first();
+          if($doctor_details) {
+            if($doctor_details->status == "0") {
+              $doctor_details->status = "1";
+              $doctor_details->save();
+              $message = "Your account has been activated. Please click on login to further process.";
+            }
+            else {
+              $message = "Account already activated";
+            }
+          }
+          else {
+            $message = "Invalid activation token";
+          }
+        }
+
+        return response()->json(['msg' => $message,'status_code'=>200]);
     }
 }

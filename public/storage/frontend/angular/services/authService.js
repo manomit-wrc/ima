@@ -1,6 +1,6 @@
 var authService = angular.module('authService',['ngStorage']);
 
-authService.factory('Auth', function($http,$q,AuthToken){
+authService.factory('Auth', function($http,$q,AuthToken,$cookieStore){
 	var authFactory = {};
 
 	authFactory.do_registration = function(first_name,last_name,email_id,mobile_no,password) {
@@ -21,13 +21,19 @@ authService.factory('Auth', function($http,$q,AuthToken){
 		return defer.promise;
 	};
 
-	authFactory.do_login = function(email,password) {
+	authFactory.do_login = function(email,password,remember_me) {
 		var defer = $q.defer();
 		$http.post('/api/login', {
 			email:email,
 			password:password
 		}).then(function(response){
 			AuthToken.setToken(response.data.token);
+			if(remember_me) {
+				$cookieStore.put("remember_token", response.data.token);
+			}
+			else {
+				$cookieStore.put("remember_token", "");
+			}
 			defer.resolve(response);
 		}).catch(function(reason){
 			defer.resolve(reason);
@@ -63,7 +69,9 @@ authService.factory('Auth', function($http,$q,AuthToken){
 	};
 
 	authFactory.logout = function() {
+
 		AuthToken.setToken();
+		$cookieStore.remove('remember_token');
 	};
 
 	authFactory.isLoggedIn = function() {
@@ -74,7 +82,7 @@ authService.factory('Auth', function($http,$q,AuthToken){
 	};
 	authFactory.getUser = function() {
 		var defer = $q.defer();
-		if(AuthToken.getToken())
+		if(AuthToken.getToken() || $cookieStore.get('remember_token'))
 		{
 			$http.get('/api/doctors').then(function(response){
 				
@@ -96,6 +104,19 @@ authService.factory('Auth', function($http,$q,AuthToken){
 			defer.resolve(response);
 		}).catch(function(reason){
 			defer.resolve(reason);
+		});
+
+		return defer.promise;
+	};
+
+	authFactory.forgot_password = function(email_id) {
+		var defer = $q.defer();
+		$http.post('/api/check-user-email',{
+			email:email_id
+		}).then(function(response){
+			defer.resolve(response);
+		}).catch(function(reason){
+			defer.resolve(response);
 		});
 
 		return defer.promise;

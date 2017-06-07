@@ -1,6 +1,6 @@
-var imaRoute = angular.module('imaRoute',['ngRoute']);
+var imaRoute = angular.module('imaRoute',['ngRoute','ngCookies']);
 
-imaRoute.config(function($routeProvider,$locationProvider){
+imaRoute.config(function($routeProvider,$locationProvider,$qProvider){
 	$locationProvider.html5Mode(true).hashPrefix('#');
 	$routeProvider.when('/',{
 		templateUrl: '/templates/home.html'
@@ -15,13 +15,17 @@ imaRoute.config(function($routeProvider,$locationProvider){
 		authenticated: true
 	}).when('/news/:news_id/:slug',{
 		templateUrl: '/templates/news.html'
+	}).when('/activate/:active_token/:active_time', {
+		templateUrl: '/templates/activate.html'
 	});
+
+	$qProvider.errorOnUnhandledRejections(false);
 });
 
-imaRoute.run(function($rootScope,$location,Auth){
+imaRoute.run(function($rootScope,$location,Auth,$cookieStore){
 	$rootScope.$on('$routeChangeStart',function(event,next,current){
 		if(next.$$route.authenticated) {
-			if(!Auth.isLoggedIn()) {
+			if(!Auth.isLoggedIn() && !$cookieStore.get('remember_token')) {
 				$location.path("/");
 			}
 

@@ -12,9 +12,12 @@
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css" />
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-route.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.11/ngStorage.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-cookies.js"></script>
+    
     {!! Html::script('storage/frontend/angular/services/authService.js') !!}
     
     {!! Html::script('storage/frontend/angular/AuthCtrl.js') !!}
@@ -158,7 +161,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal"  aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel"><i class="fa fa-user" aria-hidden="true"></i> USER LOGIN</h4>
+                            <h4 class="modal-title" id="myModalLabel"><i class="fa fa-user" aria-hidden="true"></i> DOCTOR LOGIN</h4>
                             <div class="login registration-error" ng-show="code==1">@{{message}}</div>
                         </div>
                         <form name="frmLogin" id="frmLogin" ng-submit="doLogin(frmLogin.$valid)" method="post" novalidate="novalidate">
@@ -183,7 +186,7 @@
                                 <br clear="all">
                                 <div class="remindbox">
                                     <input name="remember_me" type="checkbox" value="1" ng-model="login.remember_me" /> &nbsp; Remember Me
-                                    <span><a href="javascript:void(0)">Forgot Password?</a></span>
+                                    <span><a href="#" ng-click="closeLogin();" data-toggle="modal" data-target="#ForgetModal">Forgot Password?</a></span>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -200,7 +203,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal"  aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel"><i class="fa fa-lock" aria-hidden="true"></i> Patient Registration</h4>
+                            <h4 class="modal-title" id="myModalLabel"><i class="fa fa-lock" aria-hidden="true"></i> DOCTOR Registration</h4>
                             
                             <div class="login registration-error" ng-show="code==1">@{{message}}</div>
                         </div>
@@ -260,6 +263,43 @@
                             </div>
                             <div class="modal-footer">
                             <button type="submit" class="viewmoreBTN" id="btnRegistration">SIGN UP</button>
+                        </div>
+                        </form>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <!-- forget password Modal -->
+            <div class="modal fade" id="ForgetModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-controller="AuthController" forgot-modal>
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"  aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel"><i class="fa fa-user" aria-hidden="true"></i> FORGOT PASSWORD</h4>
+                            <div class="login registration-error" ng-show="code==1">@{{message}}</div>
+                        </div>
+                        <form name="frmForgotPassword" id="frmForgotPassword" ng-submit="doForgotPassword(frmForgotPassword.$valid)" method="post" novalidate="novalidate">
+                            <div class="modal-body">
+                                <div class="infbox" ng-class="{
+                                            'has-error':!frmForgotPassword.email_id.$valid && (!frmForgotPassword.$pristine || frmForgotPassword.$submitted), 
+                                            'has-success': frmForgotPassword.email_id.$valid && (!frmForgotPassword.$pristine || frmForgotPassword.$submitted)
+                                            }">
+                                    <div class="userid"><i class="fa fa-user" aria-hidden="true"></i></div>
+                                    <input name="email_id" id="email_id" type="email" class="loginuser" placeholder="Enter Email ID" ng-model="email_id" required="required" />
+                                    <span class="help-block" ng-show="frmForgotPassword.email_id.$error.required && (!frmForgotPassword.$pristine || frmForgotPassword.$submitted)">Please Enter Email ID</span>
+
+                                    <span class="help-block" ng-show="frmForgotPassword.email_id.$error.email && (frmForgotPassword.$pristine || frmForgotPassword.$submitted)">Please Enter Valid Email ID</span>
+                                </div>
+                                
+                                <br clear="all">
+                                <div class="remindbox">
+                                    
+                                    <a href="#" ng-click="closeForgot();" data-toggle="modal" data-target="#LoginModal">Back To Login</a>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                            <button type="submit" class="viewmoreBTN" id="btnLogin">SUBMIT</button>
                         </div>
                         </form>
                         

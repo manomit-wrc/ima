@@ -346,6 +346,8 @@ class ComposerStaticInit26ac6f531c7dc343a38a6557cc1ca91b
     );
 
     public static $classMap = array (
+        'AddActiveTokenToDoctorsTable' => __DIR__ . '/../..' . '/database/migrations/2017_06_07_094832_add_active_token_to_doctors_table.php',
+        'AddIsPublishedToJournalsTable' => __DIR__ . '/../..' . '/database/migrations/2017_06_07_093040_add_is_published_to_journals_table.php',
         'AddOtherFieldsToDoctorsTable' => __DIR__ . '/../..' . '/database/migrations/2017_06_01_125543_add_other_fields_to_doctors_table.php',
         'AddSomeFieldsToUsersTable' => __DIR__ . '/../..' . '/database/migrations/2017_05_23_073322_add_some_fields_to_users_table.php',
         'AddStateIdToDoctorsTabel' => __DIR__ . '/../..' . '/database/migrations/2017_06_05_131649_add_state_id_to_doctors_tabel.php',
@@ -371,6 +373,7 @@ class ComposerStaticInit26ac6f531c7dc343a38a6557cc1ca91b
         'CreateTeamsTable' => __DIR__ . '/../..' . '/database/migrations/2017_05_24_045605_create_teams_table.php',
         'CreateUsersTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_000000_create_users_table.php',
         'DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',
+        'DropIsPublishedToJournalsTable' => __DIR__ . '/../..' . '/database/migrations/2017_06_07_094112_drop_is_published_to_journals_table.php',
         'File_Iterator' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Iterator.php',
         'File_Iterator_Facade' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Facade.php',
         'File_Iterator_Factory' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Factory.php',
