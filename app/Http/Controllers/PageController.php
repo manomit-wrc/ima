@@ -42,7 +42,7 @@ class PageController extends Controller
             }
 
             foreach ($news as $key => $value) {
-                $news_array[] = array('title'=>$value['title'],'description'=>substr($value['description'], 0,50)." ..",'published_date'=>date('d-m-Y',strtotime($value['published_date'])),'news_id'=>$value['id']);
+                $news_array[] = array('title'=>$value['title'],'description'=>substr($value['description'], 0,50)." ..",'published_date'=>date('d-m-Y',strtotime($value['published_date'])),'news_id'=>$value['id'],'slug'=>str_slug($value['title'],"-"));
             }  
 
             foreach ($events as $key => $value) {
@@ -260,5 +260,24 @@ class PageController extends Controller
                 'code' => 500]);
           }
         }
+    }
+
+    public function get_news(Request $request) {
+        $news_id = $request->news_id;
+        $news_slug = $request->slug;
+        $news_arr = array();
+        $tags_arr = array();
+        $news_details = \App\News::with('tags')->where('id',$news_id)->get()->toArray();
+        
+        foreach ($news_details as $value) {
+           $news_arr[] = array('title'=>$value['title'],'description'=>$value['description'],'published_date'=>date('d-m-Y',strtotime($value['published_date'])));
+           foreach ($value['tags'] as  $value1) {
+               $tags_arr[] = array('tag_name'=>$value1['tag_name'],'tag_id'=>$value1['id']);
+           }
+
+        }
+
+        return response()->json(['tags_arr' => $tags_arr,
+                'news_arr' => $news_arr]);
     }
 }

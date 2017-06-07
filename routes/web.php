@@ -24,6 +24,10 @@ Route::get('/change-password', function () {
 Route::get('/upload-journal', function () {
     return view('welcome');
 });
+
+Route::get('/news/{id}/{slug}', function () {
+    return view('welcome');
+});
     
 
 Route::get('/admin', 'LoginController@index');

@@ -13,6 +13,8 @@ imaRoute.config(function($routeProvider,$locationProvider){
 	}).when('/upload-journal',{
 		templateUrl: '/templates/upload-journal.html',
 		authenticated: true
+	}).when('/news/:news_id/:slug',{
+		templateUrl: '/templates/news.html'
 	});
 });
 

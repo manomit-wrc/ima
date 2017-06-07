@@ -1,6 +1,6 @@
 var AuthCtrl = angular.module('AuthCtrl',[]);
 
-AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location){
+AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$routeParams){
 	$scope.code = '';
 	$scope.message = '';
 	$scope.user = {};
@@ -240,5 +240,17 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location){
 				
     		});
     	}
+    };
+
+    $scope.getNewsDetails = function() {
+    	$http.get('/api/get-news/',{
+    		params: { news_id: $routeParams.news_id,slug: $routeParams.slug}
+    		
+    		
+    	}).then(function(response){
+    		
+    		$scope.news_details = response.data.news_arr;
+    		$scope.tag_details = response.data.tags_arr;
+    	});
     }
 });

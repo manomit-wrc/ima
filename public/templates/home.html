@@ -75,7 +75,7 @@
                                     <div class="row">
                                         <div class="col-md-4" ng-repeat="n in news track by $index">
                                             <div class="news_box">
-                                                <a href="javascript:void(0)" target="_self">{{n.title}}</a>
+                                                <a href="/news/{{n.news_id}}/{{n.slug}}" target="_self">{{n.title}}</a>
                                                 <span>{{n.published_date}}</span>
                                                 <p>{{n.description | htmlToPlaintext}}</p>
                                             </div>
