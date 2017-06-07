@@ -124,6 +124,11 @@ Route::group(['middleware'=>['admin']], function(){
     Route::post('/admin/cms/update/{id}','CMSController@update');
     Route::get('/admin/cms/delete/{id}','CMSController@delete');
 
+    Route::get('/admin/doctor','DoctorController@index');
+    Route::get('/admin/doctor/view/{id}','DoctorController@view');
+    Route::get('/admin/doctor/Publised/{id}/{status}','DoctorController@Publised');
+    Route::post('/admin/doctor/active','DoctorController@active');
+   
     Route::get('/admin/notice','NoticeController@index');
     Route::get('/admin/notice/add','NoticeController@add');
     Route::post('/admin/notice/store','NoticeController@store');

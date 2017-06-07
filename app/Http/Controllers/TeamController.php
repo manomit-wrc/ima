@@ -13,7 +13,7 @@ class TeamController extends Controller
 {
     public function index() {
     	$teams = Team::all();
-    	return view('admin.team.index')->with('team',$teams);
+      return view('admin.team.index')->with('team',$teams);
     }
 
     public function add() {
@@ -75,9 +75,11 @@ class TeamController extends Controller
 
     public function edit($id) {
     	$team = Team::with('designations')->where('id',$id)->get();
+     
     	$designations = Designation::where('status','1')->orderBy('name')->get()->pluck('name','id')->toArray();
+  
     	return view('admin.team.edit')->with(['team'=>$team,'designations'=>$designations]);
-    }
+  }
 
     public function update(Request $request) {
     	Validator::make($request->all(), [

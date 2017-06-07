@@ -13,4 +13,12 @@ class Doctor extends Authenticatable
     protected $hidden = [
     	'password'
     ];
+
+    protected $fillable = [
+    	'first_name','last_name','email','mobile'
+    ];
+
+    public function journal() {
+    	return $this->hasMany('\App\Journal','doctor_id');
+    }
 }
