@@ -42,7 +42,7 @@ class DoctorController extends Controller
    
     $doctor = Doctor::find($request->id);
     
-    $status=$doctor->status;
+    $status=$request->status;
      
     if($status=='1')
     {

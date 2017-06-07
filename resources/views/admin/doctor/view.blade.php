@@ -45,7 +45,7 @@
                        {{$viewdoctor[0]['first_name']}}
                     </div>
                       <input type="hidden" name="id" value="{{$viewdoctor[0]['id']}}">
-                      <input type="hidden" name="staus" value="{{$viewdoctor[0]['status']}}">
+                      <input type="hidden" name="status" value="{{$viewdoctor[0]['status']}}">
                   </div>
                   <div class="form-group {{ $errors->has('last_name') ? 'has-error' : '' }}">
                     <label for="inputLastName" class="col-sm-2 control-label">Last Name</label>
