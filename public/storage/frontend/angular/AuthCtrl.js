@@ -243,9 +243,10 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     };
 
     $scope.getNewsDetails = function() {
-    	$http.post('/api/get-news/',{
-    		news_id: $routeParams.news_id,
-    		slug: $routeParams.slug
+    	$http.get('/api/get-news/',{
+    		params: { news_id: $routeParams.news_id,slug: $routeParams.slug}
+    		
+    		
     	}).then(function(response){
     		
     		$scope.news_details = response.data.news_arr;
