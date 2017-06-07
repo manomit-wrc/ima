@@ -7,7 +7,7 @@
        <!--  <li class="header">MAIN NAVIGATION</li> -->
         <li><a href="{!!URL::to('/admin/dashboard')!!}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
 
-        <li class="treeview {{ Request::segment(2) === 'organization' || Request::segment(2) === 'designation' || Request::segment(2) === 'team' || Request::segment(2) === 'banner' || Request::segment(2) === 'bulletin' || Request::segment(2) === 'local-branch' || Request::segment(2) === 'cms' || Request::segment(2) === 'accomodation' || Request::segment(2) === 'cuisine' || Request::segment(2) === 'paymenttype' || Request::segment(2) === 'connectivity' || Request::segment(2) === 'connectivityservices' || Request::segment(2) === 'accrediation' || Request::segment(2) === 'specificservice' || Request::segment(2) === 'medicalfacility' || Request::segment(2) === 'banner' || Request::segment(2) === 'role'  ? 'active' : null }}">
+        <li class="treeview {{ Request::segment(2) === 'organization' || Request::segment(2) === 'designation' || Request::segment(2) === 'team' || Request::segment(2) === 'banner' || Request::segment(2) === 'bulletin' || Request::segment(2) === 'local-branch' || Request::segment(2) === 'cms' || Request::segment(2) === 'accomodation' || Request::segment(2) === 'cuisine' || Request::segment(2) === 'paymenttype' || Request::segment(2) === 'connectivity' || Request::segment(2) === 'connectivityservices' || Request::segment(2) === 'accrediation' || Request::segment(2) === 'specificservice' || Request::segment(2) === 'medicalfacility' || Request::segment(2) === 'banner' || Request::segment(2) === 'doctor' || Request::segment(2) === 'role'  ? 'active' : null }}">
           <a href="javascript:void(0)">
             <i class="fa fa-cog"></i> <span>Settings management</span>
             <span class="pull-right-container">
@@ -29,7 +29,8 @@
             <li class="{{ Request::segment(2) === 'local-branch' ? 'active' : null }}"><a href="{!!URL::to('/admin/local-branch')!!}"><i class="fa fa-language"></i>Local Branch</a></li>
 
             <li class="{{ Request::segment(2) === 'cms' ? 'active' : null }}"><a href="{!!URL::to('/admin/cms')!!}"><i class="fa fa-language"></i>CMS</a></li>
-
+           
+            <li class="{{ Request::segment(2) === 'doctor' ? 'active' : null }}"><a href="{!!URL::to('/admin/doctor')!!}"><i class="fa fa-language"></i>Doctors</a></li>
             
                                 
           </ul>
