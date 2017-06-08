@@ -85,7 +85,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 			Auth.forgot_password($scope.email_id).then(function(response){
 
 				$scope.code = 1;
-				$scope.message = response.data.msg;
+				$scope.message = response.data.message;
 			});
 		}
 	};
