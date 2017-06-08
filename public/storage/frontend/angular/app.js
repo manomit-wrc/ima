@@ -11,9 +11,43 @@ imaApp.directive('myNavbar',function(){
 	
 });
 
+imaApp.directive('postsPagination', function(){  
+   return{
+      restrict: 'E',
+      template: '<nav aria-label="Page navigation">'+
+        '<ul class="pagination pagiright">'+
+        '<li ng-show="currentPage != 1"><a href="javascript:void(0)" ng-click="getResultsPage(1)">&laquo;</a></li>'+
+        '<li ng-show="currentPage != 1"><a href="javascript:void(0)" ng-click="getResultsPage(currentPage-1)">&lsaquo; Prev</a></li>'+
+        '<li ng-repeat="i in range" ng-class="{active : currentPage == i}">'+
+            '<a href="javascript:void(0)" ng-click="getResultsPage(i)">{{i}}</a>'+
+        '</li>'+
+        '<li ng-show="currentPage != totalPages"><a href="javascript:void(0)" ng-click="getResultsPage(currentPage+1)">Next &rsaquo;</a></li>'+
+        '<li ng-show="currentPage != totalPages"><a href="javascript:void(0)" ng-click="getResultsPage(totalPages)">&raquo;</a></li>'+
+      '</ul></nav>'
+   };
+});
+
 imaApp.filter('htmlToPlaintext', function(){
 	return function(text) {
       return  text ? String(text).replace(/<[^>]+>/gm, '') : '';
+    };
+});
+
+imaApp.filter('slugify', function(){
+  return function(input) {
+      if (!input)
+                return;
+ 
+      // make lower case and trim
+      var slug = input.toLowerCase().trim();
+
+      // replace invalid chars with spaces
+      slug = slug.replace(/[^a-z0-9\s-]/g, ' ');
+
+      // replace multiple spaces or hyphens with a single hyphen
+      slug = slug.replace(/[\s-]+/g, '-');
+
+      return slug;
     };
 });
 

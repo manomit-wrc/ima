@@ -32,6 +32,7 @@
                             <h2>Edit Profile</h2>
                             <form name="frmProfile" ng-submit="doProfile(frmProfile.$valid)" method="post" novalidate="novalidate" enctype="multipart/form-data">
                             <input type="hidden" name="auth_id" ng-model="auth_id" />
+                            <div style="margin:0 auto!important;" ng-show="status_code">{{message}}</div>
                             <div class="row">
                                 <div class="col-md-6" >
                                     <div class="fieldbox" ng-class="{
@@ -166,6 +167,18 @@
                             </div>
 
                             <div class="row">
+                                
+                                <div class="col-md-12">
+                                    <div class="fieldbox" ng-class="{
+                                            'has-error':!frmProfile.address.$valid && (!frmProfile.$pristine || frmProfile.$submitted), 
+                                            'has-success': frmProfile.address.$valid && (!frmProfile.$pristine || frmProfile.$submitted)
+                                            }">
+                                        <label>Address</label>
+                                        <textarea name="address" ng-model="address" cols="" rows="5" class="editF" required="required"></textarea>
+                                        <span class="help-block" ng-show="frmProfile.address.$error.required && (!frmProfile.$pristine || frmProfile.$submitted)">Please Enter Your Address</span>
+                                    </div>
+                                </div>
+
                                 <div class="col-md-12">
                                     <div class="fieldbox" ng-class="{
                                             'has-error':!frmProfile.biography.$valid && (!frmProfile.$pristine || frmProfile.$submitted), 

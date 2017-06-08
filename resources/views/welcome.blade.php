@@ -18,10 +18,13 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.11/ngStorage.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-cookies.js"></script>
     
+    
     {!! Html::script('storage/frontend/angular/services/authService.js') !!}
     
     {!! Html::script('storage/frontend/angular/AuthCtrl.js') !!}
+    
     {!! Html::script('storage/frontend/angular/appRoutes.js') !!}
+   
     {!! Html::script('storage/frontend/angular/app.js') !!}
 
     {!! Html::style('storage/frontend/css/bootstrap.min.css') !!}

@@ -12,6 +12,39 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 	$scope.journal_file = {};
 	$scope.isDisabled = false;
 
+	//for paginations//
+	$scope.news_data = [];
+    $scope.totalPages = 0;
+    $scope.currentPage = 1;
+    $scope.range = [];
+    
+    $scope.getResultsPage = function(pageNumber) {
+
+    	if(pageNumber===undefined){
+      		pageNumber = '1';
+    	}
+
+    	$http.get('/api/news-list?page='+pageNumber).then(function(response) {
+    	  
+    	  $scope.news_data = response.data.news_item.data;
+	      
+      	  $scope.totalPages   = response.data.news_item.last_page;
+          $scope.currentPage  = response.data.news_item.current_page;
+
+          var pages = [];
+
+	      for(var i=1;i<=response.data.news_item.last_page;i++) {          
+	        pages.push(i);
+	      }
+
+	      $scope.range = pages; 
+	    });
+	    
+	    
+    };
+   
+	//end paginations//
+
 	$scope.homeContent = function() {
 		$http.get('/api/home-content').then(function(response){
 			$scope.banners = response.data.banners;
@@ -125,6 +158,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 			$scope.doctor_id = $scope.user.id;
 			$scope.auth_id = $scope.user.id;
 			$scope.avators = $scope.user.avators;
+			$scope.address = $scope.user.address;
 			
 			if($scope.user.avators != null) {
 				$scope.image_source = '/uploads/doctors/thumb/'+$scope.user.avators;
@@ -132,6 +166,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 			else {
 				$scope.image_source = '/uploads/doctors/noimage_user.jpg';
 			}
+
 
 		});
 
@@ -177,6 +212,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
                         dob: $scope.dob,
                         license: $scope.license,
                         biography: $scope.biography,
+                        address: $scope.address,
                         doctor_id: $scope.auth_id
                     },
                     transformRequest: function (data, headersGetter) {
@@ -188,10 +224,12 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
                     }
                 })
                 .then(function (response) {
-
+                	$scope.status_code = 1;
+                	$scope.message = response.data.message;
                 })
                 .catch(function (reason) {
-
+                	$scope.status_code = 1;
+                	$scope.message = "Please try again";
                 });
 		        
 		}
@@ -286,5 +324,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     	}).then(function(response){
     		$scope.message = response.data.msg;
     	});
-    }
+    };
+
+    
 });

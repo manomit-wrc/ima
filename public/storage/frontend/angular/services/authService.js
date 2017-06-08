@@ -154,6 +154,8 @@ authService.factory('Auth', function($http,$q,AuthToken,$cookieStore){
 	return authFactory;
 });
 
+
+
 authService.factory('AuthToken', function($localStorage){
 	var authTokenFactory = {};
 

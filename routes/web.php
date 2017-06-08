@@ -32,7 +32,10 @@ Route::get('/news/{id}/{slug}', function () {
 Route::get('/activate/{active_token}/{active_time}', function () {
     return view('welcome');
 });
-    
+
+Route::get('/news-list', function(){
+    return view('welcome');
+});  
 
 Route::get('/admin', 'LoginController@index');
 Route::post('/admin/login', 'LoginController@checkLogin');

@@ -146,13 +146,14 @@ class PageController extends Controller
             $doctors->dob = date('Y-m-d',strtotime($request->dob));
             $doctors->license = $request->license;
             $doctors->biography = $request->biography;
+            $doctors->address = $request->address;
 
             $doctors->save();
             
-            return response()->json(['status_code'=>200]);
+            return response()->json(['status_code'=>200,'message'=>'Profile updated successfully']);
         }
         else {
-            return response()->json(['status_code'=>500]);
+            return response()->json(['status_code'=>500,'message'=>'Please try again']);
         }
     }
 
@@ -352,5 +353,11 @@ class PageController extends Controller
         }
 
         return response()->json(['msg' => $message,'status_code'=>200]);
+    }
+
+    public function news_list() {
+        $news = \App\News::paginate(6);
+        
+        return response()->json(['news_item' => $news,'status_code'=>200]);
     }
 }

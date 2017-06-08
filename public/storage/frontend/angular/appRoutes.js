@@ -17,6 +17,8 @@ imaRoute.config(function($routeProvider,$locationProvider,$qProvider){
 		templateUrl: '/templates/news.html'
 	}).when('/activate/:active_token/:active_time', {
 		templateUrl: '/templates/activate.html'
+	}).when('/news-list',{
+		templateUrl: '/templates/news-list.html'
 	});
 
 	$qProvider.errorOnUnhandledRejections(false);
