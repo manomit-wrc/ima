@@ -39,6 +39,14 @@ Route::get('/activate/{active_token}/{active_time}', function () {
 
 Route::get('/news-list', function(){
     return view('welcome');
+});
+
+Route::get('/events-list', function(){
+    return view('welcome');
+});
+
+Route::get('/events/{events_id}/{slug}', function() {
+    return view('welcome');
 });  
 
 Route::get('/admin', 'LoginController@index');

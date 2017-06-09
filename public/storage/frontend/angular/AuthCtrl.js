@@ -362,13 +362,13 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 
      $scope.getEventsDetails = function() {
     	$http.get('/api/get-events/',{
-    		params: { events_id: $routeParams.events_id,slug: $routeParams.slug}
+    		params: { events_id:$routeParams.events_id,slug: $routeParams.slug}
     		
     		
     	}).then(function(response){
     		
     		$scope.events_details = response.data.events_arr;
-    		//$scope.tag_details = response.data.tags_arr;
+    		
     	});
     };
 

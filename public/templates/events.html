@@ -8,13 +8,13 @@
                                 
                                 <div class="col-md-12">
                                     <div class="news_right">
-                                        <h2>{{events_details[0].name}}</h2>
-                                        <h4>Posted on: {{events_details[0].event_date}}</h4>
-                                        <p> {{events_details[0].description|htmlToPlaintext}}</p>
+                                        <h2>{{events_details.name}}</h2>
+                                        <h4>Posted on: {{events_details.event_date|date:'dd/MM/yyyy'}}</h4>
+                                        <p> {{events_details.description|htmlToPlaintext}}</p>
 
                                         
                                         <div>
-                                            <a href="javascript:void(0)" ng-repeat="tag in tag_details" class="tag">{{tag.tag_name}}</a>
+                                            <!--<a href="javascript:void(0)" ng-repeat="tag in tag_details" class="tag">{{tag.tag_name}}</a>-->
                                         </div>
                                         
                                     </div>

@@ -309,20 +309,11 @@ class PageController extends Controller
 
      public function get_events(Request $request) {
         $events_id = $request->events_id;
-        $news_slug = $request->slug;
+        $events_slug = $request->slug;
         $events_arr = array();
-        //$tags_arr = array();
-        //$events_details = \App\Event::with('tags')->where('id',$events_id)->get()->toArray();
-          $events_details = Event::find($events_id)->get()->toArray();
-           foreach ($events_details as $value) {
-           $events_arr[] = array('name'=>$value['name'],'description'=>$value['description'],'event_date'=>date('d-m-Y',strtotime($value['event_date'])));
-           /*foreach ($value['tags'] as  $value1) {
-               $tags_arr[] = array('tag_name'=>$value1['tag_name'],'tag_id'=>$value1['id']);
-           }*/
-
-        }
-
-        return response()->json(['events_arr'=> $events_arr]);
+        
+        $events_details = \App\Event::find($events_id);
+        return response()->json(['events_arr'=> $events_details]);
     }
 
     public function check_user_email(Request $request) {
