@@ -21,9 +21,11 @@ Route::get('/home-content','PageController@home_content');
 Route::post('/registration','PageController@registration');
 Route::post('/login', 'PageController@login');
 Route::get('/get-news','PageController@get_news');
+Route::get('/get-events','PageController@get_events');
 Route::post('/check-user-email','PageController@check_user_email');
 Route::get('/activate-account','PageController@activate_account');
 Route::get('/news-list','PageController@news_list');
+Route::get('/events-list','PageController@events_list');
 
 Route::group(['middleware' => 'jwt.auth'], function () {
     Route::get('/doctors', 'PageController@getAuthUser');

@@ -15,10 +15,14 @@ imaRoute.config(function($routeProvider,$locationProvider,$qProvider){
 		authenticated: true
 	}).when('/news/:news_id/:slug',{
 		templateUrl: '/templates/news.html'
+	}).when('/events/:events_id/:slug',{
+		templateUrl: '/templates/events.html'
 	}).when('/activate/:active_token/:active_time', {
 		templateUrl: '/templates/activate.html'
 	}).when('/news-list',{
 		templateUrl: '/templates/news-list.html'
+	}).when('/events-list',{
+		templateUrl: '/templates/events-list.html'
 	});
 
 	$qProvider.errorOnUnhandledRejections(false);

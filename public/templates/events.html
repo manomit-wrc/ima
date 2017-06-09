@@ -1,0 +1,27 @@
+<div class="container" ng-controller="AuthController" ng-init="getEventsDetails(); getToken();">
+            <div class="row">
+                <div class="innertopB">
+                    <div class="col-md-12">
+                        <div class="Rpanel">
+                            <h2>Events Details</h2>
+                            <div class="row">
+                                
+                                <div class="col-md-12">
+                                    <div class="news_right">
+                                        <h2>{{events_details[0].name}}</h2>
+                                        <h4>Posted on: {{events_details[0].event_date}}</h4>
+                                        <p> {{events_details[0].description|htmlToPlaintext}}</p>
+
+                                        
+                                        <div>
+                                            <a href="javascript:void(0)" ng-repeat="tag in tag_details" class="tag">{{tag.tag_name}}</a>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</div>

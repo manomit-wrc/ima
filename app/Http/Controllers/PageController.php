@@ -307,6 +307,24 @@ class PageController extends Controller
                 'news_arr' => $news_arr]);
     }
 
+     public function get_events(Request $request) {
+        $events_id = $request->events_id;
+        $news_slug = $request->slug;
+        $events_arr = array();
+        //$tags_arr = array();
+        //$events_details = \App\Event::with('tags')->where('id',$events_id)->get()->toArray();
+          $events_details = Event::find($events_id)->get()->toArray();
+           foreach ($events_details as $value) {
+           $events_arr[] = array('name'=>$value['name'],'description'=>$value['description'],'event_date'=>date('d-m-Y',strtotime($value['event_date'])));
+           /*foreach ($value['tags'] as  $value1) {
+               $tags_arr[] = array('tag_name'=>$value1['tag_name'],'tag_id'=>$value1['id']);
+           }*/
+
+        }
+
+        return response()->json(['events_arr'=> $events_arr]);
+    }
+
     public function check_user_email(Request $request) {
         $email = $request->email;
         $check_email = Doctor::where('email',$email)->get();
@@ -359,5 +377,10 @@ class PageController extends Controller
         $news = \App\News::paginate(6);
         
         return response()->json(['news_item' => $news,'status_code'=>200]);
+    }
+    public function events_list() {
+        $event = \App\Event::paginate(6);
+        
+        return response()->json(['events_item' => $event,'status_code'=>200]);
     }
 }

@@ -14,6 +14,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 
 	//for paginations//
 	$scope.news_data = [];
+	$scope.events_data = [];
     $scope.totalPages = 0;
     $scope.currentPage = 1;
     $scope.range = [];
@@ -34,6 +35,31 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
           var pages = [];
 
 	      for(var i=1;i<=response.data.news_item.last_page;i++) {          
+	        pages.push(i);
+	      }
+
+	      $scope.range = pages; 
+	    });
+	    
+	    
+    };
+
+    $scope.getEventPage = function(pageNumber) {
+
+    	if(pageNumber===undefined){
+      		pageNumber = '1';
+    	}
+
+    	$http.get('/api/events-list?page='+pageNumber).then(function(response) {
+    	  
+    	  $scope.events_data = response.data.events_item.data;
+	      
+      	  $scope.totalPages   = response.data.events_item.last_page;
+          $scope.currentPage  = response.data.events_item.current_page;
+
+          var pages = [];
+
+	      for(var i=1;i<=response.data.events_item.last_page;i++) {          
 	        pages.push(i);
 	      }
 
@@ -315,6 +341,18 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     		
     		$scope.news_details = response.data.news_arr;
     		$scope.tag_details = response.data.tags_arr;
+    	});
+    };
+
+     $scope.getEventsDetails = function() {
+    	$http.get('/api/get-events/',{
+    		params: { events_id: $routeParams.events_id,slug: $routeParams.slug}
+    		
+    		
+    	}).then(function(response){
+    		
+    		$scope.events_details = response.data.events_arr;
+    		//$scope.tag_details = response.data.tags_arr;
     	});
     };
 
