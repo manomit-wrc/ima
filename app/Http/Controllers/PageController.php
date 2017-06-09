@@ -360,4 +360,11 @@ class PageController extends Controller
         
         return response()->json(['news_item' => $news,'status_code'=>200]);
     }
+
+    public function journal_list(Request $request) {
+        $doctor_id = $request->doctor_id;
+        $journal_details = Doctor::with('journal.categories')->where('id',$doctor_id)->get()->toArray();
+        
+        return response()->json(['journals' => $journal_details]);
+    }
 }
