@@ -1740,6 +1740,7 @@ Testimonial
     border: 3px solid #ddd;
     margin-bottom: 30px;
     text-align: center;
+    min-height: 230px;
 }
 
 .news_box a {

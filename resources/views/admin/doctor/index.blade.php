@@ -1,5 +1,5 @@
 @extends('admin.dashboard_layout')
-@section('title', 'Team List')
+@section('title', 'Doctor List')
 @section('content')
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
