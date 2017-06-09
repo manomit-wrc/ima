@@ -36,4 +36,5 @@ Route::group(['middleware' => 'jwt.auth'], function () {
     Route::get('/categories','PageController@categories');
     Route::post('/submit-journal','PageController@submit_journal');
     Route::get('/journal-list','PageController@journal_list');
+    Route::get('/journal-details','PageController@journal_details');
 });

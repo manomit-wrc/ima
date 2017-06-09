@@ -392,4 +392,10 @@ class PageController extends Controller
         return response()->json(['journals' => $journal_details]);
 
     }
+
+    public function journal_details(Request $request) {
+        $journal_id = $request->journal_id;
+        $journal_details = \App\Journal::find($journal_id);
+        return response()->json(['journal_details' => $journal_details]);
+    }
 }

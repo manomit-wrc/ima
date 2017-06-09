@@ -380,5 +380,17 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     	});
     };
 
+    $scope.getJournalDetails = function() {
+    	$http.get('/api/journal-details',{
+    		params: {journal_id: $routeParams.id}
+    	}).then(function(response){
+    		
+    		$scope.category_id = response.data.journal_details.category_id;
+    		$scope.title = response.data.journal_details.title;
+    		$scope.description = response.data.journal_details.description;
+    		$scope.published_date = response.data.journal_details.published_date;
+    	});
+    };
+
     
 });

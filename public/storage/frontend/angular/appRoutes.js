@@ -26,6 +26,9 @@ imaRoute.config(function($routeProvider,$locationProvider,$qProvider){
 	}).when('/journal-list', {
 		templateUrl: '/templates/journal_list.html',
 		authenticated: true
+	}).when('/journal/:id',{
+		templateUrl: '/templates/edit_journal.html',
+		authenticated: true
 	});
 
 	$qProvider.errorOnUnhandledRejections(false);

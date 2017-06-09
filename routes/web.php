@@ -39,7 +39,11 @@ Route::get('/activate/{active_token}/{active_time}', function () {
 
 Route::get('/news-list', function(){
     return view('welcome');
-});  
+});
+
+Route::get('/journal/{id}', function() {
+    return view('welcome');
+});
 
 Route::get('/admin', 'LoginController@index');
 Route::post('/admin/login', 'LoginController@checkLogin');
