@@ -35,5 +35,5 @@ Route::group(['middleware' => 'jwt.auth'], function () {
     Route::post('/update-password','PageController@update_password');
     Route::get('/categories','PageController@categories');
     Route::post('/submit-journal','PageController@submit_journal');
-
+    Route::get('/journal-list','PageController@journal_list');
 });

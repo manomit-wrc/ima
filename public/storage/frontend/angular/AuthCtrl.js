@@ -19,6 +19,45 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     $scope.currentPage = 1;
     $scope.range = [];
     
+
+    $scope.init = function () {
+		Auth.getUser().then(function(response){
+			$scope.user = response.data.result;
+			$scope.first_name = $scope.user.first_name;
+			$scope.last_name = $scope.user.last_name;
+			$scope.mobile = $scope.user.mobile;
+			$scope.email = $scope.user.email;
+			$scope.city = $scope.user.city;
+			$scope.pincode = $scope.user.pincode;
+			$scope.sex = $scope.user.sex;
+			$scope.dob = $scope.user.dob;
+			$scope.biography = $scope.user.biography;
+			$scope.state_id = $scope.user.state_id;
+			$scope.license = $scope.user.license;
+			$scope.doctor_id = $scope.user.id;
+			$scope.auth_id = $scope.user.id;
+			$scope.avators = $scope.user.avators;
+			$scope.address = $scope.user.address;
+			
+			if($scope.user.avators != null) {
+				$scope.image_source = '/uploads/doctors/thumb/'+$scope.user.avators;
+			}
+			else {
+				$scope.image_source = '/uploads/doctors/noimage_user.jpg';
+			}
+
+
+		});
+
+		Auth.getState().then(function(response){
+			$scope.state_list = response.data.state_list;
+
+		});
+		
+	};
+	$scope.init();
+
+
     $scope.getResultsPage = function(pageNumber) {
 
     	if(pageNumber===undefined){
@@ -132,7 +171,8 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 					$scope.user = response.data.result;
 					
 					$scope.dismiss();
-					$location.path('/profile');
+					//$location.path('/profile');
+					$window.location.href = "/profile";
 				});
 				}
 			});
@@ -167,46 +207,19 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 		}
 	};
 
-	$scope.getToken = function() {
-		Auth.getUser().then(function(response){
-			$scope.user = response.data.result;
-			$scope.first_name = $scope.user.first_name;
-			$scope.last_name = $scope.user.last_name;
-			$scope.mobile = $scope.user.mobile;
-			$scope.email = $scope.user.email;
-			$scope.city = $scope.user.city;
-			$scope.pincode = $scope.user.pincode;
-			$scope.sex = $scope.user.sex;
-			$scope.dob = $scope.user.dob;
-			$scope.biography = $scope.user.biography;
-			$scope.state_id = $scope.user.state_id;
-			$scope.license = $scope.user.license;
-			$scope.doctor_id = $scope.user.id;
-			$scope.auth_id = $scope.user.id;
-			$scope.avators = $scope.user.avators;
-			$scope.address = $scope.user.address;
-			
-			if($scope.user.avators != null) {
-				$scope.image_source = '/uploads/doctors/thumb/'+$scope.user.avators;
-			}
-			else {
-				$scope.image_source = '/uploads/doctors/noimage_user.jpg';
-			}
-
-
-		});
-
-		Auth.getState().then(function(response){
-			$scope.state_list = response.data.state_list;
-
-		});
-
-
-	};
+	
 
 	$scope.getCategory = function() {
 		Auth.get_category().then(function(response){
 			$scope.categories = response.data.categories;
+		});
+	};
+
+	$scope.getJournalList = function() {
+		
+		Auth.get_journal_list($scope.doctor_id).then(function(response){
+			$scope.journal_list = response.data.journals[0];
+			
 		});
 	};
 
@@ -312,6 +325,9 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     };
     $scope.loadJournal = function() {
     	$location.path("/upload-journal");
+    };
+    $scope.loadJournalList = function() {
+    	$location.path("/journal-list");
     };
 
     $scope.doUploadJournal = function(valid) {
