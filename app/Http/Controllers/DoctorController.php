@@ -15,7 +15,7 @@ class DoctorController extends Controller
 
   public function index() {
     	$doctors = Doctor::all();
-        return view('admin.doctor.index')->with('doctor',$doctors);
+      return view('admin.doctor.index')->with('doctor',$doctors);
     }
   public function view($id){
       
@@ -25,6 +25,7 @@ class DoctorController extends Controller
    }
   public function Publised(Request $request,$id,$status){
     $journal = Journal::find($id);
+   
     if($status=='0')
     {
       $journal->status =1;

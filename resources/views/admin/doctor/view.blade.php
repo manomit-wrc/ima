@@ -129,7 +129,7 @@
                       <td>{{$value['published_date']}}</td>
                       <td><a href="{{ url('uploads/doctors/journal/' .$value['journal_file'])}}" alt="{{$value['journal_file']}}" target="_blank">{{$value['journal_file']}}</a></td>
                       <td>{{$value['categories']['name']}}</td>
-                      <td><a href="/admin/doctor/Publised/{{$value['id']}}/{{$value['status']}}" >
+                      <td><a href="/admin/doctor/Publised/{{$value['id']}}/{{$value['status']}}" onclick="return confirm('Are you want to change?')">
                         @if($value['status']=='0')
                         <input type="button" value="Publised">
                         @endif
