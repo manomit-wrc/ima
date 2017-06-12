@@ -93,7 +93,11 @@
                     <label for="inputAvators" class="col-sm-2 control-label">Image</label>
 
                     <div class="col-sm-10">
-                      <img src="{{ url('uploads/doctors/' .$viewdoctor[0]['avators'])}}" alt="{{$viewdoctor[0]['avators']}}" height="100" width="100">
+                     @if(!empty($viewdoctor[0]['avators']) && file_exists(url('uploads/doctors/'.$viewdoctor[0]['avators'])))
+                      <img src="{{ url('uploads/doctors/'.$viewdoctor[0]['avators'])}}" alt="{{$viewdoctor[0]['avators']}}" height="100" width="100">
+                     @else(empty($viewdoctor[0]['avators']))
+                      <img src="{{ url('uploads/doctors/'.'noimage_user.jpg')}}" alt="{{$viewdoctor[0]['avators']}}" height="100" width="100">@endif
+                     
                     </div>
                   </div>
 

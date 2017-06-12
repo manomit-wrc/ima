@@ -28,7 +28,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function photo_100_100()
+   public function photo_100_100()
    {
       if(file_exists( public_path() . '/uploads/profile/thumb_100_100/' . Auth::guard('admin')->user()->avators) && Auth::guard('admin')->user()->avators != "") {
           return url('uploads/profile/thumb_100_100/' . Auth::guard('admin')->user()->avators);
