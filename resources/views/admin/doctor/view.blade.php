@@ -91,12 +91,11 @@
 
                   <div class="form-group {{ $errors->has('avators') ? 'has-error' : '' }}">
                     <label for="inputAvators" class="col-sm-2 control-label">Image</label>
-
+                    
                     <div class="col-sm-10">
-                     @if(!empty($viewdoctor[0]['avators']) && file_exists(url('uploads/doctors/'.$viewdoctor[0]['avators'])))
+                    
                       <img src="{{ url('uploads/doctors/'.$viewdoctor[0]['avators'])}}" alt="{{$viewdoctor[0]['avators']}}" height="100" width="100">
-                     @else(empty($viewdoctor[0]['avators']))
-                      <img src="{{ url('uploads/doctors/'.'noimage_user.jpg')}}" alt="{{$viewdoctor[0]['avators']}}" height="100" width="100">@endif
+                    
                      
                     </div>
                   </div>
@@ -131,7 +130,7 @@
                     <tr>
                       <td>{{$value['title']}}</td>
                       <td>{{$value['published_date']}}</td>
-                      <td><a href="{{ url('uploads/doctors/journal/' .$value['journal_file'])}}" alt="{{$value['journal_file']}}" target="_blank">{{$value['journal_file']}}</a></td>
+                      <td><a href=" @if(!empty($value['journal_file']) && file_exists(url('uploads/doctors/'.$value['journal_file']))){{ url('uploads/doctors/journal/' .$value['journal_file'])}}@endif" alt="{{$value['journal_file']}}" target="_blank">{{$value['journal_file']}}</a></td>
                       <td>{{$value['categories']['name']}}</td>
                       <td><a href="/admin/doctor/Publised/{{$value['id']}}/{{$value['status']}}" onclick="return confirm('Are you want to change?')">
                         @if($value['status']=='0')
