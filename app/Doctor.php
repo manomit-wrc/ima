@@ -21,4 +21,5 @@ class Doctor extends Authenticatable
     public function journal() {
     	return $this->hasMany('\App\Journal','doctor_id');
     }
+   
 }
