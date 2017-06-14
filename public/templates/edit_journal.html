@@ -30,8 +30,9 @@
                     <div class="col-md-8 Clear-991" ng-controller="AuthController">
                         <div class="Rpanel">
                             <h2>Upload Journal</h2>
-                            <form name="frmUploadJournal" ng-submit="doUploadJournal(frmUploadJournal.$valid)" method="post" novalidate="novalidate" enctype="multipart/form-data">
+                            <form name="frmUploadJournal" ng-submit="doEditJournal(frmUploadJournal.$valid)" method="post" novalidate="novalidate" enctype="multipart/form-data">
                             <input type="hidden" name="auth_id" ng-model="auth_id" />
+                            <input type="hidden" name="journal_id" ng-model="journal_id" />
                             <div style="margin:0 auto!important;" ng-show="status_code">{{message}}</div>
                             <div class="row">
                                 <div class="col-md-12">
@@ -62,7 +63,7 @@
                                             'has-success': frmUploadJournal.published_date.$valid && (!frmUploadJournal.$pristine || frmUploadJournal.$submitted)
                                             }">
                                         <label>Published Date</label>
-                                        <input type="text" name="published_date" class="editF" ng-model="published_date|date:'dd/MM/yyyy'" placeholder="DD/MM/YYYY" jqdatepicker required="required">
+                                        <input type="text" name="published_date" class="editF" ng-model="published_date|date:'dd-MM-yyyy'" placeholder="DD-MM-YYYY" jqdatepicker required="required">
 
                                         <span class="help-block" ng-show="frmUploadJournal.published_date.$error.required && (!frmUploadJournal.$pristine || frmUploadJournal.$submitted)">Please Enter Date Of Published</span>
                                     </div>
@@ -88,6 +89,7 @@
                                         <span>
                                             <input type="file" ng-model="journal_file" name="journal_file" onchange="angular.element(this).scope().uploadedJournalDoc(this)" class="editF1" accept="image/jpeg,image/png,application/pdf,image/x-eps">
                                         </span>
+                                        <a href="{{file_source}}" target="_blank">{{file_name}}</a>
                                     </div>
                                 </div>
                                 <div class="col-md-6">

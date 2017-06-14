@@ -163,6 +163,37 @@ authService.factory('Auth', function($http,$q,AuthToken,$cookieStore){
        });
 
        return defer.promise;
+	};
+
+	authFactory.edit_journal = function(journal) {
+		console.log(journal.journal_file);
+		var defer = $q.defer();
+		$http({
+		  method  : 'POST',
+		  url     : 'api/update-journal',
+		  processData: false,
+		  transformRequest: function (data) {
+		      var formData = new FormData();
+		      formData.append("journal_file", journal.journal_file); 
+		      formData.append("doctor_id", journal.auth_id);  
+		      formData.append("title", journal.title);
+		      formData.append("description", journal.description);
+		      formData.append("published_date", journal.published_date);
+		      formData.append("category_id", journal.category_id);
+		      formData.append("journal_id",journal.journal_id);
+		      return formData;  
+		  },  
+		  data : journal,
+		  headers: {
+		         'Content-Type': undefined
+		  }
+	   }).then(function (response) {
+	   		defer.resolve(response);
+       }).catch(function(reason){
+       		defer.resolve(reason);
+       });
+
+       return defer.promise;
 	}
 
 	return authFactory;

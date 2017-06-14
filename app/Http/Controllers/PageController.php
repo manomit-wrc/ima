@@ -389,4 +389,67 @@ class PageController extends Controller
         $journal_details = \App\Journal::find($journal_id);
         return response()->json(['journal_details' => $journal_details]);
     }
+
+    public function update_journal(Request $request) {
+        $validator = Validator::make($request->all(),[
+            'title' => 'required|max:40',
+            'description' => 'required',
+            'published_date' => 'required|date_format:d-m-Y|before_or_equal:today',
+            'category_id' => 'required',
+            'journal_file' => 'required_with|mimes:pdf|max:100000'
+        ]);
+        $journal = \App\Journal::find($request->journal_id);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => true,
+                'message' => $validator->messages()->first(),
+                'code' => 500]);
+        }
+        else {
+
+            if($request->hasFile('journal_file')) {
+            $file = $request->file('journal_file') ;
+
+            $fileName = time().'_'.$file->getClientOriginalName() ;
+
+            $destinationPath = public_path().'/uploads/doctors/journal/' ;
+            $file->move($destinationPath,$fileName);
+          }
+          else {
+            $fileName = $journal->journal_file;
+            
+          }
+
+         $journal->title = $request->title;
+         $journal->description = $request->description;
+         $journal->published_date = date('Y-m-d',strtotime($request->published_date));
+         $journal->category_id = $request->category_id;
+         $journal->doctor_id = $request->doctor_id;
+         $journal->journal_file = $fileName;
+
+         $journal->save();
+
+         return response()->json(['error' => false,
+                'message' => 'Journal updated successfully',
+                'code' => 200]);
+        }
+    }
+
+    public function delete_journal(Request $request) {
+        $journal_id = $request->journal_id;
+
+        $journal_details = \App\Journal::find($journal_id);
+
+        if($journal_details) {
+            $journal_details->delete();
+            return response()->json(['error' => false,
+                'message' => 'Journal deleted successfully',
+                'code' => 200]);
+        }
+        else {
+            return response()->json(['error' => true,
+                'message' => 'Journal not found',
+                'code' => 500]);
+        }
+    }
 }

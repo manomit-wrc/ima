@@ -389,8 +389,46 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     		$scope.title = response.data.journal_details.title;
     		$scope.description = response.data.journal_details.description;
     		$scope.published_date = response.data.journal_details.published_date;
+    		$scope.journal_id = response.data.journal_details.id;
+
+    		if(response.data.journal_details.journal_file != null) {
+				$scope.file_source = '/uploads/doctors/journal/'+response.data.journal_details.journal_file;
+				$scope.file_name = response.data.journal_details.journal_file;
+			}
+
+
+			
     	});
     };
 
-    
+    $scope.doEditJournal = function(valid) {
+    	if(valid) {
+    		
+    		Auth.edit_journal($scope).then(function(response){
+    			$scope.message = response.data.message;
+				$scope.status_code = response.data.code;
+				if($scope.status_code != 500) {
+					$scope.title = null;
+					$scope.description = null;
+					$scope.published_date = null;
+					$scope.category_id = null;
+					$scope.journal_file = null;
+
+					$window.location.href = "/journal-list";
+				}
+				
+    		});
+    	}
+    };
+
+    $scope.removeJournal = function(journal_id,index) {
+    	if(journal_id) {
+    		$http.get('/api/delete-journal',{
+    			params: {journal_id: journal_id}
+    		}).then(function(response){
+    			$scope.message = response.data.message;
+    			$window.location.href = "/journal-list";
+    		});
+    	}
+    }
 });

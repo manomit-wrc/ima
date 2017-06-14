@@ -29,6 +29,7 @@
                     <div class="col-md-8 Clear-991">
                         <div class="Rpanel">
                             <h2>Journals</h2>
+                            <div>{{message}}</div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="table-responsive">
@@ -41,12 +42,12 @@
                                             <td>Action</td>
                                           </tr>
                                           
-                                          <tr ng-repeat="j in journal_list.journal">
+                                          <tr ng-repeat="j in journal_list.journal track by $index">
                                             <td>{{j.title}}</td>
                                             <td>{{j.published_date|date:'dd/MM/yyyy'}}</td>
                                             <td>{{j.categories.name}}</td>
                                             <td><a href="/uploads/doctors/journal/{{j.journal_file}}" target="_blank">{{j.journal_file}}</a></td>
-                                            <td><a href="/journal/{{j.id}}">Edit</a> | <a href="#">Delete</a></td>
+                                            <td><a href="/journal/{{j.id}}">Edit</a> | <a href="#" ng-confirm-click="Are you sure to delete this record ?" confirmed-click="removeJournal({{j.id}},{{$index}})">Delete</a></td>
                                           </tr>
                                         </table>
                                     </div>
