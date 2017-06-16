@@ -20,6 +20,28 @@ authService.factory('Auth', function($http,$q,AuthToken,$cookieStore){
 
 		return defer.promise;
 	};
+	authFactory.do_contact = function(firstname,lastname,email_id,phone,comment) {
+		/*console.log(firstname);
+		console.log(lastname);
+		console.log(email_id);
+		console.log(phone);
+		console.log(comment);*/
+		var defer = $q.defer();
+		$http.post('/api/contactsave', {
+			firstname:firstname,
+			lastname:lastname,
+			email_id:email_id,
+			phone:phone,
+			comment:comment
+		}).then(function(response){
+			AuthToken.setToken(response.data.token);
+			defer.resolve(response);
+		}).catch(function(reason){
+			defer.resolve(reason);
+		});
+
+		return defer.promise;
+	};
 
 	authFactory.do_login = function(email,password,remember_me) {
 		var defer = $q.defer();

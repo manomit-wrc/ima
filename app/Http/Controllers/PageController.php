@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Banner;
 use App\Team;
+use App\Contact;
 use App\Designation;
 use App\News;
 use App\Event;
@@ -89,6 +90,44 @@ class PageController extends Controller
             if($doctor->save()) {
                 $activation_link = config('app.url').'activate/'.$doctor->active_token."/".time();
                 Mail::to($request->input('email'))->send(new RegistrationEmail($activation_link));
+                return response()->json(['error' => false,
+                'message' => "Successfully registered. Please check your email to activate yout account.",
+                'code' => 200]);
+            }
+            
+        }
+    }
+
+    public function contact_save(Request $request) {
+       
+         $validator = Validator::make($request->all(),[
+            'firstname' => 'required|max:40',
+            'lastname' => 'required|max:40',
+            'email_id' => 'required|email|unique:contacts,email',
+            'phone' => 'required|max:10|min:10|regex:/[0-9]{10}/',
+            'comment' => 'required|max:200|min:6'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => true,
+                'message' => $validator->messages()->first(),
+                'code' => 500]);
+        }
+        else {
+            $contact = new Contact();
+            $contact->firstname = $request->firstname;
+            $contact->lastname = $request->lastname;
+            $contact->email = $request->email_id;
+            $contact->phone = $request->phone;
+            $contact->comment =$request->comment;
+            //$contact->save();
+            
+            //$contact->active_token = str_replace("/","",Hash::make(str_random(30)));
+            //$contact->save();
+            
+            if($contact->save()) {
+                $activation_link = config('app.url').'activate/'.$contact->active_token."/".time();
+                //Mail::to($request->input('email'))->send(new RegistrationEmail($activation_link));
                 return response()->json(['error' => false,
                 'message' => "Successfully registered. Please check your email to activate yout account.",
                 'code' => 200]);
@@ -374,6 +413,12 @@ class PageController extends Controller
         $event = \App\Event::paginate(6);
         
         return response()->json(['events_item' => $event,'status_code'=>200]);
+
+    }
+    public function contact_us() {
+        $contact = \App\Organization::all();
+        
+        return response()->json(['contact_item' => $contact,'status_code'=>200]);
 
     }
     public function journal_list(Request $request) {

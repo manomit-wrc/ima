@@ -356,6 +356,7 @@ class ComposerStaticInit26ac6f531c7dc343a38a6557cc1ca91b
         'CreateBulletinsTable' => __DIR__ . '/../..' . '/database/migrations/2017_05_25_060920_create_bulletins_table.php',
         'CreateCMSTable' => __DIR__ . '/../..' . '/database/migrations/2017_05_26_130520_create_c_m_s_table.php',
         'CreateCategoriesTable' => __DIR__ . '/../..' . '/database/migrations/2017_06_06_095500_create_categories_table.php',
+        'CreateContactsTable' => __DIR__ . '/../..' . '/database/migrations/2017_06_14_092817_create_contacts_table.php',
         'CreateDesignationsTable' => __DIR__ . '/../..' . '/database/migrations/2017_05_23_114447_create_designations_table.php',
         'CreateDoctorsTable' => __DIR__ . '/../..' . '/database/migrations/2017_06_01_063637_create_doctors_table.php',
         'CreateEventCategoriesTable' => __DIR__ . '/../..' . '/database/migrations/2017_05_24_071023_create_event_categories_table.php',

@@ -107,6 +107,14 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 	    
 	    
     };
+    $scope.getContactusPage = function() {
+
+          $http.get('/api/contact').then(function(response) {
+    	  $scope.contact_data = response.data.contact_item;
+	   });
+	    
+	    
+    };
    
 	//end paginations//
 
@@ -146,6 +154,36 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 				$scope.isDisabled = false;
 			});
 		}
+		
+	};
+	$scope.doContact=function(valid) {
+		
+		        //console.log($scope.registration.firstname);
+		        //console.log('hello');
+		       if(valid) {
+				$scope.isDisabled = true;
+				Auth.do_contact($scope.registration.firstname, 
+				$scope.registration.lastname,
+				$scope.registration.email_id,
+				$scope.registration.phone,
+				$scope.registration.comment).then(function(response){
+				
+				if(response.data.code == 500) {
+					$scope.code = 1;
+					$scope.message = response.data.message;
+				}
+				else if(response.data.code == 200) {
+					$scope.code = 1;
+					$scope.message = response.data.message;
+				}
+				else {
+					$scope.code = 0;
+					$scope.message = '';
+				}
+				$scope.isDisabled = false;
+
+			});
+		 }
 		
 	};
 

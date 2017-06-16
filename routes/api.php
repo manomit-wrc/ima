@@ -26,6 +26,8 @@ Route::post('/check-user-email','PageController@check_user_email');
 Route::get('/activate-account','PageController@activate_account');
 Route::get('/news-list','PageController@news_list');
 Route::get('/events-list','PageController@events_list');
+Route::get('/contact','PageController@contact_us');
+Route::post('/contactsave','PageController@contact_save');
 
 Route::group(['middleware' => 'jwt.auth'], function () {
     Route::get('/doctors', 'PageController@getAuthUser');

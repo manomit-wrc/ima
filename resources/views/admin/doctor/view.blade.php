@@ -93,10 +93,7 @@
                     <label for="inputAvators" class="col-sm-2 control-label">Image</label>
                     
                     <div class="col-sm-10">
-                    
-                      <img src="{{ url('uploads/doctors/'.$viewdoctor[0]['avators'])}}" alt="{{$viewdoctor[0]['avators']}}" height="100" width="100">
-                    
-                     
+                       <img src="{{ url('uploads/doctors/'.$viewdoctor[0]['avators'])}}" alt="{{$viewdoctor[0]['avators']}}" height="100" width="100">
                     </div>
                   </div>
 
