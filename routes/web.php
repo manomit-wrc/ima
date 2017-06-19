@@ -51,6 +51,9 @@ Route::get('/events-list', function(){
 Route::get('/contact', function(){
     return view('welcome');
 });
+Route::get('/branches', function(){
+    return view('welcome');
+});
 
 Route::get('/events/{events_id}/{slug}', function() {
     return view('welcome');

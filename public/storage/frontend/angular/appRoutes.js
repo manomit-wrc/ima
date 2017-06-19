@@ -25,6 +25,8 @@ imaRoute.config(function($routeProvider,$locationProvider,$qProvider){
 		templateUrl: '/templates/events-list.html'
 	}).when('/contact',{
 		templateUrl: '/templates/contact.html'
+	}).when('/branches',{
+		templateUrl: '/templates/local_branches.html'
 	}).when('/journal-list', {
 		templateUrl: '/templates/journal_list.html',
 		authenticated: true

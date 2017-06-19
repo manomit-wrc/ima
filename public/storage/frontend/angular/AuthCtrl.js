@@ -115,6 +115,15 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 	    
 	    
     };
+    $scope.getlocalBranchPage = function() {
+
+          $http.get('/api/localbranch').then(function(response) {
+          	//console.log(response);
+    	  $scope.branch_data = response.data.branch_item;
+	   });
+	    
+	    
+    };
    
 	//end paginations//
 
