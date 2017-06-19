@@ -8,6 +8,7 @@ use App\Team;
 use App\Contact;
 use App\Designation;
 use App\News;
+use App\Organization;
 use App\Event;
 use Validator;
 use App\Doctor;
@@ -19,6 +20,7 @@ use Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\RegistrationEmail;
 use App\Mail\NewPasswordEmail;
+use App\Mail\ContactEmail;
 
 class PageController extends Controller
 {
@@ -107,7 +109,16 @@ class PageController extends Controller
             'phone' => 'required|max:10|min:10|regex:/[0-9]{10}/',
             'comment' => 'required|max:200|min:6'
         ]);
+        
+        $organization=Organization::all();
 
+        //$contact = Contact::all();
+        
+        $emailto=$organization[0]['email'];
+        $first_name=$request->firstname;
+        $emailfrom=$request->email_id;
+        $comment=$request->comment;
+        //echo $first_name.'-'.$emailfrom.'-'.$comment.'-'.$emailto;
         if ($validator->fails()) {
             return response()->json(['error' => true,
                 'message' => $validator->messages()->first(),
@@ -122,15 +133,12 @@ class PageController extends Controller
             $contact->comment =$request->comment;
             //$contact->save();
             
-            //$contact->active_token = str_replace("/","",Hash::make(str_random(30)));
-            //$contact->save();
             
-            if($contact->save()) {
-                $activation_link = config('app.url').'activate/'.$contact->active_token."/".time();
-                //Mail::to($request->input('email'))->send(new RegistrationEmail($activation_link));
-                return response()->json(['error' => false,
-                'message' => "Successfully registered. Please check your email to activate yout account.",
-                'code' => 200]);
+           if($contact->save()) {
+            Mail::to($emailfrom)->send(new ContactEmail($first_name,$comment,$emailfrom,$emailto));
+            return response()->json(['error' => false,
+            'message' => "Mail Send Successfully.",
+            'code' => 200]);
             }
             
         }
