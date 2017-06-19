@@ -105,7 +105,7 @@ class PageController extends Controller
          $validator = Validator::make($request->all(),[
             'firstname' => 'required|max:40',
             'lastname' => 'required|max:40',
-            'email_id' => 'required|email|unique:contacts,email',
+            'email_id' => 'required|email',
             'phone' => 'required|max:10|min:10|regex:/[0-9]{10}/',
             'comment' => 'required|max:200|min:6'
         ]);
@@ -135,7 +135,7 @@ class PageController extends Controller
             
             
            if($contact->save()) {
-            Mail::to($emailfrom)->send(new ContactEmail($first_name,$comment,$emailfrom,$emailto));
+            Mail::to($emailto)->send(new ContactEmail($first_name,$comment,$request->input('email_id')));
             return response()->json(['error' => false,
             'message' => "Mail Send Successfully.",
             'code' => 200]);

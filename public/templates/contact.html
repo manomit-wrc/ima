@@ -47,7 +47,7 @@
                                         <div class="contactR">
                                             <h3><span>Get in touch with us</span></h3>
                                       <form name="frmContact" id="frmContact"  method="post" ng-submit="doContact(frmContact.$valid)" ng-app="AuthCtrl" ng-controller="AuthController" novalidate="novalidate">
-
+                                            <div style="margin:0 auto!important;" ng-show="code">{{message}}</div>
                                             <div class="row">
 
                                             
@@ -60,7 +60,7 @@
                                                     }">
 
                                                         <input name="firstname" id="firstname" type="text" ng-model="registration.firstname" required="required" placeholder="Enter First Name" />
-                                                       <span class="help-block" ng-show="frmContact.firstname.$error.required && (frmContact.$pristine || frmContact.$submitted)">Please Enter First Name</span>
+                                                       <span class="help-block" ng-show="frmContact.firstname.$error.required && (!frmContact.$pristine || frmContact.$submitted)">Please Enter First Name</span>
                                                     </div>
                                                </div>
                                                 <div class="col-md-6">
@@ -70,7 +70,7 @@
                                             'has-success': frmContact.lastname.$valid && (!frmContact.$pristine || frmContact.$submitted)
                                             }">
                                                     <input name="lastname" id="lastname" type="text" ng-model="registration.lastname" required="required" placeholder="Enter Last Name"/>
-                                                    <span class="help-block" ng-show="frmContact.lastname.$error.required && (frmContact.$pristine || frmContact.$submitted)">Please Enter Last Name</span>
+                                                    <span class="help-block" ng-show="frmContact.lastname.$error.required && (!frmContact.$pristine || frmContact.$submitted)">Please Enter Last Name</span>
                                                  </div>   
                                                 </div>
 
@@ -82,8 +82,8 @@
                                             }">
 
                                                     <input name="email_id" id="email_id" type="text" ng-model="registration.email_id" required="required" placeholder="Enter Email Id"/>
-                                                     <span class="help-block" ng-show="frmContact.email_id.$error.required && (frmContact.$pristine || frmContact.$submitted)">Please Enter Email ID</span>
-                                    <span class="help-block" ng-show="frmContact.email_id.$error.email && (frmContact.$pristine || frmContact.$submitted)">Please Enter Valid Email ID</span>
+                                                     <span class="help-block" ng-show="frmContact.email_id.$error.required && (!frmContact.$pristine || frmContact.$submitted)">Please Enter Email ID</span>
+                                    <span class="help-block" ng-show="frmContact.email_id.$error.email && (!frmContact.$pristine || frmContact.$submitted)">Please Enter Valid Email ID</span>
                                                      </div>
                                                 </div>
 
@@ -95,10 +95,10 @@
                                             }">
                                                     <input name="phone" id="phone" type="text" ng-model="registration.phone" required="required"   maxlength="10" placeholder="Enter Mobile No" ng-maxlength="10" ng-minlength="10" onkeypress="if(event.keyCode>=48 && event.keyCode>=58) { return false ;}"/>
 
-                                                    <span class="help-block" ng-show="frmContact.phone.$error.required && (frmContact.$pristine || frmContact.$submitted)">Please Enter Phone No</span>
-                                    <span class="help-block" ng-show="frmContact.phone.$error.maxlength  && (frmContact.$pristine || frmContact.$submitted)">Phone No Must Have 10 Digits</span>
-                                    <span class="help-block" ng-show="frmContact.phone.$error.minlength  && (frmContact.$pristine || frmContact.$submitted)">Phone No Must Have 10 Digits</span>
-                                    <span class="help-block" ng-show="frmContact.phone.$error.number  && (frmContact.$pristine || frmContact.$submitted)">Mobile No Must Be Numeric</span>
+                                                    <span class="help-block" ng-show="frmContact.phone.$error.required && (!frmContact.$pristine || frmContact.$submitted)">Please Enter Phone No</span>
+                                    <span class="help-block" ng-show="frmContact.phone.$error.maxlength  && (!frmContact.$pristine || frmContact.$submitted)">Phone No Must Have 10 Digits</span>
+                                    <span class="help-block" ng-show="frmContact.phone.$error.minlength  && (!frmContact.$pristine || frmContact.$submitted)">Phone No Must Have 10 Digits</span>
+                                    <span class="help-block" ng-show="frmContact.phone.$error.number  && (!frmContact.$pristine || frmContact.$submitted)">Mobile No Must Be Numeric</span>
                                                     </div>
                                                 </div>
 
@@ -109,13 +109,13 @@
                                             'has-success': frmContact.phone.$valid && (!frmContact.$pristine || frmContact.$submitted)
                                             }">
                                                     <textarea rows="5" cols="" name="comment" id="comment" ng-model="registration.comment" required="required"></textarea>
-                                                    <span class="help-block" ng-show="frmContact.comment.$error.required && (frmContact.$pristine || frmContact.$submitted)">Please Write Comment</span>
+                                                    <span class="help-block" ng-show="frmContact.comment.$error.required && (!frmContact.$pristine || frmContact.$submitted)">Please Write Comment</span>
                                                   </div>
                                                 </div>
 
                                                 <div class="col-md-12">
                                                     <button type="submit">SUBMIT</button>
-                                                    <!--<button type="button" ng-click="doContact()">SUBMIT</button>-->
+                                                    
                                                 </div>
 
                                             </div>

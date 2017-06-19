@@ -21,13 +21,13 @@ class ContactEmail extends Mailable
     public $emailfrom;
     public $emailto;
 
-    public function __construct($first_name,$comment,$emailfrom,$emailto)
+    public function __construct($first_name,$comment,$emailfrom)
     {
         //
          $this->first_name = $first_name;
          $this->comment = $comment;
          $this->emailfrom = $emailfrom;
-         $this->emailto = $emailto;
+         
     }
 
     /**
@@ -37,8 +37,9 @@ class ContactEmail extends Mailable
      */
     public function build()
     {
-        return $this->from($emailfrom, 'Indian Medical Association')
+        
+        return $this->from($this->emailfrom, 'Indian Medical Association')
         ->subject('Contact')
-        return $this->view('emails.contact');
+        ->view('emails.contact');
     }
 }

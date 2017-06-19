@@ -4,7 +4,7 @@
   </tr>
   <tr>
     <td colspan="3" style="border: 3px solid #cf4d7e; padding: 20px; font-family: arial; font-size: 16px; line-height: 24px;">
-		Below is Contact Details
+		
 
     <p>{{$comment}}</p>
 
