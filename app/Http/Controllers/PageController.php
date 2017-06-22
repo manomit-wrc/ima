@@ -426,17 +426,13 @@ class PageController extends Controller
     }
     public function contact_us() {
         $contact = \App\Organization::all();
-        
         return response()->json(['contact_item' => $contact,'status_code'=>200]);
 
     }
     public function local_branch() {
         //$localbranch = \App\LocalBranch::all();
          $localbranch = \App\LocalBranch::with('designations')->get();
-        /*echo "<pre>";
-        print_r($localbranch);
-        echo "</pre>";*/
-        return response()->json(['branch_item' => $localbranch,'status_code'=>200]);
+         return response()->json(['branch_item' => $localbranch,'status_code'=>200]);
 
     }
     public function journal_list(Request $request) {
