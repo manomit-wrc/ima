@@ -152,3 +152,4 @@ imaApp.directive('ngConfirmClick', function(){
             }
         };
 });
+

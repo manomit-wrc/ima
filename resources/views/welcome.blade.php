@@ -19,6 +19,8 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-cookies.js"></script>
     
     
+   <script src="https://maps.googleapis.com/maps/api/js?key=&v=3.0&sensor=true"></script>
+    
     {!! Html::script('storage/frontend/angular/services/authService.js') !!}
     
     {!! Html::script('storage/frontend/angular/AuthCtrl.js') !!}

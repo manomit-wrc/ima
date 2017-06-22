@@ -11,6 +11,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 	$scope.doctor_id = '';
 	$scope.journal_file = {};
 	$scope.isDisabled = false;
+	$scope.contact_address = '';
 
 	//for paginations//
 	$scope.news_data = [];
@@ -18,7 +19,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     $scope.totalPages = 0;
     $scope.currentPage = 1;
     $scope.range = [];
-    
+    $scope.map='';
 
     $scope.init = function () {
 		Auth.getUser().then(function(response){
@@ -107,23 +108,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 	    
 	    
     };
-    $scope.getContactusPage = function() {
-
-          $http.get('/api/contact').then(function(response) {
-    	  $scope.contact_data = response.data.contact_item;
-	   });
-	    
-	    
-    };
-    $scope.getlocalBranchPage = function() {
-
-          $http.get('/api/localbranch').then(function(response) {
-          	//console.log(response);
-    	  $scope.branch_data = response.data.branch_item;
-	   });
-	    
-	    
-    };
+    
    
 	//end paginations//
 
@@ -477,5 +462,91 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     			$window.location.href = "/journal-list";
     		});
     	}
+    };
+
+    $scope.getContactusPage = function() {
+          
+          $http.get('/api/contact').then(function(response) {
+          //alert(response.data);
+          $scope.contact_data = response.data.contact_item;
+          $scope.contact_address = $scope.contact_data[0].address;
+          //scope.contact_address = scope.$eval($attrs.addressBasedGoogleMap);
+          //console.log($scope.contact_address);
+          //var value=$scope.contact_address;
+          //alert(value);
+          //alert($scope.contact_address[0].address);
+	   });          
+	    
+    };
+    $scope.getlocalBranchPage = function() {
+
+          $http.get('/api/localbranch').then(function(response) {
+          	
+    	  $scope.branch_data = response.data.branch_item;
+	   });
+	    
+	    
     }
+});
+
+AuthCtrl.directive('addressBasedGoogleMap', function () {
+
+    return {
+        restrict: "A",
+        template: "<div id='addressMap'></div>",
+        scope: {
+            Address: "=addressBasedGoogleMap",
+            zoom: "="
+        },
+        link: function (scope, element, attrs) {
+            var geocoder;
+            var latlng;
+            var map;
+            var marker;
+            var lat;
+            var lng;
+            var initialize = function () {
+                
+                geocoder = new google.maps.Geocoder();
+                //attrs.$observe('addressBasedGoogleMap', function (value) {
+                //if (value) {
+                    //console.log(value);
+                    // pass value to app controller
+                    //scope.variable =scope.value;
+                  //}
+                //});
+                //scope.contact_address = scope.$eval($attrs.addressBasedGoogleMap);
+                //alert(scope.Address);
+                //alert(scope.variable);
+                geocoder.geocode({'address':scope.Address }, 
+                function (results, status) 
+                  {
+                      
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        //console.log(results[0].geometry.location.lat());
+                        lat = results[0].geometry.location.lat();
+                        lng = results[0].geometry.location.lng();
+                        latlng = new google.maps.LatLng(lat, lng);
+                   var mapOptions = {
+                    zoom: scope.zoom,
+                    center: latlng,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                 };
+                map = new google.maps.Map
+                       (document.getElementById('addressMap'), mapOptions);
+                        map.setCenter(results[0].geometry.location);
+                        marker = new google.maps.Marker({
+                            map: map,
+                            position: results[0].geometry.location
+                        });
+                    }
+                });
+
+
+                
+            };
+            
+            initialize();
+        },
+    };
 });
