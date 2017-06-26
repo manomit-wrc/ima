@@ -29,6 +29,9 @@ Route::get('/events-list','PageController@events_list');
 Route::get('/contact','PageController@contact_us');
 Route::post('/contactsave','PageController@contact_save');
 Route::get('/localbranch','PageController@local_branch');
+Route::get('/contact-address','PageController@contact_address');
+Route::get('/cms','PageController@cms');
+
 
 Route::group(['middleware' => 'jwt.auth'], function () {
     Route::get('/doctors', 'PageController@getAuthUser');

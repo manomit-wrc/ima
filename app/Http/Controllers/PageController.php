@@ -13,6 +13,7 @@ use App\Event;
 use App\LocalBranch;
 use Validator;
 use App\Doctor;
+use App\CMS;
 use JWTAuth;
 use JWTAuthException;
 use Config;
@@ -435,6 +436,7 @@ class PageController extends Controller
          return response()->json(['branch_item' => $localbranch,'status_code'=>200]);
 
     }
+    
     public function journal_list(Request $request) {
         $doctor_id = $request->doctor_id;
         $journal_details = Doctor::with('journal.categories')->where('id',$doctor_id)->get()->toArray();
@@ -510,5 +512,17 @@ class PageController extends Controller
                 'message' => 'Journal not found',
                 'code' => 500]);
         }
+    }
+
+    public function contact_address(Request $request) {
+        $contact = \App\Organization::all();
+        return response()->json(['contact_address' => $contact[0]['address'],'status_code'=>200]);
+    }
+
+    public function cms(Request $request) {
+        $slug = $request->slug;
+        $cms_details = \App\CMS::where('slug',$slug)->get()->toArray();
+        return response()->json(['cms_details' => $cms_details,'status_code'=>200]);
+
     }
 }
