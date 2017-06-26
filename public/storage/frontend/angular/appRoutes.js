@@ -27,11 +27,11 @@ imaRoute.config(function($routeProvider,$locationProvider,$qProvider){
 		templateUrl: '/templates/contact.html'
 	}).when('/branches',{
 		templateUrl: '/templates/local_branches.html'
-	}).when('/:slug',{
-		templateUrl: '/templates/cms.html'
 	}).when('/journal-list', {
 		templateUrl: '/templates/journal_list.html',
 		authenticated: true
+	}).when('/:slug',{
+		templateUrl: '/templates/cms.html'
 	}).when('/journal/:id',{
 		templateUrl: '/templates/edit_journal.html',
 		authenticated: true
