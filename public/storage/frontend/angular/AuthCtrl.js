@@ -470,7 +470,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
           
           $scope.contact_data = response.data.contact_item;
           $scope.contact_address = $scope.contact_data[0].address;
-          //console.log($scope.contact_address);
+
 	   });          
 	    
     };
@@ -480,6 +480,19 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
           	
     	  $scope.branch_data = response.data.branch_item;
 	   });
+	    
+	    
+    }
+    $scope.getCMS = function() {
+
+          $http.get('/api/cms/',{
+    		params: { slug: $routeParams.slug}
+    		
+    		
+    	}).then(function(response){
+    		
+    		$scope.cms_details = response.data.cms_details;
+    	});
 	    
 	    
     }
@@ -504,6 +517,7 @@ AuthCtrl.directive('addressBasedGoogleMap', function () {
             var addr;
             var initialize = function () {
                 $http.get('/api/contact-address').then(function(response){
+
                 	addr = response.data.contact_address;
                 	geocoder = new google.maps.Geocoder();
 	                geocoder.geocode({'address': addr }, 
@@ -533,6 +547,7 @@ AuthCtrl.directive('addressBasedGoogleMap', function () {
 
 	                
 	                });
+
                 
             };
             
@@ -540,3 +555,4 @@ AuthCtrl.directive('addressBasedGoogleMap', function () {
         },
     };
 });
+
