@@ -495,7 +495,10 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     	});
 	    
 	    
-    }
+    };
+     $scope.isActive = function (viewLocation) { 
+        return viewLocation === $location.path();
+    };
 });
 
 AuthCtrl.directive('addressBasedGoogleMap', function () {
