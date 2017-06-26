@@ -56,6 +56,7 @@
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
     <div id="wrapper" ng-controller="AuthController">
+    
         <my-navbar></my-navbar>
         <!-- Section: intro -->
         <div ng-view></div>

@@ -41,15 +41,15 @@
                                         </div>
 
                                         
-                                    <div address-based-google-map="contact_address" zoom="16">
+                                    <div address-based-google-map address="contact_address" zoom="16" >
                                     </div>
-
+                                    {{$scope.contact_data[0].address}}
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="contactR">
                                             <h3><span>Get in touch with us</span></h3>
-                                      <form name="frmContact" id="frmContact"  method="post" ng-submit="doContact(frmContact.$valid)" ng-app="AuthCtrl" ng-controller="AuthController" novalidate="novalidate">
+                                      <form name="frmContact" id="frmContact"  method="post" ng-submit="doContact(frmContact.$valid)"   novalidate="novalidate">
                                             <div style="margin:0 auto!important;" ng-show="code">{{message}}</div>
                                             <div class="row">
 

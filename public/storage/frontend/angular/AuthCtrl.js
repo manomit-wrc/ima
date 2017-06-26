@@ -467,14 +467,10 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     $scope.getContactusPage = function() {
           
           $http.get('/api/contact').then(function(response) {
-          //alert(response.data);
+          
           $scope.contact_data = response.data.contact_item;
           $scope.contact_address = $scope.contact_data[0].address;
-          //scope.contact_address = scope.$eval($attrs.addressBasedGoogleMap);
           //console.log($scope.contact_address);
-          //var value=$scope.contact_address;
-          //alert(value);
-          //alert($scope.contact_address[0].address);
 	   });          
 	    
     };
@@ -495,54 +491,48 @@ AuthCtrl.directive('addressBasedGoogleMap', function () {
         restrict: "A",
         template: "<div id='addressMap'></div>",
         scope: {
-            Address: "=addressBasedGoogleMap",
+            Address: "=address",
             zoom: "="
         },
-        link: function (scope, element, attrs) {
+        controller: function ($scope, $element, $attrs, $http) {
             var geocoder;
             var latlng;
             var map;
             var marker;
             var lat;
             var lng;
+            var addr;
             var initialize = function () {
-                
-                geocoder = new google.maps.Geocoder();
-                //attrs.$observe('addressBasedGoogleMap', function (value) {
-                //if (value) {
-                    //console.log(value);
-                    // pass value to app controller
-                    //scope.variable =scope.value;
-                  //}
-                //});
-                //scope.contact_address = scope.$eval($attrs.addressBasedGoogleMap);
-                //alert(scope.Address);
-                //alert(scope.variable);
-                geocoder.geocode({'address':scope.Address }, 
-                function (results, status) 
-                  {
-                      
-                    if (status == google.maps.GeocoderStatus.OK) {
-                        //console.log(results[0].geometry.location.lat());
-                        lat = results[0].geometry.location.lat();
-                        lng = results[0].geometry.location.lng();
-                        latlng = new google.maps.LatLng(lat, lng);
-                   var mapOptions = {
-                    zoom: scope.zoom,
-                    center: latlng,
-                    mapTypeId: google.maps.MapTypeId.ROADMAP
-                 };
-                map = new google.maps.Map
-                       (document.getElementById('addressMap'), mapOptions);
-                        map.setCenter(results[0].geometry.location);
-                        marker = new google.maps.Marker({
-                            map: map,
-                            position: results[0].geometry.location
-                        });
-                    }
-                });
+                $http.get('/api/contact-address').then(function(response){
+                	addr = response.data.contact_address;
+                	geocoder = new google.maps.Geocoder();
+	                geocoder.geocode({'address': addr }, 
+	                function (results, status) 
+	                  {
+	                      
+	                    if (status == google.maps.GeocoderStatus.OK) {
+	                        
+	                        lat = results[0].geometry.location.lat();
+	                        lng = results[0].geometry.location.lng();
+	                        latlng = new google.maps.LatLng(lat, lng);
+	                   var mapOptions = {
+	                    zoom: $scope.zoom,
+	                    center: latlng,
+	                    mapTypeId: google.maps.MapTypeId.ROADMAP
+	                 };
+	                map = new google.maps.Map
+	                       (document.getElementById('addressMap'), mapOptions);
+	                        map.setCenter(results[0].geometry.location);
+	                        marker = new google.maps.Marker({
+	                            map: map,
+	                            position: results[0].geometry.location
+	                        });
+	                    }
+	                });
 
 
+	                
+	                });
                 
             };
             

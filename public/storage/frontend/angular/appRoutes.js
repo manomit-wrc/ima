@@ -48,6 +48,7 @@ imaRoute.run(function($rootScope,$location,Auth,$cookieStore){
 			if(next.$$route.originalPath == "/") {
                     if(Auth.isLoggedIn()) {
                         $location.path(current.$$route.originalPath);
+                        
                     }
                 }
 		}

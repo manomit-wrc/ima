@@ -2933,8 +2933,8 @@ a.btn:focus {
 
 #areaMap, #addressMap
   {
-    height: 400px;
-    width: 400px;
+    height: 300px;
+    width: 500px;
     margin: 10px;
     padding: 10px;
   }

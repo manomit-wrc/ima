@@ -511,4 +511,9 @@ class PageController extends Controller
                 'code' => 500]);
         }
     }
+
+    public function contact_address(Request $request) {
+        $contact = \App\Organization::all();
+        return response()->json(['contact_address' => $contact[0]['address'],'status_code'=>200]);
+    }
 }
