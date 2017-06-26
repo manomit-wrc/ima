@@ -54,7 +54,7 @@ Route::get('/contact', function(){
 Route::get('/branches', function(){
     return view('welcome');
 });
-Route::get('/{slug}', function(){
+Route::get('/about-us', function(){
     return view('welcome');
 });
 
