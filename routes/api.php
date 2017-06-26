@@ -30,8 +30,8 @@ Route::get('/contact','PageController@contact_us');
 Route::post('/contactsave','PageController@contact_save');
 Route::get('/localbranch','PageController@local_branch');
 Route::get('/contact-address','PageController@contact_address');
-
 Route::get('/cms','PageController@cms');
+Route::get('/footer','PageController@getfooter');
 
 
 

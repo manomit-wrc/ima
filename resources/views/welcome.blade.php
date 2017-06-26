@@ -62,14 +62,14 @@
         <div ng-view></div>
         
 <footer>
-    <div class="container">
+    <div class="container" ng-init="getFootercontent();">
         <div class="row">
             <div class="col-sm-6 col-md-4">
                 <div class="wow fadeInDown" data-wow-delay="0.1s">
                     <div class="widget">
                         <h5>About IMA</h5>
                         <p>
-                            Lorem ipsum dolor sit amet, ne nam purto nihil impetus, an facilisi accommodare sea
+                            @{{footer_description[0].short_description}}
                         </p>
                     </div>
                 </div>
@@ -77,7 +77,7 @@
                     <div class="widget">
                         <h5>Information</h5>
                         <ul>
-                            <li><a href="javascript:void(0)">Home</a></li>
+                            <li><a href="/">Home</a></li>
                             <li><a href="javascript:void(0)">Laboratory</a></li>
                             <li><a href="javascript:void(0)">Medical treatment</a></li>
                             <li><a href="javascript:void(0)">Terms & conditions</a></li>
@@ -103,13 +103,13 @@
                                 <span class="fa-stack fa-lg">
                             <i class="fa fa-circle fa-stack-2x"></i>
                             <i class="fa fa-phone fa-stack-1x fa-inverse"></i>
-                        </span> +123 456 78 90
+                        </span>@{{footer_data[0].phone}}
                             </li>
                             <li>
                                 <span class="fa-stack fa-lg">
                             <i class="fa fa-circle fa-stack-2x"></i>
                             <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
-                        </span> hello@ima.com
+                        </span> @{{footer_data[0].email}}
                             </li>
                         </ul>
                     </div>
@@ -119,7 +119,7 @@
                 <div class="wow fadeInDown" data-wow-delay="0.1s">
                     <div class="widget">
                         <h5>Our location</h5>
-                        <p>The Suithouse V303, Kuningan City, Jakarta Indonesia 12940</p>
+                        <p>@{{footer_data[0].address}}</p>
                     </div>
                 </div>
                 <div class="wow fadeInDown" data-wow-delay="0.1s">

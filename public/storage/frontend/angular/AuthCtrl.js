@@ -12,6 +12,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 	$scope.journal_file = {};
 	$scope.isDisabled = false;
 	$scope.contact_address = '';
+	$scope.footer_data='';
 
 	//for paginations//
 	$scope.news_data = [];
@@ -486,19 +487,32 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     $scope.getCMS = function() {
 
           $http.get('/api/cms/',{
-    		params: { slug: $routeParams.slug}
+    		params: {slug: $routeParams.slug}
     		
     		
     	}).then(function(response){
     		
     		$scope.cms_details = response.data.cms_details;
     	});
-	    
-	    
+
     };
      $scope.isActive = function (viewLocation) { 
         return viewLocation === $location.path();
+
     };
+
+   $scope.getFootercontent= function() {
+         
+          $http.get('/api/footer').then(function(response){
+    	   
+    		$scope.footer_data = response.data.footer_item;
+    		$scope.footer_description = response.data.footer_des;
+    	});
+	    
+	    
+    }
+
+
 });
 
 AuthCtrl.directive('addressBasedGoogleMap', function () {

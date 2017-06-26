@@ -526,5 +526,12 @@ class PageController extends Controller
         return response()->json(['cms_details' => $cms_details,'status_code'=>200]);
 
     }
+    public function getfooter(Request $request) {
+        
+        $footerdata = \App\Organization::all();
+        $footer_des = \App\CMS::all();
+        return response()->json(['footer_item' => $footerdata,'footer_des' => $footer_des,'status_code'=>200]);
+
+    }
 
 }
