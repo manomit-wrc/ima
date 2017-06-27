@@ -494,20 +494,23 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     		
     		$scope.cms_details = response.data.cms_details;
     	});
-	    
-	    
-    }
+
+    };
+     $scope.isActive = function (viewLocation) { 
+        return viewLocation === $location.path();
+
+    };
 
    $scope.getFootercontent= function() {
-        
-            $http.get('/api/footer').then(function(response){
-    	  
+
+          $http.get('/api/footer').then(function(response){
     		$scope.footer_data = response.data.footer_item;
     		$scope.footer_description = response.data.footer_des;
     	});
 	    
 	    
     }
+
 
 });
 

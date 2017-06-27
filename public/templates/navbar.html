@@ -28,12 +28,12 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/">Home</a></li>
-                <li><a href="/about-us">About us</a></li>
-                <li><a href="branches">Our Branches</a></li>
-                <li><a href="/contact">Contact Us</a></li>
-                <li><a href="/news-list">News</a></li>
-                <li><a href="/events-list">Events</a></li>
+                <li ng-class="{ active: isActive('/')}"><a href="/">Home</a></li>
+                <li ng-class="{ active: isActive('/about-us')}"><a href="/about-us">About us</a></li>
+                <li ng-class="{ active: isActive('/branches')}"><a href="branches">Our Branches</a></li>
+                <li ng-class="{ active: isActive('/contact')}"><a href="/contact">Contact Us</a></li>
+                <li ng-class="{ active: isActive('/news-list')}"><a href="/news-list">News</a></li>
+                <li ng-class="{ active: isActive('/events-list')}"><a href="/events-list">Events</a></li>
                 
             </ul>
         </div>

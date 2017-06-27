@@ -529,7 +529,7 @@ class PageController extends Controller
     public function getfooter(Request $request) {
         
         $footerdata = \App\Organization::all();
-        $footer_des = \App\CMS::all();
+        $footer_des = \App\CMS::where('slug','about-us')->get()->toArray();
         return response()->json(['footer_item' => $footerdata,'footer_des' => $footer_des,'status_code'=>200]);
 
     }
