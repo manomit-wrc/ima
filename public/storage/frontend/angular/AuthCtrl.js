@@ -499,9 +499,9 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     }
 
    $scope.getFootercontent= function() {
-         //alert('ok');
-          $http.get('/api/footer').then(function(response){
-    	   console.log(response.data);
+        
+            $http.get('/api/footer').then(function(response){
+    	  
     		$scope.footer_data = response.data.footer_item;
     		$scope.footer_description = response.data.footer_des;
     	});
