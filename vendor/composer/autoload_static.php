@@ -351,6 +351,7 @@ class ComposerStaticInit26ac6f531c7dc343a38a6557cc1ca91b
         'AddOtherFieldsToDoctorsTable' => __DIR__ . '/../..' . '/database/migrations/2017_06_01_125543_add_other_fields_to_doctors_table.php',
         'AddSomeFieldsToUsersTable' => __DIR__ . '/../..' . '/database/migrations/2017_05_23_073322_add_some_fields_to_users_table.php',
         'AddStateIdToDoctorsTabel' => __DIR__ . '/../..' . '/database/migrations/2017_06_05_131649_add_state_id_to_doctors_tabel.php',
+        'AddTestimonialToDoctorsTable' => __DIR__ . '/../..' . '/database/migrations/2017_06_27_063545_add_testimonial_to_doctors_table.php',
         'CategoryTableSeeder' => __DIR__ . '/../..' . '/database/seeds/CategoryTableSeeder.php',
         'CreateBannersTable' => __DIR__ . '/../..' . '/database/migrations/2017_05_25_045124_create_banners_table.php',
         'CreateBulletinsTable' => __DIR__ . '/../..' . '/database/migrations/2017_05_25_060920_create_bulletins_table.php',

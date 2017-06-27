@@ -35,6 +35,7 @@ Route::get('/footer','PageController@getfooter');
 
 
 
+
 Route::group(['middleware' => 'jwt.auth'], function () {
     Route::get('/doctors', 'PageController@getAuthUser');
     Route::get('/state-list', 'PageController@get_state_list');

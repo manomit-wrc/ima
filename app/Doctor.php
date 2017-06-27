@@ -11,7 +11,7 @@ class Doctor extends Authenticatable
 	protected $table = 'doctors';
 
     protected $hidden = [
-    	'password'
+    	'password','active_token'
     ];
 
     protected $fillable = [
@@ -20,6 +20,10 @@ class Doctor extends Authenticatable
 
     public function journal() {
     	return $this->hasMany('\App\Journal','doctor_id');
+    }
+
+    public function states() {
+        return $this->belongsTo('\App\State','state_id');
     }
    
 }

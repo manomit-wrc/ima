@@ -11,6 +11,7 @@ return array(
     'AddOtherFieldsToDoctorsTable' => $baseDir . '/database/migrations/2017_06_01_125543_add_other_fields_to_doctors_table.php',
     'AddSomeFieldsToUsersTable' => $baseDir . '/database/migrations/2017_05_23_073322_add_some_fields_to_users_table.php',
     'AddStateIdToDoctorsTabel' => $baseDir . '/database/migrations/2017_06_05_131649_add_state_id_to_doctors_tabel.php',
+    'AddTestimonialToDoctorsTable' => $baseDir . '/database/migrations/2017_06_27_063545_add_testimonial_to_doctors_table.php',
     'CategoryTableSeeder' => $baseDir . '/database/seeds/CategoryTableSeeder.php',
     'CreateBannersTable' => $baseDir . '/database/migrations/2017_05_25_045124_create_banners_table.php',
     'CreateBulletinsTable' => $baseDir . '/database/migrations/2017_05_25_060920_create_bulletins_table.php',

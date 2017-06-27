@@ -13,6 +13,7 @@ use App\Event;
 use App\LocalBranch;
 use Validator;
 use App\Doctor;
+use App\State;
 use App\CMS;
 use JWTAuth;
 use JWTAuthException;
@@ -33,12 +34,16 @@ class PageController extends Controller
             $news = News::where('status','1')->get()->toArray();
             $events = Event::where('status','1')->get()->toArray();
             $team_list = Team::with('designations')->where('status','1')->get()->toArray();
+            $testimonial_list = Doctor::with('states')->where('status','1')->get()->toArray();
+
             $teams = [];
             $news_array = [];
             $events_array = [];
+            $testimonial_array = [];
             $i = 0;
             $k = 0;
-            
+            $j=0;
+            $h=0;
             foreach ($team_list as $key => $value) {
 
                 $teams[$k]['team_list'][$i] = array('name'=>$value['first_name']." ".$value['last_name'],'image'=>$value['avators'],'designation_name' => $value['designations']['name']);
@@ -48,6 +53,20 @@ class PageController extends Controller
                 }
                 $i++;
             }
+             /*echo "<pre>";
+             print_r($testimonial_list);
+             echo "</pre>";die();*/
+            /*foreach ($testimonial_list as $key => $value) {
+               
+                $testimonial_array[$h]['testimonial_list'][$j] = array('doctorname'=>$value['first_name']." ".$value['last_name'],'image'=>$value['avators'],'testimonial' => $value['      testimonial'],'city'=>$value['city'],'state'=>$value['states']['name']);
+                if(($j+1) % 3 == 0) {
+                    $h++;
+                    $j = -1;
+                }
+                $j++;
+            }*/
+
+              
 
             foreach ($news as $key => $value) {
                 $news_array[] = array('title'=>$value['title'],'description'=>substr($value['description'], 0,50)." ..",'published_date'=>date('d-m-Y',strtotime($value['published_date'])),'news_id'=>$value['id'],'slug'=>str_slug($value['title'],"-"));
@@ -56,7 +75,7 @@ class PageController extends Controller
             foreach ($events as $key => $value) {
                 $events_array[] = array('name'=>$value['name'],'description'=>substr($value['description'], 0,50)." ..",'event_date'=>date('d-m-Y',strtotime($value['event_date'])),'event_id'=>$value['id']);
             }           
-    		return response()->json(['banners'=>$banner_list,'teams'=>$teams,'status_code'=>200,'news'=>$news_array,'events'=>$events_array]);
+    		return response()->json(['banners'=>$banner_list,'teams'=>$teams,'status_code'=>200,'news'=>$news_array,'events'=>$events_array,'testimonialdata'=>$testimonial_array]);
     	}
     	catch(Exception $e) {
     		return response()->json(['status_code'=>500]);
@@ -196,6 +215,7 @@ class PageController extends Controller
             $doctors->license = $request->license;
             $doctors->biography = $request->biography;
             $doctors->address = $request->address;
+            $doctors->testimonial = $request->testimonial;
 
             $doctors->save();
             
@@ -533,5 +553,7 @@ class PageController extends Controller
         return response()->json(['footer_item' => $footerdata,'footer_des' => $footer_des,'status_code'=>200]);
 
     }
+
+    
 
 }

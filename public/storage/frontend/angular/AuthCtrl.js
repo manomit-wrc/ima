@@ -115,10 +115,15 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 
 	$scope.homeContent = function() {
 		$http.get('/api/home-content').then(function(response){
+
 			$scope.banners = response.data.banners;
 			$scope.teams = response.data.teams;
+			//console.log(response.data.teams);
 			$scope.news = response.data.news;
 			$scope.events = response.data.events;
+			//console.log(response.data.testimonialdata);
+			$scope.testimonial = response.data.testimonialdata;
+			
 			
 		})
 		.catch(function(reason){
@@ -285,7 +290,8 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
                         license: $scope.license,
                         biography: $scope.biography,
                         address: $scope.address,
-                        doctor_id: $scope.auth_id
+                        doctor_id: $scope.auth_id,
+                        testimonial: $scope.testimonial
                     },
                     transformRequest: function (data, headersGetter) {
                         var formData = new FormData();
@@ -503,9 +509,21 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 
    $scope.getFootercontent= function() {
 
-          $http.get('/api/footer').then(function(response){
+            $http.get('/api/footer').then(function(response){
     		$scope.footer_data = response.data.footer_item;
     		$scope.footer_description = response.data.footer_des;
+    	});
+	    
+	    
+    }
+
+   $scope.getdoctorfrofile= function() {
+             
+             //alert('doctor');
+            $http.get('/api/doctor_data').then(function(response){
+            	console.log(response.data);
+    		$scope.doctor_content = response.data.doctor_item;
+    		//$scope.footer_description = response.data.footer_des;
     	});
 	    
 	    
