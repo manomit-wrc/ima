@@ -204,6 +204,9 @@ class PageController extends Controller
 
     public function update_profile(Request $request) {
         $doctors = Doctor::find($request->doctor_id);
+         /*echo "<pre>";
+         print_r($doctors);
+         echo "</pre>";die();*/
         if($doctors) {
             $doctors->first_name = $request->first_name;
             $doctors->last_name = $request->last_name;

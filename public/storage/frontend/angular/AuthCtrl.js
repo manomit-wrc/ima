@@ -34,6 +34,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 			$scope.sex = $scope.user.sex;
 			$scope.dob = $scope.user.dob;
 			$scope.biography = $scope.user.biography;
+			$scope.testimonial = $scope.user.testimonial;
 			$scope.state_id = $scope.user.state_id;
 			$scope.license = $scope.user.license;
 			$scope.doctor_id = $scope.user.id;
