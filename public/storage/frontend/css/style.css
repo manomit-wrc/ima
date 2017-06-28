@@ -213,7 +213,7 @@ p.ultra {
 }
 
 .top_link {
-    color: #fff;
+    color: #fff !important;
     font-weight: normal;
     border-right: 1px solid #fff;
     padding: 0 15px;
