@@ -108,82 +108,21 @@
                     <div class="row">
                         <div id="carousel-reviews" class="carousel slide" data-ride="carousel">
                             <div class="carousel-inner">
-                                <div class="item active">
-                                    <div class="col-md-4 col-sm-6">
+                                <div class="item" ng-repeat="test in testimonial track by $index" ng-class="{active: $index == 0}">
+                                    <div class="col-md-4 col-sm-6" ng-repeat="ind_details in test.testimonial_list track by $index">
                                         <div class="block-text rel zmin">
-                                            <a title="" href="javascript:void(0)" target="_self">Emergency Contraception</a>
-                                            <p>Ne eam errem semper. Laudem detracto phaedrum cu vim, pri cu errem fierent fabellas. Quis magna in ius, pro vidit nonumy te, nostrud ...</p>
+                                            <!-- <a title="" href="javascript:void(0)" target="_self">Emergency Contraception</a> -->
+                                            <p>{{ind_details.testimonial}}</p>
                                             <ins class="ab zmin sprite sprite-i-triangle block"></ins>
                                         </div>
                                         <div class="person-text rel text-light">
-                                            <img src="/storage/frontend/img/testimonials/1.jpg" alt="" class="person img-circle" />
-                                            <a title="" href="javascript:void(0)" target="_self">Anna</a>
-                                            <span>Chicago, Illinois</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 col-sm-6 hidden-xs">
-                                        <div class="block-text rel zmin">
-                                            <a title="" href="javascript:void(0)" target="_self">Orthopedic Surgery</a>
-                                            <p>Ne eam errem semper. Laudem detracto phaedrum cu vim, pri cu errem fierent fabellas. Quis magna in ius, pro vidit nonumy te, nostrud ...</p>
-                                            <ins class="ab zmin sprite sprite-i-triangle block"></ins>
-                                        </div>
-                                        <div class="person-text rel text-light">
-                                            <img src="/storage/frontend/img/testimonials/2.jpg" alt="" class="person img-circle" />
-                                            <a title="" href="javascript:void(0)" target="_self">Matthew G</a>
-                                            <span>San Antonio, Texas</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 col-sm-6 hidden-sm hidden-xs">
-                                        <div class="block-text rel zmin">
-                                            <a title="" href="javascript:void(0)" target="_self">Medical consultation</a>
-                                            <p>Ne eam errem semper. Laudem detracto phaedrum cu vim, pri cu errem fierent fabellas. Quis magna in ius, pro vidit nonumy te, nostrud ...</p>
-                                            <ins class="ab zmin sprite sprite-i-triangle block"></ins>
-                                        </div>
-                                        <div class="person-text rel text-light">
-                                            <img src="/storage/frontend/img/testimonials/3.jpg" alt="" class="person img-circle" />
-                                            <a title="" href="javascript:void(0)" target="_self">Scarlet Smith</a>
-                                            <span>Dallas, Texas</span>
+                                            <img src="{{ind_details.image}}" alt="" class="person img-circle" />
+                                            <a title="" href="javascript:void(0)" target="_self">{{ind_details.doctorname}}</a>
+                                            <span>{{ind_details.city}}, {{ind_details.state}}</span>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="item">
-                                    <div class="col-md-4 col-sm-6">
-                                        <div class="block-text rel zmin">
-                                            <a title="" href="javascript:void(0)" target="_self">Birth control pills</a>
-                                            <p>Ne eam errem semper. Laudem detracto phaedrum cu vim, pri cu errem fierent fabellas. Quis magna in ius, pro vidit nonumy te, nostrud ...</p>
-                                            <ins class="ab zmin sprite sprite-i-triangle block"></ins>
-                                        </div>
-                                        <div class="person-text rel text-light">
-                                            <img src="/storage/frontend/img/testimonials/4.jpg" alt="" class="person img-circle" />
-                                            <a title="" href="javascript:void(0)" target="_self">Lucas Thompson</a>
-                                            <span>Austin, Texas</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 col-sm-6 hidden-xs">
-                                        <div class="block-text rel zmin">
-                                            <a title="" href="javascript:void(0)" target="_self">Radiology</a>
-                                            <p>Ne eam errem semper. Laudem detracto phaedrum cu vim, pri cu errem fierent fabellas. Quis magna in ius, pro vidit nonumy te, nostrud ...</p>
-                                            <ins class="ab zmin sprite sprite-i-triangle block"></ins>
-                                        </div>
-                                        <div class="person-text rel text-light">
-                                            <img src="/storage/frontend/img/testimonials/5.jpg" alt="" class="person img-circle" />
-                                            <a title="" href="javascript:void(0)" target="_self">Ella Mentree</a>
-                                            <span>Fort Worth, Texas</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 col-sm-6 hidden-sm hidden-xs">
-                                        <div class="block-text rel zmin">
-                                            <a title="" href="javascript:void(0)">Cervical Lesions</a>
-                                            <p>Ne eam errem semper. Laudem detracto phaedrum cu vim, pri cu errem fierent fabellas. Quis magna in ius, pro vidit nonumy te, nostrud ...</p>
-                                            <ins class="ab zmin sprite sprite-i-triangle block"></ins>
-                                        </div>
-                                        <div class="person-text rel text-light">
-                                            <img src="/storage/frontend/img/testimonials/6.jpg" alt="" class="person img-circle" />
-                                            <a title="" href="javascript:void(0)" target="_self">Suzanne Adam</a>
-                                            <span>Detroit, Michigan</span>
-                                        </div>
-                                    </div>
-                                </div>
+                                
                             </div>
                             <a class="left carousel-control" href="#carousel-reviews" role="button" data-slide="prev" target="_self">
                                 <span class="glyphicon glyphicon-chevron-left"></span>

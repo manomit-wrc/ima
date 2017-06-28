@@ -34,7 +34,7 @@ class PageController extends Controller
             $news = News::where('status','1')->get()->toArray();
             $events = Event::where('status','1')->get()->toArray();
             $team_list = Team::with('designations')->where('status','1')->get()->toArray();
-            $testimonial_list = Doctor::with('states')->where('status','1')->get()->toArray();
+            $testimonial_list = Doctor::with('states')->where('status','1')->whereNotNull('testimonial')->get()->toArray();
 
             $teams = [];
             $news_array = [];
@@ -45,7 +45,7 @@ class PageController extends Controller
             $j=0;
             $h=0;
             foreach ($team_list as $key => $value) {
-
+                
                 $teams[$k]['team_list'][$i] = array('name'=>$value['first_name']." ".$value['last_name'],'image'=>$value['avators'],'designation_name' => $value['designations']['name']);
                 if(($i+1) % 3 == 0) {
                     $k++;
@@ -53,20 +53,22 @@ class PageController extends Controller
                 }
                 $i++;
             }
-             /*echo "<pre>";
-             print_r($testimonial_list);
-             echo "</pre>";die();*/
-            /*foreach ($testimonial_list as $key => $value) {
-               
-                $testimonial_array[$h]['testimonial_list'][$j] = array('doctorname'=>$value['first_name']." ".$value['last_name'],'image'=>$value['avators'],'testimonial' => $value['      testimonial'],'city'=>$value['city'],'state'=>$value['states']['name']);
+             
+            foreach($testimonial_list as $key => $value) {
+                 if(file_exists( public_path() . '/uploads/doctors/thumb/'.$value['avators']) && $value['avators']) {
+                    $avators =  '/uploads/doctors/thumb/'.$value['avators'];
+                } else {
+                    $avators =  '/uploads/doctors/noimage_user.jpg';
+                }
+                $testimonial_array[$h]['testimonial_list'][$j] = array('doctorname'=>$value['first_name']." ".$value['last_name'],'image'=>$avators,'testimonial' => $value['testimonial'],'city'=>$value['city'],'state'=>$value['states']['name']);
                 if(($j+1) % 3 == 0) {
                     $h++;
                     $j = -1;
                 }
                 $j++;
-            }*/
+            }
 
-              
+            
 
             foreach ($news as $key => $value) {
                 $news_array[] = array('title'=>$value['title'],'description'=>substr($value['description'], 0,50)." ..",'published_date'=>date('d-m-Y',strtotime($value['published_date'])),'news_id'=>$value['id'],'slug'=>str_slug($value['title'],"-"));

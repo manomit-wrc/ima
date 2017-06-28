@@ -118,10 +118,10 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 
 			$scope.banners = response.data.banners;
 			$scope.teams = response.data.teams;
-			//console.log(response.data.teams);
+			
 			$scope.news = response.data.news;
 			$scope.events = response.data.events;
-			//console.log(response.data.testimonialdata);
+			
 			$scope.testimonial = response.data.testimonialdata;
 			
 			
