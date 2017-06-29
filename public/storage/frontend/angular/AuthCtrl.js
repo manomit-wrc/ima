@@ -53,6 +53,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 		});
 
 		Auth.getState().then(function(response){
+			
 			$scope.state_list = response.data.state_list;
 
 		});
@@ -522,7 +523,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
              
              //alert('doctor');
             $http.get('/api/doctor_data').then(function(response){
-            	console.log(response.data);
+            	//console.log(response.data);
     		$scope.doctor_content = response.data.doctor_item;
     		//$scope.footer_description = response.data.footer_des;
     	});
@@ -590,4 +591,7 @@ AuthCtrl.directive('addressBasedGoogleMap', function () {
         },
     };
 });
+
+
+
 

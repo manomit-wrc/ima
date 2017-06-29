@@ -82,7 +82,7 @@
                   </div>
 
                   <div class="form-group {{ $errors->has('serving_period') ? 'has-error' : '' }}">
-                    <label for="inputServingPeriod" class="col-sm-2 control-label">License</label>
+                    <label for="inputServingPeriod" class="col-sm-2 control-label">Licence</label>
 
                     <div class="col-sm-10">
                      {{$viewdoctor[0]['license']}}

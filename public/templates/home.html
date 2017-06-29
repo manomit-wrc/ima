@@ -111,8 +111,7 @@
                                 <div class="item" ng-repeat="test in testimonial track by $index" ng-class="{active: $index == 0}">
                                     <div class="col-md-4 col-sm-6" ng-repeat="ind_details in test.testimonial_list track by $index">
                                         <div class="block-text rel zmin">
-                                            <!-- <a title="" href="javascript:void(0)" target="_self">Emergency Contraception</a> -->
-                                            <p>{{ind_details.testimonial}}</p>
+                                           <p>{{ind_details.testimonial | limitTo: 150 }}</p>
                                             <ins class="ab zmin sprite sprite-i-triangle block"></ins>
                                         </div>
                                         <div class="person-text rel text-light">
