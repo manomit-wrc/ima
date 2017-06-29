@@ -55,7 +55,7 @@
                       <td>{{$value->email}}</td>
                       <td>{{$value->mobile}}</td>
                       <td>{{$value->company_regsitration_no}}</td>
-                      <td></td>
+                      <td>{{date('d-m-Y',strtotime($value->doe))}}</td>
                       <td>{{$value->status == '1'?'Active':'In-Active'}}
                       </td>
                       <td><a href="/admin/company/edit/{{$value->id}}" >Edit</a></td>
