@@ -38,7 +38,7 @@
                 <form name="frm" method="post" action="/admin/doctor/active" class="form-horizontal">
                   {{csrf_field()}}
 
-                  <div class="form-group {{ $errors->has('first_name') ? 'has-error' : '' }}">
+                  <div class="form-group">
                     <label for="inputFirstName" class="col-sm-2 control-label">First Name</label>
 
                     <div class="col-sm-10">
@@ -47,7 +47,7 @@
                       <input type="hidden" name="id" value="{{$viewdoctor[0]['id']}}">
                       <input type="hidden" name="status" value="{{$viewdoctor[0]['status']}}">
                   </div>
-                  <div class="form-group {{ $errors->has('last_name') ? 'has-error' : '' }}">
+                  <div class="form-group">
                     <label for="inputLastName" class="col-sm-2 control-label">Last Name</label>
 
                     <div class="col-sm-10">
@@ -55,7 +55,7 @@
                     </div>
                   </div>
 
-                  <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
+                  <div class="form-group">
                     <label for="inputEmail" class="col-sm-2 control-label">Email</label>
 
                     <div class="col-sm-10">
@@ -63,7 +63,7 @@
                     </div>
                   </div>
 
-                  <div class="form-group {{ $errors->has('mobile_no') ? 'has-error' : '' }}">
+                  <div class="form-group">
                     <label for="inputMobile" class="col-sm-2 control-label">Mobile No</label>
 
                     <div class="col-sm-10">
@@ -73,15 +73,15 @@
 
                   
 
-                  <div class="form-group {{ $errors->has('serving_period') ? 'has-error' : '' }}">
+                  <div class="form-group">
                     <label for="inputServingPeriod" class="col-sm-2 control-label">Date of birth</label>
 
                     <div class="col-sm-10">
-                     {{$viewdoctor[0]['dob']}}
+                     {{ date('d-m-Y',strtotime($viewdoctor[0]['dob'])) }}
                     </div>
                   </div>
 
-                  <div class="form-group {{ $errors->has('serving_period') ? 'has-error' : '' }}">
+                  <div class="form-group">
                     <label for="inputServingPeriod" class="col-sm-2 control-label">Licence</label>
 
                     <div class="col-sm-10">
@@ -89,7 +89,7 @@
                     </div>
                   </div>
 
-                  <div class="form-group {{ $errors->has('avators') ? 'has-error' : '' }}">
+                  <div class="form-group">
                     <label for="inputAvators" class="col-sm-2 control-label">Image</label>
                     
                     <div class="col-sm-10">
@@ -126,8 +126,8 @@
                   @foreach($viewdoctor[0]['journal'] as  $value)
                     <tr>
                       <td>{{$value['title']}}</td>
-                      <td>{{$value['published_date']}}</td>
-                      <td><a href=" @if(!empty($value['journal_file']) && file_exists(url('uploads/doctors/'.$value['journal_file']))){{ url('uploads/doctors/journal/' .$value['journal_file'])}}@endif" alt="{{$value['journal_file']}}" target="_blank">{{$value['journal_file']}}</a></td>
+                      <td>{{ date('d-m-Y',strtotime($value['published_date'])) }}</td>
+                      <td><a href="@if($value['journal_file'] && file_exists(public_path() . '/uploads/doctors/journal/'.$value['journal_file'])){{ url('uploads/doctors/journal/' .$value['journal_file'])}}@endif" alt="{{$value['journal_file']}}" target="_blank">{{$value['journal_file']}}</a></td>
                       <td>{{$value['categories']['name']}}</td>
                       <td><a href="/admin/doctor/Publised/{{$value['id']}}/{{$value['status']}}" onclick="return confirm('Are you want to change?')">
                         @if($value['status']=='0')
