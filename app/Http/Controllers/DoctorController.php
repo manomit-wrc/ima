@@ -14,7 +14,8 @@ class DoctorController extends Controller
 {
 
   public function index() {
-    	$doctors = Doctor::all();
+    	$doctors = Doctor::with('states')->where('type','D')->get();
+      
       return view('admin.doctor.index')->with('doctor',$doctors);
     }
   public function view($id){

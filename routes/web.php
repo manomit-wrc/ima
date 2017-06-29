@@ -164,4 +164,12 @@ Route::group(['middleware'=>['admin']], function(){
     Route::get('/admin/notice/edit/{id}','NoticeController@edit');
     Route::post('/admin/notice/update/{id}','NoticeController@update');
     Route::get('/admin/notice/delete/{id}','NoticeController@delete');
+
+
+    Route::get('/admin/company','CompanyController@index');
+    Route::get('/admin/company/add','CompanyController@add');
+    Route::post('/admin/company/store','CompanyController@store');
+    Route::get('/admin/company/edit/{id}','CompanyController@edit');
+    Route::post('/admin/company/update/{id}','CompanyController@update');
+    Route::get('/admin/company/delete/{id}','CompanyController@delete');
 });
