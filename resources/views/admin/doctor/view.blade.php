@@ -77,7 +77,9 @@
                     <label for="inputServingPeriod" class="col-sm-2 control-label">Date of birth</label>
 
                     <div class="col-sm-10">
+
                      {{ date('d-m-Y',strtotime($viewdoctor[0]['dob'])) }}
+
                     </div>
                   </div>
 
@@ -126,8 +128,10 @@
                   @foreach($viewdoctor[0]['journal'] as  $value)
                     <tr>
                       <td>{{$value['title']}}</td>
+
                       <td>{{ date('d-m-Y',strtotime($value['published_date'])) }}</td>
                       <td><a href="@if($value['journal_file'] && file_exists(public_path() . '/uploads/doctors/journal/'.$value['journal_file'])){{ url('uploads/doctors/journal/' .$value['journal_file'])}}@endif" alt="{{$value['journal_file']}}" target="_blank">{{$value['journal_file']}}</a></td>
+
                       <td>{{$value['categories']['name']}}</td>
                       <td><a href="/admin/doctor/Publised/{{$value['id']}}/{{$value['status']}}" onclick="@if($value['status'] == "0" ) return confirm('Are you sure you want to published?') @else return confirm('Are you sure you want to un-published?') @endif">
                         @if($value['status']=='0')
