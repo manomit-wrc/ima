@@ -77,7 +77,7 @@
                     <label for="inputServingPeriod" class="col-sm-2 control-label">Date of birth</label>
 
                     <div class="col-sm-10">
-                     {{$viewdoctor[0]['dob']}}
+                     {{ date('d-m-Y', strtotime($viewdoctor[0]['dob']))}}
                     </div>
                   </div>
 
@@ -126,8 +126,9 @@
                   @foreach($viewdoctor[0]['journal'] as  $value)
                     <tr>
                       <td>{{$value['title']}}</td>
-                      <td>{{$value['published_date']}}</td>
-                      <td><a href=" @if(!empty($value['journal_file']) && file_exists(url('uploads/doctors/'.$value['journal_file']))){{ url('uploads/doctors/journal/' .$value['journal_file'])}}@endif" alt="{{$value['journal_file']}}" target="_blank">{{$value['journal_file']}}</a></td>
+                      <td>{{ date('d-m-Y',strtotime($value['published_date']))}}</td>
+                      <td><a href=" @if(!empty($value['journal_file']) && file_exists(url('uploads/doctors/'.$value['journal_file']))){{ url('uploads/doctors/journal/' .$value['journal_file'])}}@endif" alt="{{$value['journal_file']}}" target="_blank">
+                       {{$value['journal_file']}}</a></td>
                       <td>{{$value['categories']['name']}}</td>
                       <td><a href="/admin/doctor/Publised/{{$value['id']}}/{{$value['status']}}" onclick="return confirm('Are you want to change?')">
                         @if($value['status']=='0')
