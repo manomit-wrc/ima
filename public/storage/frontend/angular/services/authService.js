@@ -188,7 +188,7 @@ authService.factory('Auth', function($http,$q,AuthToken,$cookieStore){
 	};
 
 	authFactory.edit_journal = function(journal) {
-		console.log(journal.journal_file);
+		
 		var defer = $q.defer();
 		$http({
 		  method  : 'POST',
@@ -216,6 +216,18 @@ authService.factory('Auth', function($http,$q,AuthToken,$cookieStore){
        });
 
        return defer.promise;
+	};
+
+	authFactory.returnType = function() {
+		var defer = $q.defer();
+		$http.get('/api/get-type/',{
+    		params: { token: AuthToken.getToken()}
+    		
+    		
+    	}).then(function(response){
+    		defer.resolve(response.data.type);
+    	});
+    	return defer.promise;
 	}
 
 	return authFactory;

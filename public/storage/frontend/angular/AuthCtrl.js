@@ -211,8 +211,12 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 					$scope.user = response.data.result;
 					
 					$scope.dismiss();
-					//$location.path('/profile');
-					$window.location.href = "/profile";
+					if($scope.user.type == "D") {
+						$window.location.href = "/profile";
+					}
+					else {
+						$window.location.href = "/company-profile";
+					}
 				});
 				}
 			});

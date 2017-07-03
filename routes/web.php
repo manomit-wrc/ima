@@ -17,6 +17,9 @@ Route::get('/', function () {
 Route::get('/profile', function () {
     return view('welcome');
 });
+Route::get('/company-profile', function () {
+    return view('welcome');
+});
 Route::get('/change-password', function () {
     return view('welcome');
 });
@@ -61,6 +64,7 @@ Route::get('/about-us', function(){
 Route::get('/events/{events_id}/{slug}', function() {
     return view('welcome');
 });  
+
 
 
 Route::get('/admin', 'LoginController@index');

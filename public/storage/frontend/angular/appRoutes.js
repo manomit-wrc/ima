@@ -6,13 +6,20 @@ imaRoute.config(function($routeProvider,$locationProvider,$qProvider){
 		templateUrl: '/templates/home.html'
 	}).when('/profile', {
 		templateUrl: '/templates/profile.html',
-		authenticated: true
+		authenticated: true,
+		type: "D"
+	}).when('/company-profile', {
+		templateUrl: '/templates/company-profile.html',
+		authenticated: true,
+		type: "C"
 	}).when('/change-password',{
 		templateUrl: '/templates/change-password.html',
-		authenticated: true
+		authenticated: true,
+		type: "D"
 	}).when('/upload-journal',{
 		templateUrl: '/templates/upload-journal.html',
-		authenticated: true
+		authenticated: true,
+		type: "D"
 	}).when('/news/:news_id/:slug',{
 		templateUrl: '/templates/news.html'
 	}).when('/events/:events_id/:slug',{
@@ -29,12 +36,14 @@ imaRoute.config(function($routeProvider,$locationProvider,$qProvider){
 		templateUrl: '/templates/local_branches.html'
 	}).when('/journal-list', {
 		templateUrl: '/templates/journal_list.html',
-		authenticated: true
+		authenticated: true,
+		type: "D"
 	}).when('/:slug',{
 		templateUrl: '/templates/cms.html'
 	}).when('/journal/:id',{
 		templateUrl: '/templates/edit_journal.html',
-		authenticated: true
+		authenticated: true,
+		type: "D"
 	});
 
 	$qProvider.errorOnUnhandledRejections(false);
@@ -43,16 +52,25 @@ imaRoute.config(function($routeProvider,$locationProvider,$qProvider){
 imaRoute.run(function($rootScope,$location,Auth,$cookieStore){
 	$rootScope.$on('$routeChangeStart',function(event,next,current){
 		if(next.$$route.authenticated) {
+			
 			if(!Auth.isLoggedIn() && !$cookieStore.get('remember_token')) {
 				$location.path("/");
 			}
-
-			if(next.$$route.originalPath == "/") {
-                    if(Auth.isLoggedIn()) {
-                        $location.path(current.$$route.originalPath);
-                        
-                    }
-                }
+			Auth.returnType().then(function(response){
+				if(response == next.$$route.type) {
+					
+					if(next.$$route.originalPath == "/") {
+	                    if(Auth.isLoggedIn()) {
+	                        $location.path(current.$$route.originalPath);
+	                        
+	                    }
+            		}
+				}
+				else {
+					$location.path("/");
+				}
+			});
+			
 		}
 	});
 });

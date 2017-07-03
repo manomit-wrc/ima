@@ -38,6 +38,7 @@ Route::get('/footer','PageController@getfooter');
 
 Route::group(['middleware' => 'jwt.auth'], function () {
     Route::get('/doctors', 'PageController@getAuthUser');
+    Route::get('/get-type','PageController@get_type');
     Route::get('/state-list', 'PageController@get_state_list');
     Route::post('/update-profile', 'PageController@update_profile');
     Route::post('/update-profile-photo','PageController@update_profile_photo');
@@ -48,4 +49,5 @@ Route::group(['middleware' => 'jwt.auth'], function () {
     Route::get('/journal-details','PageController@journal_details');
     Route::post('/update-journal','PageController@update_journal');
     Route::get('/delete-journal','PageController@delete_journal');
+
 });

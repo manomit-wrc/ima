@@ -559,6 +559,9 @@ class PageController extends Controller
 
     }
 
-    
+    public function get_type(Request $request) {
+        $user = JWTAuth::toUser($request->token);
+        return response()->json(['type' => $user->type]);
+    }
 
 }
