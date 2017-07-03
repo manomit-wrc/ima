@@ -29,7 +29,7 @@ class CompanyController extends Controller
           'email' => 'required|email|unique:doctors,email',
           'password' => 'required',
           'mobile_no' => 'required',
-          'avators' => 'required',
+          'avators' => 'required|image:jpg,png,jpeg',
           'company_regsitration_no' => 'required',
           'date_of_establishment' => 'required|date_format:d-m-Y|',
           'state_id' => 'required',
@@ -91,7 +91,7 @@ class CompanyController extends Controller
           'company_name' => 'required|max:225',
           'company_address' => 'required',
           'email' => 'required|email|unique:doctors,email,'.$id,
-          
+          'avators' => 'required_with|image:jpg,png,jpeg',
           'mobile_no' => 'required',
           'company_regsitration_no' => 'required',
           'date_of_establishment' => 'required|date_format:d-m-Y|',
