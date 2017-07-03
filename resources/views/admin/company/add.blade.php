@@ -138,7 +138,7 @@
 
                     <div class="col-sm-10">
                       <input type="file" class="form-control" id="profile-img" name="avators" >
-                      <span class="text-danger">{{ $errors->first('avators') }}</span>
+                      <span class="text-danger" id="hid_err">{{ $errors->first('avators') }}</span>
                     </div>
                     <font id="pre_img" style="display:none">
                       
@@ -184,9 +184,10 @@
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
   <script type="text/javascript">
     function readURL(input) {
-
+         document.getElementById('hid_err').style.visibility='hidden';
          var mimeType=input.files[0]['type'];
          if (input.files && input.files[0] && mimeType.split('/')[0]=="image") {
+
             document.getElementById('pre_img').style.display='block';
             var reader = new FileReader();
             
@@ -197,6 +198,7 @@
         }
         else
         {
+          
           document.getElementById('pre_img').style.display='none';
           alert("Not A image file");
         }
