@@ -25,6 +25,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     $scope.init = function () {
 		Auth.getUser().then(function(response){
 			$scope.user = response.data.result;
+			
 			$scope.first_name = $scope.user.first_name;
 			$scope.last_name = $scope.user.last_name;
 			$scope.mobile = $scope.user.mobile;
@@ -41,6 +42,12 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 			$scope.auth_id = $scope.user.id;
 			$scope.avators = $scope.user.avators;
 			$scope.address = $scope.user.address;
+
+			if($scope.user.type == "C") {
+				$scope.company_registration_no = $scope.user.company_regsitration_no;
+				$scope.doe = $scope.user.doe;
+			}
+			
 			
 			if($scope.user.avators != null) {
 				$scope.image_source = '/uploads/doctors/thumb/'+$scope.user.avators;
@@ -207,8 +214,9 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 					$scope.code = 0;
 					$scope.message = '';
 					Auth.getUser().then(function(response){
-				
+					
 					$scope.user = response.data.result;
+
 					
 					$scope.dismiss();
 					if($scope.user.type == "D") {
@@ -319,6 +327,46 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 		}
 	};
 
+	$scope.doCompanyProfile = function(valid) {
+		if(valid) {
+			$http({
+                    method: 'POST',
+                    url: 'api/update-company-profile',
+                    headers: {
+                		'Content-Type': undefined
+            		},
+                    data: {
+                        first_name: $scope.first_name,
+                        email: $scope.email,
+                        mobile: $scope.mobile,
+                        state_id: $scope.state_id,
+                        city: $scope.city,
+                        pincode: $scope.pincode,
+                        doe: $scope.doe,
+                        company_registration_no: $scope.company_registration_no,
+                        biography: $scope.biography,
+                        address: $scope.address,
+                        doctor_id: $scope.auth_id
+                    },
+                    transformRequest: function (data, headersGetter) {
+                        var formData = new FormData();
+                        angular.forEach(data, function (value, key) {
+                            formData.append(key, value);
+                        });
+                        return formData;
+                    }
+                })
+                .then(function (response) {
+                	$scope.status_code = 1;
+                	$scope.message = response.data.message;
+                })
+                .catch(function (reason) {
+                	$scope.status_code = 1;
+                	$scope.message = "Please try again";
+                });
+		}
+	};
+
 
 
 	$scope.uploadedFile = function(element) {
@@ -363,6 +411,10 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 
     $scope.loadProfile = function() {
     	$location.path("/profile");
+    };
+
+    $scope.loadCompanyProfile = function() {
+    	$location.path("/company-profile");
     };
 
     $scope.loadChangePassword = function() {

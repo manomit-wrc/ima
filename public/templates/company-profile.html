@@ -17,44 +17,42 @@
                                 
                                 </div>
                                 </form>
-                                <h3>Dr. {{user.first_name}}&nbsp;{{user.last_name}}</h3>
+                                <h3>{{user.first_name}}</h3>
                                 <!--<h4>National President</h4>-->
-                                <h5 class="user_address"><i class="fa fa-map-marker" aria-hidden="true"></i> Kolkata,&nbsp;West Bengal, &nbsp;India</h5>
+                                <h5 class="user_address"><i class="fa fa-map-marker" aria-hidden="true"></i> {{user.address}}</h5>
                             </div>
 
-                            <button type="button" class="LeftBtnActive" ng-click="loadProfile()"><i class="fa fa-user" aria-hidden="true"></i> Edit profile</button>
-                            <button type="button" class="LeftBtn" ng-click="loadChangePassword()"><i class="fa fa-user" aria-hidden="true"></i> Change Password</button>
-                            <button type="button" class="LeftBtn" ng-click="loadJournal()"><i class="fa fa-user" aria-hidden="true"></i> Upload Journal</button>
-                            <button type="button" class="LeftBtn" ng-click="loadJournalList()"><i class="fa fa-user" aria-hidden="true"></i> Upload List</button>
+                            <button type="button" class="LeftBtnActive" ng-click="loadCompanyProfile()"><i class="fa fa-user" aria-hidden="true"></i> Edit profile</button>
+                            
                         </div>
                     </div>
                     <div class="col-md-8 Clear-991" ng-controller="AuthController">
                         <div class="Rpanel">
                             <h2>Edit Profile</h2>
-                            <form name="frmProfile" ng-submit="doProfile(frmProfile.$valid)" method="post" novalidate="novalidate" enctype="multipart/form-data">
+                            <form name="frmCompanyProfile" ng-submit="doCompanyProfile(frmCompanyProfile.$valid)" method="post" novalidate="novalidate" enctype="multipart/form-data">
                             <input type="hidden" name="auth_id" ng-model="auth_id" />
                             <div style="margin:0 auto!important;" ng-show="status_code">{{message}}</div>
                             <div class="row">
                                 <div class="col-md-6" >
                                     <div class="fieldbox" ng-class="{
-                                            'has-error':!frmProfile.first_name.$valid && (!frmProfile.$pristine || frmProfile.$submitted), 
-                                            'has-success': frmProfile.first_name.$valid && (!frmProfile.$pristine || frmProfile.$submitted)
+                                            'has-error':!frmCompanyProfile.first_name.$valid && (!frmCompanyProfile.$pristine || frmCompanyProfile.$submitted), 
+                                            'has-success': frmCompanyProfile.first_name.$valid && (!frmCompanyProfile.$pristine || frmCompanyProfile.$submitted)
                                             }">
-                                        <label>First Name </label>
+                                        <label>Company Name </label>
                                         <input type="text" name="first_name"  class="editF"  required="required" ng-model="first_name" />
-                                        <span class="help-block" ng-show="frmProfile.first_name.$error.required && (!frmProfile.$pristine || frmProfile.$submitted)">Please Enter First Name</span>
+                                        <span class="help-block" ng-show="frmCompanyProfile.first_name.$error.required && (!frmCompanyProfile.$pristine || frmCompanyProfile.$submitted)">Please Enter Company Name</span>
 
                                         
                                     </div>
                                 </div>
                                 <div class="col-md-6" >
                                     <div class="fieldbox" ng-class="{
-                                            'has-error':!frmProfile.last_name.$valid && (!frmProfile.$pristine || frmProfile.$submitted), 
-                                            'has-success': frmProfile.last_name.$valid && (!frmProfile.$pristine || frmProfile.$submitted)
+                                            'has-error':!frmCompanyProfile.company_registration_no.$valid && (!frmCompanyProfile.$pristine || frmCompanyProfile.$submitted), 
+                                            'has-success': frmCompanyProfile.company_registration_no.$valid && (!frmCompanyProfile.$pristine || frmCompanyProfile.$submitted)
                                             }">
-                                        <label>Last Name</label>
-                                        <input type="text" name="last_name" id="last_name"  ng-model="last_name" class="editF" required="required">
-                                        <span class="help-block" ng-show="frmProfile.last_name.$error.required && (!frmProfile.$pristine || frmProfile.$submitted)">Please Enter Last Name</span>
+                                        <label>Company Registration No</label>
+                                        <input type="text" name="company_registration_no" id="company_registration_no"  ng-model="company_registration_no" class="editF" required="required">
+                                        <span class="help-block" ng-show="frmCompanyProfile.company_registration_no.$error.required && (!frmCompanyProfile.$pristine || frmCompanyProfile.$submitted)">Please Enter Company Registration No</span>
                                     </div>
                                 </div>
                             </div>
@@ -62,143 +60,107 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="fieldbox" ng-class="{
-                                            'has-error':!frmProfile.email.$valid && (!frmProfile.$pristine || frmProfile.$submitted), 
-                                            'has-success': frmProfile.email.$valid && (!frmProfile.$pristine || frmProfile.$submitted)
+                                            'has-error':!frmCompanyProfile.email.$valid && (!frmCompanyProfile.$pristine || frmCompanyProfile.$submitted), 
+                                            'has-success': frmCompanyProfile.email.$valid && (!frmCompanyProfile.$pristine || frmCompanyProfile.$submitted)
                                             }">
                                         <label>Email</label>
                                         <input type="text" name="email" id="email" ng-model="email"  class="editF" required="required">
-                                        <span class="help-block" ng-show="frmProfile.email.$error.required && (frmProfile.$pristine || frmProfile.$submitted)">Please Enter Email ID</span>
-                                        <span class="help-block" ng-show="frmProfile.email.$error.email && (!frmProfile.$pristine || frmProfile.$submitted)">Please Valid Email ID</span>
+                                        <span class="help-block" ng-show="frmCompanyProfile.email.$error.required && (frmCompanyProfile.$pristine || frmCompanyProfile.$submitted)">Please Enter Email ID</span>
+                                        <span class="help-block" ng-show="frmCompanyProfile.email.$error.email && (!frmCompanyProfile.$pristine || frmCompanyProfile.$submitted)">Please Valid Email ID</span>
                                     </div>
                                 </div>
                                 <div class="col-md-6" ng-class="{
-                                            'has-error':!frmProfile.mobile.$valid && (!frmProfile.$pristine || frmProfile.$submitted), 
-                                            'has-success': frmProfile.mobile.$valid && (!frmProfile.$pristine || frmProfile.$submitted)
+                                            'has-error':!frmCompanyProfile.mobile.$valid && (!frmCompanyProfile.$pristine || frmCompanyProfile.$submitted), 
+                                            'has-success': frmCompanyProfile.mobile.$valid && (!frmCompanyProfile.$pristine || frmCompanyProfile.$submitted)
                                             }">
                                     <div class="fieldbox">
                                         <label>Mobile</label>
                                         <input type="text" name="mobile" id="mobile" ng-model="mobile"  class="editF" required="required" ng-maxlength="10" ng-minlength="10">
-                                        <span class="help-block" ng-show="frmProfile.mobile.$error.required && (frmProfile.$pristine || frmProfile.$submitted)">Please Enter Mobile No</span>
-                                        <span class="help-block" ng-show="frmRegistration.mobile.$error.maxlength  && (frmRegistration.$pristine || frmRegistration.$submitted)">Mobile No Must Have 10 Digits</span>
-                                        <span class="help-block" ng-show="frmRegistration.mobile.$error.minlength  && (!frmRegistration.$pristine || frmRegistration.$submitted)">Mobile No Must Have 10 Digits</span>
+                                        <span class="help-block" ng-show="frmCompanyProfile.mobile.$error.required && (frmCompanyProfile.$pristine || frmProfile.$submitted)">Please Enter Mobile No</span>
+                                        <span class="help-block" ng-show="frmCompanyProfile.mobile.$error.maxlength  && (frmCompanyProfile.$pristine || frmCompanyProfile.$submitted)">Mobile No Must Have 10 Digits</span>
+                                        <span class="help-block" ng-show="frmCompanyProfile.mobile.$error.minlength  && (!frmCompanyProfile.$pristine || frmCompanyProfile.$submitted)">Mobile No Must Have 10 Digits</span>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-3">
-                                    <div class="fieldbox" ng-class="{
-                                            'has-error':!frmProfile.sex.$valid && (!frmProfile.$pristine || frmProfile.$submitted), 
-                                            'has-success': frmProfile.sex.$valid && (!frmProfile.$pristine || frmProfile.$submitted)
-                                            }">
-                                        <label>Sex</label>
-                                        <select name="sex" id="sex"  class="fieldboxSel" ng-model="sex" required="required">
-                                              <option value="">Select</option>
-                                              <option value="M">Male</option>
-                                              <option value="F">Female</option>
-                                          </select>
-                                          <span class="help-block" ng-show="frmProfile.sex.$error.required && (!frmProfile.$pristine || frmProfile.$submitted)">Please Select Gender</span>
-                                    </div>
-                                </div>
-
                                 
-
-                                <div class="col-md-3">
+                                <div class="col-md-6">
                                     <div class="fieldbox" ng-class="{
-                                            'has-error':!frmProfile.state_id.$valid && (!frmProfile.$pristine || frmProfile.$submitted), 
-                                            'has-success': frmProfile.state_id.$valid && (!frmProfile.$pristine || frmProfile.$submitted)
+                                            'has-error':!frmCompanyProfile.state_id.$valid && (!frmCompanyProfile.$pristine || frmCompanyProfile.$submitted), 
+                                            'has-success': frmCompanyProfile.state_id.$valid && (!frmCompanyProfile.$pristine || frmCompanyProfile.$submitted)
                                             }">
                                         <label>State</label>
                                         <select name="state_id" ng-model="state_id"  class="fieldboxSel" required="required">
                                               <option value="">Select</option>
                                               <option ng-repeat="(key, value) in state_list" value="{{key}}" >{{value}}</option>
                                           </select>
-                                        <span class="help-block" ng-show="frmProfile.state_id.$error.required && (!frmProfile.$pristine || frmProfile.$submitted)">Please Select State</span>
+                                        <span class="help-block" ng-show="frmCompanyProfile.state_id.$error.required && (!frmCompanyProfile.$pristine || frmCompanyProfile.$submitted)">Please Select State</span>
                                     </div>
                                 </div>
 
-                                <div class="col-md-3">
+                                <div class="col-md-6">
                                     <div class="fieldbox" ng-class="{
-                                            'has-error':!frmProfile.city.$valid && (!frmProfile.$pristine || frmProfile.$submitted), 
-                                            'has-success': frmProfile.city.$valid && (!frmProfile.$pristine || frmProfile.$submitted)
+                                            'has-error':!frmCompanyProfile.city.$valid && (!frmCompanyProfile.$pristine || frmCompanyProfile.$submitted), 
+                                            'has-success': frmCompanyProfile.city.$valid && (!frmCompanyProfile.$pristine || frmCompanyProfile.$submitted)
                                             }">
                                         <label>City</label>
                                         <input type="text" name="city" id="city" ng-model="city"  class="editF" required="required">
-                                        <span class="help-block" ng-show="frmProfile.city.$error.required && (!frmProfile.$pristine || frmProfile.$submitted)">Please Enter City</span>
+                                        <span class="help-block" ng-show="frmCompanyProfile.city.$error.required && (!frmCompanyProfile.$pristine || frmCompanyProfile.$submitted)">Please Enter City</span>
                                     </div>
                                 </div>
+                            </div>
 
-                                <div class="col-md-3">
+                            <div class="row">
+                                <div class="col-md-6">
                                     <div class="fieldbox" ng-class="{
-                                            'has-error':!frmProfile.pincode.$valid && (!frmProfile.$pristine || frmProfile.$submitted), 
-                                            'has-success': frmProfile.pincode.$valid && (!frmProfile.$pristine || frmProfile.$submitted)
+                                            'has-error':!frmCompanyProfile.pincode.$valid && (!frmCompanyProfile.$pristine || frmCompanyProfile.$submitted), 
+                                            'has-success': frmCompanyProfile.pincode.$valid && (!frmCompanyProfile.$pristine || frmCompanyProfile.$submitted)
                                             }">
                                         <label>Pincode</label>
                                         <input type="text" name="pincode" id="pincode" ng-model="pincode"  class="editF" required="required">
-                                        <span class="help-block" ng-show="frmProfile.pincode.$error.required && (!frmProfile.$pristine || frmProfile.$submitted)">Please Enter Pincode</span>
+                                        <span class="help-block" ng-show="frmCompanyProfile.pincode.$error.required && (!frmCompanyProfile.$pristine || frmCompanyProfile.$submitted)">Please Enter Pincode</span>
                                     </div>
                                 </div>
-                                
-                            </div>
-
-                            <div class="row">
                                 <div class="col-md-6">
                                     
                                     <div class="fieldbox date" ng-class="{
-                                            'has-error':!frmProfile.dob.$valid && (!frmProfile.$pristine || frmProfile.$submitted), 
-                                            'has-success': frmProfile.dob.$valid && (!frmProfile.$pristine || frmProfile.$submitted)
+                                            'has-error':!frmCompanyProfile.doe.$valid && (!frmCompanyProfile.$pristine || frmCompanyProfile.$submitted), 
+                                            'has-success': frmCompanyProfile.doe.$valid && (!frmCompanyProfile.$pristine || frmCompanyProfile.$submitted)
                                             }">
-                                        <label>Birthday</label>
-                                        <input type="text" name="dob" class="editF" ng-model="dob" placeholder="DD/MM/YYYY" jqdatepicker required="required">
+                                        <label>Date Of Established</label>
+                                        <input type="text" name="doe" class="editF" ng-model="doe" placeholder="DD/MM/YYYY" jqdatepicker required="required">
 
-                                        <span class="help-block" ng-show="frmProfile.dob.$error.required && (!frmProfile.$pristine || frmProfile.$submitted)">Please Enter Date Of Birth</span>
+                                        <span class="help-block" ng-show="frmCompanyProfile.doe.$error.required && (!frmCompanyProfile.$pristine || frmCompanyProfile.$submitted)">Please Enter Date Of Established</span>
                                         
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="fieldbox" ng-class="{
-                                            'has-error':!frmProfile.license.$valid && (!frmProfile.$pristine || frmProfile.$submitted), 
-                                            'has-success': frmProfile.license.$valid && (!frmProfile.$pristine || frmProfile.$submitted)
-                                            }">
-                                        <label>Doctor's License</label>
-                                        <input type="text" name="license" ng-model="license" class="editF" required="required">
-                                        <span class="help-block" ng-show="frmProfile.license.$error.required && (!frmProfile.$pristine || frmProfile.$submitted)">Please Enter Doctor's License</span>
-                                    </div>
-                                </div>
+                                
                             </div>
 
                             <div class="row">
                                 
                                 <div class="col-md-12">
                                     <div class="fieldbox" ng-class="{
-                                            'has-error':!frmProfile.address.$valid && (!frmProfile.$pristine || frmProfile.$submitted), 
-                                            'has-success': frmProfile.address.$valid && (!frmProfile.$pristine || frmProfile.$submitted)
+                                            'has-error':!frmCompanyProfile.address.$valid && (!frmCompanyProfile.$pristine || frmCompanyProfile.$submitted), 
+                                            'has-success': frmCompanyProfile.address.$valid && (!frmCompanyProfile.$pristine || frmCompanyProfile.$submitted)
                                             }">
                                         <label>Address</label>
                                         <textarea name="address" ng-model="address" cols="" rows="5" class="editF" required="required"></textarea>
-                                        <span class="help-block" ng-show="frmProfile.address.$error.required && (!frmProfile.$pristine || frmProfile.$submitted)">Please Enter Your Address</span>
+                                        <span class="help-block" ng-show="frmCompanyProfile.address.$error.required && (!frmCompanyProfile.$pristine || frmCompanyProfile.$submitted)">Please Enter Your Address</span>
                                     </div>
                                 </div>
 
                                 <div class="col-md-12">
                                     <div class="fieldbox" ng-class="{
-                                            'has-error':!frmProfile.biography.$valid && (!frmProfile.$pristine || frmProfile.$submitted), 
-                                            'has-success': frmProfile.biography.$valid && (!frmProfile.$pristine || frmProfile.$submitted)
+                                            'has-error':!frmCompanyProfile.biography.$valid && (!frmCompanyProfile.$pristine || frmCompanyProfile.$submitted), 
+                                            'has-success': frmCompanyProfile.biography.$valid && (!frmCompanyProfile.$pristine || frmCompanyProfile.$submitted)
                                             }">
                                         <label>Biography</label>
                                         <textarea name="biography" ng-model="biography" cols="" rows="5" class="editF" required="required"></textarea>
-                                        <span class="help-block" ng-show="frmProfile.biography.$error.required && (!frmProfile.$pristine || frmProfile.$submitted)">Please Enter Your Biography</span>
+                                        <span class="help-block" ng-show="frmCompanyProfile.biography.$error.required && (!frmCompanyProfile.$pristine || frmCompanyProfile.$submitted)">Please Enter Your Biography</span>
                                     </div>
                                 </div>
-                                 
-                                <div class="col-md-12">
-                                     <div class="fieldbox">
-                                        <label>Testimonial</label>
-                                        <textarea name="testimonial" ng-model="testimonial" cols="" rows="5" class="editF"></textarea>
-                                     </div>
-                                </div>
-                                  
-
                             </div>
 
                             <div class="row">

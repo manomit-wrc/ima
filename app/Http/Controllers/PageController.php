@@ -564,4 +564,29 @@ class PageController extends Controller
         return response()->json(['type' => $user->type]);
     }
 
+    public function update_company_profile(Request $request) {
+        $doctors = Doctor::find($request->doctor_id);
+        
+        if($doctors) {
+            $doctors->first_name = $request->first_name;
+            $doctors->email = $request->email;
+            $doctors->mobile = $request->mobile;
+            $doctors->state_id = $request->state_id;
+            $doctors->city = $request->city;
+            $doctors->pincode = $request->pincode;
+            $doctors->doe = date('Y-m-d',strtotime($request->doe));
+            $doctors->company_regsitration_no = $request->company_registration_no;
+            $doctors->biography = $request->biography;
+            $doctors->address = $request->address;
+            $doctors->testimonial = $request->testimonial;
+
+            $doctors->save();
+            
+            return response()->json(['status_code'=>200,'message'=>'Profile updated successfully']);
+        }
+        else {
+            return response()->json(['status_code'=>500,'message'=>'Please try again']);
+        }
+    }
+
 }

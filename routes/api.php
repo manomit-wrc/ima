@@ -49,5 +49,5 @@ Route::group(['middleware' => 'jwt.auth'], function () {
     Route::get('/journal-details','PageController@journal_details');
     Route::post('/update-journal','PageController@update_journal');
     Route::get('/delete-journal','PageController@delete_journal');
-
+    Route::post('/update-company-profile','PageController@update_company_profile');
 });

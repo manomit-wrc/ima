@@ -19,7 +19,7 @@
                                 </form>
                                 <h3>Dr. {{user.first_name}}&nbsp;{{user.last_name}}</h3>
                                 <!--<h4>National President</h4>-->
-                                <h5 class="user_address"><i class="fa fa-map-marker" aria-hidden="true"></i> Kolkata,&nbsp;West Bengal, &nbsp;India</h5>
+                                <h5 class="user_address"><i class="fa fa-map-marker" aria-hidden="true"></i> {{user.address}}</h5>
                             </div>
 
                             <button type="button" class="LeftBtnActive" ng-click="loadProfile()"><i class="fa fa-user" aria-hidden="true"></i> Edit profile</button>
@@ -79,8 +79,8 @@
                                         <label>Mobile</label>
                                         <input type="text" name="mobile" id="mobile" ng-model="mobile"  class="editF" required="required" ng-maxlength="10" ng-minlength="10">
                                         <span class="help-block" ng-show="frmProfile.mobile.$error.required && (frmProfile.$pristine || frmProfile.$submitted)">Please Enter Mobile No</span>
-                                        <span class="help-block" ng-show="frmRegistration.mobile.$error.maxlength  && (frmRegistration.$pristine || frmRegistration.$submitted)">Mobile No Must Have 10 Digits</span>
-                                        <span class="help-block" ng-show="frmRegistration.mobile.$error.minlength  && (!frmRegistration.$pristine || frmRegistration.$submitted)">Mobile No Must Have 10 Digits</span>
+                                        <span class="help-block" ng-show="frmProfile.mobile.$error.maxlength  && (frmProfile.$pristine || frmProfile.$submitted)">Mobile No Must Have 10 Digits</span>
+                                        <span class="help-block" ng-show="frmProfile.mobile.$error.minlength  && (!frmProfile.$pristine || frmProfile.$submitted)">Mobile No Must Have 10 Digits</span>
                                     </div>
                                 </div>
                             </div>
