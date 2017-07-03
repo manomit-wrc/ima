@@ -180,13 +180,18 @@
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
   <script type="text/javascript">
     function readURL(input) {
-        if (input.files && input.files[0]) {
+         var mimeType=input.files[0]['type'];
+         if (input.files && input.files[0] && mimeType.split('/')[0]=="image") {
             var reader = new FileReader();
             
             reader.onload = function (e) {
                 $('#profile-img-tag').attr('src', e.target.result);
             }
             reader.readAsDataURL(input.files[0]);
+        }
+        else
+        {
+          alert("Not A image file");
         }
     }
     $("#profile-img").change(function(){

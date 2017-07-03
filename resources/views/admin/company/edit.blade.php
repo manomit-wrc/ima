@@ -187,15 +187,21 @@
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
   <script type="text/javascript">
     function readURL(input) {
+          var mimeType=input.files[0]['type'];
           document.getElementById('shw_img').style.display='none';
           document.getElementById('pre_img').style.display='block';
-        if (input.files && input.files[0]) {
+        if (input.files && input.files[0] && mimeType.split('/')[0]=="image") {
             var reader = new FileReader();
             
             reader.onload = function (e) {
                 $('#profile-img-tag').attr('src', e.target.result);
             }
             reader.readAsDataURL(input.files[0]);
+        }
+        else
+        {
+          document.getElementById('pre_img').style.display='none';
+          alert("Not A image file");
         }
     }
     $("#profile-img").change(function(){
