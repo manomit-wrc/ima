@@ -8,7 +8,7 @@
                         <a href="#" class="top_link" data-toggle="modal" data-target="#RegModal">Registration</a>
                     </p>
                     <p class="text-right" ng-if="user.id">
-                        Welcome <a href="/profile" class="top_link">{{user.first_name}}</a>
+                        Welcome <a href="{{user.type == 'D' ? '/profile' : '/company-profile'}}" class="top_link">{{user.first_name}}</a>
                         <a href="javascript:void(0)" ng-click="doLogout()" class="top_link">Logout</a>
                     </p>
                 </div>
