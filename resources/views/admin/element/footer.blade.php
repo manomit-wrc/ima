@@ -32,7 +32,7 @@
 {!! Html::style('storage/admin/css/bootstrap-toggle.min.css') !!}
 {!!Html::script("storage/admin/js/bootstrap-toggle.min.js")!!}
 
-@if(Request::segment(2) === 'event' || Request::segment(2) === 'news' || Request::segment(2) === 'notice' && (Request::segment(3) == 'add' || Request::segment(3) == 'edit'))
+@if(Request::segment(2) === 'event' || Request::segment(2) === 'news' || Request::segment(2) === 'notice' || Request::segment(2) === 'company' && (Request::segment(3) == 'add' || Request::segment(3) == 'edit'))
   {!!Html::script("storage/admin/js/input-mask/jquery.inputmask.js")!!}
   {!!Html::script("storage/admin/js/input-mask/jquery.inputmask.date.extensions.js")!!}
   {!!Html::script("storage/admin/js/input-mask/jquery.inputmask.extensions.js")!!}

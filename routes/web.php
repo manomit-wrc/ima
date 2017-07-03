@@ -170,6 +170,8 @@ Route::group(['middleware'=>['admin']], function(){
     Route::get('/admin/company/add','CompanyController@add');
     Route::post('/admin/company/store','CompanyController@store');
     Route::get('/admin/company/edit/{id}','CompanyController@edit');
-    Route::post('/admin/company/update/{id}','CompanyController@update');
+    Route::post('/admin/company/update','CompanyController@update');
     Route::get('/admin/company/delete/{id}','CompanyController@delete');
+    Route::get('/admin/company/changepassword/{id}','CompanyController@changepassword');
+    Route::post('/admin/company/updatepassword','CompanyController@updatepassword');
 });

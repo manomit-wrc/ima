@@ -58,7 +58,8 @@
                       <td>{{date('d-m-Y',strtotime($value->doe))}}</td>
                       <td>{{$value->status == '1'?'Active':'In-Active'}}
                       </td>
-                      <td><a href="/admin/company/edit/{{$value->id}}" >Edit</a></td>
+                      <td><a href="/admin/company/edit/{{$value->id}}" >Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/admin/company/delete/{{$value->id}}" >Delete</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/admin/company/changepassword/{{$value->id}}" >Change Password</a></td>
+
                     </tr>
                   @endforeach
                 @endif

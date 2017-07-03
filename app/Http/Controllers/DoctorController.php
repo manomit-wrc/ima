@@ -21,7 +21,7 @@ class DoctorController extends Controller
   public function view($id){
       
       $doctor = Doctor::with('journal.categories')->where('id',$id)->get()->toArray();
-      /*echo "<pre>";
+     /* echo "<pre>";
       print_r($doctor);
       echo "</pre>";die();*/
       return view('admin.doctor.view')->with('viewdoctor',$doctor);
