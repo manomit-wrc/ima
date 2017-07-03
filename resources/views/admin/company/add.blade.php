@@ -137,9 +137,10 @@
                     <label for="inputAvators" class="col-sm-2 control-label">Image</label>
 
                     <div class="col-sm-10">
-                      <input type="file" class="form-control" id="avators" name="avators" >
+                      <input type="file" class="form-control" id="profile-img" name="avators" >
                       <span class="text-danger">{{ $errors->first('avators') }}</span>
                     </div>
+                    <div class="col-md-10 col-md-offset-2"><img src="" id="profile-img-tag" width="100px" /></div>
                   </div>
 
                   <div class="form-group {{ $errors->has('status') ? 'has-error' : '' }}">
@@ -176,4 +177,20 @@
     </section>
     <!-- /.content -->
   </div>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+  <script type="text/javascript">
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            
+            reader.onload = function (e) {
+                $('#profile-img-tag').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#profile-img").change(function(){
+        readURL(this);
+    });
+</script>
 @stop
