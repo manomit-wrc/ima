@@ -1,17 +1,17 @@
 @extends('admin.dashboard_layout')
-@section('title', 'Company List')
+@section('title', 'Qualification List')
 @section('content')
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Company List
+        Qualification List
         
       </h1>
       <ol class="breadcrumb">
         <li><a href="/admin/dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
         
-        <li class="active">Company List</li>
+        <li class="active">Qualification List</li>
       </ol>
     </section>
 
@@ -29,45 +29,33 @@
 
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Company List</h3>
+              <h3 class="box-title">Qualification List</h3>
             </div>
             <!-- /.box-header -->
-            <div class="topbtn"><a href="/admin/company/add"><button type="button" class="btn bg-purple btn-rightad">ADD</button></a></div>
+            <div class="topbtn"><a href="/admin/qualification/add"><button type="button" class="btn bg-purple btn-rightad">ADD</button></a></div>
             <div class="box-body">
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>Company Name</th>
-                  <th>Email</th>
-                  <th>Mobile</th>
-                  <th>Registration No</th>
-                  <th>Date Of Established</th>
-                  
+                  <th>Qualification Name</th>
                   <th>Status</th>
                   <th>Action</th>
                   
                 </tr>
                 </thead>
-                <tbody>
-                @if($companies)
-                  @foreach($companies as $value)
+                
+                 <tbody>
+                @if($qualification)
+                  @foreach($qualification as $value)
                     <tr>
-                      <td>{{$value->first_name}}</td>
-                      <td>{{$value->email}}</td>
-                      <td>{{$value->mobile}}</td>
-                      <td>{{$value->company_regsitration_no}}</td>
-                      <td>{{date('d-m-Y',strtotime($value->doe))}}</td>
-                      
-                      <td>{{$value->status == '1'?'Active':'In-Active'}}
-                      </td>
-                      <td><a href="/admin/company/edit/{{$value->id}}" return confirm('Are you sure you want to delete?')>Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/admin/company/delete/{{$value->id}}" >Delete</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/admin/company/changepassword/{{$value->id}}" >Change Password</a></td>
-
+                      <td>{{$value->qualification_name}}</td>
+                      <td>{{$value->status == '1'?'Active':'In-Active'}}</td>
+                      <td><a href="/admin/qualification/edit/{{$value->id}}" return confirm('Are you sure you want to delete?')>Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/admin/qualification/delete/{{$value->id}}" >Delete</a></td>
                     </tr>
-                  @endforeach
+                     @endforeach
                 @endif
                 
                 </tbody>
-                
               </table>
             </div>
             <!-- /.box-body -->

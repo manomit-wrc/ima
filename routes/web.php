@@ -178,4 +178,13 @@ Route::group(['middleware'=>['admin']], function(){
     Route::get('/admin/company/delete/{id}','CompanyController@delete');
     Route::get('/admin/company/changepassword/{id}','CompanyController@changepassword');
     Route::post('/admin/company/updatepassword','CompanyController@updatepassword');
+
+    
+    Route::get('/admin/qualification','QualificationController@index');
+    Route::get('/admin/qualification/add','QualificationController@add');
+    Route::post('/admin/qualification/store','QualificationController@store');
+    Route::get('/admin/qualification/edit/{id}','QualificationController@edit');
+    Route::post('/admin/qualification/update','QualificationController@update');
+    Route::get('/admin/qualification/delete/{id}','QualificationController@delete');
+
 });

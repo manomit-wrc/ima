@@ -64,7 +64,7 @@
                     <label for="inputMobile" class="col-sm-2 control-label">Mobile No</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputMobile" placeholder="Mobile No" name="mobile_no" value="{{ $companies->mobile}}">
+                      <input type="text" class="form-control" id="inputMobile" placeholder="Mobile No" name="mobile_no" value="{{ $companies->mobile}}" onkeypress="if(event.keyCode>=48 && event.keyCode>=58) { return false ;}" maxlength="12">
                       <span class="text-danger">{{ $errors->first('mobile_no') }}</span>
                     </div>
                   </div>
