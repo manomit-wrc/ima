@@ -31,7 +31,7 @@ class QualificationController extends Controller
         $qualification->qualification_name=$request->qualification_name;
         $qualification->status	=$request->inputStatus;
         $qualification->save();
-        return view('admin.qualification.index');
+        return redirect('/admin/qualification');
     }
 
     public function edit($id) {
