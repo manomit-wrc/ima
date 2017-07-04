@@ -40,10 +40,12 @@ Route::group(['middleware' => 'jwt.auth'], function () {
     Route::get('/doctors', 'PageController@getAuthUser');
     Route::get('/get-type','PageController@get_type');
     Route::get('/state-list', 'PageController@get_state_list');
+    Route::get('/qualification-list', 'PageController@get_qualification_list');
     Route::post('/update-profile', 'PageController@update_profile');
     Route::post('/update-profile-photo','PageController@update_profile_photo');
     Route::post('/update-password','PageController@update_password');
     Route::get('/categories','PageController@categories');
+    Route::get('/certificates','PageController@certificates');
     Route::post('/submit-journal','PageController@submit_journal');
     Route::get('/journal-list','PageController@journal_list');
     Route::get('/journal-details','PageController@journal_details');

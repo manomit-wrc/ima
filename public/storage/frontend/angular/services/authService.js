@@ -75,6 +75,17 @@ authService.factory('Auth', function($http,$q,AuthToken,$cookieStore){
 		return defer.promise;
 	};
 
+	authFactory.get_certificate = function() {
+		var defer = $q.defer();
+		$http.get('/api/certificates').then(function(response){
+			defer.resolve(response);
+		}).catch(function(reason){
+			defer.resolve(response);
+		});
+
+		return defer.promise;
+	};
+
 	authFactory.get_journal_list = function(doctor_id) {
 		var defer = $q.defer();
 		
@@ -137,6 +148,17 @@ authService.factory('Auth', function($http,$q,AuthToken,$cookieStore){
 	authFactory.getState = function() {
 		var defer = $q.defer();
 		$http.get('/api/state-list').then(function(response){
+			defer.resolve(response);
+		}).catch(function(reason){
+			defer.resolve(reason);
+		});
+
+		return defer.promise;
+	};
+
+	authFactory.getqualification = function() {
+		var defer = $q.defer();
+		$http.get('/api/qualification-list').then(function(response){
 			defer.resolve(response);
 		}).catch(function(reason){
 			defer.resolve(reason);

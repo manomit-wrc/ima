@@ -64,6 +64,12 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 			$scope.state_list = response.data.state_list;
 
 		});
+
+		Auth.getqualification().then(function(response){
+			
+			$scope.qualification_list = response.data.qualification_list;
+
+		});
 		
 	};
 	$scope.init();
@@ -267,6 +273,12 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 		});
 	};
 
+	$scope.getcertificate = function() {
+		Auth.get_certificate().then(function(response){
+			$scope.categories = response.data.categories;
+		});
+	};
+
 	$scope.getJournalList = function() {
 		
 		Auth.get_journal_list($scope.doctor_id).then(function(response){
@@ -425,6 +437,9 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     };
     $scope.loadJournalList = function() {
     	$location.path("/journal-list");
+    };
+     $scope.uploadcertificate = function() {
+    	$location.path("/payment-certificate");
     };
 
     $scope.doUploadJournal = function(valid) {

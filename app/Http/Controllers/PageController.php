@@ -15,6 +15,7 @@ use Validator;
 use App\Doctor;
 use App\State;
 use App\CMS;
+use App\Qualification;
 use JWTAuth;
 use JWTAuthException;
 use Config;
@@ -202,6 +203,11 @@ class PageController extends Controller
         return response()->json(['state_list' => $state_list]);
     }
 
+    public function get_qualification_list() {
+        $qualification_list = \App\Qualification::where('status','1')->orderBy('qualification_name')->get()->pluck('qualification_name','id')->toArray();
+        return response()->json(['qualification_list' => $qualification_list]);
+    }
+
     public function update_profile(Request $request) {
         $doctors = Doctor::find($request->doctor_id);
          /*echo "<pre>";
@@ -311,6 +317,11 @@ class PageController extends Controller
                 'categories' => array(),
                 'code' => 404]);
         }
+    }
+
+    public function certificates() {
+         $qualification_list = \App\Qualification::where('status','1')->orderBy('qualification_name')->get()->pluck('qualification_name','id')->toArray();
+        return response()->json(['qualification_list' => $qualification_list]);
     }
 
     public function submit_journal(Request $request) {

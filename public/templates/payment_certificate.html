@@ -1,0 +1,97 @@
+<div ng-init='getcertificate();'>    
+    <div class="container">
+            <div class="row">
+                <div class="innertopB">
+                    <div class="col-md-4">
+                        <div class="leftP">
+                            <div class="Leftimgbox">
+                                <form name="frmAvator" ng-submit="doUpload()" method="post" novalidate="novalidate" enctype="multipart/form-data">
+                                <input type="hidden" name="doctor_id" ng-model="doctor_id" />
+                                <div class="imgLbox">
+                                    <span class="btn-file">
+                                        <input type="file" name="avators" ng-model="avators" onchange="angular.element(this).scope().uploadedFile(this)" accept="image/*"/>
+                                    </span>
+                                
+
+                                <img  alt="" ng-src="{{image_source}}" class="img-responsive"/>
+                                
+                                </div>
+                                </form>
+                                <h3>Dr. {{user.first_name}}&nbsp;{{user.last_name}}</h3>
+                                <!--<h4>National President</h4>-->
+                                <h5 class="user_address"><i class="fa fa-map-marker" aria-hidden="true"></i> Kolkata,&nbsp;West Bengal, &nbsp;India</h5>
+                            </div>
+                            <button type="button" class="LeftBtn" ng-click="loadProfile()"><i class="fa fa-user" aria-hidden="true"></i> Edit profile</button>
+                            <button type="button" class="LeftBtn" ng-click="loadChangePassword()"><i class="fa fa-user" aria-hidden="true"></i> Change Password</button>
+                            <button type="button" class="LeftBtnActive" ng-click="loadJournal()"><i class="fa fa-user" aria-hidden="true"></i> Upload Journal</button>
+                            <button type="button" class="LeftBtn" ng-click="loadJournalList()"><i class="fa fa-user" aria-hidden="true"></i> Upload List</button>
+                            <button type="button" class="LeftBtn" ng-click="uploadcertificate()"><i class="fa fa-user" aria-hidden="true"></i> Payment & Certificate</button>
+                        </div>
+                    </div>
+                    <div class="col-md-8 Clear-991" ng-controller="AuthController">
+                        <div class="Rpanel">
+                            <h2>Payment & Certificate</h2>
+                            <form name="frmUploadJournal" ng-submit="doUploadJournal(frmUploadJournal.$valid)" method="post" novalidate="novalidate" enctype="multipart/form-data">
+                            <input type="hidden" name="auth_id" ng-model="auth_id" />
+                            <div style="margin:0 auto!important;" ng-show="status_code">{{message}}</div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="fieldbox" ng-class="{
+                                            'has-error':!frmUploadJournal.title.$valid && (!frmUploadJournal.$pristine || frmUploadJournal.$submitted), 
+                                            'has-success': frmUploadJournal.title.$valid && (!frmUploadJournal.$pristine || frmUploadJournal.$submitted)
+                                            }">
+                                        <label>Payment</label>
+                                        <input type="text" name="title" id="title" ng-model="title" class="editF" required="required">
+                                        <span class="help-block" ng-show="frmUploadJournal.title.$error.required && (!frmUploadJournal.$pristine || frmUploadJournal.$submitted)">Please Enter Journal Title</span>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="fieldbox" ng-class="{
+                                            'has-error':!frmUploadJournal.published_date.$valid && (!frmUploadJournal.$pristine || frmUploadJournal.$submitted), 
+                                            'has-success': frmUploadJournal.published_date.$valid && (!frmUploadJournal.$pristine || frmUploadJournal.$submitted)
+                                            }">
+                                        <label>Published Date</label>
+                                        <input type="text" name="published_date" class="editF" ng-model="published_date" placeholder="DD/MM/YYYY" jqdatepicker required="required">
+
+                                        <span class="help-block" ng-show="frmUploadJournal.published_date.$error.required && (!frmUploadJournal.$pristine || frmUploadJournal.$submitted)">Please Enter Date Of Published</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="fieldbox"  ng-class="{
+                                            'has-error':!frmUploadJournal.certificate_id.$valid && (!frmUploadJournal.$pristine || frmUploadJournal.$submitted), 
+                                            'has-success': frmUploadJournal.category_id.$valid && (!frmUploadJournal.$pristine || frmUploadJournal.$submitted)
+                                            }">
+                                        <label>Select Certificate</label>
+                                        <select name="certificate_id" ng-model="certificate_id[]" class="fieldboxSel" required="required" multiple="multiple">
+                                            <option value="">Select</option>
+                                            <option ng-repeat="(key, value) in qualification_list" value="{{key}}" >{{value}}</option>
+                                        </select>
+                                        <span class="help-block" ng-show="frmUploadJournal.certificate_id.$error.required && (!frmUploadJournal.$pristine || frmUploadJournal.$submitted)">Please Select Journal Category</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="fieldbox">
+                                        <label>Certificate Upload</label>
+                                        <span>
+                                            <input type="file" ng-model="journal_file" name="journal_file" onchange="angular.element(this).scope().uploadedJournalDoc(this)" class="editF1" accept="image/jpeg,image/png,application/pdf,image/x-eps">
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="fieldbox">
+                                        <button class="button1" type="submit">SAVE</button>
+                                    </div>
+                                </div>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>

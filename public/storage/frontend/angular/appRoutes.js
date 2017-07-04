@@ -34,6 +34,8 @@ imaRoute.config(function($routeProvider,$locationProvider,$qProvider){
 		templateUrl: '/templates/contact.html'
 	}).when('/branches',{
 		templateUrl: '/templates/local_branches.html'
+	}).when('/payment-certificate',{
+		templateUrl: '/templates/payment_certificate.html'
 	}).when('/journal-list', {
 		templateUrl: '/templates/journal_list.html',
 		authenticated: true,
