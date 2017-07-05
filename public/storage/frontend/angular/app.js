@@ -107,6 +107,7 @@ imaApp.directive('jqdatepicker', function () {
                     scope.dob = date;
                     scope.published_date = date;
                     scope.doe = date;
+                    scope.payment_date = date;
                     scope.$apply();
                 }
             });

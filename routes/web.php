@@ -65,7 +65,9 @@ Route::get('/events/{events_id}/{slug}', function() {
     return view('welcome');
 });  
 
-
+Route::get('/payment-certificate', function(){
+    return view('welcome');
+});
 
 Route::get('/admin', 'LoginController@index');
 Route::post('/admin/login', 'LoginController@checkLogin');

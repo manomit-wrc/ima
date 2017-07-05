@@ -209,6 +209,51 @@ authService.factory('Auth', function($http,$q,AuthToken,$cookieStore){
        return defer.promise;
 	};
 
+    authFactory.submit_doctorcertificate = function(doctor) {
+    	//console.log(doctor.doctor_file);
+    	//console.log(doctor.qualification_id);
+		var defer = $q.defer();
+		$http({
+		  method  : 'POST',
+		  url     : 'api/submit-doctorcertificate',
+		  processData: false,
+		  transformRequest: function (data) {
+		  	  var quarr = [];
+					angular.forEach(doctor.qualification_id, function(value, key){
+						quarr.push(value);
+					});
+			  var doctorImg = [];
+			  		angular.forEach(doctor.doctor_file, function(value, key){
+						doctorImg.push(value);
+					});
+			  
+		      var formData = new FormData();
+		      formData.append("doctor_file", doctorImg); 
+		      formData.append("doctor_id", doctor.auth_id);  
+		      formData.append("payment", doctor.payment);
+		      formData.append("payment_date", doctor.payment_date);
+		      formData.append("qualification_id", quarr);
+		      
+		      return formData;  
+		  },  
+		  data : doctor,
+		  headers: {
+		         'Content-Type': undefined
+		  }
+	   }).then(function (response) {
+	   		defer.resolve(response);
+       }).catch(function(reason){
+       		defer.resolve(reason);
+       });
+
+       return defer.promise;
+	};
+
+
+
+
+
+
 	authFactory.edit_journal = function(journal) {
 		
 		var defer = $q.defer();
