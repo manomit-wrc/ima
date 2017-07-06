@@ -392,6 +392,8 @@ class PageController extends Controller
 
     public function submit_doctorcertificate(Request $request) {
         
+       
+
         $validator = Validator::make($request->all(),[
             'payment' => 'required|max:7',
             'qualification_id' => 'required',
@@ -416,8 +418,13 @@ class PageController extends Controller
         }
         else {
  
-            $doctor_id = $request->doctor_id;
-            
+            //$doctor_id = $request->doctor_id;
+            //echo $doctor_id;die();
+            $filedata=array();
+            //$filedata=$request->file('doctor_file');
+            /*echo "<pre>";
+            print_r($filedata);
+            echo "</pre>";die();*/
 
             if($request->hasFile('doctor_file')) {
                 foreach ($request->file('doctor_file') as $key => $value) {
@@ -427,20 +434,25 @@ class PageController extends Controller
 
                     $destinationPath = public_path().'/uploads/doctors/qualification/';
                     $value->move($destinationPath,$fileName);
+
+                    $filedata[]=$fileName;
                 }
-            die();
             
-            $doctors =  Doctor::find($doctor_id);
+            
+
+
+            $doctors =  Doctor::find($request->doctor_id);
             
             $doctors->payment = $request->payment;
-            $doctors->payment_date = $request->payment_date;
-            $doctors->journal_file = $fileName;
+            $doctors->date_of_payment =date('Y-m-d',strtotime($request->payment_date));
+            $doctors->certificate = implode(',',$filedata);
 
             $doctors->save();
-            $doctor_qualifications->save();
+            $doctors->doctor_qualifications()->wherePivot('doctor_id', '=', $request->doctor_id)->detach();
+            $doctors->doctor_qualifications()->attach(explode(",", $request->qualification_id));
 
             return response()->json(['error' => false,
-            'message' => 'Journal uploaded successfully',
+            'message' => 'Certificate uploaded successfully',
             'code' => 200]);
             
                 
@@ -452,8 +464,6 @@ class PageController extends Controller
                 'code' => 500]);
           }
         }
-    
-
 
   }
 
@@ -713,6 +723,21 @@ class PageController extends Controller
         else {
             
         }
+    }
+
+    public function payment_details(Request $request) {
+
+        $doctor_payment_details = Doctor::with('doctor_qualifications')->where('id',$request->doctor_id)->get()->toArray();
+        $payment_details = array('payment'=>$doctor_payment_details[0]['payment'],'date_of_payment'=>$doctor_payment_details[0]['date_of_payment']);
+
+        $qualification_arr = [];
+        foreach ($doctor_payment_details[0]['doctor_qualifications'] as $key => $value) {
+            $qualification_arr[] = strval($value['id']);
+        }
+
+        $certificates_arr = explode(",", $doctor_payment_details[0]['certificate']);
+
+        return response()->json(['payment_details'=>$payment_details,'qualification_arr'=>$qualification_arr,'certificates_arr'=>$certificates_arr]);
     }
 
 }

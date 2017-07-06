@@ -25,5 +25,9 @@ class Doctor extends Authenticatable
     public function states() {
         return $this->belongsTo('\App\State','state_id');
     }
+
+    public function doctor_qualifications() {
+        return $this->belongsToMany('\App\Qualification','doctor_qualifications','doctor_id','qualification_id');
+    }
    
 }

@@ -55,4 +55,5 @@ Route::group(['middleware' => 'jwt.auth'], function () {
     Route::post('/update-company-profile','PageController@update_company_profile');
     Route::post('/add-new-drug','PageController@add_new_drug');
     Route::get('/medical-category','PageController@medical_category');
+    Route::get('/payment-details','PageController@payment_details');
 });

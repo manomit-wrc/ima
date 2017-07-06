@@ -97,6 +97,19 @@ authService.factory('Auth', function($http,$q,AuthToken,$cookieStore){
 		return defer.promise;
 	};
 
+	authFactory.get_payment_details = function(doctor_id) {
+		var defer = $q.defer();
+		$http.get('/api/payment-details',{
+    		params: { doctor_id: doctor_id}
+    	}).then(function(response){
+			defer.resolve(response);
+		}).catch(function(reason){
+			defer.resolve(response);
+		});
+
+		return defer.promise;
+	};
+
 	authFactory.get_journal_list = function(doctor_id) {
 		var defer = $q.defer();
 		
@@ -221,9 +234,9 @@ authService.factory('Auth', function($http,$q,AuthToken,$cookieStore){
 	};
 
     authFactory.submit_doctorcertificate = function(doctor) {
-    	
+
 		var defer = $q.defer();
-		  
+
        var formData = new FormData();
        for (var i in doctor.doctor_file) {
             
@@ -243,11 +256,13 @@ authService.factory('Auth', function($http,$q,AuthToken,$cookieStore){
         	defer.resolve(response);
         })
         .catch(function(reason){
+
        		defer.resolve(reason);
        });
 		
        return defer.promise;
 	};
+
 
 
 	authFactory.add_new_drug = function(company) {
@@ -280,8 +295,6 @@ authService.factory('Auth', function($http,$q,AuthToken,$cookieStore){
 
         return defer.promise;
 	};
-
-
 
 	authFactory.edit_journal = function(journal) {
 		

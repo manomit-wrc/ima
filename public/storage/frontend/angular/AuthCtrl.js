@@ -43,6 +43,8 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 			$scope.avators = $scope.user.avators;
 			$scope.address = $scope.user.address;
 
+			
+
 			if($scope.user.type == "C") {
 				$scope.company_registration_no = $scope.user.company_regsitration_no;
 				$scope.doe = $scope.user.doe;
@@ -281,6 +283,19 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 			$scope.qualification_list = response.data.qualification_list;
 		});
 		console.log($scope.qualification_list);
+	};
+
+	$scope.getPaymentDetails = function() {
+		Auth.get_payment_details($scope.doctor_id).then(function(response){
+			
+			$scope.payment = response.data.payment_details.payment;
+			$scope.payment_date = response.data.payment_details.date_of_payment;
+			$scope.certificates_arr = response.data.certificates_arr;
+			$scope.qualification_arr = response.data.qualification_arr;
+			
+			$scope.qualification_id = $scope.qualification_arr;
+
+		});
 	};
 
 	$scope.getJournalList = function() {
