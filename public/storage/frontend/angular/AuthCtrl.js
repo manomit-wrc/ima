@@ -478,10 +478,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
         };
 
      $scope.doUploadcertificate = function(valid) {
-        //console.log($scope.doctor_file);
-     	//console.log($scope.qualification_id);
-    	//if(valid) {
-    		
+    	if(valid) {
     		Auth.submit_doctorcertificate($scope).then(function(response){
     			$scope.message = response.data.message;
 				$scope.status_code = response.data.code;
@@ -494,7 +491,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 				}
 				
     		});
-    	//}
+    	}
     };
 
 

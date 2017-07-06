@@ -374,14 +374,22 @@ class PageController extends Controller
     }
 
     public function submit_doctorcertificate(Request $request) {
-
+        
         $validator = Validator::make($request->all(),[
             'payment' => 'required|max:7',
             'qualification_id' => 'required',
             'payment_date' => 'required|date_format:d-m-Y|before_or_equal:today',
            
             'doctor_file' => 'required',
-            'doctor_file.*' => 'image|mimes:jpg,jpeg'
+            'doctor_file.*' => 'mimes:jpg,jpeg,pdf,png'
+        ],[
+            'payment.required' => 'Please enter payment',
+            'payment.max:7' => 'Maximum 7 digits',
+            'qualification_id.required' => 'Please select qualification',
+            'payment_date.required' => 'Please enter payment date',
+            'payment_date.date_format:d-m-Y' => 'Payment date must be valid date',
+            'doctor_file.required' => 'Please upload certificate',
+            'doctor_file.*' => 'Must be image file or pdf file'
         ]);
 
         if ($validator->fails()) {
@@ -390,21 +398,21 @@ class PageController extends Controller
                 'code' => 500]);
         }
         else {
-
-            $filew = $request->file('doctor_file'); 
+ 
             $doctor_id = $request->doctor_id;
             
 
             if($request->hasFile('doctor_file')) {
-            $file = $request->file('doctor_file') ;
+                foreach ($request->file('doctor_file') as $key => $value) {
+                    
 
-            $fileName = time().'_'.$file->getClientOriginalName() ;
+                    $fileName = time().'_'.$value->getClientOriginalName() ;
 
-            $destinationPath = public_path().'/uploads/doctors/qualification/';
-            $file->move($destinationPath,$fileName);
+                    $destinationPath = public_path().'/uploads/doctors/qualification/';
+                    $value->move($destinationPath,$fileName);
+                }
+            die();
             
-            
-            //$doctor_qualifications = new \App\doctor_qualifications();
             $doctors =  Doctor::find($doctor_id);
             
             $doctors->payment = $request->payment;

@@ -60,7 +60,7 @@
                                             'has-success': frmUploadcertificate.qualification_id.$valid && (!frmUploadcertificate.$pristine || frmUploadcertificate.$submitted)
                                             }">
                                         <label>Select Qualification</label>
-                                        <select name="qualification_id[]" ng-model="qualification_id[qualification]" class="fieldboxSelM" required="required" multiple="true">
+                                        <select name="qualification_id[]" ng-model="qualification_id" class="fieldboxSelM" required="required" multiple="true">
                                             <option value="">Select</option>
                                             <option ng-repeat="(key, value) in qualification_list" value="{{key}}">{{value}}</option>
                                         </select>
