@@ -374,7 +374,12 @@ class PageController extends Controller
     }
 
     public function submit_doctorcertificate(Request $request) {
-
+         
+         $doctor_file=$request->doctor_file;
+         $qualification_id=$request->qualification_id;
+         echo "<pre>";
+         print_r($doctor_file);
+         echo "</pre>";die();
         $validator = Validator::make($request->all(),[
             'payment' => 'required|max:7',
             'qualification_id' => 'required',
