@@ -43,6 +43,14 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 			$scope.avators = $scope.user.avators;
 			$scope.address = $scope.user.address;
 
+			$scope.payment = $scope.user.payment;
+			$scope.payment_date = $scope.user.date_of_payment;
+			$scope.doctor_cert = $scope.user.certificate;
+			$scope.qualification_ids = $scope.user.qualification_id	;
+            
+             $scope.arrString = new Array();
+             $scope.arrString = $scope.doctor_cert.split(',');
+
 			if($scope.user.type == "C") {
 				$scope.company_registration_no = $scope.user.company_regsitration_no;
 				$scope.doe = $scope.user.doe;
@@ -426,6 +434,9 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     $scope.loadCompanyProfile = function() {
     	$location.path("/company-profile");
     };
+    $scope.loadDrugProfile = function() {
+    	$location.path("/upload-drug");
+    };
 
     $scope.loadChangePassword = function() {
     	$location.path("/change-password");
@@ -475,10 +486,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
         };
 
      $scope.doUploadcertificate = function(valid) {
-        //console.log($scope.doctor_file);
-     	//console.log($scope.qualification_id);
-    	//if(valid) {
-    		
+    	if(valid) {
     		Auth.submit_doctorcertificate($scope).then(function(response){
     			$scope.message = response.data.message;
 				$scope.status_code = response.data.code;
@@ -491,7 +499,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 				}
 				
     		});
-    	//}
+    	}
     };
 
 

@@ -215,47 +215,32 @@ authService.factory('Auth', function($http,$q,AuthToken,$cookieStore){
     	//var senddata = [doctor.doctor_file];
           //console.log(senddata);
 		var defer = $q.defer();
-		$http({
-		  method  : 'POST',
-		  url     : 'api/submit-doctorcertificate',
-		  processData: false,
-		  transformRequest: function (data) {
-		  	  var quarr = [];
-					angular.forEach(doctor.qualification_id, function(value, key){
-						quarr.push(value);
-					});
-			  var doctorImg = [];
-			  		angular.forEach(doctor.doctor_file, function(value, key){
-						doctorImg.push(value);
-					});
-			  //console.log(doctorImg);
-			  //console.log(doctorImg[0].name);
-		      var formData = new FormData();
-		      formData.append("doctor_file", doctor.doctorImg); 
-		      formData.append("doctor_id", doctor.auth_id);  
-		      formData.append("payment", doctor.payment);
-		      formData.append("payment_date", doctor.payment_date);
-		      formData.append("qualification_id", quarr);
-		      
-		      return formData;  
-		  },  
-		  data : doctor,
-		  headers: {
-		         'Content-Type': undefined
-		  }
-	   }).then(function (response) {
-	   		defer.resolve(response);
-       }).catch(function(reason){
+  
+       var formData = new FormData();
+       for (var i in doctor.doctor_file) {
+            
+            formData.append("doctor_file[]", doctor.doctor_file[i]); 
+        }
+       
+       formData.append("doctor_id", doctor.auth_id);  
+       formData.append("payment", doctor.payment);
+       formData.append("payment_date", doctor.payment_date);
+       formData.append("qualification_id", doctor.qualification_id);
+       
+		$http.post('api/submit-doctorcertificate', formData, {
+            transformRequest: angular.identity,
+            headers: {'Content-Type': undefined}
+        })
+        .then(function(response){
+        	defer.resolve(response);
+        })
+        .catch(function(reason){
+
        		defer.resolve(reason);
        });
-
+		
        return defer.promise;
 	};
-
-
-
-
-
 
 	authFactory.edit_journal = function(journal) {
 		

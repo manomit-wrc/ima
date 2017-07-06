@@ -20,6 +20,10 @@ imaRoute.config(function($routeProvider,$locationProvider,$qProvider){
 		templateUrl: '/templates/upload-journal.html',
 		authenticated: true,
 		type: "D"
+	}).when('/upload-drug',{
+		templateUrl: '/templates/upload-drug.html',
+		authenticated: true,
+		type: "C"
 	}).when('/news/:news_id/:slug',{
 		templateUrl: '/templates/news.html'
 	}).when('/events/:events_id/:slug',{

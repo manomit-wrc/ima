@@ -28,6 +28,10 @@ Route::get('/upload-journal', function () {
     return view('welcome');
 });
 
+Route::get('/upload-drug', function () {
+    return view('welcome');
+});
+
 Route::get('/journal-list', function () {
     return view('welcome');
 });
@@ -188,5 +192,13 @@ Route::group(['middleware'=>['admin']], function(){
     Route::get('/admin/qualification/edit/{id}','QualificationController@edit');
     Route::post('/admin/qualification/update','QualificationController@update');
     Route::get('/admin/qualification/delete/{id}','QualificationController@delete');
+
+
+    Route::get('/admin/department','DepartmentController@index');
+    Route::get('/admin/department/add','DepartmentController@add');
+    Route::post('/admin/department/store','DepartmentController@store');
+    Route::get('/admin/department/edit/{id}','DepartmentController@edit');
+    Route::post('/admin/department/update/{id}','DepartmentController@update');
+    Route::get('/admin/department/delete/{id}','DepartmentController@delete');
 
 });

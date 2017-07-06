@@ -374,19 +374,24 @@ class PageController extends Controller
     }
 
     public function submit_doctorcertificate(Request $request) {
-         
-         $doctor_file=$request->doctor_file;
-         $qualification_id=$request->qualification_id;
-         echo "<pre>";
-         print_r($doctor_file);
-         echo "</pre>";die();
+        
+       
+
         $validator = Validator::make($request->all(),[
             'payment' => 'required|max:7',
             'qualification_id' => 'required',
             'payment_date' => 'required|date_format:d-m-Y|before_or_equal:today',
            
             'doctor_file' => 'required',
-            'doctor_file.*' => 'image|mimes:jpg,jpeg'
+            'doctor_file.*' => 'mimes:jpg,jpeg,pdf,png'
+        ],[
+            'payment.required' => 'Please enter payment',
+            'payment.max:7' => 'Maximum 7 digits',
+            'qualification_id.required' => 'Please select qualification',
+            'payment_date.required' => 'Please enter payment date',
+            'payment_date.date_format:d-m-Y' => 'Payment date must be valid date',
+            'doctor_file.required' => 'Please upload certificate',
+            'doctor_file.*' => 'Must be image file or pdf file'
         ]);
 
         if ($validator->fails()) {
@@ -395,32 +400,42 @@ class PageController extends Controller
                 'code' => 500]);
         }
         else {
-
-            $filew = $request->file('doctor_file'); 
-            $doctor_id = $request->doctor_id;
-            
+ 
+            //$doctor_id = $request->doctor_id;
+            //echo $doctor_id;die();
+            $filedata=array();
+            //$filedata=$request->file('doctor_file');
+            /*echo "<pre>";
+            print_r($filedata);
+            echo "</pre>";die();*/
 
             if($request->hasFile('doctor_file')) {
-            $file = $request->file('doctor_file') ;
+                foreach ($request->file('doctor_file') as $key => $value) {
+                    
 
-            $fileName = time().'_'.$file->getClientOriginalName() ;
+                    $fileName = time().'_'.$value->getClientOriginalName() ;
 
-            $destinationPath = public_path().'/uploads/doctors/qualification/';
-            $file->move($destinationPath,$fileName);
+                    $destinationPath = public_path().'/uploads/doctors/qualification/';
+                    $value->move($destinationPath,$fileName);
+
+                    $filedata[]=$fileName;
+                }
             
             
-            //$doctor_qualifications = new \App\doctor_qualifications();
-            $doctors =  Doctor::find($doctor_id);
+
+
+            $doctors =  Doctor::find($request->doctor_id);
             
             $doctors->payment = $request->payment;
-            $doctors->payment_date = $request->payment_date;
-            $doctors->journal_file = $fileName;
+            $doctors->date_of_payment =date('Y-m-d',strtotime($request->payment_date));
+            $doctors->certificate = implode(',',$filedata);
 
             $doctors->save();
-            $doctor_qualifications->save();
+            $doctors->doctor_qualifications()->wherePivot('doctor_id', '=', $request->doctor_id)->detach();
+            $doctors->doctor_qualifications()->attach(explode(",", $request->qualification_id));
 
             return response()->json(['error' => false,
-            'message' => 'Journal uploaded successfully',
+            'message' => 'Certificate uploaded successfully',
             'code' => 200]);
             
                 
@@ -432,8 +447,6 @@ class PageController extends Controller
                 'code' => 500]);
           }
         }
-    
-
 
   }
 
