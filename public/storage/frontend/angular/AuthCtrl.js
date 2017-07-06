@@ -428,6 +428,9 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     $scope.loadCompanyProfile = function() {
     	$location.path("/company-profile");
     };
+    $scope.loadDrugProfile = function() {
+    	$location.path("/upload-drug");
+    };
 
     $scope.loadChangePassword = function() {
     	$location.path("/change-password");
