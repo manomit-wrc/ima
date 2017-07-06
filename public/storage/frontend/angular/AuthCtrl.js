@@ -65,11 +65,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 
 		});
 
-		Auth.getqualification().then(function(response){
-			
-			$scope.qualification_list = response.data.qualification_list;
-
-		});
+		
 		
 	};
 	$scope.init();
@@ -274,9 +270,11 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 	};
 
 	$scope.getcertificate = function() {
+		
 		Auth.get_certificate().then(function(response){
-			$scope.categories = response.data.categories;
+			$scope.qualification_list = response.data.qualification_list;
 		});
+		console.log($scope.qualification_list);
 	};
 
 	$scope.getJournalList = function() {
@@ -462,6 +460,43 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     		});
     	}
     };
+
+
+    $scope.getFileDetails = function (e) {
+
+            $scope.doctor_file = [];
+            $scope.$apply(function () {
+
+                // STORE THE FILE OBJECT IN AN ARRAY.
+                for (var i = 0; i < e.files.length; i++) {
+                    $scope.doctor_file.push(e.files[i])
+                }
+
+            });
+
+            
+        };
+
+     $scope.doUploadcertificate = function(valid) {
+        //console.log($scope.doctor_file);
+     	//console.log($scope.qualification_id);
+    	//if(valid) {
+    		
+    		Auth.submit_doctorcertificate($scope).then(function(response){
+    			$scope.message = response.data.message;
+				$scope.status_code = response.data.code;
+				if($scope.status_code != 500) {
+					/*$scope.payment = null;
+					$scope.payment_date = null;
+					$scope.qualification_id = null;
+					$scope.doctor_file = null;*/
+					
+				}
+				
+    		});
+    	//}
+    };
+
 
     $scope.getNewsDetails = function() {
     	$http.get('/api/get-news/',{

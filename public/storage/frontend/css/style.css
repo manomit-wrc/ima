@@ -994,7 +994,7 @@ hr.bold {
     border: 5px solid #5ddee3;
     /* border-radius: 50%; */
     margin-bottom: 15px;
-    width: 180px;
+    /*width: 180px;*/
 }
 
 .Leftimgbox h3 {
@@ -2767,6 +2767,22 @@ a.btn:focus {
     padding: 10px 15px;
     border: 1px solid #fff;
     background: #e7e7e7 url(../img/arrow.png) 95% center no-repeat;
+    color: #010101;
+    font-size: 14px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+.fieldboxSelM {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #fff;
+    background: #e7e7e7;
     color: #010101;
     font-size: 14px;
     -webkit-box-sizing: border-box;

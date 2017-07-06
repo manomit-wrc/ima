@@ -373,6 +373,67 @@ class PageController extends Controller
         }
     }
 
+    public function submit_doctorcertificate(Request $request) {
+
+        $validator = Validator::make($request->all(),[
+            'payment' => 'required|max:7',
+            'qualification_id' => 'required',
+            'payment_date' => 'required|date_format:d-m-Y|before_or_equal:today',
+           
+            'doctor_file' => 'required',
+            'doctor_file.*' => 'image|mimes:jpg,jpeg'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => true,
+                'message' => $validator->messages()->first(),
+                'code' => 500]);
+        }
+        else {
+
+            $filew = $request->file('doctor_file'); 
+            $doctor_id = $request->doctor_id;
+            
+
+            if($request->hasFile('doctor_file')) {
+            $file = $request->file('doctor_file') ;
+
+            $fileName = time().'_'.$file->getClientOriginalName() ;
+
+            $destinationPath = public_path().'/uploads/doctors/qualification/';
+            $file->move($destinationPath,$fileName);
+            
+            
+            //$doctor_qualifications = new \App\doctor_qualifications();
+            $doctors =  Doctor::find($doctor_id);
+            
+            $doctors->payment = $request->payment;
+            $doctors->payment_date = $request->payment_date;
+            $doctors->journal_file = $fileName;
+
+            $doctors->save();
+            $doctor_qualifications->save();
+
+            return response()->json(['error' => false,
+            'message' => 'Journal uploaded successfully',
+            'code' => 200]);
+            
+                
+
+          }
+          else {
+            return response()->json(['error' => true,
+                'message' => 'Something not right. Try again',
+                'code' => 500]);
+          }
+        }
+    
+
+
+  }
+
+
+
     public function get_news(Request $request) {
         $news_id = $request->news_id;
         $news_slug = $request->slug;
