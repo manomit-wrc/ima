@@ -210,7 +210,7 @@ authService.factory('Auth', function($http,$q,AuthToken,$cookieStore){
 	};
 
     authFactory.submit_doctorcertificate = function(doctor) {
-    	//console.log(doctor.doctor_file);
+    	
     	//console.log(doctor.qualification_id);
 		var defer = $q.defer();
 		$http({
@@ -226,7 +226,8 @@ authService.factory('Auth', function($http,$q,AuthToken,$cookieStore){
 			  		angular.forEach(doctor.doctor_file, function(value, key){
 						doctorImg.push(value);
 					});
-			  
+			  console.log(doctorImg);
+			  console.log(doctorImg[0].name);
 		      var formData = new FormData();
 		      formData.append("doctor_file", doctorImg); 
 		      formData.append("doctor_id", doctor.auth_id);  

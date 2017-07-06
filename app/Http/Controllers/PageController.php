@@ -374,13 +374,14 @@ class PageController extends Controller
     }
 
     public function submit_doctorcertificate(Request $request) {
-        
+
         $validator = Validator::make($request->all(),[
             'payment' => 'required|max:7',
             'qualification_id' => 'required',
             'payment_date' => 'required|date_format:d-m-Y|before_or_equal:today',
            
-            'doctor_file' => 'required|array|mimes:pdf|max:100000|mimes:doc|max:100000'
+            'doctor_file' => 'required',
+            'doctor_file.*' => 'image|mimes:jpg,jpeg'
         ]);
 
         if ($validator->fails()) {
