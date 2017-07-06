@@ -75,6 +75,17 @@ authService.factory('Auth', function($http,$q,AuthToken,$cookieStore){
 		return defer.promise;
 	};
 
+	authFactory.get_medical_cat = function() {
+		var defer = $q.defer();
+		$http.get('/api/medical-category').then(function(response){
+			defer.resolve(response);
+		}).catch(function(reason){
+			defer.resolve(response);
+		});
+
+		return defer.promise;
+	};
+
 	authFactory.get_certificate = function() {
 		var defer = $q.defer();
 		$http.get('/api/certificates').then(function(response){
@@ -211,17 +222,8 @@ authService.factory('Auth', function($http,$q,AuthToken,$cookieStore){
 
     authFactory.submit_doctorcertificate = function(doctor) {
     	
-    	//console.log(doctor.qualification_id);
 		var defer = $q.defer();
-		var quarr = [];
-		angular.forEach(doctor.qualification_id, function(value, key){
-			quarr.push(value);
-		});
-  		var doctorImg = [];
-  		angular.forEach(doctor.doctor_file, function(value, key){
-			doctorImg.push(value);
-		});
-			  
+		  
        var formData = new FormData();
        for (var i in doctor.doctor_file) {
             
@@ -248,7 +250,36 @@ authService.factory('Auth', function($http,$q,AuthToken,$cookieStore){
 	};
 
 
+	authFactory.add_new_drug = function(company) {
+		var defer = $q.defer();
+		var data = new FormData();
+		
+		data.append('title',company.title);
+		data.append('description',company.description);
+		data.append('department_id',company.department_id);
+		data.append('mfg_name',company.mfg_name);
+		data.append('unit',company.unit);
+		data.append('price',company.price);
+		data.append('image',company.image);
+		if(!angular.isUndefined(company.video)) {
+			data.append('video',company.video);
+		}
+		
+		data.append('company_id',company.auth_id);
 
+		$http.post('api/add-new-drug', data, {
+            transformRequest: angular.identity,
+            headers: {'Content-Type': undefined}
+        })
+        .then(function(response){
+        	defer.resolve(response);
+        })
+        .catch(function(reason){
+       		defer.resolve(reason);
+       });
+
+        return defer.promise;
+	};
 
 
 

@@ -1,4 +1,4 @@
-<div>    
+<div ng-init="getMedicalCat();">    
     <div class="container">
             <div class="row">
                 <div class="innertopB">
@@ -17,9 +17,9 @@
                                 
                                 </div>
                                 </form>
-                                <h3>Dr. {{user.first_name}}&nbsp;{{user.last_name}}</h3>
+                                <h3>{{user.first_name}}</h3>
                                 <!--<h4>National President</h4>-->
-                                <h5 class="user_address"><i class="fa fa-map-marker" aria-hidden="true"></i> Kolkata,&nbsp;West Bengal, &nbsp;India</h5>
+                                <h5 class="user_address"><i class="fa fa-map-marker" aria-hidden="true"></i> {{user.address}}</h5>
                             </div>
                             <button type="button" class="LeftBtn" ng-click="loadCompanyProfile()"><i class="fa fa-user" aria-hidden="true" ></i>Profile</button>
                             <button type="button" class="LeftBtnActive" ng-click="loadDrugProfile()"><i class="fa fa-user" aria-hidden="true" ></i>New Drug</button>
@@ -27,64 +27,95 @@
                     </div>
                     <div class="col-md-8 Clear-991" ng-controller="AuthController">
                         <div class="Rpanel">
-                            <h2>Upload Journal</h2>
-                            <form name="frmUploadJournal" ng-submit="doUploadJournal(frmUploadJournal.$valid)" method="post" novalidate="novalidate" enctype="multipart/form-data">
+                            <h2>Add Product</h2>
+                            <form name="frmUploadDrug" ng-submit="doUploadDrug(frmUploadDrug.$valid)" method="post" novalidate="novalidate" enctype="multipart/form-data">
                             <input type="hidden" name="auth_id" ng-model="auth_id" />
                             <div style="margin:0 auto!important;" ng-show="status_code">{{message}}</div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="fieldbox" ng-class="{
-                                            'has-error':!frmUploadJournal.title.$valid && (!frmUploadJournal.$pristine || frmUploadJournal.$submitted), 
-                                            'has-success': frmUploadJournal.title.$valid && (!frmUploadJournal.$pristine || frmUploadJournal.$submitted)
+                                            'has-error':!frmUploadDrug.title.$valid && (!frmUploadDrug.$pristine || frmUploadDrug.$submitted), 
+                                            'has-success': frmUploadDrug.title.$valid && (!frmUploadDrug.$pristine || frmUploadDrug.$submitted)
                                             }">
-                                        <label>Title</label>
+                                        <label>Name</label>
                                         <input type="text" name="title" id="title" ng-model="title" class="editF" required="required">
-                                        <span class="help-block" ng-show="frmUploadJournal.title.$error.required && (!frmUploadJournal.$pristine || frmUploadJournal.$submitted)">Please Enter Journal Title</span>
+                                        <span class="help-block" ng-show="frmUploadDrug.title.$error.required && (!frmUploadDrug.$pristine || frmUploadDrug.$submitted)">Please Enter Name</span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="fieldbox" ng-class="{
-                                            'has-error':!frmUploadJournal.description.$valid && (!frmUploadJournal.$pristine || frmUploadJournal.$submitted), 
-                                            'has-success': frmUploadJournal.description.$valid && (!frmUploadJournal.$pristine || frmUploadJournal.$submitted)
+                                            'has-error':!frmUploadDrug.description.$valid && (!frmUploadDrug.$pristine || frmUploadDrug.$submitted), 
+                                            'has-success': frmUploadDrug.description.$valid && (!frmUploadDrug.$pristine || frmUploadDrug.$submitted)
                                             }">
                                         <label>Description</label>
                                         <textarea name="description" ng-model="description" cols="" rows="5" class="editF" required="required"></textarea>
-                                        <span class="help-block" ng-show="frmUploadJournal.description.$error.required && (!frmUploadJournal.$pristine || frmUploadJournal.$submitted)">Please Enter Journal Description</span>
+                                        <span class="help-block" ng-show="frmUploadDrug.description.$error.required && (!frmUploadDrug.$pristine || frmUploadDrug.$submitted)">Please Enter Description</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-12">
-                                    <div class="fieldbox" ng-class="{
-                                            'has-error':!frmUploadJournal.published_date.$valid && (!frmUploadJournal.$pristine || frmUploadJournal.$submitted), 
-                                            'has-success': frmUploadJournal.published_date.$valid && (!frmUploadJournal.$pristine || frmUploadJournal.$submitted)
-                                            }">
-                                        <label>Published Date</label>
-                                        <input type="text" name="published_date" class="editF" ng-model="published_date" placeholder="DD/MM/YYYY" jqdatepicker required="required">
-
-                                        <span class="help-block" ng-show="frmUploadJournal.published_date.$error.required && (!frmUploadJournal.$pristine || frmUploadJournal.$submitted)">Please Enter Date Of Published</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="fieldbox"  ng-class="{
-                                            'has-error':!frmUploadJournal.category_id.$valid && (!frmUploadJournal.$pristine || frmUploadJournal.$submitted), 
-                                            'has-success': frmUploadJournal.category_id.$valid && (!frmUploadJournal.$pristine || frmUploadJournal.$submitted)
+                                            'has-error':!frmUploadDrug.department_id.$valid && (!frmUploadDrug.$pristine || frmUploadDrug.$submitted), 
+                                            'has-success': frmUploadDrug.department_id.$valid && (!frmUploadDrug.$pristine || frmUploadDrug.$submitted)
                                             }">
                                         <label>Category</label>
-                                        <select name="category_id" ng-model="category_id" class="fieldboxSel" required="required">
+                                        <select name="department_id" ng-model="department_id" class="fieldboxSel" required="required">
                                             <option value="">Select</option>
-                                            <option ng-repeat="item in categories" value="{{item.value}}">{{item.label}}</option>
+                                            <option ng-repeat="item in departments" value="{{item.value}}">{{item.label}}</option>
                                         </select>
-                                        <span class="help-block" ng-show="frmUploadJournal.category_id.$error.required && (!frmUploadJournal.$pristine || frmUploadJournal.$submitted)">Please Select Journal Category</span>
+                                        <span class="help-block" ng-show="frmUploadDrug.department_id.$error.required && (!frmUploadDrug.$pristine || frmUploadDrug.$submitted)">Please Select Medicine Category</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="fieldbox" ng-class="{
+                                            'has-error':!frmUploadDrug.mfg_name.$valid && (!frmUploadDrug.$pristine || frmUploadDrug.$submitted), 
+                                            'has-success': frmUploadDrug.mfg_name.$valid && (!frmUploadDrug.$pristine || frmUploadDrug.$submitted)
+                                            }">
+                                        <label>Mfg. Name</label>
+                                        <input type="text" name="mfg_name" class="editF" ng-model="mfg_name" placeholder="Enter manufacturing company name" required="required">
+
+                                        <span class="help-block" ng-show="frmUploadDrug.mfg_name.$error.required && (!frmUploadDrug.$pristine || frmUploadDrug.$submitted)">Please enter manufacturing company</span>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="fieldbox" ng-class="{
+                                            'has-error':!frmUploadDrug.unit.$valid && (!frmUploadDrug.$pristine || frmUploadDrug.$submitted), 
+                                            'has-success': frmUploadDrug.unit.$valid && (!frmUploadDrug.$pristine || frmUploadDrug.$submitted)
+                                            }">
+                                        <label>Quantity Per Unit</label>
+                                        <input type="text" name="unit" id="unit" ng-model="unit" class="editF" required="required">
+                                        <span class="help-block" ng-show="frmUploadDrug.unit.$error.required && (!frmUploadDrug.$pristine || frmUploadDrug.$submitted)">Please Enter Quantity Per Unit</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="fieldbox" ng-class="{
+                                            'has-error':!frmUploadDrug.price.$valid && (!frmUploadDrug.$pristine || frmUploadDrug.$submitted), 
+                                            'has-success': frmUploadDrug.price.$valid && (!frmUploadDrug.$pristine || frmUploadDrug.$submitted)
+                                            }">
+                                        <label>Price</label>
+                                        <input type="text" name="price" id="price" ng-model="price" class="editF" required="required">
+                                        <span class="help-block" ng-show="frmUploadDrug.price.$error.required && (!frmUploadDrug.$pristine || frmUploadDrug.$submitted)">Please Enter Price</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="fieldbox">
-                                        <label>File Upload</label>
+                                        <label>Image Upload</label>
                                         <span>
-                                            <input type="file" ng-model="journal_file" name="journal_file" onchange="angular.element(this).scope().uploadedJournalDoc(this)" class="editF1" accept="image/jpeg,image/png,application/pdf,image/x-eps">
+                                            <input type="file" ng-model="image" name="image" onchange="angular.element(this).scope().uploadedImage(this)" class="editF1" accept="image/jpeg,image/png">
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="fieldbox">
+                                        <label>Video Upload</label>
+                                        <span>
+                                            <input type="file" ng-model="video" name="video" onchange="angular.element(this).scope().uploadedVideo(this)" class="editF1" accept="video/mpeg,video/mp4">
                                         </span>
                                     </div>
                                 </div>

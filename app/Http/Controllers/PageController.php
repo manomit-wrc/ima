@@ -319,6 +319,23 @@ class PageController extends Controller
         }
     }
 
+    public function medical_category() {
+        $departments = \App\Department::all();
+        if($departments) {
+            foreach ($departments as $value) {
+                $cat_arr[] = array('label'=>$value->name,'value'=>$value->id);
+            }
+            return response()->json(['error' => false,
+                'departments' => $cat_arr,
+                'code' => 200]);
+        }
+        else {
+            return response()->json(['error' => true,
+                'departments' => array(),
+                'code' => 404]);
+        }
+    }
+
     public function certificates() {
          $qualification_list = \App\Qualification::where('status','1')->orderBy('qualification_name')->get()->pluck('qualification_name','id')->toArray();
         return response()->json(['qualification_list' => $qualification_list]);
@@ -666,6 +683,35 @@ class PageController extends Controller
         }
         else {
             return response()->json(['status_code'=>500,'message'=>'Please try again']);
+        }
+    }
+
+    public function add_new_drug(Request $request) {
+        $validator = Validator::make($request->all(),[
+            'title' => 'required|max:50',
+            'description' => 'required',
+            'department_id' => 'required',
+            'mfg_name' => 'required|max:50',
+            'unit' => 'required|max:20',
+            'price' => 'required|between:0,999.99',
+            'image' => 'required|mimes:jpg,jpeg,pdf,png|max:500000',
+            'video' => 'required_with|mimes:mp4,wmv|max:500000'
+        ],[
+            'title.required' => 'Please enter medicine name',
+            'title.max:50' => 'Name should have maximum 50 characters',
+            'description.required' => 'Please enter description',
+            'department_id.required' => 'Please select medical category',
+            'mfg_name.required' => 'Please enter manufacturing company name',
+            'mfg_name.max:50' => 'Manufacturing name should have maximum 50 characters'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => true,
+                'message' => $validator->messages()->first(),
+                'code' => 500]);
+        }
+        else {
+            
         }
     }
 

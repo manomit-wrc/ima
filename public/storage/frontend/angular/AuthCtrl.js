@@ -269,6 +269,12 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 		});
 	};
 
+	$scope.getMedicalCat = function() {
+		Auth.get_medical_cat().then(function(response){
+			$scope.departments = response.data.departments;
+		});
+	};
+
 	$scope.getcertificate = function() {
 		
 		Auth.get_certificate().then(function(response){
@@ -415,6 +421,20 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 	$scope.uploadedJournalDoc = function(element) {
 		 $scope.$apply(function($scope) {
 	       $scope.journal_file = element.files[0];
+	       
+	      });
+	};
+
+	$scope.uploadedImage = function(element) {
+		 $scope.$apply(function($scope) {
+	       $scope.image = element.files[0];
+	       
+	      });
+	};
+
+	$scope.uploadedVideo = function(element) {
+		 $scope.$apply(function($scope) {
+	       $scope.video = element.files[0];
 	       
 	      });
 	};
@@ -623,7 +643,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     	});
 	    
 	    
-    }
+    };
 
    $scope.getdoctorfrofile= function() {
              
@@ -635,9 +655,26 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     	});
 	    
 	    
+    };
+
+    $scope.doUploadDrug = function(valid) {
+    	if(valid) {
+    		Auth.add_new_drug($scope).then(function(response){
+    			$scope.message = response.data.message;
+				$scope.status_code = response.data.code;
+				if($scope.status_code != 500) {
+					$scope.title = null;
+					$scope.description = null;
+					$scope.mfg_name = null;
+					$scope.unit = null;
+					$scope.price = null;
+					$scope.image = null;
+					$scope.video = null;
+				}
+				
+    		});
+    	}
     }
-
-
 });
 
 AuthCtrl.directive('addressBasedGoogleMap', function () {
