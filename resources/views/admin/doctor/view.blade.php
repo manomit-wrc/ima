@@ -84,6 +84,25 @@
                   </div>
 
                   <div class="form-group">
+                    <label for="inputServingPeriod" class="col-sm-2 control-label">Qualification</label>
+
+                    <div class="col-sm-10">
+
+                     @foreach($doctor_qualifs[0]['doctor_qualifications'] as $value)
+                         {{ $value['qualification_name'] }},
+                      @endforeach
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="inputServingPeriod" class="col-sm-2 control-label">Paid Amount</label>
+
+                    <div class="col-sm-10">
+                       {{$doctor_qualifs[0]['payment']}}
+                    </div>
+                  </div>
+
+                  <div class="form-group">
                     <label for="inputServingPeriod" class="col-sm-2 control-label">Licence</label>
 
                     <div class="col-sm-10">
@@ -107,8 +126,37 @@
                   </div>
 
                   </form>
+                  @if($doctor_certificates)
                   </br></br>
-
+                   <h3><font color="">Doctor Certificate</font></h3>
+                     
+                     <div class="box-body">
+                        
+                          <table id="" class="table table-bordered table-striped">
+                              <thead>
+                              <tr>
+                                <th>Sl.No</th>
+                                <th>Certificates</th>
+                                
+                              </tr>
+                              </thead>
+                              <tbody>
+                                
+                                 @foreach($doctor_certificates as $key=>$value)
+                                  
+                                   <tr>
+                                     <td>{{ ++$key }}</td>
+                                   <td><a  data-toggle="tooltip" data-placement="top" title="{{$value}}"   href="@if($value && file_exists(public_path() . '/uploads/doctors/qualification/'.$value)){{ url('uploads/doctors/qualification/' .$value)}}@endif" alt="{{$value}}" target="_blank"><i class="fa fa-paperclip" aria-hidden="true"></i></a></td>
+                                   
+                                   </tr>
+                                   
+                                 @endforeach
+                              </tbody>
+                              </table>
+                     </div>
+                      @endif
+                   </br></br>
+                   @if($viewdoctor[0]['journal'])
                    <h3><font color="">Journal</font></h3>
                  <!--Journal table start--> 
                 
@@ -124,13 +172,13 @@
                 </tr>
                 </thead>
                 <tbody>
-                @if($viewdoctor)
+                
                   @foreach($viewdoctor[0]['journal'] as  $value)
                     <tr>
                       <td>{{$value['title']}}</td>
 
                       <td>{{ date('d-m-Y',strtotime($value['published_date'])) }}</td>
-                      <td><a href="@if($value['journal_file'] && file_exists(public_path() . '/uploads/doctors/journal/'.$value['journal_file'])){{ url('uploads/doctors/journal/' .$value['journal_file'])}}@endif" alt="{{$value['journal_file']}}" target="_blank">{{$value['journal_file']}}</a></td>
+                      <td><a  data-toggle="tooltip" data-placement="top" title="{{$value['journal_file']}}"  href="@if($value['journal_file'] && file_exists(public_path() . '/uploads/doctors/journal/'.$value['journal_file'])){{ url('uploads/doctors/journal/' .$value['journal_file'])}}@endif" alt="{{$value['journal_file']}}" target="_blank"><i class="fa fa-paperclip" aria-hidden="true"></i></a></td>
 
                       <td>{{$value['categories']['name']}}</td>
                       <td><a href="/admin/doctor/Publised/{{$value['id']}}/{{$value['status']}}" onclick="@if($value['status'] == "0" ) return confirm('Are you sure you want to published?') @else return confirm('Are you sure you want to un-published?') @endif">
@@ -143,12 +191,13 @@
                         </a></td>
                     </tr>
                   @endforeach
-                @endif
+               
                 
                 </tbody>
                 
               </table>
             </div>
+             @endif
             <!--Journal table end-->
 
 

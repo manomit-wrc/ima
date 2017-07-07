@@ -337,6 +337,8 @@
     {!! Html::script('storage/frontend/js/nivo-lightbox.min.js') !!}
     
     {!! Html::script('storage/frontend/js/custom.js') !!}
+
+    
     
     
 </body>

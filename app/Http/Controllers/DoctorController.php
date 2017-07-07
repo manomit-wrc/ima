@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Doctor;
 use App\Journal;
-//use App\Designation;
+use App\Qualification;
 //use Validator;
 
 
@@ -21,10 +21,20 @@ class DoctorController extends Controller
   public function view($id){
       
       $doctor = Doctor::with('journal.categories')->where('id',$id)->get()->toArray();
-     /* echo "<pre>";
-      print_r($doctor);
+
+      $doctor_qualifs = Doctor::with('doctor_qualifications')->where('id',$id)->get()->toArray();
+      
+      $doctor_certificates = explode(",", $doctor_qualifs[0]['certificate']);
+      //$doctor_quali=[];
+      /*foreach($doctor_qualifs[0]['doctor_qualifications']  as $key=>$value)
+      {
+         $doctor_quali[]=$value['qualification_name'];
+      }*/
+
+      /*echo "<pre>";
+      print_r($doctor_qualifs);
       echo "</pre>";die();*/
-      return view('admin.doctor.view')->with('viewdoctor',$doctor);
+      return view('admin.doctor.view')->with(['viewdoctor'=>$doctor,'doctor_qualifs'=>$doctor_qualifs,'doctor_certificates'=>$doctor_certificates]);
      
    }
   public function Publised(Request $request,$id,$status){
