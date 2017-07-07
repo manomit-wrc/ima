@@ -137,7 +137,7 @@
                               <tr>
                                 <th>Sl.No</th>
                                 <th>Certificates</th>
-                                
+                                <th>Download Certificates</th>
                               </tr>
                               </thead>
                               <tbody>
@@ -148,6 +148,7 @@
                                      <td>{{ ++$key }}</td>
                                    <td><a  data-toggle="tooltip" data-placement="top" title="{{$value}}"   href="@if($value && file_exists(public_path() . '/uploads/doctors/qualification/'.$value)){{ url('uploads/doctors/qualification/' .$value)}}@endif" alt="{{$value}}" target="_blank"><i class="fa fa-paperclip" aria-hidden="true"></i></a></td>
                                    
+                                   <td><a href="/admin/doctor/downloadcertificate/{{$value}}"><i class="icon-download-alt"> </i> Download Certificate </a></td>
                                    </tr>
                                    
                                  @endforeach
@@ -167,6 +168,7 @@
                   <th>Title</th>
                   <th>Publised Date</th>
                   <th>Journal File</th>
+                  <th>Download File</th>
                   <th>Category Name</th>
                   <th>Action</th>
                 </tr>
@@ -179,6 +181,9 @@
 
                       <td>{{ date('d-m-Y',strtotime($value['published_date'])) }}</td>
                       <td><a  data-toggle="tooltip" data-placement="top" title="{{$value['journal_file']}}"  href="@if($value['journal_file'] && file_exists(public_path() . '/uploads/doctors/journal/'.$value['journal_file'])){{ url('uploads/doctors/journal/' .$value['journal_file'])}}@endif" alt="{{$value['journal_file']}}" target="_blank"><i class="fa fa-paperclip" aria-hidden="true"></i></a></td>
+
+                      <td><a href="/admin/doctor/download/{{$value['journal_file']}}"><i class="icon-download-alt"> </i> Download Brochure </a></td>
+
 
                       <td>{{$value['categories']['name']}}</td>
                       <td><a href="/admin/doctor/Publised/{{$value['id']}}/{{$value['status']}}" onclick="@if($value['status'] == "0" ) return confirm('Are you sure you want to published?') @else return confirm('Are you sure you want to un-published?') @endif">

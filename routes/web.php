@@ -167,6 +167,9 @@ Route::group(['middleware'=>['admin']], function(){
     Route::get('/admin/doctor/view/{id}','DoctorController@view');
     Route::get('/admin/doctor/Publised/{id}/{status}','DoctorController@Publised');
     Route::post('/admin/doctor/active','DoctorController@active');
+    Route::get('/admin/doctor/download/{file}','DoctorController@download');
+    Route::get('/admin/doctor/downloadcertificate/{file}','DoctorController@downloadcertificate');
+    
    
     Route::get('/admin/notice','NoticeController@index');
     Route::get('/admin/notice/add','NoticeController@add');

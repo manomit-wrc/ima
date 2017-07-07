@@ -70,6 +70,19 @@ class DoctorController extends Controller
     $doctor->save();
     return redirect('/admin/doctor/');
   }
+  
+  public function downloadcertificate(Request $request,$file)
+  {
+     $file=public_path("/uploads/doctors/qualification/".$file);
+     return response()->download($file);
+
+  }
+
+  public function download(Request $request,$file)
+  {
+         $file=public_path("/uploads/doctors/journal/".$file);
+         return response()->download($file);
+  }
 
 }
 
