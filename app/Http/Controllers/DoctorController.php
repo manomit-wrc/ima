@@ -71,6 +71,16 @@ class DoctorController extends Controller
     return redirect('/admin/doctor/');
   }
 
+  public function download(Request $request,$file)
+  {
+    //echo $file; die();
+        $file=public_path("/uploads/doctors/journal/".$file);
+         return response()->download($file);
+        //return response()->download(public_path()."/uploads/doctors/journal/".$file);
+        //return Response::download($file);
+
+  }
+
 }
 
 
