@@ -78,7 +78,7 @@ class DoctorController extends Controller
 
   }
 
-  public function download(Request $request,$file)
+  public function downloadjournal(Request $request,$file)
   {
          $file=public_path("/uploads/doctors/journal/".$file);
          return response()->download($file);
