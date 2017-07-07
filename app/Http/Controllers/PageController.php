@@ -28,6 +28,13 @@ use App\Mail\ContactEmail;
 
 class PageController extends Controller
 {
+    private $imageName;
+    private $videoName;
+
+    public function __construct() {
+        $this->imageName = '';
+        $this->videoName = '';
+    }
     public function home_content() {
     	
     	try {
@@ -721,7 +728,47 @@ class PageController extends Controller
                 'code' => 500]);
         }
         else {
-            
+            try {
+                if($request->hasFile('image')) {
+                    $file = $request->file('image') ;
+
+                    $this->imageName = time().'_'.$file->getClientOriginalName() ;
+
+                    $destinationPath = public_path().'/uploads/company/medicine/image/' ;
+                    $file->move($destinationPath,$this->imageName);
+                }
+
+                if($request->hasFile('video')) {
+                    $file = $request->file('video') ;
+
+                    $this->videoName = time().'_'.$file->getClientOriginalName() ;
+
+                    $destinationPath = public_path().'/uploads/company/medicine/video/' ;
+                    $file->move($destinationPath,$this->videoName);
+                }
+
+                $drug = new \App\Drug();
+                $drug->title = $request->title;
+                $drug->description = $request->description;
+                $drug->department_id = $request->department_id;
+                $drug->doctor_id = $request->company_id;
+                $drug->image = $this->imageName;
+                $drug->mfg_name = $request->mfg_name;
+                $drug->unit = $request->unit;
+                $drug->price = $request->price;
+                $drug->video = $this->videoName;
+
+                $drug->save();
+
+                return response()->json(['error' => false,
+                'message' => "New medicine addedd successfully",
+                'code' => 200]);
+            }
+            catch (Exception $e) {
+                return response()->json(['error' => true,
+                'message' => "Something is not right. Please try again",
+                'code' => 500]);
+            }
         }
     }
 

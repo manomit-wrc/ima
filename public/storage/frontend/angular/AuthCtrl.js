@@ -1,4 +1,4 @@
-var AuthCtrl = angular.module('AuthCtrl',[]);
+var AuthCtrl = angular.module('AuthCtrl',['oitozero.ngSweetAlert']);
 
 AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$routeParams,$cookieStore,$window){
 	$scope.code = '';
@@ -685,6 +685,16 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 					$scope.price = null;
 					$scope.image = null;
 					$scope.video = null;
+
+					SweetAlert.swal({   
+				     title: "Thank You",   
+				     text: response.data.message,   
+				     type: "success",     
+				     confirmButtonColor: "#DD6B55",   
+				     confirmButtonText: "OK"
+				    },  function(){  
+				     window.location.reload();
+				    });
 				}
 				
     		});
