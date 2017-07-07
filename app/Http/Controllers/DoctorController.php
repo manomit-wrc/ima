@@ -25,15 +25,7 @@ class DoctorController extends Controller
       $doctor_qualifs = Doctor::with('doctor_qualifications')->where('id',$id)->get()->toArray();
       
       $doctor_certificates = explode(",", $doctor_qualifs[0]['certificate']);
-      //$doctor_quali=[];
-      /*foreach($doctor_qualifs[0]['doctor_qualifications']  as $key=>$value)
-      {
-         $doctor_quali[]=$value['qualification_name'];
-      }*/
-
-      /*echo "<pre>";
-      print_r($doctor_qualifs);
-      echo "</pre>";die();*/
+      
       return view('admin.doctor.view')->with(['viewdoctor'=>$doctor,'doctor_qualifs'=>$doctor_qualifs,'doctor_certificates'=>$doctor_certificates]);
      
    }
@@ -78,7 +70,7 @@ class DoctorController extends Controller
 
   }
 
-  public function download(Request $request,$file)
+  public function downloadjournal(Request $request,$file)
   {
          $file=public_path("/uploads/doctors/journal/".$file);
          return response()->download($file);

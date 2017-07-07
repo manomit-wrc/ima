@@ -88,8 +88,13 @@
 
                     <div class="col-sm-10">
 
-                     @foreach($doctor_qualifs[0]['doctor_qualifications'] as $value)
-                         {{ $value['qualification_name'] }},
+                     @foreach($doctor_qualifs[0]['doctor_qualifications'] as $key=>$value)
+                         @if($key=='0')
+                         {{ $value['qualification_name'] }}
+                         @endif
+                         @if($key!='0')
+                         ,{{ $value['qualification_name'] }}
+                         @endif
                       @endforeach
                     </div>
                   </div>
@@ -182,7 +187,7 @@
                       <td>{{ date('d-m-Y',strtotime($value['published_date'])) }}</td>
                       <td><a  data-toggle="tooltip" data-placement="top" title="{{$value['journal_file']}}"  href="@if($value['journal_file'] && file_exists(public_path() . '/uploads/doctors/journal/'.$value['journal_file'])){{ url('uploads/doctors/journal/' .$value['journal_file'])}}@endif" alt="{{$value['journal_file']}}" target="_blank"><i class="fa fa-paperclip" aria-hidden="true"></i></a></td>
 
-                      <td><a href="/admin/doctor/download/{{$value['journal_file']}}"><i class="icon-download-alt"> </i> Download Brochure </a></td>
+                      <td><a href="/admin/doctor/downloadjournal/{{$value['journal_file']}}"><i class="icon-download-alt"> </i> Download Brochure </a></td>
 
 
                       <td>{{$value['categories']['name']}}</td>
