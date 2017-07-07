@@ -137,7 +137,7 @@
                               <tr>
                                 <th>Sl.No</th>
                                 <th>Certificates</th>
-                                
+                                <th>Download Certificates</th>
                               </tr>
                               </thead>
                               <tbody>
@@ -148,6 +148,7 @@
                                      <td>{{ ++$key }}</td>
                                    <td><a  data-toggle="tooltip" data-placement="top" title="{{$value}}"   href="@if($value && file_exists(public_path() . '/uploads/doctors/qualification/'.$value)){{ url('uploads/doctors/qualification/' .$value)}}@endif" alt="{{$value}}" target="_blank"><i class="fa fa-paperclip" aria-hidden="true"></i></a></td>
                                    
+                                   <td><a href="/admin/doctor/downloadcertificate/{{$value}}"><i class="icon-download-alt"> </i> Download Certificate </a></td>
                                    </tr>
                                    
                                  @endforeach
