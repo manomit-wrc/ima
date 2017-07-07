@@ -88,8 +88,13 @@
 
                     <div class="col-sm-10">
 
-                     @foreach($doctor_qualifs[0]['doctor_qualifications'] as $value)
-                         {{ $value['qualification_name'] }},
+                     @foreach($doctor_qualifs[0]['doctor_qualifications'] as $key=>$value)
+                         @if($key=='0')
+                         {{ $value['qualification_name'] }}
+                         @endif
+                         @if($key!='0')
+                         ,{{ $value['qualification_name'] }}
+                         @endif
                       @endforeach
                     </div>
                   </div>
