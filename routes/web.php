@@ -28,6 +28,10 @@ Route::get('/upload-journal', function () {
     return view('welcome');
 });
 
+Route::get('/drug-list', function () {
+    return view('welcome');
+});
+
 Route::get('/upload-drug', function () {
     return view('welcome');
 });
@@ -49,6 +53,9 @@ Route::get('/news-list', function(){
 });
 
 Route::get('/journal/{id}', function() {
+    return view('welcome');
+});
+Route::get('/drug/{id}', function() {
     return view('welcome');
 });
 

@@ -50,10 +50,12 @@ Route::group(['middleware' => 'jwt.auth'], function () {
     Route::post('/submit-doctorcertificate','PageController@submit_doctorcertificate');
     Route::get('/journal-list','PageController@journal_list');
     Route::get('/journal-details','PageController@journal_details');
+    Route::get('/drug-details','PageController@drug_details');
     Route::post('/update-journal','PageController@update_journal');
     Route::get('/delete-journal','PageController@delete_journal');
     Route::post('/update-company-profile','PageController@update_company_profile');
     Route::post('/add-new-drug','PageController@add_new_drug');
     Route::get('/medical-category','PageController@medical_category');
     Route::get('/payment-details','PageController@payment_details');
+    Route::get('/drug-list','PageController@drug_list');
 });

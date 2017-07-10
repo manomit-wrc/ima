@@ -124,6 +124,20 @@ authService.factory('Auth', function($http,$q,AuthToken,$cookieStore){
 		return defer.promise;
 	};
 
+	authFactory.get_drug_list = function(doctor_id) {
+		var defer = $q.defer();
+		
+		$http.get('/api/drug-list',{
+			params: { doctor_id: doctor_id}
+		}).then(function(response){
+			defer.resolve(response);
+		}).catch(function(reason){
+			defer.resolve(response);
+		});
+
+		return defer.promise;
+	};
+
 	authFactory.do_change_password = function(old_password,auth_id,new_password) {
 		var defer = $q.defer();
 		

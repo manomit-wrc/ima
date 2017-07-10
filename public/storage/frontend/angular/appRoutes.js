@@ -24,6 +24,10 @@ imaRoute.config(function($routeProvider,$locationProvider,$qProvider){
 		templateUrl: '/templates/upload-drug.html',
 		authenticated: true,
 		type: "C"
+	}).when('/drug-list',{
+		templateUrl: '/templates/drug-list.html',
+		authenticated: true,
+		type: "C"
 	}).when('/news/:news_id/:slug',{
 		templateUrl: '/templates/news.html'
 	}).when('/events/:events_id/:slug',{
@@ -52,6 +56,10 @@ imaRoute.config(function($routeProvider,$locationProvider,$qProvider){
 		templateUrl: '/templates/edit_journal.html',
 		authenticated: true,
 		type: "D"
+	}).when('/drug/:id',{
+		templateUrl: '/templates/edit_drug.html',
+		authenticated: true,
+		type: "C"
 	});
 
 	$qProvider.errorOnUnhandledRejections(false);

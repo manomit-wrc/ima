@@ -282,7 +282,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 		Auth.get_certificate().then(function(response){
 			$scope.qualification_list = response.data.qualification_list;
 		});
-		console.log($scope.qualification_list);
+		//console.log($scope.qualification_list);
 	};
 
 	$scope.getPaymentDetails = function() {
@@ -302,6 +302,15 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 		
 		Auth.get_journal_list($scope.doctor_id).then(function(response){
 			$scope.journal_list = response.data.journals[0];
+			console.log($scope.journal_list);
+		});
+	};
+
+	$scope.getdrugList = function() {
+		
+		Auth.get_drug_list($scope.doctor_id).then(function(response){
+			$scope.drug_list = response.data.drug_list;
+			console.log($scope.drug_list);
 			
 		});
 	};
@@ -462,7 +471,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     	$location.path("/company-profile");
     };
     $scope.loadDrugProfile = function() {
-    	$location.path("/upload-drug");
+    	$location.path("/drug-list");
     };
 
     $scope.loadChangePassword = function() {
@@ -583,7 +592,38 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     	});
     };
 
+    $scope.getDrugDetails = function() {
+    	$http.get('/api/drug-details',{
+    		params: {drug_id: $routeParams.id}
+    	}).then(function(response){
+    		console.log(response.data.drug_details[0].department_id);
+    		$scope.title = response.data.drug_details[0].title;
+    		$scope.description = response.data.drug_details[0].description;
+    		$scope.mfg_name = response.data.drug_details[0].mfg_name;
+    		$scope.price = response.data.drug_details[0].price;
+    		$scope.unit = response.data.drug_details[0].unit;
+    		$scope.departments = response.data.drug_details[0].department_id;
+    		//$scope.image = response.data.drug_details.image;
+    		//$scope.video = response.data.drug_details.video;
+    		$scope.id = response.data.drug_details[0].id;
+
+    		if(response.data.drug_details[0].image != null) {
+				$scope.file_source = '/uploads/company/medicine/image/'+response.data.drug_details.image;
+				$scope.file_name = response.data.drug_details.image;
+			}
+			if(response.data.drug_details[0].image != null) {
+				$scope.video_source = '/uploads/company/medicine/video/'+response.data.drug_details.video;
+				$scope.video_name = response.data.drug_details.video;
+			}
+
+
+			
+    	});
+    };
+
+
     $scope.doEditJournal = function(valid) {
+
     	if(valid) {
     		
     		Auth.edit_journal($scope).then(function(response){

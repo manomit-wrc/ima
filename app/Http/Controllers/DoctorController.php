@@ -24,8 +24,10 @@ class DoctorController extends Controller
 
       $doctor_qualifs = Doctor::with('doctor_qualifications')->where('id',$id)->get()->toArray();
       
+
       $doctor_certificates = explode(",", $doctor_qualifs[0]['certificate']);
-      
+   
+
       return view('admin.doctor.view')->with(['viewdoctor'=>$doctor,'doctor_qualifs'=>$doctor_qualifs,'doctor_certificates'=>$doctor_certificates]);
      
    }

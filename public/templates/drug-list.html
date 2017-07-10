@@ -1,0 +1,67 @@
+<div class="container"  ng-init='getdrugList();'>
+            <div class="row">
+                <div class="innertopB">
+                    <div class="col-md-4">
+                        <div class="leftP">
+                            <div class="Leftimgbox">
+                                <form name="frmAvator" ng-submit="doUpload()" method="post" novalidate="novalidate" enctype="multipart/form-data">
+                                <input type="hidden" name="doctor_id" ng-model="doctor_id" />
+                                <div class="imgLbox">
+                                    <span class="btn-file">
+                                        <input type="file" name="avators" ng-model="avators" onchange="angular.element(this).scope().uploadedFile(this)" accept="image/*"/>
+                                    </span>
+                                
+
+                                <img  alt="" ng-src="{{image_source}}" class="img-responsive"/>
+                                
+                                </div>
+                                </form>
+                                <h3>Dr. {{user.first_name}}&nbsp;{{user.last_name}}</h3>
+                                <!--<h4>National President</h4>-->
+                                <h5 class="user_address"><i class="fa fa-map-marker" aria-hidden="true"></i> Kolkata,&nbsp;West Bengal, &nbsp;India</h5>
+                            </div>
+                            <button type="button" class="LeftBtn" ng-click="loadCompanyProfile()"><i class="fa fa-user" aria-hidden="true"></i> Edit profile</button>
+                            <button type="button" class="LeftBtnActive" ng-click="loadDrugProfile()"><i class="fa fa-user" aria-hidden="true" ></i>Drug</button>
+                        </div>
+                    </div>
+                    <div class="col-md-8 Clear-991">
+                        <div class="Rpanel">
+                            <h2>Drugs<button type="button" class="btn_right"><i class="fa fa-plus" aria-hidden="true"></i> Add</button></h2>
+                            <div>{{message}}</div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="table-responsive">
+                                        <table width="100%" class="table table-bordered">
+                                          <tr class="tabletop">
+                                            <td>Title</td>
+                                            <td>Description</td>
+                                            <td>Price</td>
+                                            <td>Manufacturing Name</td>
+                                            <td>Image</td>
+                                            <td>Video</td>
+                                            <td>Action</td>
+                                          </tr>
+                                          
+                                          <tr ng-repeat="j in drug_list track by $index">
+                                            <td>{{j.title}}</td>
+                                            <td>{{j.description}}</td>
+                                            <td>{{j.price}}</td>
+                                            <td>{{j.mfg_name}}</td>
+                                            <td><a href="/uploads/company/medicine/image/{{j.image}}" target="_blank">{{j.image}}</a></td>
+                                            <td>
+                                              <a href="/uploads/company/medicine/video/{{j.video}}" target="_blank">{{j.video}}</a>  
+
+                                            </td>
+                                            <td>
+                                            <a class="ed" href="/drug/{{j.id}}"><i class="fa fa-pencil-square" aria-hidden="true"></i></a> | <a class="ed" href="#" ng-confirm-click="Are you sure to delete this record ?" confirmed-click="removeJournal({{j.id}},{{$index}})"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                                          </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>

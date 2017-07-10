@@ -13,6 +13,7 @@ use App\Event;
 use App\LocalBranch;
 use Validator;
 use App\Doctor;
+use App\Drug;
 use App\State;
 use App\CMS;
 use App\Qualification;
@@ -785,6 +786,24 @@ class PageController extends Controller
         $certificates_arr = explode(",", $doctor_payment_details[0]['certificate']);
 
         return response()->json(['payment_details'=>$payment_details,'qualification_arr'=>$qualification_arr,'certificates_arr'=>$certificates_arr]);
+    }
+
+    public function drug_list(Request $request)
+    {
+       $doctor_id = $request->doctor_id;
+       $drug_list = Drug::where('doctor_id',$doctor_id)->get()->toArray();
+       
+        
+        return response()->json(['drug_list' => $drug_list]);
+
+    }
+
+    public function drug_details(Request $request) {
+        $drug_id = $request->drug_id;
+
+        $drug_details = Drug::where('id',$drug_id)->get()->toArray();
+        
+        return response()->json(['drug_details' => $drug_details]);
     }
 
 }

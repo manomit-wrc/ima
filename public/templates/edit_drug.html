@@ -1,4 +1,4 @@
-<div ng-init="getMedicalCat();">    
+<div ng-init="getMedicalCat(); getDrugDetails();">    
     <div class="container">
             <div class="row">
                 <div class="innertopB">
@@ -22,12 +22,12 @@
                                 <h5 class="user_address"><i class="fa fa-map-marker" aria-hidden="true"></i> {{user.address}}</h5>
                             </div>
                             <button type="button" class="LeftBtn" ng-click="loadCompanyProfile()"><i class="fa fa-user" aria-hidden="true" ></i>Profile</button>
-                            <button type="button" class="LeftBtnActive" ng-click="loadDrugProfiles()"><i class="fa fa-user" aria-hidden="true" ></i>Drug</button>
+                            <button type="button" class="LeftBtnActive" ng-click="loadDrugProfile()"><i class="fa fa-user" aria-hidden="true" ></i>Drug</button>
                         </div>
                     </div>
                     <div class="col-md-8 Clear-991" ng-controller="AuthController">
                         <div class="Rpanel">
-                            <h2>Add Product</h2>
+                            <h2>Edit Drug</h2>
                             <form name="frmUploadDrug" ng-submit="doUploadDrug(frmUploadDrug.$valid)" method="post" novalidate="novalidate" enctype="multipart/form-data">
                             <input type="hidden" name="auth_id" ng-model="auth_id" />
                             <div style="margin:0 auto!important;" ng-show="status_code">{{message}}</div>
@@ -62,7 +62,7 @@
                                         <label>Category</label>
                                         <select name="department_id" ng-model="department_id" class="fieldboxSel" required="required">
                                             <option value="">Select</option>
-                                            <option ng-repeat="item in departments" value="{{item.value}}">{{item.label}}</option>
+                                            <option ng-repeat="(key,value) in departments" value="{{key}}">{{value}}</option>
                                         </select>
                                         <span class="help-block" ng-show="frmUploadDrug.department_id.$error.required && (!frmUploadDrug.$pristine || frmUploadDrug.$submitted)">Please Select Medicine Category</span>
                                     </div>

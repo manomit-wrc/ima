@@ -3105,3 +3105,15 @@ a.btn:focus {
     height: 50px;
     display: block;
 }
+
+.btn_right{
+    float: right;
+    background: none;
+    border: 1px solid #ccc;
+    padding: 5px 20px;
+    font-size: 16px;
+}
+
+.ed{
+    color: #666 !important;
+}
