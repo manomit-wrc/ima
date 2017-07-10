@@ -1,6 +1,6 @@
 var AuthCtrl = angular.module('AuthCtrl',['oitozero.ngSweetAlert']);
 
-AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$routeParams,$cookieStore,$window){
+AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$routeParams,$cookieStore,$window,SweetAlert){
 	$scope.code = '';
 	$scope.message = '';
 	$scope.user = {};
