@@ -322,9 +322,7 @@ authService.factory('Auth', function($http,$q,AuthToken,$cookieStore){
 		data.append('mfg_name',companyedit.mfg_name);
 		data.append('unit',companyedit.unit);
 		data.append('price',companyedit.price);
-		//data.append('image',companyedit.image);
-		data.append('hid_img',companyedit.hidimg);
-		data.append('hid_vedio',companyedit.hidvedio);
+		
 
         if(!angular.isUndefined(companyedit.image)) {
 			data.append('image',companyedit.image);

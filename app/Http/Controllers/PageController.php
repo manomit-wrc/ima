@@ -820,6 +820,7 @@ class PageController extends Controller
                 'code' => 500]);
         }
         else {
+            $drug =Drug::find($request->id);
             try {
                 if($request->hasFile('image')) {
                     $file = $request->file('image') ;
@@ -833,7 +834,7 @@ class PageController extends Controller
                 }
                 else
                 {
-                    $imagefilename=$request->hid_img;
+                    $imagefilename=$drug->image;
                 }
 
                 if($request->hasFile('video')) {
@@ -848,19 +849,8 @@ class PageController extends Controller
                 }
                 else
                 {
-                    if(!empty($request->hid_vedio))
-                    {
-                     $vediofilename=$request->hid_vedio;
-                    }
-                    else
-                    {
-                      $vediofilename=''; 
-                    }
-                }
-
-                $drug_id=$request->id;
-                //echo $drug_id;die();
-                $drug =Drug::find($drug_id);
+                    $vediofilename=$drug->video;
+                } 
                 $drug->title = $request->title;
                 $drug->description = $request->description;
                 $drug->department_id = $request->department_id;
@@ -874,7 +864,7 @@ class PageController extends Controller
                 $drug->save();
 
                 return response()->json(['error' => false,
-                'message' => "New medicine Updated successfully",
+                'message' => "Medicine Updated successfully",
                 'code' => 200]);
             }
             catch (Exception $e) {

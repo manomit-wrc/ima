@@ -62,7 +62,7 @@
                                         <label>Category</label>
                                         <select name="department_id" ng-model="department_id" class="fieldboxSel" required="required">
                                             <option value="">Select</option>
-                                            <option ng-repeat="item in departments" value="{{item.value}}">{{item.value}}</option>
+                                            <option ng-repeat="item in departments" value="{{item.value}}">{{item.label}}</option>
                                         </select>
                                         <span class="help-block" ng-show="frmUploadDrug.department_id.$error.required && (!frmUploadDrug.$pristine || frmUploadDrug.$submitted)">Please Select Medicine Category</span>
                                     </div>

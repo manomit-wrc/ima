@@ -62,7 +62,7 @@
                                         <label>Category</label>
                                         <select name="department_id" ng-model="department_id" class="fieldboxSel" required="required">
                                             <option value="">Select</option>
-                                            <option ng-repeat="item  in departments" value="{{item.value}}">{{item.value}}</option>
+                                            <option ng-repeat="item  in departments" value="{{item.value}}">{{item.label}}</option>
                                         </select>
                                         <span class="help-block" ng-show="frmUploadDrug.department_id.$error.required && (!frmUploadDrug.$pristine || frmUploadDrug.$submitted)">Please Select Medicine Category</span>
                                     </div>
@@ -121,8 +121,7 @@
                                         <a href="{{video_source}}" target="_blank">{{video_name}}</a>
                                     </div>
                                      <input type="hidden" id="uid" name="uid" ng-model="uid">
-                                     <input type="hidden" id="hidimg" name="hidimg" ng-model="hidimg">
-                                     <input type="hidden" id="hidvedio" name="hidvedio" ng-model="hidvedio">
+                                     
                                 </div>
                                 <div class="col-md-6">
                                     <div class="fieldbox">

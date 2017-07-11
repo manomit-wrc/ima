@@ -605,8 +605,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     		$scope.department_id = response.data.drug_details[0].department_id;
     	     //console.log(response.data.drug_details[0].department_id);
     		$scope.uid = response.data.drug_details[0].id;
-    		$scope.hidimg=response.data.drug_details[0].image;
-    		$scope.hidvedio=response.data.drug_details[0].vedio;
+    		
 
     		if(response.data.drug_details[0].image != null) {
 				$scope.file_source = '/uploads/company/medicine/image/'+response.data.drug_details[0].image;
@@ -784,7 +783,11 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 				
     		});
     	}
-    }
+    };
+
+	$scope.loadAddNewDrug = function() {
+		$window.location.href = "/upload-drug";
+	}
 
 
 
