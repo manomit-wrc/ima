@@ -53,8 +53,10 @@ Route::group(['middleware' => 'jwt.auth'], function () {
     Route::get('/drug-details','PageController@drug_details');
     Route::post('/update-journal','PageController@update_journal');
     Route::get('/delete-journal','PageController@delete_journal');
+    Route::get('/delete-drug','PageController@delete_drug');
     Route::post('/update-company-profile','PageController@update_company_profile');
     Route::post('/add-new-drug','PageController@add_new_drug');
+    Route::post('/edit-new-drug','PageController@edit_new_drug');
     Route::get('/medical-category','PageController@medical_category');
     Route::get('/payment-details','PageController@payment_details');
     Route::get('/drug-list','PageController@drug_list');

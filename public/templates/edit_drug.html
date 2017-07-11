@@ -28,7 +28,7 @@
                     <div class="col-md-8 Clear-991" ng-controller="AuthController">
                         <div class="Rpanel">
                             <h2>Edit Drug</h2>
-                            <form name="frmUploadDrug" ng-submit="doUploadDrug(frmUploadDrug.$valid)" method="post" novalidate="novalidate" enctype="multipart/form-data">
+                            <form name="frmUploadDrug" ng-submit="doEditDrug(frmUploadDrug.$valid)" method="post" novalidate="novalidate" enctype="multipart/form-data">
                             <input type="hidden" name="auth_id" ng-model="auth_id" />
                             <div style="margin:0 auto!important;" ng-show="status_code">{{message}}</div>
                             <div class="row">
@@ -62,7 +62,7 @@
                                         <label>Category</label>
                                         <select name="department_id" ng-model="department_id" class="fieldboxSel" required="required">
                                             <option value="">Select</option>
-                                            <option ng-repeat="(key,value) in departments" value="{{key}}">{{value}}</option>
+                                            <option ng-repeat="item  in departments" value="{{item.value}}">{{item.value}}</option>
                                         </select>
                                         <span class="help-block" ng-show="frmUploadDrug.department_id.$error.required && (!frmUploadDrug.$pristine || frmUploadDrug.$submitted)">Please Select Medicine Category</span>
                                     </div>
@@ -109,6 +109,7 @@
                                         <span>
                                             <input type="file" ng-model="image" name="image" onchange="angular.element(this).scope().uploadedImage(this)" class="editF1" accept="image/jpeg,image/png">
                                         </span>
+                                        <a href="{{file_source}}" target="_blank">{{file_name}}</a>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -117,7 +118,11 @@
                                         <span>
                                             <input type="file" ng-model="video" name="video" onchange="angular.element(this).scope().uploadedVideo(this)" class="editF1" accept="video/mpeg,video/mp4">
                                         </span>
+                                        <a href="{{video_source}}" target="_blank">{{video_name}}</a>
                                     </div>
+                                     <input type="hidden" id="uid" name="uid" ng-model="uid">
+                                     <input type="hidden" id="hidimg" name="hidimg" ng-model="hidimg">
+                                     <input type="hidden" id="hidvedio" name="hidvedio" ng-model="hidvedio">
                                 </div>
                                 <div class="col-md-6">
                                     <div class="fieldbox">

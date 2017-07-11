@@ -22,7 +22,7 @@
                                 <h5 class="user_address"><i class="fa fa-map-marker" aria-hidden="true"></i> {{user.address}}</h5>
                             </div>
                             <button type="button" class="LeftBtn" ng-click="loadCompanyProfile()"><i class="fa fa-user" aria-hidden="true" ></i>Profile</button>
-                            <button type="button" class="LeftBtnActive" ng-click="loadDrugProfiles()"><i class="fa fa-user" aria-hidden="true" ></i>Drug</button>
+                            <button type="button" class="LeftBtn" ng-click="loadDrugProfile()"><i class="fa fa-user" aria-hidden="true" ></i>Drug</button>
                         </div>
                     </div>
                     <div class="col-md-8 Clear-991" ng-controller="AuthController">
@@ -62,7 +62,7 @@
                                         <label>Category</label>
                                         <select name="department_id" ng-model="department_id" class="fieldboxSel" required="required">
                                             <option value="">Select</option>
-                                            <option ng-repeat="item in departments" value="{{item.value}}">{{item.label}}</option>
+                                            <option ng-repeat="item in departments" value="{{item.value}}">{{item.value}}</option>
                                         </select>
                                         <span class="help-block" ng-show="frmUploadDrug.department_id.$error.required && (!frmUploadDrug.$pristine || frmUploadDrug.$submitted)">Please Select Medicine Category</span>
                                     </div>

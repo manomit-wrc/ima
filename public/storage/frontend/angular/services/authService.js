@@ -310,6 +310,48 @@ authService.factory('Auth', function($http,$q,AuthToken,$cookieStore){
         return defer.promise;
 	};
 
+ authFactory.edit_new_drug = function(companyedit) {
+ 	//console.log(companyedit.uid);
+		var defer = $q.defer();
+		var data = new FormData();
+		
+		data.append('id',companyedit.uid);
+		data.append('title',companyedit.title);
+		data.append('description',companyedit.description);
+		data.append('department_id',companyedit.department_id);
+		data.append('mfg_name',companyedit.mfg_name);
+		data.append('unit',companyedit.unit);
+		data.append('price',companyedit.price);
+		//data.append('image',companyedit.image);
+		data.append('hid_img',companyedit.hidimg);
+		data.append('hid_vedio',companyedit.hidvedio);
+
+        if(!angular.isUndefined(companyedit.image)) {
+			data.append('image',companyedit.image);
+		}
+
+		if(!angular.isUndefined(companyedit.video)) {
+			data.append('video',companyedit.video);
+		}
+		
+		data.append('company_id',companyedit.auth_id);
+
+		$http.post('api/edit-new-drug', data, {
+            transformRequest: angular.identity,
+            headers: {'Content-Type': undefined}
+        })
+        .then(function(response){
+        	defer.resolve(response);
+        })
+        .catch(function(reason){
+       		defer.resolve(reason);
+       });
+
+        return defer.promise;
+	};
+
+
+
 	authFactory.edit_journal = function(journal) {
 		
 		var defer = $q.defer();

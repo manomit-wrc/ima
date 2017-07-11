@@ -310,7 +310,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 		
 		Auth.get_drug_list($scope.doctor_id).then(function(response){
 			$scope.drug_list = response.data.drug_list;
-			console.log($scope.drug_list);
+			
 			
 		});
 	};
@@ -596,24 +596,26 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     	$http.get('/api/drug-details',{
     		params: {drug_id: $routeParams.id}
     	}).then(function(response){
-    		console.log(response.data.drug_details[0].department_id);
+    		//console.log(response.data.drug_details[0].department_id);
     		$scope.title = response.data.drug_details[0].title;
     		$scope.description = response.data.drug_details[0].description;
     		$scope.mfg_name = response.data.drug_details[0].mfg_name;
     		$scope.price = response.data.drug_details[0].price;
     		$scope.unit = response.data.drug_details[0].unit;
-    		$scope.departments = response.data.drug_details[0].department_id;
-    		//$scope.image = response.data.drug_details.image;
-    		//$scope.video = response.data.drug_details.video;
-    		$scope.id = response.data.drug_details[0].id;
+    		$scope.department_id = response.data.drug_details[0].department_id;
+    	     //console.log(response.data.drug_details[0].department_id);
+    		$scope.uid = response.data.drug_details[0].id;
+    		$scope.hidimg=response.data.drug_details[0].image;
+    		$scope.hidvedio=response.data.drug_details[0].vedio;
 
     		if(response.data.drug_details[0].image != null) {
-				$scope.file_source = '/uploads/company/medicine/image/'+response.data.drug_details.image;
-				$scope.file_name = response.data.drug_details.image;
+				$scope.file_source = '/uploads/company/medicine/image/'+response.data.drug_details[0].image;
+				$scope.file_name = response.data.drug_details[0].image;
+				//console.log(response.data.drug_details.image);
 			}
 			if(response.data.drug_details[0].image != null) {
-				$scope.video_source = '/uploads/company/medicine/video/'+response.data.drug_details.video;
-				$scope.video_name = response.data.drug_details.video;
+				$scope.video_source = '/uploads/company/medicine/video/'+response.data.drug_details[0].video;
+				$scope.video_name = response.data.drug_details[0].video;
 			}
 
 
@@ -650,6 +652,17 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     		}).then(function(response){
     			$scope.message = response.data.message;
     			$window.location.href = "/journal-list";
+    		});
+    	}
+    };
+
+    $scope.removedrug = function(drug_id,index) {
+    	if(drug_id) {
+    		$http.get('/api/delete-drug',{
+    			params: {drug_id:drug_id}
+    		}).then(function(response){
+    			$scope.message = response.data.message;
+    			$window.location.href = "/drug-list";
     		});
     	}
     };
@@ -740,6 +753,41 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     		});
     	}
     }
+
+ $scope.doEditDrug = function(valid) {
+    	if(valid) {
+    		Auth.edit_new_drug($scope).then(function(response){
+    			$scope.message = response.data.message;
+				$scope.status_code = response.data.code;
+				if($scope.status_code != 500) {
+					$scope.title = null;
+					$scope.uid = null;
+					$scope.description = null;
+					$scope.mfg_name = null;
+					$scope.unit = null;
+					$scope.price = null;
+					$scope.image = null;
+					$scope.video = null;
+					$scope.hidimg = null;
+					$scope.hidvedio = null;
+
+					SweetAlert.swal({   
+				     title: "Thank You",   
+				     text: response.data.message,   
+				     type: "success",     
+				     confirmButtonColor: "#DD6B55",   
+				     confirmButtonText: "OK"
+				    },  function(){  
+				     window.location.reload();
+				    });
+				}
+				
+    		});
+    	}
+    }
+
+
+
 });
 
 AuthCtrl.directive('addressBasedGoogleMap', function () {

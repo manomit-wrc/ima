@@ -26,7 +26,7 @@
                     </div>
                     <div class="col-md-8 Clear-991">
                         <div class="Rpanel">
-                            <h2>Drugs<button type="button" class="btn_right"><i class="fa fa-plus" aria-hidden="true"></i> Add</button></h2>
+                            <h2>Drugs<a href="/upload-drug"><button type="button" class="btn_right"><i class="fa fa-plus" aria-hidden="true"></i> Add</button></a></h2>
                             <div>{{message}}</div>
                             <div class="row">
                                 <div class="col-md-12">
@@ -49,11 +49,15 @@
                                             <td>{{j.mfg_name}}</td>
                                             <td><a href="/uploads/company/medicine/image/{{j.image}}" target="_blank">{{j.image}}</a></td>
                                             <td>
-                                              <a href="/uploads/company/medicine/video/{{j.video}}" target="_blank">{{j.video}}</a>  
+                                            
+                                              <a href="/uploads/company/medicine/video/{{j.video}}" target="_blank">
+                                              {{j.video}}</a>
+                                              
+                                                
 
                                             </td>
                                             <td>
-                                            <a class="ed" href="/drug/{{j.id}}"><i class="fa fa-pencil-square" aria-hidden="true"></i></a> | <a class="ed" href="#" ng-confirm-click="Are you sure to delete this record ?" confirmed-click="removeJournal({{j.id}},{{$index}})"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                                            <a class="ed" href="/drug/{{j.id}}"><i class="fa fa-pencil-square" aria-hidden="true"></i></a> | <a class="ed" href="#" ng-confirm-click="Are you sure to delete this record ?" confirmed-click="removedrug({{j.id}},{{$index}})"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
                                           </tr>
                                         </table>
                                     </div>

@@ -654,6 +654,24 @@ class PageController extends Controller
         }
     }
 
+    public function delete_drug(Request $request) {
+        $drug_id = $request->drug_id;
+
+        $drug_details = Drug::find($drug_id);
+
+        if($drug_details) {
+            $drug_details->delete();
+            return response()->json(['error' => false,
+                'message' => 'Drug deleted successfully',
+                'code' => 200]);
+        }
+        else {
+            return response()->json(['error' => true,
+                'message' => 'Drug not found',
+                'code' => 500]);
+        }
+    }
+
     public function contact_address(Request $request) {
         $contact = \App\Organization::all();
         return response()->json(['contact_address' => $contact[0]['address'],'status_code'=>200]);
@@ -737,7 +755,10 @@ class PageController extends Controller
 
                     $destinationPath = public_path().'/uploads/company/medicine/image/' ;
                     $file->move($destinationPath,$this->imageName);
+
+
                 }
+               
 
                 if($request->hasFile('video')) {
                     $file = $request->file('video') ;
@@ -773,6 +794,97 @@ class PageController extends Controller
         }
     }
 
+
+    public function edit_new_drug(Request $request) {
+        $validator = Validator::make($request->all(),[
+            'title' => 'required|max:50',
+            'description' => 'required',
+            'department_id' => 'required',
+            'mfg_name' => 'required|max:50',
+            'unit' => 'required|max:20',
+            'price' => 'required|between:0,999.99',
+            'image' => 'required_with|mimes:jpg,jpeg,pdf,png|max:500000',
+            'video' => 'required_with|mimes:mp4,wmv|max:500000'
+        ],[
+            'title.required' => 'Please enter medicine name',
+            'title.max:50' => 'Name should have maximum 50 characters',
+            'description.required' => 'Please enter description',
+            'department_id.required' => 'Please select medical category',
+            'mfg_name.required' => 'Please enter manufacturing company name',
+            'mfg_name.max:50' => 'Manufacturing name should have maximum 50 characters'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => true,
+                'message' => $validator->messages()->first(),
+                'code' => 500]);
+        }
+        else {
+            try {
+                if($request->hasFile('image')) {
+                    $file = $request->file('image') ;
+
+                    $this->imageName = time().'_'.$file->getClientOriginalName() ;
+
+                    $destinationPath = public_path().'/uploads/company/medicine/image/' ;
+                    $file->move($destinationPath,$this->imageName);
+
+                    $imagefilename=$this->imageName;
+                }
+                else
+                {
+                    $imagefilename=$request->hid_img;
+                }
+
+                if($request->hasFile('video')) {
+                    $file = $request->file('video') ;
+
+                    $this->videoName = time().'_'.$file->getClientOriginalName() ;
+
+                    $destinationPath = public_path().'/uploads/company/medicine/video/' ;
+                    $file->move($destinationPath,$this->videoName);
+
+                    $vediofilename=$this->videoName;
+                }
+                else
+                {
+                    if(!empty($request->hid_vedio))
+                    {
+                     $vediofilename=$request->hid_vedio;
+                    }
+                    else
+                    {
+                      $vediofilename=''; 
+                    }
+                }
+
+                $drug_id=$request->id;
+                //echo $drug_id;die();
+                $drug =Drug::find($drug_id);
+                $drug->title = $request->title;
+                $drug->description = $request->description;
+                $drug->department_id = $request->department_id;
+                $drug->doctor_id = $request->company_id;
+                $drug->image = $imagefilename;
+                $drug->mfg_name = $request->mfg_name;
+                $drug->unit = $request->unit;
+                $drug->price = $request->price;
+                $drug->video = $vediofilename;
+
+                $drug->save();
+
+                return response()->json(['error' => false,
+                'message' => "New medicine Updated successfully",
+                'code' => 200]);
+            }
+            catch (Exception $e) {
+                return response()->json(['error' => true,
+                'message' => "Something is not right. Please try again",
+                'code' => 500]);
+            }
+        }
+    }
+
     public function payment_details(Request $request) {
 
         $doctor_payment_details = Doctor::with('doctor_qualifications')->where('id',$request->doctor_id)->get()->toArray();
@@ -791,7 +903,7 @@ class PageController extends Controller
     public function drug_list(Request $request)
     {
        $doctor_id = $request->doctor_id;
-       $drug_list = Drug::where('doctor_id',$doctor_id)->get()->toArray();
+       $drug_list = Drug::where('doctor_id',$doctor_id)->whereNotNull('video')->get()->toArray();
        
         
         return response()->json(['drug_list' => $drug_list]);
@@ -802,7 +914,7 @@ class PageController extends Controller
         $drug_id = $request->drug_id;
 
         $drug_details = Drug::where('id',$drug_id)->get()->toArray();
-        
+
         return response()->json(['drug_details' => $drug_details]);
     }
 
