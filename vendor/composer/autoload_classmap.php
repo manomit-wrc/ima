@@ -30,6 +30,7 @@ return array(
     'CreateEventCategoriesTable' => $baseDir . '/database/migrations/2017_05_24_071023_create_event_categories_table.php',
     'CreateEventGalleriesTable' => $baseDir . '/database/migrations/2017_05_24_125225_create_event_galleries_table.php',
     'CreateEventsTable' => $baseDir . '/database/migrations/2017_05_24_084238_create_events_table.php',
+    'CreateGroupsTable' => $baseDir . '/database/migrations/2017_07_11_111421_create_groups_table.php',
     'CreateJournalsTable' => $baseDir . '/database/migrations/2017_06_06_114422_create_journals_table.php',
     'CreateLocalBranchesTable' => $baseDir . '/database/migrations/2017_05_25_072614_create_local_branches_table.php',
     'CreateNewsTable' => $baseDir . '/database/migrations/2017_05_25_122251_create_news_table.php',

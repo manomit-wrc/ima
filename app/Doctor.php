@@ -10,14 +10,14 @@ class Doctor extends Authenticatable
 	use Notifiable;
 	protected $table = 'doctors';
 
-    protected $hidden = [
-    	'password','active_token'
-    ];
-
     protected $fillable = [
     	'first_name','last_name','email','mobile'
     ];
 
+    protected $hidden = [
+    	'password','active_token'
+    ];
+    
     public function journal() {
     	return $this->hasMany('\App\Journal','doctor_id');
     }

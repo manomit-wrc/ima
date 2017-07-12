@@ -1,4 +1,4 @@
-<div class="container"  ng-init='getJournalList();'>
+<div class="container"  ng-init='groupList();'>
             <div class="row">
                 <div class="innertopB">
                     <div class="col-md-4">
@@ -23,33 +23,35 @@
                             <button type="button" class="LeftBtn" ng-click="loadProfile()"><i class="fa fa-user" aria-hidden="true"></i> Edit profile</button>
                             <button type="button" class="LeftBtn" ng-click="loadChangePassword()"><i class="fa fa-user" aria-hidden="true"></i> Change Password</button>
                             <button type="button" class="LeftBtn" ng-click="loadJournal()"><i class="fa fa-user" aria-hidden="true"></i> Upload Journal</button>
-                            <button type="button" class="LeftBtnActive" ng-click="loadJournalList()"><i class="fa fa-user" aria-hidden="true"></i> Upload List</button>
+                            <button type="button" class="LeftBtn" ng-click="loadJournalList()"><i class="fa fa-user" aria-hidden="true"></i> Upload List</button>
                             <button type="button" class="LeftBtn" ng-click="uploadcertificate()"><i class="fa fa-user" aria-hidden="true"></i> Payment & Certificate</button>
-                            <button type="button" class="LeftBtn" ng-click="loadGroup()"><i class="fa fa-user" aria-hidden="true"></i> Groups</button>
+                            <button type="button" class="LeftBtnActive" ng-click="loadGroup()"><i class="fa fa-user" aria-hidden="true"></i> Groups</button>
                         </div>
                     </div>
                     <div class="col-md-8 Clear-991">
                         <div class="Rpanel">
-                            <h2>Journals</h2>
+                            <h2>Groups<button type="button" class="btn_right" ng-click="loadAddNewGroup()"><i class="fa fa-plus" aria-hidden="true"></i> Add</button></h2>
                             <div>{{message}}</div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="table-responsive">
                                         <table width="100%" class="table table-bordered">
                                           <tr class="tabletop">
-                                            <td>Title</td>
-                                            <td>Published Date</td>
-                                            <td>Category Name</td>
-                                            <td>File</td>
+                                            <td>Name</td>
+                                            <td>Description</td>
+                                            <td>No of people</td>
+                                            <td>Status</td>
                                             <td>Action</td>
                                           </tr>
                                           
-                                          <tr ng-repeat="j in journal_list.journal track by $index">
-                                            <td>{{j.title}}</td>
-                                            <td>{{j.published_date|date:'dd/MM/yyyy'}}</td>
-                                            <td>{{j.categories.name}}</td>
-                                            <td><a href="/uploads/doctors/journal/{{j.journal_file}}" target="_blank">{{j.journal_file}}</a></td>
-                                            <td><a href="/journal/{{j.id}}">Edit</a> | <a href="#" ng-confirm-click="Are you sure to delete this record ?" confirmed-click="removeJournal({{j.id}},{{$index}})">Delete</a></td>
+                                          <tr ng-repeat="j in group_list track by $index">
+                                            <td>{{j.name}}</td>
+                                            <td>{{j.description}}</td>
+                                            <td>{{j.no_of_people}}</td>
+                                            <td>{{j.status == '1'? 'Active':'Inactive'}}</td>
+                                            
+                                            <td>
+                                            <a class="ed" href="/groups/edit/{{j.id}}"><i class="fa fa-pencil-square" aria-hidden="true"></i></a> | <a class="ed" href="javascript:void(0)" ng-click="removeGroup(j.id)" ><i class="fa fa-trash" aria-hidden="true"></i></a></td>
                                           </tr>
                                         </table>
                                     </div>

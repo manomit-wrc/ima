@@ -80,6 +80,17 @@ Route::get('/payment-certificate', function(){
     return view('welcome');
 });
 
+Route::get('/groups', function(){
+    return view('welcome');
+});
+
+Route::get('/groups/add', function(){
+    return view('welcome');
+});
+Route::get('/groups/edit/{id}', function(){
+    return view('welcome');
+});
+
 Route::get('/admin', 'LoginController@index');
 Route::post('/admin/login', 'LoginController@checkLogin');
 
