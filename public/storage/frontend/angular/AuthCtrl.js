@@ -913,7 +913,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 		},  function(isConfirm){
 			if(isConfirm) {
 				$http.get('/api/delete-drug',{
-				params: { drug_id: drug_id}
+				params: {drug_id:drug_id}
 				}).then(function(response){
 					SweetAlert.swal({   
 				     title: "Deleted!",   
