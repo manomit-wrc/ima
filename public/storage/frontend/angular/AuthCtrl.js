@@ -655,16 +655,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     	}
     };
 
-    $scope.removedrug = function(drug_id,index) {
-    	if(drug_id) {
-    		$http.get('/api/delete-drug',{
-    			params: {drug_id:drug_id}
-    		}).then(function(response){
-    			$scope.message = response.data.message;
-    			$window.location.href = "/drug-list";
-    		});
-    	}
-    };
+    
 
     $scope.getContactusPage = function() {
           
@@ -824,7 +815,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 				$scope.code = response.data.code;
 				if($scope.code == 200) {
 					//
-					SweetAlert.swal({   
+					 SweetAlert.swal({   
 				     title: "Thank You",   
 				     text: response.data.message,   
 				     type: "success",     
@@ -908,6 +899,37 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 			}
 		});
 	}
+
+	$scope.removedrug = function(drug_id) {
+       
+         SweetAlert.swal({   
+			title: "Are you sure you want to delete this drug?",
+			text: "You will not be able to recover this drug!",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#DD6B55",
+			confirmButtonText: "Yes, delete it!",
+			closeOnConfirm: false
+		},  function(isConfirm){
+			if(isConfirm) {
+				$http.get('/api/delete-drug',{
+				params: { drug_id: drug_id}
+				}).then(function(response){
+					SweetAlert.swal({   
+				     title: "Deleted!",   
+				     text: "Your drug has been deleted",   
+				     type: "success",     
+				     confirmButtonColor: "#DD6B55",   
+				     confirmButtonText: "OK"
+				    },  function(){  
+				     $window.location.href = "/drug-list";
+				    });
+				}); 
+			}
+		});
+    
+
+    }
 
 
 });
