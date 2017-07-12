@@ -218,9 +218,7 @@ class PageController extends Controller
 
     public function update_profile(Request $request) {
         $doctors = Doctor::find($request->doctor_id);
-         /*echo "<pre>";
-         print_r($doctors);
-         echo "</pre>";die();*/
+         
         if($doctors) {
             $doctors->first_name = $request->first_name;
             $doctors->last_name = $request->last_name;
@@ -850,7 +848,8 @@ class PageController extends Controller
                 else
                 {
                     $vediofilename=$drug->video;
-                } 
+                }
+                 
                 $drug->title = $request->title;
                 $drug->description = $request->description;
                 $drug->department_id = $request->department_id;
