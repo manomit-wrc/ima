@@ -98,6 +98,31 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 	    
     };
 
+	$scope.getAllDoctors = function(pageNumber) {
+		if(pageNumber===undefined){
+      		pageNumber = '1';
+    	}
+
+		$http.get('/api/doctor-list?page='+pageNumber).then(function(response) {
+
+		
+    	  
+    	  $scope.doctor_list = response.data.doctor_list.data;
+	      
+      	  $scope.totalPages   = response.data.doctor_list.last_page;
+          $scope.currentPage  = response.data.doctor_list.current_page;
+
+          var pages = [];
+
+	      for(var i=1;i<=response.data.doctor_list.last_page;i++) {          
+	        pages.push(i);
+	      }
+
+	      $scope.range = pages;
+		  console.log($scope.doctor_list); 
+	    });
+	};
+
     $scope.getEventPage = function(pageNumber) {
 
     	if(pageNumber===undefined){
@@ -486,6 +511,9 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
      $scope.uploadcertificate = function() {
     	$location.path("/payment-certificate");
     };
+	$scope.loadDoctors = function() {
+		$location.path("/doctor-list");
+	};
 
     $scope.doUploadJournal = function(valid) {
     	if(valid) {

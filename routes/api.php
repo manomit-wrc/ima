@@ -65,4 +65,5 @@ Route::group(['middleware' => 'jwt.auth'], function () {
     Route::get('/group-details','PageController@group_details');
     Route::post('/edit-group','PageController@edit_group');
     Route::get('/group-delete','PageController@delete_group');
+    Route::get('/doctor-list','PageController@doctor_list');
 });

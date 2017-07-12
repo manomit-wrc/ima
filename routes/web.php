@@ -52,6 +52,10 @@ Route::get('/news-list', function(){
     return view('welcome');
 });
 
+Route::get('/doctor-list', function(){
+    return view('welcome');
+});
+
 Route::get('/journal/{id}', function() {
     return view('welcome');
 });
