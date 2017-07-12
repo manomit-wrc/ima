@@ -60,4 +60,9 @@ Route::group(['middleware' => 'jwt.auth'], function () {
     Route::get('/medical-category','PageController@medical_category');
     Route::get('/payment-details','PageController@payment_details');
     Route::get('/drug-list','PageController@drug_list');
+    Route::get('/group-list','PageController@group_list');
+    Route::post('/add-group','PageController@add_group');
+    Route::get('/group-details','PageController@group_details');
+    Route::post('/edit-group','PageController@edit_group');
+    Route::get('/group-delete','PageController@delete_group');
 });

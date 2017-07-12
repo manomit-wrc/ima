@@ -46,6 +46,18 @@ imaRoute.config(function($routeProvider,$locationProvider,$qProvider){
 		templateUrl: '/templates/payment_certificate.html',
 		authenticated: true,
 		type: "D"
+	}).when('/groups',{
+		templateUrl: '/templates/groups.html',
+		authenticated: true,
+		type: "D"
+	}).when('/groups/add',{
+		templateUrl: '/templates/add-groups.html',
+		authenticated: true,
+		type: "D"
+	}).when('/groups/edit/:id',{
+		templateUrl: '/templates/edit-groups.html',
+		authenticated: true,
+		type: "D"
 	}).when('/journal-list', {
 		templateUrl: '/templates/journal_list.html',
 		authenticated: true,

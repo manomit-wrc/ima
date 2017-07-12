@@ -370,6 +370,7 @@ class ComposerStaticInit26ac6f531c7dc343a38a6557cc1ca91b
         'CreateEventCategoriesTable' => __DIR__ . '/../..' . '/database/migrations/2017_05_24_071023_create_event_categories_table.php',
         'CreateEventGalleriesTable' => __DIR__ . '/../..' . '/database/migrations/2017_05_24_125225_create_event_galleries_table.php',
         'CreateEventsTable' => __DIR__ . '/../..' . '/database/migrations/2017_05_24_084238_create_events_table.php',
+        'CreateGroupsTable' => __DIR__ . '/../..' . '/database/migrations/2017_07_11_111421_create_groups_table.php',
         'CreateJournalsTable' => __DIR__ . '/../..' . '/database/migrations/2017_06_06_114422_create_journals_table.php',
         'CreateLocalBranchesTable' => __DIR__ . '/../..' . '/database/migrations/2017_05_25_072614_create_local_branches_table.php',
         'CreateNewsTable' => __DIR__ . '/../..' . '/database/migrations/2017_05_25_122251_create_news_table.php',

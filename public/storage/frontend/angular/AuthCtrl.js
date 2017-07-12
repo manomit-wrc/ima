@@ -787,8 +787,119 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 
 	$scope.loadAddNewDrug = function() {
 		$window.location.href = "/upload-drug";
-	}
+	};
 
+	$scope.loadGroup = function() {
+		$location.path('/groups');
+	};
+
+	$scope.loadAddNewGroup = function() {
+		$window.location.href = "/groups/add";
+	};
+
+	$scope.groupList = function() {
+		$http.get('/api/group-list'
+    	).then(function(response){
+    		if(response.data.code != 200) {
+				$scope.message = response.data.message;
+			}
+			else {
+				$scope.message = '';
+			}
+			$scope.group_list = response.data.group_list;
+    	}).catch(function(reason) {
+
+		});
+	};
+
+	$scope.doAddGroup = function(valid) {
+		if(valid) {
+			$http.post('/api/add-group', {
+			name:$scope.name,
+			description:$scope.description,
+			no_of_people:$scope.no_of_people,
+			status:$scope.status
+			}).then(function(response){
+				$scope.message = response.data.message;
+				$scope.code = response.data.code;
+				if($scope.code == 200) {
+					//
+					SweetAlert.swal({   
+				     title: "Thank You",   
+				     text: response.data.message,   
+				     type: "success",     
+				     confirmButtonColor: "#DD6B55",   
+				     confirmButtonText: "OK"
+				    },  function(){  
+				     $window.location.href = "/groups";
+				    });
+				}
+			}).catch(function(reason){
+				
+			});
+		}
+	};
+
+	$scope.doEditGroup = function(valid) {
+		if(valid) {
+			$http.post('/api/edit-group', {
+			name:$scope.name,
+			description:$scope.description,
+			no_of_people:$scope.no_of_people,
+			status:$scope.status,
+			group_id: $routeParams.id
+			}).then(function(response){
+				$scope.message = response.data.message;
+				$scope.code = response.data.code;
+				if($scope.code == 200) {
+					//
+					SweetAlert.swal({   
+				     title: "Thank You",   
+				     text: response.data.message,   
+				     type: "success",     
+				     confirmButtonColor: "#DD6B55",   
+				     confirmButtonText: "OK"
+				    },  function(){  
+				     $window.location.href = "/groups";
+				    });
+				}
+			}).catch(function(reason){
+				
+			});
+		}
+	};
+
+	$scope.groupDetails = function() {
+		$http.get('/api/group-details/',{
+    		params: { group_id: $routeParams.id}
+    	}).then(function(response){
+    		$scope.name = response.data.group_details.name;
+			$scope.no_of_people = response.data.group_details.no_of_people;
+			$scope.description = response.data.group_details.description;
+			$scope.status = response.data.group_details.status;
+    	});
+	};
+
+	$scope.removeGroup = function(group_id) {
+		
+		SweetAlert.swal({   
+			title: "Are you sure you want to delete this group?",
+			text: "You will not be able to recover this group!",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#DD6B55",
+			confirmButtonText: "Yes, delete it!",
+			closeOnConfirm: false
+		},  function(){
+			$http.get('/api/group-delete',{
+    		params: { group_id: group_id}
+    		}).then(function(response){
+				SweetAlert.swal("Deleted!", "Your group has been deleted.", "success");
+				$window.location.href = "/groups";
+    		});  
+			
+		});
+	}
 
 
 });

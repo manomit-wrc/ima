@@ -907,4 +907,140 @@ class PageController extends Controller
         return response()->json(['drug_details' => $drug_details]);
     }
 
+    public function group_list(Request $request) {
+        try{   
+            $user = JWTAuth::toUser($request->header('token'));
+            if($user->type == "D") {
+                $group_list = \App\Group::where('doctor_id',$user->id)->get()->toArray();
+                if($group_list) {
+                    return response()->json(['error' => false,
+                'message' => "Data Found",
+                'group_list' => $group_list,
+                'code' => 200]);
+                }
+                else {
+                    return response()->json(['error' => false,
+                'message' => "No group found",
+                'group_list' => $group_list,
+                'code' => 404]);
+                }
+            }
+            else {
+                return response()->json(['error' => false,
+                'message' => "Not authorized to access",
+                'group_list' => $group_list,
+                'code' => 500]);
+            }
+            }catch (JWTException $e) {
+                return response()->json(['error' => true,
+                'message' => "Something is not right. Please try again",
+                'code' => 500]);
+            }
+    }
+
+    public function add_group(Request $request) {
+        $validator = Validator::make($request->all(),[
+            'name' => 'required|max:20',
+            'description' => 'required',
+            'no_of_people' => 'required|numeric|min:1|max:100',
+            'status' => 'required'
+        ],[
+            'name.required' => 'Please enter group name',
+            'name.max:20' => 'Group name should not be more than 20 characters',
+            'description.required' => 'Please enter description',
+            'no_of_people.required' => 'Please enter no of people in that group',
+            'no_of_people.numeric' => 'It should be only number',
+            'no_of_people.min:1' => 'It should have minimum 1 member',
+            'no_of_people.max:100' => 'It should have maximum 100 member',
+            'status.required' => 'Please select status'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => true,
+                'message' => $validator->messages()->first(),
+                'code' => 500]);
+        }
+        else {
+            $user = JWTAuth::toUser($request->header('token'));
+            $group = new \App\Group();
+            $group->name = $request->name;
+            $group->description = $request->description;
+            $group->no_of_people = $request->no_of_people;
+            $group->status = $request->status;
+            $group->doctor_id = $user->id;
+
+            $group->save();
+
+            return response()->json(['error' => false,
+                'message' => 'Group addedd successfully',
+                'code' => 200]);
+        }
+    }
+
+    public function group_details(Request $request) {
+        $group_id = $request->group_id;
+        try {
+            $user = JWTAuth::toUser($request->header('token'));
+            $group_details = \App\Group::find($group_id);
+            return response()->json(['group_details'=>$group_details,'error'=>false,'code'=>200]);
+        }
+        catch(JWTException $e) {
+            return response()->json(['message'=>'Session expired','error'=>true,'code'=>500]);
+        }
+    }
+
+    public function edit_group(Request $request) {
+        $validator = Validator::make($request->all(),[
+            'name' => 'required|max:20',
+            'description' => 'required',
+            'no_of_people' => 'required|numeric|min:1|max:100',
+            'status' => 'required'
+        ],[
+            'name.required' => 'Please enter group name',
+            'name.max:20' => 'Group name should not be more than 20 characters',
+            'description.required' => 'Please enter description',
+            'no_of_people.required' => 'Please enter no of people in that group',
+            'no_of_people.numeric' => 'It should be only number',
+            'no_of_people.min:1' => 'It should have minimum 1 member',
+            'no_of_people.max:100' => 'It should have maximum 100 member',
+            'status.required' => 'Please select status'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => true,
+                'message' => $validator->messages()->first(),
+                'code' => 500]);
+        }
+        else {
+            $user = JWTAuth::toUser($request->header('token'));
+            $group = \App\Group::find($request->group_id);
+            
+            $group->name = $request->name;
+            $group->description = $request->description;
+            $group->no_of_people = $request->no_of_people;
+            $group->status = $request->status;
+            $group->doctor_id = $user->id;
+
+            $group->save();
+
+            return response()->json(['error' => false,
+                'message' => 'Group updated successfully',
+                'code' => 200]);
+        }
+    }
+
+    public function delete_group(Request $request) {
+        $group = \App\Group::find($request->group_id);
+        if($group->delete()) {
+            return response()->json(['error' => false,
+                'message' => 'Group deleted successfully',
+                'code' => 200]);
+        }
+        else {
+            return response()->json(['error' => true,
+                'message' => 'Error!. Please try again',
+                'code' => 500]);
+        }
+    }
+
 }

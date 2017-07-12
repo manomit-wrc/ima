@@ -30,6 +30,7 @@
     {!! Html::script('storage/frontend/angular/services/authService.js') !!}
     
     {!! Html::script('storage/frontend/angular/AuthCtrl.js') !!}
+   
     
     {!! Html::script('storage/frontend/angular/appRoutes.js') !!}
    
