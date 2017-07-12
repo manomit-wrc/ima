@@ -51,6 +51,26 @@ imaApp.directive('doctorsPagination', function(){
    };
 });
 
+imaApp.directive('uiAutocomplete', function(){
+    return {
+        require: '?ngModel',
+        link: function(scope, element, attrs, controller) {
+            var getOptions = function() {
+                return angular.extend({}, scope.$eval(attrs.uiAutocomplete));
+            };
+            var initAutocompleteWidget = function () {
+                var opts = getOptions();
+                element.autocomplete(opts);
+                if (opts._renderItem) {
+                    element.data("autocomplete")._renderItem = opts._renderItem;
+                }
+            };
+            
+            scope.$watch(getOptions, initAutocompleteWidget, true);
+        }
+    };
+});
+
 imaApp.filter('htmlToPlaintext', function(){
 	return function(text) {
       return  text ? String(text).replace(/<[^>]+>/gm, '') : '';

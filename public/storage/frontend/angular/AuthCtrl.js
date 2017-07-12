@@ -119,10 +119,38 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 	      }
 
 	      $scope.range = pages;
-		  console.log($scope.doctor_list); 
+		  
 	    });
 	};
-
+	var search = function(request, response) {
+            var callback = function(data) {
+				console.log(data.data);
+				if(data.data) {
+					response(data.data.doctors);
+				}
+                
+            };
+            $http.get("/api/doctors/search?q=" + $scope.term)
+                .then(callback);
+        },
+		_renderItem = function (ul, item) {
+            return $("<li>")
+                .data("item.autocomplete", item)
+                .append("<a>" + item.first_name + "</a>")
+                .appendTo(ul);
+        },
+        select = function (event, ui) {
+            if (ui.item) {
+                console.log(ui.item);
+            }
+        };
+		$scope.autocompleteOptions = {
+			minLength: 1,
+			source: search,
+			select: select,
+			delay: 500,
+			_renderItem: _renderItem
+    };
     $scope.getEventPage = function(pageNumber) {
 
     	if(pageNumber===undefined){
@@ -450,8 +478,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 			  processData: false,
 			  transformRequest: function (data) {
 			      var formData = new FormData();
-			      formData.append("avators", $scope.image); 
-			      formData.append("doctor_id", $scope.doctor_id);  
+			      formData.append("avators", $scope.image);  
 			      return formData;  
 			  },  
 			  data : $scope,

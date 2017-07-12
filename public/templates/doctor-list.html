@@ -4,7 +4,7 @@
                     <my-sidebar></my-sidebar>
                     <div class="col-md-8 Clear-991">
                         <div class="Rpanel">
-                            <h2>Doctors</h2>
+                            <h2 ng-controller="AuthController">Doctors<input type="text" name="term" id="term" ng-model="term" class="btn_right" placeholder="Enter doctor related text" ui-autocomplete="autocompleteOptions" ></h2>
                             <div>{{message}}</div>
                             <div class="row">
                                 <div class="col-md-12">
