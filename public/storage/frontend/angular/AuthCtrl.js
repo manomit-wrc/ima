@@ -890,14 +890,22 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 			confirmButtonColor: "#DD6B55",
 			confirmButtonText: "Yes, delete it!",
 			closeOnConfirm: false
-		},  function(){
-			$http.get('/api/group-delete',{
-    		params: { group_id: group_id}
-    		}).then(function(response){
-				SweetAlert.swal("Deleted!", "Your group has been deleted.", "success");
-				$window.location.href = "/groups";
-    		});  
-			
+		},  function(isConfirm){
+			if(isConfirm) {
+				$http.get('/api/group-delete',{
+				params: { group_id: group_id}
+				}).then(function(response){
+					SweetAlert.swal({   
+				     title: "Deleted!",   
+				     text: "Your group has been deleted",   
+				     type: "success",     
+				     confirmButtonColor: "#DD6B55",   
+				     confirmButtonText: "OK"
+				    },  function(){  
+				     $window.location.href = "/groups";
+				    });
+				}); 
+			}
 		});
 	}
 
