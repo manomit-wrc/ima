@@ -2,33 +2,7 @@
     <div class="container">
             <div class="row">
                 <div class="innertopB">
-                    <div class="col-md-4">
-                        <div class="leftP">
-                            <div class="Leftimgbox">
-                                <form name="frmAvator" ng-submit="doUpload()" method="post" novalidate="novalidate" enctype="multipart/form-data">
-                                <input type="hidden" name="doctor_id" ng-model="doctor_id" />
-                                <div class="imgLbox">
-                                    <span class="btn-file">
-                                        <input type="file" name="avators" ng-model="avators" onchange="angular.element(this).scope().uploadedFile(this)" accept="image/*"/>
-                                    </span>
-                                
-
-                                <img  alt="" ng-src="{{image_source}}" class="img-responsive"/>
-                                
-                                </div>
-                                </form>
-                                <h3>Dr. {{user.first_name}}&nbsp;{{user.last_name}}</h3>
-                                <!--<h4>National President</h4>-->
-                                <h5 class="user_address"><i class="fa fa-map-marker" aria-hidden="true"></i> Kolkata,&nbsp;West Bengal, &nbsp;India</h5>
-                            </div>
-                            <button type="button" class="LeftBtn" ng-click="loadProfile()"><i class="fa fa-user" aria-hidden="true"></i> Edit profile</button>
-                            <button type="button" class="LeftBtn" ng-click="loadChangePassword()"><i class="fa fa-user" aria-hidden="true"></i> Change Password</button>
-                            <button type="button" class="LeftBtnActive" ng-click="loadJournal()"><i class="fa fa-user" aria-hidden="true"></i> Upload Journal</button>
-                            <button type="button" class="LeftBtn" ng-click="loadJournalList()"><i class="fa fa-user" aria-hidden="true"></i> Upload List</button>
-                            <button type="button" class="LeftBtn" ng-click="uploadcertificate()"><i class="fa fa-user" aria-hidden="true"></i> Payment & Certificate</button>
-                            <button type="button" class="LeftBtn" ng-click="loadGroup()"><i class="fa fa-user" aria-hidden="true"></i> Groups</button>
-                        </div>
-                    </div>
+                    <my-sidebar></my-sidebar>
                     <div class="col-md-8 Clear-991" ng-controller="AuthController">
                         <div class="Rpanel">
                             <h2>Upload Journal</h2>

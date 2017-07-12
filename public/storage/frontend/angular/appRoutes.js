@@ -36,6 +36,10 @@ imaRoute.config(function($routeProvider,$locationProvider,$qProvider){
 		templateUrl: '/templates/activate.html'
 	}).when('/news-list',{
 		templateUrl: '/templates/news-list.html'
+	}).when('/doctor-list',{
+		templateUrl: '/templates/doctor-list.html',
+		authenticated: true,
+		type: "D"
 	}).when('/events-list',{
 		templateUrl: '/templates/events-list.html'
 	}).when('/contact',{
