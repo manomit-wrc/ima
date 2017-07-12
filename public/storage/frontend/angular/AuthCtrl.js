@@ -512,8 +512,12 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     	$location.path("/payment-certificate");
     };
 	$scope.loadDoctors = function() {
+		//.addClass('LeftBtnActive');
+		//$scope.getclass  = LeftBtnActive;
+		$scope.class='LeftBtnActive';
 		$location.path("/doctor-list");
 	};
+	
 
     $scope.doUploadJournal = function(valid) {
     	if(valid) {
@@ -914,7 +918,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 				$http.get('/api/group-delete',{
 				params: { group_id: group_id}
 				}).then(function(response){
-					SweetAlert.swal({   
+			SweetAlert.swal({   
 				     title: "Deleted!",   
 				     text: "Your group has been deleted",   
 				     type: "success",     
