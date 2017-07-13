@@ -19,17 +19,20 @@
         </div>
         
 
-        <button type="button" class="LeftBtn" ng-click="loadProfile()"><i class="fa fa-user" aria-hidden="true"></i> Edit profile</button>
-        <button type="button" class="LeftBtn" ng-click="loadChangePassword()"><i class="fa fa-user" aria-hidden="true"></i> Change Password</button>
-        <button type="button" class="LeftBtn" ng-click="loadJournal()"><i class="fa fa-user" aria-hidden="true"></i> Upload Journal</button>
-        <button type="button" class="LeftBtnActive" ng-click="loadJournalList()"><i class="fa fa-user" aria-hidden="true"></i> Upload List</button>
+        <button type="button" class="LeftBtn" ng-click="loadProfile()" ng-class="edit_prfl"><i class="fa fa-user" aria-hidden="true"></i> Edit profile</button>
+        <button type="button" class="LeftBtn" ng-click="loadChangePassword()" ng-class="change_pwd"><i class="fa fa-user" aria-hidden="true"></i> Change Password</button>
+
+        <button type="button" class="LeftBtn" ng-click="loadJournal()" ng-class="upload_jnal"><i class="fa fa-user" aria-hidden="true"></i> Upload Journal</button>
+
+        <button type="button" class="LeftBtn" ng-click="loadJournalList()" ng-class="upload_lst"><i class="fa fa-user" aria-hidden="true"></i> Upload List</button>
         
         <!--<button type="button" class="LeftBtn"><i class="fa fa-user" aria-hidden="true" ng-class="{ active: isActive('/journal-list')}"></i> Upload List</button>-->
 
-        <button type="button" class="LeftBtn" ng-click="uploadcertificate()"><i class="fa fa-user" aria-hidden="true"></i> Payment & Certificate</button>
-        <button type="button" class="LeftBtn" ng-click="loadGroup()"><i class="fa fa-user" aria-hidden="true"></i> Groups</button>
+        <button type="button" class="LeftBtn" ng-click="uploadcertificate()" ng-class="Payment_crtf"><i class="fa fa-user" aria-hidden="true"></i> Payment & Certificate</button>
+
+        <button type="button" class="LeftBtn" ng-click="loadGroup()" ng-class="grp"><i class="fa fa-user" aria-hidden="true"></i> Groups</button>
         
-        <button type="button" class="LeftBtn" ng-click="loadDoctors()"><i class="fa fa-user" aria-hidden="true"></i> Doctors</button>
+        <button type="button" class="LeftBtn" ng-click="loadDoctors()" ng-class="doctr"><i class="fa fa-user" aria-hidden="true"></i> Doctors</button>
 
         <!--<button type="button"  class="LeftBtn" ><i class="fa fa-user" aria-hidden="true" ng-click="loadDoctors()"></i> Doctors</button>-->
     </div>
