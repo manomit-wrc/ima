@@ -261,7 +261,8 @@ class PageController extends Controller
         //original destination path
         $destinationPath = public_path().'/uploads/doctors/' ;
         $file->move($destinationPath,$fileName);
-        $doctors = Doctor::find($request->doctor_id);
+        $user = JWTAuth::toUser($request->header('token'));
+        $doctors = Doctor::find($user->id);
         if($doctors) {
             $doctors->avators = $fileName;
             $doctors->save();
@@ -1048,6 +1049,20 @@ class PageController extends Controller
         $doctor_list = \App\Doctor::where('type','D')->where('id','<>',$user->id)->paginate(10);
         
         return response()->json(['doctor_list' => $doctor_list,'status_code'=>200]);
+    }
+
+    public function search_doctor(Request $request) {
+        $user = JWTAuth::toUser($request->header('token'));
+        $doctors = \App\Doctor::select('id','first_name')->where('type','D')
+        ->where('id','<>',$user->id)
+        ->orWhere('first_name', 'like', '%' . $request->q . '%')
+        ->orWhere('last_name', 'like', '%' . $request->q . '%')
+        ->orWhere('license', '=', $request->q)->get()->toArray();
+        $doctor_array = [];
+        $doctor_array[] = array('name'=>'manomit');
+        $doctor_array[] = array('name'=>'amrita');
+        return response()->json(['doctors'=>$doctor_array]);
+        
     }
 
 }
