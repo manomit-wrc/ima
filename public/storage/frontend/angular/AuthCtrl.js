@@ -490,6 +490,15 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 	};
 
     $scope.loadProfile = function() {
+
+    	$scope.edit_prfl="LeftBtnActive";
+    	$scope.change_pwd="LeftBtn";
+    	$scope.upload_jnal="LeftBtn";
+    	$scope.upload_lst="LeftBtn";
+    	$scope.Payment_crtf="LeftBtn";
+    	$scope.grp="LeftBtn";
+    	$scope.doctr="LeftBtn";
+    	
     	$location.path("/profile");
     };
 
@@ -501,21 +510,55 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     };
 
     $scope.loadChangePassword = function() {
+
+    	$scope.edit_prfl="LeftBtn";
+    	$scope.change_pwd="LeftBtnActive";
+    	$scope.upload_jnal="LeftBtn";
+    	$scope.upload_lst="LeftBtn";
+    	$scope.Payment_crtf="LeftBtn";
+    	$scope.grp="LeftBtn";
+    	$scope.doctr="LeftBtn";
     	$location.path("/change-password");
     };
     $scope.loadJournal = function() {
+    	$scope.edit_prfl="LeftBtn";
+    	$scope.change_pwd="LeftBtn";
+    	$scope.upload_jnal="LeftBtnActive";
+    	$scope.upload_lst="LeftBtn";
+    	$scope.Payment_crtf="LeftBtn";
+    	$scope.grp="LeftBtn";
+    	$scope.doctr="LeftBtn";
     	$location.path("/upload-journal");
     };
     $scope.loadJournalList = function() {
+    	$scope.edit_prfl="LeftBtn";
+    	$scope.change_pwd="LeftBtn";
+    	$scope.upload_jnal="LeftBtn";
+    	$scope.upload_lst="LeftBtnActive";
+    	$scope.Payment_crtf="LeftBtn";
+    	$scope.grp="LeftBtn";
+    	$scope.doctr="LeftBtn";
+    	$location.path("/upload-journal");
     	$location.path("/journal-list");
     };
      $scope.uploadcertificate = function() {
+     	$scope.edit_prfl="LeftBtn";
+    	$scope.change_pwd="LeftBtn";
+    	$scope.upload_jnal="LeftBtn";
+    	$scope.upload_lst="LeftBtn";
+    	$scope.Payment_crtf="LeftBtnActive";
+    	$scope.grp="LeftBtn";
+    	$scope.doctr="LeftBtn";
     	$location.path("/payment-certificate");
     };
 	$scope.loadDoctors = function() {
-		//.addClass('LeftBtnActive');
-		//$scope.getclass  = LeftBtnActive;
-		$scope.class='LeftBtnActive';
+		$scope.edit_prfl="LeftBtn";
+    	$scope.change_pwd="LeftBtn";
+    	$scope.upload_jnal="LeftBtn";
+    	$scope.upload_lst="LeftBtn";
+    	$scope.Payment_crtf="LeftBtn";
+    	$scope.grp="LeftBtn";
+    	$scope.doctr="LeftBtnActive";
 		$location.path("/doctor-list");
 	};
 	
@@ -814,10 +857,19 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 	};
 
 	$scope.loadGroup = function() {
+		$scope.edit_prfl="LeftBtn";
+    	$scope.change_pwd="LeftBtn";
+    	$scope.upload_jnal="LeftBtn";
+    	$scope.upload_lst="LeftBtn";
+    	$scope.Payment_crtf="LeftBtn";
+    	$scope.grp="LeftBtnActive";
+    	$scope.doctr="LeftBtn";
 		$location.path('/groups');
+
 	};
 
 	$scope.loadAddNewGroup = function() {
+		//$scope.activeClass = LeftBtnActive;
 		$window.location.href = "/groups/add";
 	};
 
