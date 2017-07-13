@@ -3,14 +3,58 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 ol-md-12">
+                    <div class="Text_Right">
                     <p class="text-right" ng-if="!user.id">
                         <a href="#" class="top_link" data-toggle="modal" data-target="#LoginModal">Login</a>
                         <a href="#" class="top_link" data-toggle="modal" data-target="#RegModal">Registration</a>
                     </p>
                     <p class="text-right" ng-if="user.id">
-                        Welcome <a href="{{user.type == 'D' ? '/profile' : '/company-profile'}}" class="top_link">{{user.first_name}}</a>
-                        <a href="javascript:void(0)" ng-click="doLogout()" class="top_link">Logout</a>
+                        Welcome  
+
+                        <li class="dropdown newli">
+                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 
+
+                        <i class="fa fa-users" aria-hidden="true"></i>
+
+                            </a>
+                            <ul class="dropdown-menu">
+
+                                <li>
+                                    <span class="group_inner">
+                                        <div class="col-xs-4">
+                                            <img src="http://localhost:8000/uploads/teams/thumb/1496235496_2.jpg">
+                                        </div>
+                                        <div class="col-xs-8">
+                                            <h4>Dr. Arijit Das</h4>
+                                            <h5>aaa</h5>
+                                            <button type="button" class="sendrqst">Send Request</button>
+                                        </div>
+                                    </span>
+                                </li>
+
+                                <li>
+                                    <span class="group_inner">
+                                        <div class="col-xs-4">
+                                            <img src="http://localhost:8000/uploads/teams/thumb/1496235496_2.jpg">
+                                        </div>
+                                        <div class="col-xs-8">
+                                            <h4>Dr. Arijit Das</h4>
+                                            <h5>aaa</h5>
+                                            <button type="button" class="sendrqst">Send Request</button>
+                                        </div>
+                                    </span>
+                                </li>
+                                
+                              </ul>
+                        </li>
+
+                        <a href="{{user.type == 'D' ? '/profile' : '/company-profile'}}" class="top_link">{{user.first_name}}</a>
+                        <a href="javascript:void(0)" ng-click="doLogout()" class="top_link rightBnone">Logout</a>
                     </p>
+
+
+                    </div>
+
                 </div>
             </div>
         </div>

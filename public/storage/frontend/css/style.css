@@ -991,7 +991,7 @@ hr.bold {
 }
 
 .Leftimgbox img {
-    border: 5px solid #5ddee3;
+    border: 2px solid #ccc;
     /* border-radius: 50%; */
     margin-bottom: 15px;
     /*width: 180px;*/
@@ -3140,4 +3140,68 @@ a.btn:focus {
 
 .ed{
     color: #666 !important;
+}
+
+.newli{
+    display: inline-block;
+    padding-left: 12px;
+}
+
+.group_inner{
+    width: 96%;
+    float: left;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-top: 15px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 15px;
+}
+
+.newli a i{
+    color: #fff;
+}
+
+.text-right{
+    display: inline-block;
+}
+
+.rightBnone{
+    border-right: 0;
+}
+
+.Text_Right{
+    text-align: right;
+}
+
+.dropdown-menu{
+    min-width: 320px;
+}
+
+.group_inner img{
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    padding: 3px;
+    border: 1px solid #ccc;
+}
+
+.dropdown-menu h4{
+    font-size: 16px;
+    margin: 0;
+    font-weight: bold;
+}
+
+.dropdown-menu h5{
+    font-size: 16px;
+    margin: 10px 0 0 0;
+}
+
+.sendrqst{
+    padding: 3px 18px;
+    border: 0;
+    color: #fff;
+    background: #40bbc0;
+    margin-top: 10px;
+    font-size: 12px;
+    text-transform:uppercase;
 }
