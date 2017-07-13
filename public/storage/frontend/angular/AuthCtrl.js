@@ -961,7 +961,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 			});
 		}
 	};
-
+    
 	$scope.doEditGroup = function(valid) {
 		if(valid) {
 			$http.post('/api/edit-group', {
@@ -1061,6 +1061,11 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     
 
     }
+
+    $scope.getdoctorgroup=function(){
+
+       
+    };
 
 
 });
