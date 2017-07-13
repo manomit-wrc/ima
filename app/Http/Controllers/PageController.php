@@ -1053,15 +1053,9 @@ class PageController extends Controller
 
     public function search_doctor(Request $request) {
         $user = JWTAuth::toUser($request->header('token'));
-        $doctors = \App\Doctor::select('id','first_name')->where('type','D')
-        ->where('id','<>',$user->id)
-        ->orWhere('first_name', 'like', '%' . $request->q . '%')
-        ->orWhere('last_name', 'like', '%' . $request->q . '%')
-        ->orWhere('license', '=', $request->q)->get()->toArray();
-        $doctor_array = [];
-        $doctor_array[] = array('name'=>'manomit');
-        $doctor_array[] = array('name'=>'amrita');
-        return response()->json(['doctors'=>$doctor_array]);
+        $arr = array();
+        $doctors = \App\Doctor::where('type','D')->get()->toArray();
+        return response()->json(['doctors'=>$doctors]);
         
     }
 

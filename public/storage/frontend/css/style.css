@@ -2954,6 +2954,30 @@ a.btn:focus {
     margin: 10px;
     padding: 10px;
   }
+
+#searchResult{
+ list-style: none;
+ padding: 0px;
+ width: 250px;
+ position: absolute;
+ margin: 0;
+}
+
+#searchResult li{
+ background: lavender;
+ padding: 4px;
+ margin-bottom: 1px;
+}
+
+#searchResult li:nth-child(even){
+ background: cadetblue;
+ color: white;
+}
+
+#searchResult li:hover{
+ cursor: pointer;
+}
+
 /* Theme Styler :: End */
 
 

@@ -1,4 +1,4 @@
-var AuthCtrl = angular.module('AuthCtrl',['oitozero.ngSweetAlert']);
+var AuthCtrl = angular.module('AuthCtrl',['oitozero.ngSweetAlert','ui.bootstrap']);
 
 AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$routeParams,$cookieStore,$window,SweetAlert){
 	$scope.code = '';
@@ -122,35 +122,9 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 		  
 	    });
 	};
-	var search = function(request, response) {
-            var callback = function(data) {
-				console.log(data.data);
-				if(data.data) {
-					response(data.data.doctors);
-				}
-                
-            };
-            $http.get("/api/doctors/search?q=" + $scope.term)
-                .then(callback);
-        },
-		_renderItem = function (ul, item) {
-            return $("<li>")
-                .data("item.autocomplete", item)
-                .append("<a>" + item.first_name + "</a>")
-                .appendTo(ul);
-        },
-        select = function (event, ui) {
-            if (ui.item) {
-                console.log(ui.item);
-            }
-        };
-		$scope.autocompleteOptions = {
-			minLength: 1,
-			source: search,
-			select: select,
-			delay: 500,
-			_renderItem: _renderItem
-    };
+	
+
+
     $scope.getEventPage = function(pageNumber) {
 
     	if(pageNumber===undefined){
@@ -988,7 +962,14 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 		});
     
 
-    }
+    };
+    getCountries(); // Load all countries with capitals
+  function getCountries(){  
+  $http.get("/api/doctors/search").then(function(response){
+  		console.log(response);
+        $scope.countries = response.data.doctors;
+       });
+  };
 
 
 });

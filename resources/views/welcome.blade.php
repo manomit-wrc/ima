@@ -15,9 +15,11 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-route.min.js"></script>
+    {!! Html::script('storage/frontend/angular/ui-bootstrap-tpls-0.9.0.js') !!}
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.11/ngStorage.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-cookies.js"></script>
     
+
     
    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD1YnEDntvpLx4UiOrpoFS6dEfNfkkqFsE&v=3.0&sensor=true"></script>
 

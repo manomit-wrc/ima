@@ -4,7 +4,10 @@
                     <my-sidebar></my-sidebar>
                     <div class="col-md-8 Clear-991">
                         <div class="Rpanel">
-                            <h2 ng-controller="AuthController">Doctors<input type="text" name="term" id="term" ng-model="term" class="btn_right" placeholder="Enter doctor related text" ui-autocomplete="autocompleteOptions" ></h2>
+                            <h2 ng-controller="AuthController">Doctors<input type="text" ng-model="selectedCountries" placeholder="Search Countries" typeahead="c as c.first_name for c in countries | filter:$viewValue | limitTo:10" typeahead-min-length='1' typeahead-on-select='onSelectPart($item, $model, $label)'  class="btn_right">
+                            <i class="icon-search nav-search-icon"></i>
+
+                            </h2>
                             <div>{{message}}</div>
                             <div class="row">
                                 <div class="col-md-12">
