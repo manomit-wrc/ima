@@ -1052,11 +1052,30 @@ class PageController extends Controller
     }
 
     public function search_doctor(Request $request) {
-        $user = JWTAuth::toUser($request->header('token'));
+        $term = $request->term;
+        $token = $request->get('token');
         $arr = array();
-        $doctors = \App\Doctor::where('type','D')->get()->toArray();
-        return response()->json(['doctors'=>$doctors]);
+        $doctors = \App\Doctor::where(function ($query) use ($term,$token) {
+                $user = JWTAuth::toUser($token);
+                $query->where('type', '=', 'D')->where('id','<>',$user->id);
+                })->where(function ($query) use ($term) {
+                $query->where('first_name', 'like', '%' . $term . '%')
+                ->orWhere('last_name', 'like', '%' . $term . '%')
+                ->orWhere('license', 'like', '%' . $term . '%');
+                })->get();
         
+        $data=array();
+        foreach ($doctors as $value) {
+            $data[]=array('value'=>$value->first_name." ".$value->last_name,'id'=>$value->id);
+        }
+        return $data;
+        
+    }
+
+    public function doctor_search(Request $request) {
+        $doctor_list = \App\Doctor::where('id',$request->doctor_id)->where('type','D')->paginate(10);
+        
+        return response()->json(['doctor_list' => $doctor_list,'status_code'=>200]);
     }
 
 }

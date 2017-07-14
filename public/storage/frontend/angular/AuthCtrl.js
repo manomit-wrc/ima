@@ -979,13 +979,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 		});
  
     };
-    getCountries(); // Load all countries with capitals
-  function getCountries(){  
-  $http.get("/api/doctors/search").then(function(response){
-  		console.log(response);
-        $scope.countries = response.data.doctors;
-       });
-  };
+   
 
   $scope.loadPath = function() {
   	$scope.location = $location;
@@ -1050,6 +1044,48 @@ AuthCtrl.directive('addressBasedGoogleMap', function () {
             initialize();
         },
     };
+});
+
+AuthCtrl.directive('autocomplete', function($http,$localStorage) {
+    return {
+        restrict: 'A',
+        require : 'ngModel',
+        link : function (scope, element, attrs, ngModelCtrl) {
+              
+              element.autocomplete({
+              	/*source:function(request, response) {
+              		'/api/doctors/search',{ token: $localStorage.token }
+              	},*/
+              	source: '/api/doctors/search?token='+$localStorage.token,
+                select:function (event,ui) {
+                  
+                    ngModelCtrl.$setViewValue(ui.item);
+                    
+					$http.get('/api/doctor-search?page=1&doctor_id='+ui.item.id).then(function(response) {
+
+					
+			    	  
+			    	  scope.doctor_list = response.data.doctor_list.data;
+				      
+			      	  scope.totalPages   = response.data.doctor_list.last_page;
+			          scope.currentPage  = response.data.doctor_list.current_page;
+
+			          var pages = [];
+
+				      for(var i=1;i<=response.data.doctor_list.last_page;i++) {          
+				        pages.push(i);
+				      }
+
+				      scope.range = pages;
+					  
+				    });
+                    scope.$apply();
+                }
+              });
+                
+            
+        }
+    }
 });
 
 
