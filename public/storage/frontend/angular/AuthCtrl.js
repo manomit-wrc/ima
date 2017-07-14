@@ -13,7 +13,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 	$scope.isDisabled = false;
 	$scope.contact_address = '';
 	$scope.footer_data='';
-
+    
 	//for paginations//
 	$scope.news_data = [];
 	$scope.events_data = [];
