@@ -37,7 +37,9 @@ textarea {
     font-size: inherit;
     line-height: inherit;
 }
-
+ div[slim-scroll] {
+            height: 280px;
+        }
 .ui-autocomplete {
     max-height: 100px;
     overflow-y: auto;

@@ -20,6 +20,8 @@
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-route.min.js"></script>
     {!! Html::script('storage/frontend/angular/ui-bootstrap-tpls-0.9.0.js') !!}
+    {!! Html::script('storage/frontend/angular/ng-slim-scroll.min.js') !!}
+    {!! Html::style('storage/frontend/angular/ng-slim-scroll.css') !!}
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.11/ngStorage.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-cookies.js"></script>
     
@@ -353,21 +355,5 @@
     
     {!! Html::script('storage/frontend/js/custom.js') !!}
 
-
-    {!! Html::script('storage/frontend/js/jquery.nicescroll.min.js') !!}
-
-    <!--<script type="text/javascript">
-
-      $(document).ready(function() {
-      
-        var nice = $("html").niceScroll(); 
-        
-        
-        $("#boxscroll").niceScroll({cursorborder:"",cursorcolor:"#00F",boxzoom:true}); // First scrollable DIV
-        
-      });
-</script>-->
-    
-    
 </body>
 </html>
