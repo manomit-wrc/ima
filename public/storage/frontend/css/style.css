@@ -3150,6 +3150,20 @@ a.btn:focus {
     border: 1px solid #ccc;
     padding: 5px 20px;
     font-size: 16px;
+    border-radius: 4px;
+    font-weight: normal;
+    margin-left: 10px;
+}
+
+
+.btnsearch{
+    float: right;
+    background: none;
+    border: 1px solid #ccc;
+    padding: 5px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    margin-left: 10px;
 }
 
 .ed{

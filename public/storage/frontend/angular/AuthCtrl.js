@@ -21,6 +21,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     $scope.currentPage = 1;
     $scope.range = [];
     $scope.map='';
+    $scope.group_list = {};
 
     $scope.init = function () {
 		Auth.getUser().then(function(response){
@@ -841,7 +842,9 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 		
 		$http.get('/api/group-list'
     	).then(function(response){
+
     		if(response.data.code != 200) {
+
 				$scope.message = response.data.message;
 			}
 			else {
@@ -986,6 +989,18 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
   	
   }
 
+  $scope.getGroupData=function(){
+    $http.get('/api/group-search-details',{
+    		params: { group_name:$scope.grp}
+    	}).then(function(response){
+
+    		$scope.$parent.group_list = response.data.group_search;
+    		console.log($scope.$parent.group_list);
+
+    	});
+
+  };
+
 });
 
 AuthCtrl.directive('addressBasedGoogleMap', function () {
@@ -1056,6 +1071,7 @@ AuthCtrl.directive('autocomplete', function($http,$localStorage) {
               	/*source:function(request, response) {
               		'/api/doctors/search',{ token: $localStorage.token }
               	},*/
+
               	source: '/api/doctors/search?token='+$localStorage.token,
                 select:function (event,ui) {
                   
@@ -1080,6 +1096,32 @@ AuthCtrl.directive('autocomplete', function($http,$localStorage) {
 					  
 				    });
                     scope.$apply();
+                }
+              });
+                
+            
+        }
+    }
+});
+
+AuthCtrl.directive('groupAutocomplete', function($http,$localStorage) {
+    return {
+        restrict: 'A',
+        require : 'ngModel',
+        link : function (scope, element, attrs, ngModelCtrl) {
+
+              
+              element.autocomplete({
+              	/*source:function(request, response) {
+              		'/api/doctors/search',{ token: $localStorage.token }
+              	},*/
+                  
+              	source: '/api/groups/search?token='+$localStorage.token,
+                select:function (event,ui) {
+                  
+                    ngModelCtrl.$setViewValue(ui.item);
+                    
+					
                 }
               });
                 
