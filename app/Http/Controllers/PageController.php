@@ -1078,4 +1078,21 @@ class PageController extends Controller
         return response()->json(['doctor_list' => $doctor_list,'status_code'=>200]);
     }
 
+    public function find_doctors(Request $request) {
+        $user = JWTAuth::toUser($request->header('token'));
+        $find_doctors = \App\Doctor::where('type','D')->where('id','<>',$user->id)->get();
+
+        $doctor_arr = array();
+
+        foreach ($find_doctors as $value) {
+           if(file_exists( public_path() . '/uploads/doctors/thumb/'.$value['avators']) && $value['avators']) {
+                    $avators =  '/uploads/doctors/thumb/'.$value['avators'];
+            } else {
+                $avators =  '/uploads/doctors/noimage_user.jpg';
+            }
+            $data[]=array('name'=>$value->first_name." ".$value->last_name,'avators'=>$avators,'license'=>$value->license);
+        }
+        return response()->json(['find_doctors' => $data,'status_code'=>200]);
+    }
+
 }

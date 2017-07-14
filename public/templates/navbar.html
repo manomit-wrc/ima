@@ -1,7 +1,7 @@
  
 <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
     <div class="top-area">
-        <div class="container" ng-init='getdoctorgroup()'>
+        <div class="container">
             <div class="row">
                 <div class="col-sm-12 ol-md-12">
                     <div class="Text_Right">
@@ -12,77 +12,32 @@
                     <p class="text-right" ng-if="user.id">
                         Welcome  
 
-                        <li class="dropdown newli">
+                        <li class="dropdown newli" ng-if="user.id" >
                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 
 
-                        <i class="fa fa-users" aria-hidden="true"></i>
+                        <i class="fa fa-users" aria-hidden="true" ng-click="findDoctors();"></i>
 
                             </a>
                             <ul class="dropdown-menu">
 
                                 <div slim-scroll>
-
-                                <li>
+                                <div class="col-xs-12" data-loading>
+                                    <img src="/uploads/load.gif">
+                                </div>
+                                <li ng-repeat="fn in find_doctors">
                                     <span class="group_inner">
                                         <div class="col-xs-4">
-                                            <img src="http://localhost:8000/uploads/teams/thumb/1496235496_2.jpg">
+                                            <img src="{{fn.avators}}">
                                         </div>
                                         <div class="col-xs-8">
-                                            <h4>Dr. Arijit Das</h4>
-                                            <h5>aaa</h5>
+                                            <h4>Dr. {{fn.name}}</h4>
+                                            <h5>{{fn.license}}</h5>
                                             <button type="button" class="sendrqst">Send Request</button>
                                         </div>
                                     </span>
                                 </li>
 
-                                <li>
-                                    <span class="group_inner">
-                                        <div class="col-xs-4">
-                                            <img src="http://localhost:8000/uploads/teams/thumb/1496235496_2.jpg">
-                                        </div>
-                                        <div class="col-xs-8">
-                                            <h4>Dr. Arijit Das</h4>
-                                            <h5>aaa</h5>
-                                            <button type="button" class="sendrqst">Send Request</button>
-                                        </div>
-                                    </span>
-                                </li>
-                                <li>
-                                    <span class="group_inner">
-                                        <div class="col-xs-4">
-                                            <img src="http://localhost:8000/uploads/teams/thumb/1496235496_2.jpg">
-                                        </div>
-                                        <div class="col-xs-8">
-                                            <h4>Dr. Arijit Das</h4>
-                                            <h5>aaa</h5>
-                                            <button type="button" class="sendrqst">Send Request</button>
-                                        </div>
-                                    </span>
-                                </li>
-                                <li>
-                                    <span class="group_inner">
-                                        <div class="col-xs-4">
-                                            <img src="http://localhost:8000/uploads/teams/thumb/1496235496_2.jpg">
-                                        </div>
-                                        <div class="col-xs-8">
-                                            <h4>Dr. Arijit Das</h4>
-                                            <h5>aaa</h5>
-                                            <button type="button" class="sendrqst">Send Request</button>
-                                        </div>
-                                    </span>
-                                </li>
-                                <li>
-                                    <span class="group_inner">
-                                        <div class="col-xs-4">
-                                            <img src="http://localhost:8000/uploads/teams/thumb/1496235496_2.jpg">
-                                        </div>
-                                        <div class="col-xs-8">
-                                            <h4>Dr. Arijit Das</h4>
-                                            <h5>aaa</h5>
-                                            <button type="button" class="sendrqst">Send Request</button>
-                                        </div>
-                                    </span>
-                                </li>
+                                
 
                                 </div>
                                 
@@ -90,7 +45,7 @@
                         </li>
 
                         <a href="{{user.type == 'D' ? '/profile' : '/company-profile'}}" class="top_link">{{user.first_name}}</a>
-                        <a href="javascript:void(0)" ng-click="doLogout()" class="top_link rightBnone">Logout</a>
+                        <a ng-show="user.id" href="javascript:void(0)" ng-click="doLogout()" class="top_link rightBnone">Logout</a>
                     </p>
 
 

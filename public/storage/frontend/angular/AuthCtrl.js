@@ -21,6 +21,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     $scope.currentPage = 1;
     $scope.range = [];
     $scope.map='';
+    $scope.find_doctors = {};
 
     $scope.init = function () {
 		Auth.getUser().then(function(response){
@@ -984,6 +985,18 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
   $scope.loadPath = function() {
   	$scope.location = $location;
   	
+  };
+  $scope.findDoctors = function() {
+  			if(Object.keys($scope.find_doctors).length == 0) {
+  				
+	  			$http.get('/api/find-doctors').then(function(response){
+	  			$scope.find_doctors = response.data.find_doctors;
+				})
+				.catch(function(reason){
+
+				});
+  			}
+  		
   }
 
 });
@@ -1062,22 +1075,6 @@ AuthCtrl.directive('autocomplete', function($http,$localStorage) {
                     ngModelCtrl.$setViewValue(ui.item);
                     
 					$http.get('/api/doctor-search?page=1&doctor_id='+ui.item.id).then(function(response) {
-
-					
-			    	  
-			    	  scope.doctor_list = response.data.doctor_list.data;
-				      
-			      	  scope.totalPages   = response.data.doctor_list.last_page;
-			          scope.currentPage  = response.data.doctor_list.current_page;
-
-			          var pages = [];
-
-				      for(var i=1;i<=response.data.doctor_list.last_page;i++) {          
-				        pages.push(i);
-				      }
-
-				      scope.range = pages;
-					  
 				    });
                     scope.$apply();
                 }
@@ -1086,6 +1083,27 @@ AuthCtrl.directive('autocomplete', function($http,$localStorage) {
             
         }
     }
+});
+
+AuthCtrl.directive('loading', function($http){
+	return {
+            restrict: 'A',
+            link: function (scope, elm, attrs)
+            {
+                scope.isLoading = function () {
+                    return $http.pendingRequests.length > 0;
+                };
+
+                scope.$watch(scope.isLoading, function (v)
+                {
+                    if(v){
+                        elm.show();
+                    }else{
+                        elm.hide();
+                    }
+                });
+            }
+        };
 });
 
 
