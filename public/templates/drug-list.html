@@ -26,7 +26,13 @@
                     </div>
                     <div class="col-md-8 Clear-991">
                         <div class="Rpanel">
-                            <h2>Drugs<button type="button" class="btn_right" ng-click="loadAddNewDrug()"><i class="fa fa-plus" aria-hidden="true"></i> Add</button></h2>
+                            <h2>Drugs
+                            <button type="button" class="btn_right" ng-click="loadAddNewDrug()"><i class="fa fa-plus" aria-hidden="true"></i> Add</button>
+
+                            <!--<input type="search" ng-model="q" placeholder="search" class="filter_input">-->
+                             
+                            
+                            </h2>
                             <div>{{message}}</div>
                             <div class="row">
                                 <div class="col-md-12">
@@ -42,7 +48,7 @@
                                             <td>Action</td>
                                           </tr>
                                           
-                                          <tr ng-repeat="j in drug_list track by $index">
+                                          <tr class="animate-repeat" ng-repeat="j in drug_list | filter:q as results">
                                             <td>{{j.title}}</td>
                                             <td>{{j.description}}</td>
                                             <td>{{j.price}}</td>
@@ -59,6 +65,9 @@
                                             <td>
                                             <a class="ed" href="/drug/{{j.id}}"><i class="fa fa-pencil-square" aria-hidden="true"></i></a> | <a class="ed" href="javascript:void(0)" ng-click="removedrug(j.id)" ><i class="fa fa-trash" aria-hidden="true"></i></a></td>
                                           </tr>
+                                          <!--<tr class="animate-repeat" ng-if="results.length === 0">
+                                          <strong>No results found...</strong>
+                                          </tr>-->
                                         </table>
                                     </div>
                                 </div>
@@ -69,3 +78,58 @@
                 </div>
             </div>
         </div>
+        <style type="text/css">
+            
+            .example-animate-container {
+  background:white;
+  border:1px solid black;
+  list-style:none;
+  margin:0;
+  padding:0 10px;
+}
+
+.animate-repeat {
+  line-height:30px;
+  list-style:none;
+  box-sizing:border-box;
+}
+
+.animate-repeat.ng-move,
+.animate-repeat.ng-enter,
+.animate-repeat.ng-leave {
+  transition:all linear 0.5s;
+}
+
+.animate-repeat.ng-leave.ng-leave-active,
+.animate-repeat.ng-move,
+.animate-repeat.ng-enter {
+  opacity:0;
+  max-height:0;
+}
+
+.animate-repeat.ng-leave,
+.animate-repeat.ng-move.ng-move-active,
+.animate-repeat.ng-enter.ng-enter-active {
+  opacity:1;
+  max-height:30px;
+}
+
+.filter_input{
+    float: right;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    margin-right: 15px;
+    padding: 5px;
+    font-weight: normal;
+    color: #000;
+}
+
+.filter_input:focus{
+    outline: none;
+    border: 1px solid #ccc;
+}
+
+.text-right{
+    float: right;
+}
+        </style>

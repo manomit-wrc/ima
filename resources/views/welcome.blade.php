@@ -8,6 +8,10 @@
     <title>Indian Medical Associations</title>
     <base href="/">
     <!-- css -->
+
+
+
+
      {!! Html::script('storage/frontend/js/jquery.min.js') !!}
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css" />
 
@@ -15,9 +19,11 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-route.min.js"></script>
+    {!! Html::script('storage/frontend/angular/ui-bootstrap-tpls-0.9.0.js') !!}
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.11/ngStorage.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-cookies.js"></script>
     
+
     
    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD1YnEDntvpLx4UiOrpoFS6dEfNfkkqFsE&v=3.0&sensor=true"></script>
 
@@ -57,12 +63,14 @@
     <link id="bodybg" href="/storage/frontend/bodybg/bg1.css" rel="stylesheet" type="text/css" />
     <!-- template skin -->
     <link id="t-colors" href="/storage/frontend/color/default.css" rel="stylesheet">
+
+
     
    
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
-    <div id="wrapper" ng-controller="AuthController">
+    <div id="wrapper" ng-controller="AuthController" ng-init="loadPath();">
     
         <my-navbar></my-navbar>
         <!-- Section: intro -->
@@ -345,7 +353,20 @@
     
     {!! Html::script('storage/frontend/js/custom.js') !!}
 
-    
+
+    {!! Html::script('storage/frontend/js/jquery.nicescroll.min.js') !!}
+
+    <!--<script type="text/javascript">
+
+      $(document).ready(function() {
+      
+        var nice = $("html").niceScroll(); 
+        
+        
+        $("#boxscroll").niceScroll({cursorborder:"",cursorcolor:"#00F",boxzoom:true}); // First scrollable DIV
+        
+      });
+</script>-->
     
     
 </body>
