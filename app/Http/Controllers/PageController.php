@@ -913,6 +913,7 @@ class PageController extends Controller
             $user = JWTAuth::toUser($request->header('token'));
             if($user->type == "D") {
                 $group_list = \App\Group::where('doctor_id',$user->id)->get()->toArray();
+
                 if($group_list) {
                     return response()->json(['error' => false,
                 'message' => "Data Found",
@@ -1053,6 +1054,7 @@ class PageController extends Controller
 
     public function search_doctor(Request $request) {
         $term = $request->term;
+        
         $token = $request->get('token');
         $arr = array();
         $doctors = \App\Doctor::where(function ($query) use ($term,$token) {
@@ -1094,5 +1096,44 @@ class PageController extends Controller
         }
         return response()->json(['find_doctors' => $data,'status_code'=>200]);
     }
+
+
+    public function search_group(Request $request) {
+        
+        $grp = $request->term;
+        
+        
+        $token = $request->get('token');
+        $user = JWTAuth::toUser($token);
+        $id=$user->id;
+        $groups=\App\Group::where('doctor_id',$user->id)->where('name', 'like', '%' . $grp . '%')->get();
+        
+        $data=array();
+        foreach ($groups as $value) {
+            $data[]=array('value'=>$value->name,'id'=>$value->id);
+        }
+       
+        return $data;
+        
+    }
+    public function group_search_details(Request $request)
+     {
+
+       $group_name=$request->group_name;
+       $group_search=\App\Group::where('name',$group_name)->get()->toArray();
+        
+        /*echo "<pre>";
+        print_r($group_search);
+        echo "</pre>";die();*/
+        return response()->json(['error' => false,
+                'message' => "Data Found",
+                'group_search' => $group_search,
+                'code' => 200]);
+       //return response()->json(['group_list' => $group_search,'status_code'=>200]);
+         
+
+     }
+
+
 
 }

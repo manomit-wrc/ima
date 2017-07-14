@@ -4,7 +4,16 @@
                     <my-sidebar></my-sidebar>
                     <div class="col-md-8 Clear-991">
                         <div class="Rpanel">
-                            <h2>Groups<button type="button" class="btn_right" ng-click="loadAddNewGroup()"><i class="fa fa-plus" aria-hidden="true"></i> Add</button></h2>
+                            <h2 ng-controller="AuthController">Groups
+
+                             <button type="button" class="btnsearch" ng-click="getGroupData();"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            
+                            <input type="text" ng-model="grp" placeholder="Search Group Details" name="grp" id="grp" group-autocomplete="true"  class="btn_right">
+
+                             
+
+
+                            <button type="button" class="btn_right" ng-click="loadAddNewGroup()"><i class="fa fa-plus" aria-hidden="true"></i> Add</button></h2>
                             <div>{{message}}</div>
                             <div class="row">
                                 <div class="col-md-12">
@@ -27,6 +36,7 @@
                                             <td>
                                             <a class="ed" href="/groups/edit/{{j.id}}"><i class="fa fa-pencil-square" aria-hidden="true"></i></a> | <a class="ed" href="javascript:void(0)" ng-click="removeGroup(j.id)" ><i class="fa fa-trash" aria-hidden="true"></i></a></td>
                                           </tr>
+
                                         </table>
                                     </div>
                                 </div>
