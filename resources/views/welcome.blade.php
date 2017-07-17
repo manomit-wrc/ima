@@ -330,7 +330,62 @@
                 </div>
             </div>
 
-            
+             <script type="text/ng-template" id="myModalContent.html">
+                <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"  aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel"><i class="fa fa-user" aria-hidden="true"></i> Send Group Request</h4>
+                            <div class="login registration-error" ng-show="code==1">@{{message}}</div>
+                        </div>
+                <form name="sendGroupRequest" id="sendGroupRequest" ng-controller="AuthController">
+                            <div class="modal-body">
+                                <div class="infbox" ng-class="{
+                                            'has-error':!sendGroupRequest.receiver_email_id.$valid && (!sendGroupRequest.$pristine || sendGroupRequest.$submitted), 
+                                            'has-success': sendGroupRequest.receiver_email_id.$valid && (!sendGroupRequest.$pristine || sendGroupRequest.$submitted)
+                                            }">
+                                    <div class="userid"><i class="fa fa-user" aria-hidden="true"></i></div>
+                                    <input name="receiver_email_id" id="receiver_email_id" type="email" class="loginuser" placeholder="Enter Email ID" ng-model="receiver_email_id" required="required" disabled="disabled" />
+                                    <span class="help-block" ng-show="sendGroupRequest.receiver_email_id.$error.required && (!sendGroupRequest.$pristine || sendGroupRequest.$submitted)">Please Enter Email ID</span>
+
+                                    <span class="help-block" ng-show="sendGroupRequest.receiver_email_id.$error.email && (sendGroupRequest.$pristine || sendGroupRequest.$submitted)">Please Enter Valid Email ID</span>
+                                </div>
+                                <br clear="all">
+                                <div class="infbox" ng-class="{
+                                            'has-error':!sendGroupRequest.group_id.$valid && (!sendGroupRequest.$pristine || sendGroupRequest.$submitted), 
+                                            'has-success': sendGroupRequest.group_id.$valid && (!sendGroupRequest.$pristine || sendGroupRequest.$submitted)
+                                            }">
+                                    <div class="userid"><i class="fa fa-user" aria-hidden="true"></i></div>
+                                    <select name="group_id" ng-model="group_id" class="loginuser" required="required">
+                                    <option value="" disabled="disabled">Select Any Group</option>
+                                    <option ng-repeat="(key, value) in groups" value="@{{key}}" >@{{value}}</option>
+                                    </select>
+                                    <span class="help-block" ng-show="sendGroupRequest.group_id.$error.required && (!sendGroupRequest.$pristine || sendGroupRequest.$submitted)">Please Select  Group</span>
+
+                                    
+                                </div>
+
+                                <br clear="all">
+                                <div class="infbox" ng-class="{
+                                            'has-error':!sendGroupRequest.description.$valid && (!sendGroupRequest.$pristine || sendGroupRequest.$submitted), 
+                                            'has-success': sendGroupRequest.description.$valid && (!sendGroupRequest.$pristine || sendGroupRequest.$submitted)
+                                            }">
+                                    <div class="userid"><i class="fa fa-user" aria-hidden="true"></i></div>
+                                    <textarea name="description" ng-model="description" class="loginuser" required="required"></textarea>
+                                    <span class="help-block" ng-show="sendGroupRequest.group_id.$error.required && (!sendGroupRequest.$pristine || sendGroupRequest.$submitted)">Please Enter Description</span>
+
+                                    
+                                </div>
+
+                                <div class="modal-footer">
+                            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+                            <input type="button" class="btn primary-btn" value="Submit" ng-click="sendRequest()" />
+
+                            </div>
+                            
+                        </div>
+                        </form>
+                        </div>
+            </script>
     </div>
     <a href="javascript:void(0)" class="scrollup"><i class="fa fa-angle-up active"></i></a>
     <!-- Core JavaScript Files -->

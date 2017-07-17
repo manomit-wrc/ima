@@ -27,6 +27,8 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     $scope.group_list = {};
     $scope.doctor_list = {};
 
+    $scope.onSubmit = false;
+
 
     $scope.init = function () {
 		Auth.getUser().then(function(response){
@@ -1089,32 +1091,23 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 	    });
 	};
 
-	 $scope.open = function () {
+	 $scope.open = function (id) {
+	 	angular.element(document.querySelector(".newli")).removeClass("open");
         $modal.open({
-            templateUrl: 'myModalContent.html', // loads the template
-            backdrop: true, // setting backdrop allows us to close the modal window on clicking outside the modal window
-            windowClass: 'modal', // windowClass - additional CSS class(es) to be added to a modal window template
+            templateUrl: 'myModalContent.html',
+            backdrop: true, 
+            windowClass: 'modal', 
             controller: function ($scope, $modalInstance, $log, user) {
-                $scope.user = user;
-                $scope.submit = function () {
-                    $log.log('Submiting user info.'); // kinda console logs this statement
-                    $log.log(user);
-                    $http({
-                    method: 'POST', 
-                    url: 'https://mytesturl.com/apihit',
-                    headers: {
-                        "Content-type": undefined
-                    }
-                    , data: user
-                }).then(function (response) {
-                    console.log(response);
-                   $modalInstance.dismiss('cancel'); 
-                }, function (response) {
-                    console.log('i am in error');
-                   $modalInstance.dismiss('cancel'); 
-                    });
-                    //$modalInstance.dismiss('cancel'); // dismiss(reason) - a method that can be used to dismiss a modal, passing a reason
-                }
+                $http.get('/api/group-by-doctors',{
+                	params: {doctor_id:id}
+                }).then(function(response){
+	  				$scope.groups = response.data.groups;
+	  				$scope.receiver_email_id = response.data.doctor_details.email;
+				})
+				.catch(function(reason){
+
+				});
+                
                 $scope.cancel = function () {
                     $modalInstance.dismiss('cancel'); 
                 };
@@ -1124,8 +1117,49 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
                     return $scope.user;
                 }
             }
-        });//end of modal.open
-    }; // end of scope.open function
+        });
+    };
+
+    $scope.sendRequest = function() {
+    	if(!$scope.sendGroupRequest.$valid)
+    	{
+    		SweetAlert.swal({   
+		     title: "Please enter all details to send group request",  
+		     type: "warning",     
+		     confirmButtonColor: "#DD6B55",   
+		     confirmButtonText: "OK",
+		     closeOnConfirm: true
+		    });
+    	}
+    	else{
+    		$http.post('/api/send-group-request',{
+				receiver_email_id: $scope.receiver_email_id,
+				group_id: $scope.group_id,
+				description: $scope.description	
+    		}).then(function(response){
+    			SweetAlert.swal({   
+				     title: "Thank You",   
+				     text: response.data.message,   
+				     type: "success",     
+				     confirmButtonColor: "#DD6B55",   
+				     confirmButtonText: "OK"
+				    },  function(){  
+				     window.location.reload();
+				    });
+    		}).catch(function(reason){
+    			SweetAlert.swal({   
+				     title: "Thank You",   
+				     text: response.data.message,   
+				     type: "warning",     
+				     confirmButtonColor: "#DD6B55",   
+				     confirmButtonText: "OK",
+				     closeOnConfirm: true
+				    });
+    		});
+    	}
+    	
+    };
+
 
 });
 

@@ -1082,18 +1082,28 @@ class PageController extends Controller
 
     public function find_doctors(Request $request) {
         $user = JWTAuth::toUser($request->header('token'));
+        $receiver_details = \App\SendGroupRequest::select('receiver_id')->where('sender_id',$user->id)->get()->toArray();
+        
         $find_doctors = \App\Doctor::where('type','D')->where('id','<>',$user->id)->get();
 
         $doctor_arr = array();
 
-        foreach ($find_doctors as $value) {
-           if(file_exists( public_path() . '/uploads/doctors/thumb/'.$value['avators']) && $value['avators']) {
-                    $avators =  '/uploads/doctors/thumb/'.$value['avators'];
-            } else {
-                $avators =  '/uploads/doctors/noimage_user.jpg';
-            }
-            $data[]=array('name'=>$value->first_name." ".$value->last_name,'avators'=>$avators,'license'=>$value->license);
+        foreach ($receiver_details as $key => $value) {
+           $doctor_arr[] = $value['receiver_id'];
         }
+
+        foreach ($find_doctors as $value) {
+
+            if(!in_array($value->id, $doctor_arr)) {
+                if(file_exists( public_path() . '/uploads/doctors/thumb/'.$value['avators']) && $value['avators']) {
+                    $avators =  '/uploads/doctors/thumb/'.$value['avators'];
+                } else {
+                    $avators =  '/uploads/doctors/noimage_user.jpg';
+                }
+                $data[]=array('id'=>$value->id,'name'=>$value->first_name." ".$value->last_name,'avators'=>$avators,'license'=>$value->license);
+            }
+        }
+        
         return response()->json(['find_doctors' => $data,'status_code'=>200]);
     }
 
@@ -1184,6 +1194,44 @@ class PageController extends Controller
             return response()->json(['error' => true,
                         'code' => 500]);
         }
+    }
+
+    public function group_by_doctors(Request $request) {
+        $user = JWTAuth::toUser($request->header('token'));
+        $doctor_id = $request->doctor_id;
+        $doctor_details = \App\Doctor::find($doctor_id);
+        $groups = \App\Group::where('doctor_id',$user->id)->orderBy('name')->get()->pluck('name','id')->toArray();
+        return response()->json(['groups' => $groups,'doctor_details'=>$doctor_details]);
+    }
+
+    public function send_group_request(Request $request) {
+        $user = JWTAuth::toUser($request->header('token'));
+        $receiver_email_id = $request->receiver_email_id;
+        $group_id = $request->group_id;
+        $description = $request->description;
+        try {
+            $doctor_details = \App\Doctor::where('email',$receiver_email_id)->get()->toArray();
+
+
+            $insert_data = new \App\SendGroupRequest();
+            $insert_data->group_id = $group_id;
+            $insert_data->sender_id = $user->id;
+            $insert_data->receiver_id = $doctor_details[0]['id'];
+            $insert_data->description = $description;
+
+            $insert_data->save();
+
+            return response()->json(['error' => false,
+                'message' => "Request send successfully",
+                'code' => 200]);
+        }
+        catch(Exception $e) {
+            return response()->json(['error' => true,
+                'message' => "Please try again",
+                'code' => 500]);
+        }
+        
+
     }
 
 }

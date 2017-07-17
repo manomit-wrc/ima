@@ -83,4 +83,8 @@ Route::group(['middleware' => 'jwt.auth'], function () {
 
     Route::get('/check-doctor-image','PageController@check_doctor_image');
 
+    Route::get('/group-by-doctors','PageController@group_by_doctors');
+
+    Route::post('/send-group-request','PageController@send_group_request');
+
 });

@@ -39,6 +39,7 @@ return array(
     'CreateOrganizationsTable' => $baseDir . '/database/migrations/2017_05_23_110115_create_organizations_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
     'CreateQualificationsTable' => $baseDir . '/database/migrations/2017_07_04_094523_create_qualifications_table.php',
+    'CreateSendGroupRequestsTable' => $baseDir . '/database/migrations/2017_07_17_122221_create_send_group_requests_table.php',
     'CreateStatesTable' => $baseDir . '/database/migrations/2017_06_05_054329_create_states_table.php',
     'CreateTagsTable' => $baseDir . '/database/migrations/2017_05_25_110222_create_tags_table.php',
     'CreateTeamsTable' => $baseDir . '/database/migrations/2017_05_24_045605_create_teams_table.php',
