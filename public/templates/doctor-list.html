@@ -20,6 +20,7 @@
                                     <div class="table-responsive">
                                         <table width="100%" class="table table-bordered">
                                           <tr class="tabletop">
+                                            <td>Image</td>
                                             <td>Name</td>
                                             <td>Email</td>
                                             <td>Mobile</td>
@@ -28,6 +29,7 @@
                                           </tr>
                                           
                                           <tr ng-repeat="j in doctor_list track by $index">
+                                            <td><img class="img-thumbnail" img-check="{{j.avators?j.avators:'noimage_user.jpg'}}" width="100" height="100" />
                                             <td>{{j.first_name}} {{j.last_name}}</td>
                                             <td>{{j.email}}</td>
                                             <td>{{j.mobile}}</td>
@@ -45,3 +47,21 @@
                 </div>
             </div>
         </div>
+
+        <script type="text/ng-template" id="myModalContent.html">
+                <div class="modal-header">
+                    <h3>I'm a modal!</h3>
+                </div>
+                <form ng-submit="submit()">
+                  <div class="modal-body">
+                    <label>Email address:</label>
+                    <input type="email" ng-model="user.email" />
+                    <label>Password</label>
+                    <input type="password" ng-model="user.password" />
+                  </div>
+                  <div class="modal-footer">
+                      <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+                      <input type="submit" class="btn primary-btn" value="Submit" />
+                  </div>
+                </form>
+            </script>

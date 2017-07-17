@@ -1,6 +1,6 @@
 var AuthCtrl = angular.module('AuthCtrl',['oitozero.ngSweetAlert','ui.bootstrap','ngSlimScroll']);
 
-AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$routeParams,$cookieStore,$window,SweetAlert){
+AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$routeParams,$cookieStore,$window,SweetAlert,$modal){
 	$scope.code = '';
 	$scope.message = '';
 	$scope.user = {};
@@ -1061,6 +1061,43 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 	    });
 	};
 
+	 $scope.open = function () {
+        $modal.open({
+            templateUrl: 'myModalContent.html', // loads the template
+            backdrop: true, // setting backdrop allows us to close the modal window on clicking outside the modal window
+            windowClass: 'modal', // windowClass - additional CSS class(es) to be added to a modal window template
+            controller: function ($scope, $modalInstance, $log, user) {
+                $scope.user = user;
+                $scope.submit = function () {
+                    $log.log('Submiting user info.'); // kinda console logs this statement
+                    $log.log(user);
+                    $http({
+                    method: 'POST', 
+                    url: 'https://mytesturl.com/apihit',
+                    headers: {
+                        "Content-type": undefined
+                    }
+                    , data: user
+                }).then(function (response) {
+                    console.log(response);
+                   $modalInstance.dismiss('cancel'); 
+                }, function (response) {
+                    console.log('i am in error');
+                   $modalInstance.dismiss('cancel'); 
+                    });
+                    //$modalInstance.dismiss('cancel'); // dismiss(reason) - a method that can be used to dismiss a modal, passing a reason
+                }
+                $scope.cancel = function () {
+                    $modalInstance.dismiss('cancel'); 
+                };
+            },
+            resolve: {
+                user: function () {
+                    return $scope.user;
+                }
+            }
+        });//end of modal.open
+    }; // end of scope.open function
 
 });
 
@@ -1229,7 +1266,31 @@ AuthCtrl.directive('drugAutocomplete', function($http,$localStorage) {
             
         }
     }
-});
+}).directive('imgCheck', ['$http', function($http){
+        return {
+            link: function(scope, element, attrs){
+            	if(attrs.imgCheck) {
+            		$http.get('/api/check-doctor-image',{
+                	params: { avators: attrs.imgCheck}})
+                     .then(function(response){
+                     	
+                        if(response.data.code==200){
+                            attrs.$set('src','/uploads/doctors/thumb/'+attrs.imgCheck);
+                        }else{
+                            attrs.$set('src','/uploads/doctors/noimage_user.jpg');
+                        }
+                     })
+                     .catch(function(reason){
+                        attrs.$set('src','/uploads/doctors/noimage_user.jpg');
+                     });
+            	}
+            	else {
+            		attrs.$set('src','/uploads/doctors/noimage_user.jpg');
+            	}
+                
+            }
+        };
+}]);;
 
 
 

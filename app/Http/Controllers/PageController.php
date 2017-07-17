@@ -1047,7 +1047,7 @@ class PageController extends Controller
 
     public function doctor_list(Request $request) {
         $user = JWTAuth::toUser($request->header('token'));
-        $doctor_list = \App\Doctor::where('type','D')->where('id','<>',$user->id)->paginate(2);
+        $doctor_list = \App\Doctor::where('type','D')->where('id','<>',$user->id)->paginate(10);
         
         return response()->json(['doctor_list' => $doctor_list,'status_code'=>200]);
     }
@@ -1162,6 +1162,24 @@ class PageController extends Controller
                 'message' => "Data Found",
                 'group_search' => $group_search,
                 'code' => 200]);
+    }
+
+    public function check_doctor_image(Request $request) {
+        $avators = $request->avators;
+        try {
+            if(file_exists( public_path() .'/uploads/doctors/thumb/'.$avators)) {
+                    return response()->json(['error' => false,
+                        'code' => 200]);
+                } else {
+                    return response()->json(['error' => false,
+                        'code' => 404]);
+                  
+                }
+        }
+        catch(Exception $e) {
+            return response()->json(['error' => true,
+                        'code' => 500]);
+        }
     }
 
 }

@@ -81,6 +81,6 @@ Route::group(['middleware' => 'jwt.auth'], function () {
     Route::get('/drugs/search','PageController@search_drug');
     Route::get('/drugs-search-details','PageController@drugs_search_details');
 
-
+    Route::get('/check-doctor-image','PageController@check_doctor_image');
 
 });
