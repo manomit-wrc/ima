@@ -125,7 +125,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 	      for(var i=1;i<=response.data.doctor_list.last_page;i++) {          
 	        pages.push(i);
 	      }
-
+             console.log(pages);
 	      $scope.range = pages;
 		  
 	    });
@@ -140,7 +140,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 
 		$http.get('/api/group-list?page='+pageNumber).then(function(response){
 
-			$scope.group_list = response.data.group_list;
+			$scope.group_list = response.data.group_list.data;
             $scope.totalPages   = response.data.group_list.last_page;
           $scope.currentPage  = response.data.group_list.current_page;
             var pages = [];
@@ -166,8 +166,8 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 
 		$http.get('/api/group-list?page='+pageNumber).then(function(response){
               
-              console.log(response.data.group_list);
-			$scope.$parent.group_list = response.data.group_list;
+            //console.log(response.data.group_list.data);
+			$scope.$parent.group_list = response.data.group_list.data;
             $scope.$parent.totalPages   = response.data.group_list.last_page;
           $scope.$parent.currentPage  = response.data.group_list.current_page;
             var pages = [];
@@ -176,7 +176,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 	        pages.push(i);
 	      }
 
-	      $scope.range = pages;
+	      $scope.$parent.range = pages;
 
     	}).catch(function(reason) {
 
@@ -1259,7 +1259,7 @@ AuthCtrl.directive('drugAutocomplete', function($http,$localStorage) {
     return {
         restrict: 'A',
         require : 'ngModel',
-        link : function (scope, element, attrs, ngModelCtrl) {
+        link : function ($scope,$element,$attrs, ngModelCtrl) {
 
               
               element.autocomplete({
@@ -1271,9 +1271,29 @@ AuthCtrl.directive('drugAutocomplete', function($http,$localStorage) {
                 select:function (event,ui) {
                   
                     ngModelCtrl.$setViewValue(ui.item);
+
+                    $http.get('/api/group-search-details?page=1&group_id='+ui.item.id).then(function(response) {
+
+                    	   //console.log(response.data.group_search.data);
+						$scope.$parent.group_list = response.data.group_search.data;
+	      
+				      	$scope.$parent.totalPages   = response.data.group_search.last_page;
+				        $scope.$parent.currentPage  = response.data.group_search.current_page;
+
+				          var pages = [];
+
+					      for(var i=1;i<=response.data.group_search.last_page;i++) {          
+					        pages.push(i);
+					      }
+
+					      $scope.$parent.range = pages;
+					      
+				    });
+
                     
 					
                 }
+
               });
                 
             

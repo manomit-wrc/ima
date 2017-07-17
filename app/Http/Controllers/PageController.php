@@ -909,12 +909,20 @@ class PageController extends Controller
     }
 
     public function group_list(Request $request) {
+
         try{   
             $user = JWTAuth::toUser($request->header('token'));
             if($user->type == "D") {
-                $group_list = \App\Group::where('doctor_id',$user->id)->get()->toArray();
+                $group_list = \App\Group::where('doctor_id',$user->id)->paginate(2);
+                
+                //$group_list = \App\Group::where('doctor_id',$user->id)->get()->toArray();
+                 /*echo "<pre>";
+                print_r($group_list);
+                echo "</pre>";die();*/
+                 return response()->json(['group_list' => $group_list,'status_code'=>200]);
 
-                if($group_list) {
+
+                /*if($group_list) {
                     return response()->json(['error' => false,
                 'message' => "Data Found",
                 'group_list' => $group_list,
@@ -925,7 +933,7 @@ class PageController extends Controller
                 'message' => "No group found",
                 'group_list' => $group_list,
                 'code' => 404]);
-                }
+                }*/
             }
             else {
                 return response()->json(['error' => false,
