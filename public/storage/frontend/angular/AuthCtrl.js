@@ -1007,12 +1007,28 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
   }
 
   $scope.getGroupData=function(){
+  	console.log($scope.grp);
     $http.get('/api/group-search-details',{
     		params: { group_name:$scope.grp}
     	}).then(function(response){
 
     		$scope.$parent.group_list = response.data.group_search;
     		console.log($scope.$parent.group_list);
+
+    	});
+
+  };
+
+
+  $scope.getDrugData=function(){
+
+  	console.log($scope.drgs);
+    $http.get('/api/drugs-search-details',{
+    		params: { drug_name:$scope.drg}
+    	}).then(function(response){
+
+    		//$scope.$parent.group_list = response.data.group_search;
+    		//console.log($scope.$parent.group_list);
 
     	});
 
@@ -1044,6 +1060,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 		  
 	    });
 	};
+
 
 });
 
@@ -1188,6 +1205,31 @@ AuthCtrl.directive('groupAutocomplete', function($http,$localStorage) {
 
 });
 
+AuthCtrl.directive('drugAutocomplete', function($http,$localStorage) {
+    return {
+        restrict: 'A',
+        require : 'ngModel',
+        link : function (scope, element, attrs, ngModelCtrl) {
+
+              
+              element.autocomplete({
+              	/*source:function(request, response) {
+              		'/api/doctors/search',{ token: $localStorage.token }
+              	},*/
+                  
+              	source: '/api/drugs/search?token='+$localStorage.token,
+                select:function (event,ui) {
+                  
+                    ngModelCtrl.$setViewValue(ui.item);
+                    
+					
+                }
+              });
+                
+            
+        }
+    }
+});
 
 
 

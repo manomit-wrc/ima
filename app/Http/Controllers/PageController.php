@@ -1121,19 +1121,47 @@ class PageController extends Controller
 
        $group_name=$request->group_name;
        $group_search=\App\Group::where('name',$group_name)->get()->toArray();
-        
-        /*echo "<pre>";
-        print_r($group_search);
-        echo "</pre>";die();*/
+       
         return response()->json(['error' => false,
                 'message' => "Data Found",
                 'group_search' => $group_search,
                 'code' => 200]);
-       //return response()->json(['group_list' => $group_search,'status_code'=>200]);
+    }
+
+   public function search_drug(Request $request) {
+        
+        $drg = $request->term;
+        
+        
+        $token = $request->get('token');
+        $user = JWTAuth::toUser($token);
+        $id=$user->id;
+        $drugs=\App\Drug::where('doctor_id',$user->id)->where('title', 'like', '%' . $drg . '%')->get();
+        
+        $data=array();
+        foreach ($drugs as $value) {
+            $data[]=array('value'=>$value->title,'id'=>$value->id);
+        }
          
+        return $data;
+        
+    }
 
-     }
 
 
+
+
+    public function drugs_search_details(Request $request)
+     {
+
+       $drug_name=$request->drug_name;
+       echo 'hello'.$drug_name;die();
+       $group_search=\App\Group::where('name',$group_name)->get()->toArray();
+       
+        return response()->json(['error' => false,
+                'message' => "Data Found",
+                'group_search' => $group_search,
+                'code' => 200]);
+    }
 
 }

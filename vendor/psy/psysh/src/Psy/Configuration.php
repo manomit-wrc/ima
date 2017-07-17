@@ -183,7 +183,7 @@ class Configuration
      */
     public function getLocalConfigFile()
     {
-        $localConfig = getcwd() . '/.psysh.php';
+        $localConfig = getenv('PWD') . '/.psysh.php';
 
         if (@is_file($localConfig)) {
             return $localConfig;

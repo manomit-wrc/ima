@@ -27,6 +27,14 @@
                     <div class="col-md-8 Clear-991">
                         <div class="Rpanel">
                             <h2>Drugs
+
+                             <button type="button" class="btnsearch" ng-click="getDrugData();"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            
+                            <input type="text" ng-model="drgs" placeholder="Search Drug Details" name="drgs" id="drgs" drug-autocomplete="true"  class="btn_right">
+
+
+
+
                             <button type="button" class="btn_right" ng-click="loadAddNewDrug()"><i class="fa fa-plus" aria-hidden="true"></i> Add</button>
 
                             <!--<input type="search" ng-model="q" placeholder="search" class="filter_input">-->
