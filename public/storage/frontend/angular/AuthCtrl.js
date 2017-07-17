@@ -131,6 +131,61 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 	    });
 	};
 	
+	$scope.groupList = function(pageNumber) {
+		
+
+		if(pageNumber===undefined){
+      		pageNumber = '1';
+    	}
+
+		$http.get('/api/group-list?page='+pageNumber).then(function(response){
+
+			$scope.group_list = response.data.group_list;
+            $scope.totalPages   = response.data.group_list.last_page;
+          $scope.currentPage  = response.data.group_list.current_page;
+            var pages = [];
+
+	      for(var i=1;i<=response.data.group_list.last_page;i++) {          
+	        pages.push(i);
+	      }
+
+	      $scope.range = pages;
+
+    	}).catch(function(reason) {
+
+		});
+	};
+
+    
+    $scope.getGroupData = function(pageNumber) {
+		
+
+		if(pageNumber===undefined){
+      		pageNumber = '1';
+    	}
+
+		$http.get('/api/group-list?page='+pageNumber).then(function(response){
+              
+              console.log(response.data.group_list);
+			$scope.$parent.group_list = response.data.group_list;
+            $scope.$parent.totalPages   = response.data.group_list.last_page;
+          $scope.$parent.currentPage  = response.data.group_list.current_page;
+            var pages = [];
+
+	      for(var i=1;i<=response.data.group_list.last_page;i++) {          
+	        pages.push(i);
+	      }
+
+	      $scope.range = pages;
+
+    	}).catch(function(reason) {
+
+		});
+	};
+
+
+
+
 
 
     $scope.getEventPage = function(pageNumber) {
@@ -843,23 +898,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 	};
 
 
-	$scope.groupList = function() {
-		
-		$http.get('/api/group-list'
-    	).then(function(response){
-
-    		if(response.data.code != 200) {
-
-				$scope.message = response.data.message;
-			}
-			else {
-				$scope.message = '';
-			}
-			$scope.group_list = response.data.group_list;
-    	}).catch(function(reason) {
-
-		});
-	};
+	
 
 	$scope.doAddGroup = function(valid) {
 		if(valid) {
@@ -1006,18 +1045,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
   		
   }
 
-  $scope.getGroupData=function(){
-  	console.log($scope.grp);
-    $http.get('/api/group-search-details',{
-    		params: { group_name:$scope.grp}
-    	}).then(function(response){
-
-    		$scope.$parent.group_list = response.data.group_search;
-    		console.log($scope.$parent.group_list);
-
-    	});
-
-  };
+  
 
 
   $scope.getDrugData=function(){
@@ -1027,8 +1055,8 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     		params: { drug_name:$scope.drg}
     	}).then(function(response){
 
-    		//$scope.$parent.group_list = response.data.group_search;
-    		//console.log($scope.$parent.group_list);
+    		//$scope.$parent.drug_list = response.data.group_search;
+    		//console.log($scope.$parent.drug_list);
 
     	});
 
@@ -1182,10 +1210,10 @@ AuthCtrl.directive('groupAutocomplete', function($http,$localStorage) {
     return {
         restrict: 'A',
         require : 'ngModel',
-        link : function (scope, element, attrs, ngModelCtrl) {
+        link : function ($scope, $element, $attrs, ngModelCtrl) {
 
               
-              element.autocomplete({
+              $element.autocomplete({
               	/*source:function(request, response) {
               		'/api/doctors/search',{ token: $localStorage.token }
               	},*/
@@ -1194,9 +1222,31 @@ AuthCtrl.directive('groupAutocomplete', function($http,$localStorage) {
                 select:function (event,ui) {
                   
                     ngModelCtrl.$setViewValue(ui.item);
-                    
+
+
+                    $http.get('/api/group-search-details?page=1&group_id='+ui.item.id).then(function(response) {
+
+                    	   //console.log(response.data.group_search.data);
+						$scope.$parent.group_list = response.data.group_search.data;
+	      
+				      	$scope.$parent.totalPages   = response.data.group_search.last_page;
+				        $scope.$parent.currentPage  = response.data.group_search.current_page;
+
+				          var pages = [];
+
+					      for(var i=1;i<=response.data.group_search.last_page;i++) {          
+					        pages.push(i);
+					      }
+
+					      $scope.$parent.range = pages;
+					      
+				    });
 					
+                
+
                 }
+
+
               });
                 
             
