@@ -127,7 +127,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 	      for(var i=1;i<=response.data.doctor_list.last_page;i++) {          
 	        pages.push(i);
 	      }
-
+             console.log(pages);
 	      $scope.range = pages;
 		  
 	    });
@@ -142,7 +142,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 
 		$http.get('/api/group-list?page='+pageNumber).then(function(response){
 
-			$scope.group_list = response.data.group_list;
+			$scope.group_list = response.data.group_list.data;
             $scope.totalPages   = response.data.group_list.last_page;
           $scope.currentPage  = response.data.group_list.current_page;
             var pages = [];
@@ -168,8 +168,8 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 
 		$http.get('/api/group-list?page='+pageNumber).then(function(response){
               
-              console.log(response.data.group_list);
-			$scope.$parent.group_list = response.data.group_list;
+            //console.log(response.data.group_list.data);
+			$scope.$parent.group_list = response.data.group_list.data;
             $scope.$parent.totalPages   = response.data.group_list.last_page;
           $scope.$parent.currentPage  = response.data.group_list.current_page;
             var pages = [];
@@ -178,7 +178,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 	        pages.push(i);
 	      }
 
-	      $scope.range = pages;
+	      $scope.$parent.range = pages;
 
     	}).catch(function(reason) {
 
@@ -411,6 +411,37 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 			
 		});
 	};
+
+
+	$scope.getDrugData = function(pageNumber) {
+		
+
+		if(pageNumber===undefined){
+      		pageNumber = '1';
+    	}
+
+		$http.get('/api/drug-list?page='+pageNumber).then(function(response){
+              
+            //console.log(response.data.group_list.data);
+			$scope.$parent.drug_list = response.data.drug_list.data;
+            $scope.$parent.totalPages   = response.data.drug_list.last_page;
+          $scope.$parent.currentPage  = response.data.drug_list.current_page;
+            var pages = [];
+
+	      for(var i=1;i<=response.data.drug_list.last_page;i++) {          
+	        pages.push(i);
+	      }
+
+	      $scope.$parent.range = pages;
+
+    	}).catch(function(reason) {
+
+		});
+	};
+
+
+
+	
 
 	$scope.doLogout = function() {
 
@@ -1050,19 +1081,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
   
 
 
-  $scope.getDrugData=function(){
-
-  	console.log($scope.drgs);
-    $http.get('/api/drugs-search-details',{
-    		params: { drug_name:$scope.drg}
-    	}).then(function(response){
-
-    		//$scope.$parent.drug_list = response.data.group_search;
-    		//console.log($scope.$parent.drug_list);
-
-    	});
-
-  };
+  
 
   $scope.searchAllDoctors = function(pageNumber) {
 		
@@ -1327,13 +1346,14 @@ AuthCtrl.directive('groupAutocomplete', function($http,$localStorage) {
 });
 
 AuthCtrl.directive('drugAutocomplete', function($http,$localStorage) {
+
     return {
         restrict: 'A',
         require : 'ngModel',
-        link : function (scope, element, attrs, ngModelCtrl) {
+        link : function ($scope,$element,attrs, ngModelCtrl) {
 
               
-              element.autocomplete({
+              $element.autocomplete({
               	/*source:function(request, response) {
               		'/api/doctors/search',{ token: $localStorage.token }
               	},*/
@@ -1342,9 +1362,29 @@ AuthCtrl.directive('drugAutocomplete', function($http,$localStorage) {
                 select:function (event,ui) {
                   
                     ngModelCtrl.$setViewValue(ui.item);
+
+                    $http.get('/api/drugs-search-details?page=1&drug_id='+ui.item.id).then(function(response) {
+
+                    	  //console.log(response.data.drug_search.data);
+						$scope.$parent.drug_list = response.data.drug_search.data;
+	      
+				      	$scope.$parent.totalPages   = response.data.drug_search.last_page;
+				        $scope.$parent.currentPage  = response.data.drug_search.current_page;
+
+				          var pages = [];
+
+					      for(var i=1;i<=response.data.drug_search.last_page;i++) {          
+					        pages.push(i);
+					      }
+
+					      $scope.$parent.range = pages;
+					      
+				    });
+
                     
 					
                 }
+
               });
                 
             

@@ -909,12 +909,20 @@ class PageController extends Controller
     }
 
     public function group_list(Request $request) {
+
         try{   
             $user = JWTAuth::toUser($request->header('token'));
             if($user->type == "D") {
-                $group_list = \App\Group::where('doctor_id',$user->id)->get()->toArray();
+                $group_list = \App\Group::where('doctor_id',$user->id)->paginate(2);
+                
+                //$group_list = \App\Group::where('doctor_id',$user->id)->get()->toArray();
+                 /*echo "<pre>";
+                print_r($group_list);
+                echo "</pre>";die();*/
+                 return response()->json(['group_list' => $group_list,'status_code'=>200]);
 
-                if($group_list) {
+
+                /*if($group_list) {
                     return response()->json(['error' => false,
                 'message' => "Data Found",
                 'group_list' => $group_list,
@@ -925,7 +933,7 @@ class PageController extends Controller
                 'message' => "No group found",
                 'group_list' => $group_list,
                 'code' => 404]);
-                }
+                }*/
             }
             else {
                 return response()->json(['error' => false,
@@ -1146,7 +1154,6 @@ class PageController extends Controller
         
         $drg = $request->term;
         
-        
         $token = $request->get('token');
         $user = JWTAuth::toUser($token);
         $id=$user->id;
@@ -1156,7 +1163,7 @@ class PageController extends Controller
         foreach ($drugs as $value) {
             $data[]=array('value'=>$value->title,'id'=>$value->id);
         }
-         
+        
         return $data;
         
     }
@@ -1167,15 +1174,17 @@ class PageController extends Controller
 
     public function drugs_search_details(Request $request)
      {
+        $drug_id=$request->drug_id;
 
-       $drug_name=$request->drug_name;
-       echo 'hello'.$drug_name;die();
-       $group_search=\App\Group::where('name',$group_name)->get()->toArray();
        
-        return response()->json(['error' => false,
+       //$group_search=\App\Group::where('id',$drug_id)->get()->toArray();
+       $drug_search=\App\Drug::where('id',$drug_id)->paginate(10);
+      
+       return response()->json(['drug_search' => $drug_search,'status_code'=>200]);
+        /*return response()->json(['error' => false,
                 'message' => "Data Found",
                 'group_search' => $group_search,
-                'code' => 200]);
+                'code' => 200]);*/
     }
 
     public function check_doctor_image(Request $request) {

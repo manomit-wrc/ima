@@ -1,4 +1,4 @@
-<div class="container"  ng-init='getdrugList();'>
+<div class="container"  ng-init='getdrugList(1);'>
             <div class="row">
                 <div class="innertopB">
                     <div class="col-md-4">
@@ -20,7 +20,7 @@
                                 <!--<h4>National President</h4>-->
                                 <h5 class="user_address"><i class="fa fa-map-marker" aria-hidden="true"></i> Kolkata,&nbsp;West Bengal, &nbsp;India</h5>
                             </div>
-                            <button type="button" class="LeftBtn" ng-click="loadCompanyProfile()"><i class="fa fa-user" aria-hidden="true"></i> Edit profile</button>
+                            <button type="button" class="LeftBtn" ng-click="loadCompanyProfile(1)"><i class="fa fa-user" aria-hidden="true"></i> Edit profile</button>
                             <button type="button" class="LeftBtnActive" ng-click="loadDrugProfile()"><i class="fa fa-user" aria-hidden="true" ></i>Drug</button>
                         </div>
                     </div>
@@ -28,7 +28,7 @@
                         <div class="Rpanel">
                             <h2>Drugs
 
-                             <button type="button" class="btnsearch" ng-click="getDrugData();"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            <button type="button" class="btnsearch" ng-click="getDrugData(1);"><i class="fa fa-search" aria-hidden="true"></i></button>
                             
                             <input type="text" ng-model="drgs" placeholder="Search Drug Details" name="drgs" id="drgs" drug-autocomplete="true"  class="btn_right">
 
@@ -79,6 +79,8 @@
                                         </table>
                                     </div>
                                 </div>
+                                <br clear="All">
+                                <drugs-pagination></drugs-pagination>
                             </div>
                             
                         </div>
