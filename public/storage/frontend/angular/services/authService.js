@@ -429,8 +429,8 @@ authService.factory('AuthInterceptor', function ($q, $location, $localStorage,$w
         	
 
             if (response.status === 401 || response.status === 403 || response.status === 500) {
-                //$location.path("/");
-                $window.location.href="/";
+                $location.path("/");
+                //$window.location.href="/";
             }
             return $q.reject(response);
         }

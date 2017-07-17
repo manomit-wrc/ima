@@ -1106,6 +1106,7 @@ class PageController extends Controller
         $token = $request->get('token');
         $user = JWTAuth::toUser($token);
         $id=$user->id;
+
         $groups=\App\Group::where('doctor_id',$user->id)->where('name', 'like', '%' . $grp . '%')->get();
         
         $data=array();
@@ -1118,14 +1119,17 @@ class PageController extends Controller
     }
     public function group_search_details(Request $request)
      {
+       $group_id=$request->group_id;
 
-       $group_name=$request->group_name;
-       $group_search=\App\Group::where('name',$group_name)->get()->toArray();
-       
-        return response()->json(['error' => false,
-                'message' => "Data Found",
-                'group_search' => $group_search,
-                'code' => 200]);
+       //$doctor_list = \App\Doctor::where('id',$request->doctor_id)->where('type','D')->paginate(10);
+
+       //$group_name=$request->group_name;
+       $group_search=\App\Group::where('id',$request->group_id)->paginate(10);
+     
+       return response()->json(['group_search' => $group_search,'status_code'=>200]);
+
+
+        
     }
 
    public function search_drug(Request $request) {
