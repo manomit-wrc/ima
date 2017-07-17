@@ -410,6 +410,37 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 		});
 	};
 
+
+	$scope.getDrugData = function(pageNumber) {
+		
+
+		if(pageNumber===undefined){
+      		pageNumber = '1';
+    	}
+
+		$http.get('/api/drug-list?page='+pageNumber).then(function(response){
+              
+            //console.log(response.data.group_list.data);
+			$scope.$parent.drug_list = response.data.drug_list.data;
+            $scope.$parent.totalPages   = response.data.drug_list.last_page;
+          $scope.$parent.currentPage  = response.data.drug_list.current_page;
+            var pages = [];
+
+	      for(var i=1;i<=response.data.drug_list.last_page;i++) {          
+	        pages.push(i);
+	      }
+
+	      $scope.$parent.range = pages;
+
+    	}).catch(function(reason) {
+
+		});
+	};
+
+
+
+	
+
 	$scope.doLogout = function() {
 
 		Auth.logout();
@@ -1048,19 +1079,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
   
 
 
-  $scope.getDrugData=function(){
-
-  	console.log($scope.drgs);
-    $http.get('/api/drugs-search-details',{
-    		params: { drug_name:$scope.drg}
-    	}).then(function(response){
-
-    		//$scope.$parent.drug_list = response.data.group_search;
-    		//console.log($scope.$parent.drug_list);
-
-    	});
-
-  };
+  
 
   $scope.searchAllDoctors = function(pageNumber) {
 		
@@ -1256,13 +1275,14 @@ AuthCtrl.directive('groupAutocomplete', function($http,$localStorage) {
 });
 
 AuthCtrl.directive('drugAutocomplete', function($http,$localStorage) {
+
     return {
         restrict: 'A',
         require : 'ngModel',
-        link : function ($scope,$element,$attrs, ngModelCtrl) {
+        link : function ($scope,$element,attrs, ngModelCtrl) {
 
               
-              element.autocomplete({
+              $element.autocomplete({
               	/*source:function(request, response) {
               		'/api/doctors/search',{ token: $localStorage.token }
               	},*/
@@ -1272,17 +1292,17 @@ AuthCtrl.directive('drugAutocomplete', function($http,$localStorage) {
                   
                     ngModelCtrl.$setViewValue(ui.item);
 
-                    $http.get('/api/group-search-details?page=1&group_id='+ui.item.id).then(function(response) {
+                    $http.get('/api/drugs-search-details?page=1&drug_id='+ui.item.id).then(function(response) {
 
-                    	   //console.log(response.data.group_search.data);
-						$scope.$parent.group_list = response.data.group_search.data;
+                    	  //console.log(response.data.drug_search.data);
+						$scope.$parent.drug_list = response.data.drug_search.data;
 	      
-				      	$scope.$parent.totalPages   = response.data.group_search.last_page;
-				        $scope.$parent.currentPage  = response.data.group_search.current_page;
+				      	$scope.$parent.totalPages   = response.data.drug_search.last_page;
+				        $scope.$parent.currentPage  = response.data.drug_search.current_page;
 
 				          var pages = [];
 
-					      for(var i=1;i<=response.data.group_search.last_page;i++) {          
+					      for(var i=1;i<=response.data.drug_search.last_page;i++) {          
 					        pages.push(i);
 					      }
 

@@ -1144,7 +1144,6 @@ class PageController extends Controller
         
         $drg = $request->term;
         
-        
         $token = $request->get('token');
         $user = JWTAuth::toUser($token);
         $id=$user->id;
@@ -1154,7 +1153,7 @@ class PageController extends Controller
         foreach ($drugs as $value) {
             $data[]=array('value'=>$value->title,'id'=>$value->id);
         }
-         
+        
         return $data;
         
     }
@@ -1165,15 +1164,17 @@ class PageController extends Controller
 
     public function drugs_search_details(Request $request)
      {
+        $drug_id=$request->drug_id;
 
-       $drug_name=$request->drug_name;
-       echo 'hello'.$drug_name;die();
-       $group_search=\App\Group::where('name',$group_name)->get()->toArray();
        
-        return response()->json(['error' => false,
+       //$group_search=\App\Group::where('id',$drug_id)->get()->toArray();
+       $drug_search=\App\Drug::where('id',$drug_id)->paginate(10);
+      
+       return response()->json(['drug_search' => $drug_search,'status_code'=>200]);
+        /*return response()->json(['error' => false,
                 'message' => "Data Found",
                 'group_search' => $group_search,
-                'code' => 200]);
+                'code' => 200]);*/
     }
 
 }

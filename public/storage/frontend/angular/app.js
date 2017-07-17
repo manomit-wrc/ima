@@ -67,6 +67,22 @@ imaApp.directive('groupsPagination', function(){
    };
 });
 
+imaApp.directive('drugsPagination', function(){  
+   return{
+      restrict: 'E',
+      template: '<nav aria-label="Page navigation">'+
+        '<ul class="pagination pagiright">'+
+        '<li ng-show="currentPage != 1"><a href="javascript:void(0)" ng-click="groupList(1)">&laquo;</a></li>'+
+        '<li ng-show="currentPage != 1"><a href="javascript:void(0)" ng-click="groupList(currentPage-1)">&lsaquo; Prev</a></li>'+
+        '<li ng-repeat="i in range" ng-class="{active : currentPage == i}">'+
+            '<a href="javascript:void(0)" ng-click="groupList(i)">{{i}}</a>'+
+        '</li>'+
+        '<li ng-show="currentPage != totalPages"><a href="javascript:void(0)" ng-click="groupList(currentPage+1)">Next &rsaquo;</a></li>'+
+        '<li ng-show="currentPage != totalPages"><a href="javascript:void(0)" ng-click="groupList(totalPages)">&raquo;</a></li>'+
+      '</ul></nav>'
+   };
+});
+
 imaApp.filter('htmlToPlaintext', function(){
 	return function(text) {
       return  text ? String(text).replace(/<[^>]+>/gm, '') : '';
