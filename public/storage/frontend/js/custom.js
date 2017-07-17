@@ -210,6 +210,7 @@
 
     // activate counter for filters
     gridContainer.cubeportfolio('showCounter', filtersContainer.find('.cbp-filter-item'));
+    
 
 })(jQuery, window, document);
 		

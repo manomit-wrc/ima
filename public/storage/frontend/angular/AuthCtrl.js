@@ -21,11 +21,12 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     $scope.currentPage = 1;
     $scope.range = [];
     $scope.map='';
-<<<<<<< HEAD
+
     $scope.find_doctors = {};
-=======
+
     $scope.group_list = {};
->>>>>>> cf006fffcd017f821c465639fde1148c56b645ce
+    $scope.doctor_list = {};
+
 
     $scope.init = function () {
 		Auth.getUser().then(function(response){
@@ -1017,6 +1018,33 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 
   };
 
+  $scope.searchAllDoctors = function(pageNumber) {
+		
+
+		if(pageNumber===undefined){
+      		pageNumber = '1';
+    	}
+
+		$http.get('/api/doctor-list?page='+pageNumber).then(function(response) {
+
+		
+    	  
+    	  $scope.$parent.doctor_list = response.data.doctor_list.data;
+	      
+      	  $scope.$parent.totalPages   = response.data.doctor_list.last_page;
+          $scope.$parent.currentPage  = response.data.doctor_list.current_page;
+
+          var pages = [];
+
+	      for(var i=1;i<=response.data.doctor_list.last_page;i++) {          
+	        pages.push(i);
+	      }
+
+	      $scope.$parent.range = pages;
+		  
+	    });
+	};
+
 });
 
 AuthCtrl.directive('addressBasedGoogleMap', function () {
@@ -1081,21 +1109,29 @@ AuthCtrl.directive('autocomplete', function($http,$localStorage) {
     return {
         restrict: 'A',
         require : 'ngModel',
-        link : function (scope, element, attrs, ngModelCtrl) {
+        link : function ($scope, $element, $attrs, ngModelCtrl) {
               
-              element.autocomplete({
-              	/*source:function(request, response) {
-              		'/api/doctors/search',{ token: $localStorage.token }
-              	},*/
-
+              $element.autocomplete({
               	source: '/api/doctors/search?token='+$localStorage.token,
                 select:function (event,ui) {
                   
                     ngModelCtrl.$setViewValue(ui.item);
                     
 					$http.get('/api/doctor-search?page=1&doctor_id='+ui.item.id).then(function(response) {
+						$scope.$parent.doctor_list = response.data.doctor_list.data;
+	      
+				      	$scope.$parent.totalPages   = response.data.doctor_list.last_page;
+				        $scope.$parent.currentPage  = response.data.doctor_list.current_page;
+
+				          var pages = [];
+
+					      for(var i=1;i<=response.data.doctor_list.last_page;i++) {          
+					        pages.push(i);
+					      }
+
+					      $scope.$parent.range = pages;
 				    });
-                    scope.$apply();
+                    
                 }
               });
                 

@@ -415,7 +415,7 @@ authService.factory('AuthToken', function($localStorage){
 	return authTokenFactory;
 });
 
-authService.factory('AuthInterceptor', function ($q, $location, $localStorage) {
+authService.factory('AuthInterceptor', function ($q, $location, $localStorage,$window) {
     return {
         'request': function (config) {
             config.headers = config.headers || {};
@@ -429,7 +429,8 @@ authService.factory('AuthInterceptor', function ($q, $location, $localStorage) {
         	
 
             if (response.status === 401 || response.status === 403 || response.status === 500) {
-                $location.path("/");
+                //$location.path("/");
+                $window.location.href="/";
             }
             return $q.reject(response);
         }

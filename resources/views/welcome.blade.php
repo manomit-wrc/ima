@@ -234,54 +234,54 @@
                             <div class="modal-body">
 
                                 <div class="infbox" ng-class="{
-                                            'has-error':!frmRegistration.first_name.$valid && (frmRegistration.$pristine || frmRegistration.$submitted), 
-                                            'has-success': frmRegistration.first_name.$valid && (frmRegistration.$pristine || frmRegistration.$submitted)
+                                            'has-error':!frmRegistration.first_name.$valid && (!frmRegistration.$pristine || frmRegistration.$submitted), 
+                                            'has-success': frmRegistration.first_name.$valid && (!frmRegistration.$pristine || frmRegistration.$submitted)
                                             }">
                                     <div class="userid"><i class="fa fa-user" aria-hidden="true"></i></div>
                                     <input name="first_name" id="first_name" type="text" ng-model="registration.first_name" class="loginuser" placeholder="Enter First Name" required="required" />
-                                    <span class="help-block" ng-show="frmRegistration.first_name.$error.required && (frmRegistration.$pristine || frmRegistration.$submitted)">Please Enter First Name</span>
+                                    <span class="help-block" ng-show="frmRegistration.first_name.$error.required && (!frmRegistration.$pristine || frmRegistration.$submitted)">Please Enter First Name</span>
                                 </div>
                                 <br clear="all">
                                 <div class="infbox" ng-class="{
-                                            'has-error':!frmRegistration.last_name.$valid && (frmRegistration.$pristine || frmRegistration.$submitted), 
-                                            'has-success': frmRegistration.last_name.$valid && (frmRegistration.$pristine || frmRegistration.$submitted)
+                                            'has-error':!frmRegistration.last_name.$valid && (!frmRegistration.$pristine || frmRegistration.$submitted), 
+                                            'has-success': frmRegistration.last_name.$valid && (!frmRegistration.$pristine || frmRegistration.$submitted)
                                             }">
                                     <div class="userid"><i class="fa fa-user" aria-hidden="true"></i></div>
                                     <input name="last_name" id="last_name" type="text" class="loginuser" ng-model="registration.last_name" placeholder="Enter Last Name" required="required" />
-                                    <span class="help-block" ng-show="frmRegistration.last_name.$error.required && (frmRegistration.$pristine || frmRegistration.$submitted)">Please Enter Last Name</span>
+                                    <span class="help-block" ng-show="frmRegistration.last_name.$error.required && (!frmRegistration.$pristine || frmRegistration.$submitted)">Please Enter Last Name</span>
                                 </div>
                                 <br clear="all">
                                 <div class="infbox" ng-class="{
-                                            'has-error':!frmRegistration.email_id.$valid && (frmRegistration.$pristine || frmRegistration.$submitted), 
-                                            'has-success': frmRegistration.email_id.$valid && (frmRegistration.$pristine || frmRegistration.$submitted)
+                                            'has-error':!frmRegistration.email_id.$valid && (!frmRegistration.$pristine || frmRegistration.$submitted), 
+                                            'has-success': frmRegistration.email_id.$valid && (!frmRegistration.$pristine || frmRegistration.$submitted)
                                             }">
                                     <div class="userid">@</div>
                                     <input name="email_id" id="email_id" type="email" ng-model="registration.email_id" class="loginuser" placeholder="Enter Email ID" required="required" />
-                                    <span class="help-block" ng-show="frmRegistration.email_id.$error.required && (frmRegistration.$pristine || frmRegistration.$submitted)">Please Enter Email ID</span>
-                                    <span class="help-block" ng-show="frmRegistration.email_id.$error.email && (frmRegistration.$pristine || frmRegistration.$submitted)">Please Enter Valid Email ID</span>
+                                    <span class="help-block" ng-show="frmRegistration.email_id.$error.required && (!frmRegistration.$pristine || frmRegistration.$submitted)">Please Enter Email ID</span>
+                                    <span class="help-block" ng-show="frmRegistration.email_id.$error.email && (!frmRegistration.$pristine || frmRegistration.$submitted)">Please Enter Valid Email ID</span>
                                 </div>
                                 <br clear="all">
                                 <div class="infbox" ng-class="{
-                                            'has-error':!frmRegistration.mobile_no.$valid && (frmRegistration.$pristine || frmRegistration.$submitted), 
-                                            'has-success': frmRegistration.mobile_no.$valid && (frmRegistration.$pristine || frmRegistration.$submitted)
+                                            'has-error':!frmRegistration.mobile_no.$valid && (!frmRegistration.$pristine || frmRegistration.$submitted), 
+                                            'has-success': frmRegistration.mobile_no.$valid && (!frmRegistration.$pristine || frmRegistration.$submitted)
                                             }">
                                     <div class="userid"><i class="fa fa-phone-square" aria-hidden="true"></i></div>
                                     <input name="mobile_no" id="mobile_no" type="text" class="loginuser" ng-model="registration.mobile_no" maxlength="10" placeholder="Enter Mobile No" ng-maxlength="10" ng-minlength="10" required="required" />
-                                    <span class="help-block" ng-show="frmRegistration.mobile_no.$error.required && (frmRegistration.$pristine || frmRegistration.$submitted)">Please Enter Mobile No</span>
-                                    <span class="help-block" ng-show="frmRegistration.mobile_no.$error.maxlength  && (frmRegistration.$pristine || frmRegistration.$submitted)">Mobile No Must Have 10 Digits</span>
-                                    <span class="help-block" ng-show="frmRegistration.mobile_no.$error.minlength  && (frmRegistration.$pristine || frmRegistration.$submitted)">Mobile No Must Have 10 Digits</span>
-                                    <span class="help-block" ng-show="frmRegistration.mobile_no.$error.number  && (frmRegistration.$pristine || frmRegistration.$submitted)">Mobile No Must Be Numeric</span>
+                                    <span class="help-block" ng-show="frmRegistration.mobile_no.$error.required && (!frmRegistration.$pristine || frmRegistration.$submitted)">Please Enter Mobile No</span>
+                                    <span class="help-block" ng-show="frmRegistration.mobile_no.$error.maxlength  && (!frmRegistration.$pristine || frmRegistration.$submitted)">Mobile No Must Have 10 Digits</span>
+                                    <span class="help-block" ng-show="frmRegistration.mobile_no.$error.minlength  && (!frmRegistration.$pristine || frmRegistration.$submitted)">Mobile No Must Have 10 Digits</span>
+                                    <span class="help-block" ng-show="frmRegistration.mobile_no.$error.number  && (!frmRegistration.$pristine || frmRegistration.$submitted)">Mobile No Must Be Numeric</span>
                                 </div>
                                 <br clear="all">
                                 <div class="infbox" ng-class="{
-                                            'has-error':!frmRegistration.password.$valid && (frmRegistration.$pristine || frmRegistration.$submitted), 
-                                            'has-success': frmRegistration.password.$valid && (frmRegistration.$pristine || frmRegistration.$submitted)
+                                            'has-error':!frmRegistration.password.$valid && (!frmRegistration.$pristine || frmRegistration.$submitted), 
+                                            'has-success': frmRegistration.password.$valid && (!frmRegistration.$pristine || frmRegistration.$submitted)
                                             }">
                                     <div class="userid"><i class="fa fa-key" aria-hidden="true"></i></div>
                                     <input name="password" id="password" type="password" ng-model="registration.password" class="loginuser" placeholder="Enter Password" ng-maxlength="32" ng-minlength="6" required="required" />
-                                    <span class="help-block" ng-show="frmRegistration.password.$error.required  && (frmRegistration.$pristine || frmRegistration.$submitted)">Please Enter Password</span>
-                                    <span class="help-block" ng-show="frmRegistration.password.$error.minlength  && (frmRegistration.$pristine || frmRegistration.$submitted)">Password Have Atleast 6 Characters</span>
-                                    <span class="help-block" ng-show="frmRegistration.password.$error.maxlength  && (frmRegistration.$pristine || frmRegistration.$submitted)">Password Have Atmost 32 Characters</span>
+                                    <span class="help-block" ng-show="frmRegistration.password.$error.required  && (!frmRegistration.$pristine || frmRegistration.$submitted)">Please Enter Password</span>
+                                    <span class="help-block" ng-show="frmRegistration.password.$error.minlength  && (!frmRegistration.$pristine || frmRegistration.$submitted)">Password Have Atleast 6 Characters</span>
+                                    <span class="help-block" ng-show="frmRegistration.password.$error.maxlength  && (!frmRegistration.$pristine || frmRegistration.$submitted)">Password Have Atmost 32 Characters</span>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -355,5 +355,6 @@
     
     {!! Html::script('storage/frontend/js/custom.js') !!}
 
+    
 </body>
 </html>
