@@ -890,15 +890,7 @@ class PageController extends Controller
         return response()->json(['payment_details'=>$payment_details,'qualification_arr'=>$qualification_arr,'certificates_arr'=>$certificates_arr]);
     }
 
-    public function drug_list(Request $request)
-    {
-       $doctor_id = $request->doctor_id;
-       $drug_list = Drug::where('doctor_id',$doctor_id)->whereNotNull('video')->get()->toArray();
-       
-        
-        return response()->json(['drug_list' => $drug_list]);
-
-    }
+    
 
     public function drug_details(Request $request) {
         $drug_id = $request->drug_id;
@@ -915,25 +907,8 @@ class PageController extends Controller
             if($user->type == "D") {
                 $group_list = \App\Group::where('doctor_id',$user->id)->paginate(2);
                 
-                //$group_list = \App\Group::where('doctor_id',$user->id)->get()->toArray();
-                 /*echo "<pre>";
-                print_r($group_list);
-                echo "</pre>";die();*/
                  return response()->json(['group_list' => $group_list,'status_code'=>200]);
 
-
-                /*if($group_list) {
-                    return response()->json(['error' => false,
-                'message' => "Data Found",
-                'group_list' => $group_list,
-                'code' => 200]);
-                }
-                else {
-                    return response()->json(['error' => false,
-                'message' => "No group found",
-                'group_list' => $group_list,
-                'code' => 404]);
-                }*/
             }
             else {
                 return response()->json(['error' => false,
@@ -946,6 +921,18 @@ class PageController extends Controller
                 'message' => "Something is not right. Please try again",
                 'code' => 500]);
             }
+    }
+
+    public function drug_list(Request $request)
+    {
+       
+       $user = JWTAuth::toUser($request->header('token'));
+       
+       //$drug_list = Drug::where('doctor_id',$doctor_id)->whereNotNull('video')->get()->toArray();
+       $drug_list = Drug::where('doctor_id',$user->id)->whereNotNull('video')->paginate(3);
+        
+        return response()->json(['drug_list' => $drug_list,'status_code'=>200]);
+
     }
 
     public function add_group(Request $request) {

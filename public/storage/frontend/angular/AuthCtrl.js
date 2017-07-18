@@ -108,7 +108,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 
 	$scope.getAllDoctors = function(pageNumber) {
 		
-
+          
 		if(pageNumber===undefined){
       		pageNumber = '1';
     	}
@@ -127,7 +127,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 	      for(var i=1;i<=response.data.doctor_list.last_page;i++) {          
 	        pages.push(i);
 	      }
-             console.log(pages);
+             //console.log(pages);
 	      $scope.range = pages;
 		  
 	    });
@@ -148,6 +148,32 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
             var pages = [];
 
 	      for(var i=1;i<=response.data.group_list.last_page;i++) {          
+	        pages.push(i);
+	      }
+
+	      $scope.range = pages;
+
+    	}).catch(function(reason) {
+
+		});
+	};
+    
+    $scope.getdrugList = function(pageNumber) {
+		
+         //console.log(pageNumber);
+		if(pageNumber===undefined){
+      		pageNumber = '1';
+    	}
+
+		$http.get('/api/drug-list?page='+pageNumber).then(function(response){
+            
+            console.log(response.data.drug_list.data);
+			$scope.drug_list = response.data.drug_list.data;
+            $scope.totalPages   = response.data.drug_list.last_page;
+          $scope.currentPage  = response.data.drug_list.current_page;
+            var pages = [];
+
+	      for(var i=1;i<=response.data.drug_list.last_page;i++) {          
 	        pages.push(i);
 	      }
 
@@ -403,14 +429,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 		});
 	};
 
-	$scope.getdrugList = function() {
-		
-		Auth.get_drug_list($scope.doctor_id).then(function(response){
-			$scope.drug_list = response.data.drug_list;
-			
-			
-		});
-	};
+	
 
 
 	$scope.getDrugData = function(pageNumber) {
