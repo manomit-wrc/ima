@@ -72,13 +72,13 @@ imaApp.directive('drugsPagination', function(){
       restrict: 'E',
       template: '<nav aria-label="Page navigation">'+
         '<ul class="pagination pagiright">'+
-        '<li ng-show="currentPage != 1"><a href="javascript:void(0)" ng-click="groupList(1)">&laquo;</a></li>'+
-        '<li ng-show="currentPage != 1"><a href="javascript:void(0)" ng-click="groupList(currentPage-1)">&lsaquo; Prev</a></li>'+
+        '<li ng-show="currentPage != 1"><a href="javascript:void(0)" ng-click="getdrugList(1)">&laquo;</a></li>'+
+        '<li ng-show="currentPage != 1"><a href="javascript:void(0)" ng-click="getdrugList(currentPage-1)">&lsaquo; Prev</a></li>'+
         '<li ng-repeat="i in range" ng-class="{active : currentPage == i}">'+
-            '<a href="javascript:void(0)" ng-click="groupList(i)">{{i}}</a>'+
+            '<a href="javascript:void(0)" ng-click="getdrugList(i)">{{i}}</a>'+
         '</li>'+
-        '<li ng-show="currentPage != totalPages"><a href="javascript:void(0)" ng-click="groupList(currentPage+1)">Next &rsaquo;</a></li>'+
-        '<li ng-show="currentPage != totalPages"><a href="javascript:void(0)" ng-click="groupList(totalPages)">&raquo;</a></li>'+
+        '<li ng-show="currentPage != totalPages"><a href="javascript:void(0)" ng-click="getdrugList(currentPage+1)">Next &rsaquo;</a></li>'+
+        '<li ng-show="currentPage != totalPages"><a href="javascript:void(0)" ng-click="getdrugList(totalPages)">&raquo;</a></li>'+
       '</ul></nav>'
    };
 });
