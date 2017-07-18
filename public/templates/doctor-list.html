@@ -34,6 +34,9 @@
                                             <td>{{j.email}}</td>
                                             <td>{{j.mobile}}</td>
                                             <td>{{j.license}}</td>
+                                            <td ng-if="(j.doctor_groups).length"><button type="button" class="sendrqst" >Request Sent</button></td>
+                                             <td ng-if="!(j.doctor_groups).length"><button type="button" class="sendrqst" ng-click="open(j.id);" >Send Request</button></td>
+
                                           </tr>
                                         </table>
                                     </div>

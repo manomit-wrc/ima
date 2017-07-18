@@ -29,5 +29,8 @@ class Doctor extends Authenticatable
     public function doctor_qualifications() {
         return $this->belongsToMany('\App\Qualification','doctor_qualifications','doctor_id','qualification_id');
     }
+    public function doctor_groups() {
+        return $this->hasMany('\App\SendGroupRequest','receiver_id');
+    }
    
 }
