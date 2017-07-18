@@ -127,7 +127,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 	      for(var i=1;i<=response.data.doctor_list.last_page;i++) {          
 	        pages.push(i);
 	      }
-             console.log(pages);
+          
 	      $scope.range = pages;
 		  
 	    });
@@ -1092,7 +1092,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 
 		$http.get('/api/doctor-list?page='+pageNumber).then(function(response) {
 
-		
+		  
     	  
     	  $scope.$parent.doctor_list = response.data.doctor_list.data;
 	      
