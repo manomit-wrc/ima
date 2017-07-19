@@ -1,0 +1,91 @@
+<div class="container" ng-init='getPostData();'>
+            <div class="row">
+                <div class="innertopB">
+                    <my-sidebar></my-sidebar>
+                    <div class="col-md-8 Clear-991">
+                        <div class="Rpanel">
+                            <h2 >Comments
+
+                             </h2>
+                            
+                            <div class="row" ng-controller="AuthController">
+                                <div class="col-md-12">
+                                    <div class="">
+                                     <font ng-show="IsVisible">
+                                        <ul class="media-list"> <li class="media"> 
+                                        <div class="media-left" ng-repeat="n in getpostdata"> <a href="#"> <img src="/uploads/doctors/thumb/{{n.avators}}"
+
+                                         data-holder-rendered="true" style="width: 64px; height: 64px;"> </a> </div>
+
+                                          <div class="media-body"> 
+                                          <h4 class="media-heading" ng-repeat="n in getpostdata ">  {{n.first_name}}&nbsp;&nbsp;{{n.last_name}}
+                                          </h4> 
+                                          <div ng-repeat="n in getpostdata ">
+                                          <p>
+                                            {{n.comments[0].comment}}
+                                          </p>
+                                          </div>
+                                        </font>
+
+                                        <font style="display:none">
+                                        <a href="#" onclick="get_block();">Reply <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+                                        </font>
+
+                                        <br clear="all">
+                                        <form enctype="multipart/form-data">
+                                       <font id="replay_block" style="display:none;">
+                                        <div class="row">
+                                        <div class="col-md-9">
+                                            <textarea rows="1" class="postfields" ng-model="commit" ng-keyup="$event.keyCode == 13 && replayFunction()" id="commit" name="commit"></textarea>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="filebox">
+                                                <i class="fa fa-paperclip" aria-hidden="true"></i>
+                                            <input type="file" name="comment_file" ng-model="comment_file"  onchange="angular.element(this).scope().uploadedCommentDocs(this)" accept="image/jpg" class="postattach">
+                                            </div>
+                                        </div>
+                                        </div>
+                                         </font>
+                                         </form>
+                                         <div class="media"> <div class="media-left"> <a href="#"> <img alt="64x64" class="media-object" data-src="holder.js/64x64" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+PCEtLQpTb3VyY2UgVVJMOiBob2xkZXIuanMvNjR4NjQKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNWQ1NGVjNjM3YSB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1ZDU0ZWM2MzdhIj48cmVjdCB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSIxMy4xNzk2ODc1IiB5PSIzNi41Ij42NHg2NDwvdGV4dD48L2c+PC9nPjwvc3ZnPg==" data-holder-rendered="true" style="width: 64px; height: 64px;"> </a> </div> <div class="media-body"> <h4 class="media-heading">Nested media heading</h4> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. <div class="media"> <div class="media-left"> <a href="#"> <img alt="64x64" class="media-object" data-src="holder.js/64x64" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+PCEtLQpTb3VyY2UgVVJMOiBob2xkZXIuanMvNjR4NjQKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNWQ1NGVjNzA5OSB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1ZDU0ZWM3MDk5Ij48cmVjdCB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSIxMy4xNzk2ODc1IiB5PSIzNi41Ij42NHg2NDwvdGV4dD48L2c+PC9nPjwvc3ZnPg==" data-holder-rendered="true" style="width: 64px; height: 64px;"> </a> </div> <div class="media-body"> <h4 class="media-heading">Nested media heading</h4> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. </div> </div> </div> </div> <div class="media"> <div class="media-left"> <a href="#"> <img alt="64x64" class="media-object" data-src="holder.js/64x64" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+PCEtLQpTb3VyY2UgVVJMOiBob2xkZXIuanMvNjR4NjQKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNWQ1NGVjN2VjOCB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1ZDU0ZWM3ZWM4Ij48cmVjdCB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSIxMy4xNzk2ODc1IiB5PSIzNi41Ij42NHg2NDwvdGV4dD48L2c+PC9nPjwvc3ZnPg==" data-holder-rendered="true" style="width: 64px; height: 64px;"> </a> </div> <div class="media-body"> <h4 class="media-heading">Nested media heading</h4> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. </div> </div> </div> </li> </ul>
+
+                                         <br clear="all">
+                                       <font id="main_block">
+                                       <form enctype="multipart/form-data">
+                                        <div class="row">
+                                        <div class="col-md-9">
+                                            <textarea name="" rows="1" class="postfields" ng-keyup="$event.keyCode == 13 && mainpost()" ng-model="main_post" id="main_post" name="main_post"></textarea>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="filebox">
+                                                <i class="fa fa-paperclip" aria-hidden="true"></i>
+                                            <input type="file" class="postattach" name="main_comment_file" ng-model="main_comment_file" id="main_comment_file" onchange="angular.element(this).scope().uploadedCommentDoc(this)" accept="image/jpg">
+                                            </div>
+                                        </div>
+                                        </div>
+                                        </form>
+                                        </font>
+
+                                    </div>
+                                </div>
+                                 
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       <script type="text/javascript">
+        
+         function get_block()
+          {
+             
+             document.getElementById('replay_block').style.display='block';
+             // body...
+          }
+
+
+       </script>

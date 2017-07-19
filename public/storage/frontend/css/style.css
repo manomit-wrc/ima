@@ -3271,3 +3271,67 @@ a.btn:focus {
     color: #006633;
     overflow: auto;
 }
+
+.group_inner h6{
+    font-size: 14px;
+    font-style: italic;
+    color: #40bbc0;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+}
+
+
+}
+
+.group_inner p{
+    color: #666;
+    font-size: 16px;
+    padding: 0;
+    margin: 0;
+    line-height: 24px;
+}
+
+.group_inner a:hover{
+    color: #666 !important;
+}
+
+.media-heading{
+    font-size: 16px !important;
+    color: #666;
+}
+
+.postfields {
+    border: 1px solid #fff;
+    background: #e7e7e7;
+    padding: 8px 15px;
+    width: 100%;
+    resize: none;
+    cursor: pointer;
+}
+
+.filebox{
+    width: 100%;
+    background: #ccc;
+    text-align: center;
+    height: 43px;
+    line-height: 43px;
+    color: #fff;
+    font-size: 20px;
+}
+
+.postattach {
+    padding: 22px 15px;
+    height: 1px;
+    width: 100%;
+    resize: none;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: right;
+    opacity: 0;
+    outline: none;
+    cursor: pointer;
+    display: block;
+    position: absolute;
+}

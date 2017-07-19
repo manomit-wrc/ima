@@ -10,6 +10,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 	$scope.events = {};
 	$scope.doctor_id = '';
 	$scope.journal_file = {};
+	$scope.comment_file={};
 	$scope.isDisabled = false;
 	$scope.contact_address = '';
 	$scope.footer_data='';
@@ -167,7 +168,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 
 		$http.get('/api/drug-list?page='+pageNumber).then(function(response){
             
-            console.log(response.data.drug_list.data);
+            //console.log(response.data.drug_list.data);
 			$scope.drug_list = response.data.drug_list.data;
             $scope.totalPages   = response.data.drug_list.last_page;
           $scope.currentPage  = response.data.drug_list.current_page;
@@ -643,6 +644,11 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 		$scope.location = $location;
 		$location.path("/doctor-list");
 	};
+
+	$scope.loadComments = function() {
+		$scope.location = $location;
+		$location.path("/comment-list");
+	};
 	
 
     $scope.doUploadJournal = function(valid) {
@@ -662,7 +668,21 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     		});
     	}
     };
+    
+    $scope.mainpost = function() {
+		 
+       Auth.submit_replay($scope).then(function(response){
+    			$scope.message = response.data.message;
+				$scope.status_code = response.data.code;
 
+				if($scope.status_code != 500) {
+					$scope.main_post = null;
+					$scope.main_comment_file = null;
+				}
+				
+    		});
+          $location.path("/comment-list");
+    };		  
 
     $scope.getFileDetails = function (e) {
 
@@ -832,8 +852,19 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     	  $scope.branch_data = response.data.branch_item;
 	   });
 	    
+	}
+
+	$scope.getPostData = function() {
+
+          $http.get('/api/get-post-data').then(function(response) {
+          	console.log(response.data.getpostdata);
+          	$scope.IsVisible=true
+    	  $scope.getpostdata = response.data.getpostdata;
+	   });
 	    
-    }
+	}
+
+
     $scope.getCMS = function() {
 
           $http.get('/api/cms/',{
@@ -865,7 +896,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
              
              //alert('doctor');
             $http.get('/api/doctor_data').then(function(response){
-            	//console.log(response.data);
+            	
     		$scope.doctor_content = response.data.doctor_item;
     		//$scope.footer_description = response.data.footer_des;
     	});
@@ -1197,6 +1228,45 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     	}
     	
     };
+
+    $scope.uploadedCommentDoc = function(element) {
+		 $scope.$apply(function($scope) {
+	       $scope.main_comment_file = element.files[0];
+	       
+	      });
+		 //console.log($scope.comment_file);
+	};
+    
+    
+
+    
+
+    $scope.replayFunc = function() {
+		
+		  console.log($scope.comment_file);
+        //$scope.image = element.files[0];
+
+        $http.post('/api/comment-data', {
+		     comment:$scope.commit,
+             //comment_file:$scope.comment_file
+             
+             //formData.append("comment", $scope.commit);
+             //formData.append("comment_file", $scope.comment_file);
+              transformRequest: function (data) {
+			      var formData = new FormData();
+			      formData.append("comment_file",$scope.comment_file);  
+			      return formData;  
+			  },
+			  
+             //comment_file:$scope.comment_file
+			}).then(function(response){
+				//$scope.message = response.data.message;
+				//$scope.code = response.data.code;
+				
+			});
+		 
+		 document.getElementById('replay_block').style.display='none';
+	};
 
 
 });

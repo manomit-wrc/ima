@@ -87,4 +87,7 @@ Route::group(['middleware' => 'jwt.auth'], function () {
 
     Route::post('/send-group-request','PageController@send_group_request');
 
+    Route::post('/comment-data','PageController@comment_data');
+    Route::get('/get-post-data','PageController@get_post_data');
+
 });

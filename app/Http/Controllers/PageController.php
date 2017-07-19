@@ -14,6 +14,7 @@ use App\LocalBranch;
 use Validator;
 use App\Doctor;
 use App\Drug;
+use App\Comment;
 use App\State;
 use App\CMS;
 use App\Qualification;
@@ -1228,6 +1229,47 @@ class PageController extends Controller
         }
         
 
+    }
+
+    public function comment_data(Request $request) {
+
+          if($request->hasFile('comment_file')) {
+              $file = $request->file('comment_file') ;
+
+            $filename= time().'_'.$file->getClientOriginalName() ;
+                    $destinationPath = public_path().'/uploads/doctors/postnotification/' ;
+                    $file->move($destinationPath,$filename);
+
+                }
+         
+        $user = JWTAuth::toUser($request->header('token'));
+        $comments = new \App\Comment();
+        $comment = $request->comment;
+        
+        $doctor_id=$user->id;
+        
+        //echo 'file'.$filename;die();
+        $comments->doctor_id=$doctor_id;
+        $comments->comment=$request->comment;
+        $comments->group_id=0;
+        $comments->replay_id=0;
+        $comments->file=$filename;
+        $comments->created_at=time();
+        $comments->updated_at=time();
+        $comments->save();
+    }
+
+    public function get_post_data(Request $request)
+    {
+        //echo 'hello';
+        $user = JWTAuth::toUser($request->header('token'));
+        $doctor_id=$user->id;
+        
+        /*$team_list = Team::with('designations')->where('status','1')->get()->toArray();
+            $testimonial_list = Doctor::with('states')->where('status','1')->whereNotNull('testimonial')->get()->toArray();*/
+      $getpostdata= \App\Doctor::with('comments')->where('id',$doctor_id)->get()->toArray();
+      
+       return response()->json(['getpostdata' => $getpostdata,'status_code'=>200]);
     }
 
 }

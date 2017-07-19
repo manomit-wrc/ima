@@ -32,5 +32,9 @@ class Doctor extends Authenticatable
     public function doctor_groups() {
         return $this->hasMany('\App\SendGroupRequest','receiver_id');
     }
+
+     public function comments() {
+        return $this->hasMany('\App\Comment','doctor_id');
+    }
    
 }
