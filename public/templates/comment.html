@@ -10,7 +10,7 @@
                             
                             <div class="row" ng-controller="AuthController">
                                 <div class="col-md-12">
-                                    <div class="">
+                                    <div class="" >
                                      <font ng-show="IsVisible">
                                         <ul class="media-list"> <li class="media"> 
                                         <div class="media-left" ng-repeat="n in getpostdata"> <a href="#"> <img src="/uploads/doctors/thumb/{{n.avators}}"
@@ -20,14 +20,19 @@
                                           <div class="media-body"> 
                                           <h4 class="media-heading" ng-repeat="n in getpostdata ">  {{n.first_name}}&nbsp;&nbsp;{{n.last_name}}
                                           </h4> 
-                                          <div ng-repeat="n in getpostdata ">
-                                          <p>
+                                          
+                                          <p ng-repeat="n in getpostdata ">
                                             {{n.comments[0].comment}}
                                           </p>
+                                          <div ng-repeat="n in getpostdata">
+                                          <img src="/uploads/doctors/postnotification/{{n.comments[0].file}}"
+                                          data-holder-rendered="true" style="width: 40px; height: 40px;">
+                                         </div>
                                           </div>
+                                          
                                         </font>
-
-                                        <font style="display:none">
+                                         <br clear="all">
+                                        <font style="">
                                         <a href="#" onclick="get_block();">Reply <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
                                         </font>
 

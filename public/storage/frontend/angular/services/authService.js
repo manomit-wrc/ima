@@ -260,7 +260,9 @@ authService.factory('Auth', function($http,$q,AuthToken,$cookieStore){
             transformRequest: angular.identity,
             headers: {'Content-Type': undefined}
         }).then(function (response) {
+        	  reload: true;
         	 //$scope.mainpostdiv=true;  
+        	 //$window.location.href = "/comment-list";
 			//$location.path("/comment-list");
 	   		defer.resolve(response);
        }).catch(function(reason){

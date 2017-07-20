@@ -675,13 +675,19 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     			$scope.message = response.data.message;
 				$scope.status_code = response.data.code;
 
+				  //$location.path('/comment-list');
+                 $window.location.href = "/comment-list";
 				if($scope.status_code != 500) {
 					$scope.main_post = null;
 					$scope.main_comment_file = null;
+
+					//$location.path('/comment-list');
+					//$window.location.href = "/comment-list";
 				}
 				
     		});
-          $location.path("/comment-list");
+
+          //$location.path("/comment-list");
     };		  
 
     $scope.getFileDetails = function (e) {
@@ -1270,6 +1276,18 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 
 
 });
+
+//AuthCtrl.directive('myRefresh',function($location,$route){
+    //return function(scope, element, attrs) {
+        //element.bind('click',function(){
+            //if(element[0] && element[0].href && element[0].href === $location.absUrl('/comment-list')){
+                //$route.reload();
+            //}
+        //});
+    //}   
+//});
+
+
 
 AuthCtrl.directive('addressBasedGoogleMap', function () {
 

@@ -1241,6 +1241,9 @@ class PageController extends Controller
                     $file->move($destinationPath,$filename);
 
                 }
+                else {
+                    $filename='';
+                }
          
         $user = JWTAuth::toUser($request->header('token'));
         $comments = new \App\Comment();
