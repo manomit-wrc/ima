@@ -212,14 +212,20 @@ class PageController extends Controller
         return response()->json(['state_list' => $state_list]);
     }
 
+    public function get_speciality_list() {
+        $speciality_list = \App\Specialist::where('status','1')->orderBy('specialist_name')->get()->pluck('specialist_name','id')->toArray();
+        return response()->json(['speciality_list' => $speciality_list]);
+    }
+
     public function get_qualification_list() {
         $qualification_list = \App\Qualification::where('status','1')->orderBy('qualification_name')->get()->pluck('qualification_name','id')->toArray();
         return response()->json(['qualification_list' => $qualification_list]);
     }
 
     public function update_profile(Request $request) {
+
         $doctors = Doctor::find($request->doctor_id);
-         
+        
         if($doctors) {
             $doctors->first_name = $request->first_name;
             $doctors->last_name = $request->last_name;
@@ -234,6 +240,9 @@ class PageController extends Controller
             $doctors->biography = $request->biography;
             $doctors->address = $request->address;
             $doctors->testimonial = $request->testimonial;
+            $doctors->hospital_name = $request->hospital_name;
+            $doctors->doj =date('Y-m-d',strtotime($request->doj));
+            $doctors->specialist_id = $request->speciality_id;
 
             $doctors->save();
             
@@ -405,7 +414,8 @@ class PageController extends Controller
         $validator = Validator::make($request->all(),[
             'payment' => 'required|max:7',
             'qualification_id' => 'required',
-            'payment_date' => 'required|date_format:d-m-Y|before_or_equal:today',
+            'payment_date' => 'required|date_format:Y-m-d|before_or_equal:today',
+            //'payment_date' => 'required|date_format:d-m-Y|before_or_equal:today',
            
             'doctor_file' => 'required',
             'doctor_file.*' => 'mimes:jpg,jpeg,pdf,png'
@@ -447,13 +457,19 @@ class PageController extends Controller
                 }
             
             
-
+             //$a=$request->payment_type;
+             //echo $a;die();
 
             $doctors =  Doctor::find($request->doctor_id);
             
             $doctors->payment = $request->payment;
             $doctors->date_of_payment =date('Y-m-d',strtotime($request->payment_date));
             $doctors->certificate = implode(',',$filedata);
+            
+            $doctors->payment_type = $request->payment_type;
+            $doctors->bank_name = $request->bank_name;
+            $doctors->branch_name = $request->branch_name;
+            $doctors->cheque_no = $request->cheque_no;
 
             $doctors->save();
             $doctors->doctor_qualifications()->wherePivot('doctor_id', '=', $request->doctor_id)->detach();
@@ -879,7 +895,7 @@ class PageController extends Controller
     public function payment_details(Request $request) {
 
         $doctor_payment_details = Doctor::with('doctor_qualifications')->where('id',$request->doctor_id)->get()->toArray();
-        $payment_details = array('payment'=>$doctor_payment_details[0]['payment'],'date_of_payment'=>$doctor_payment_details[0]['date_of_payment']);
+        $payment_details = array('payment'=>$doctor_payment_details[0]['payment'],'date_of_payment'=>$doctor_payment_details[0]['date_of_payment'],'payment_type'=>$doctor_payment_details[0]['payment_type'],'bank_name'=>$doctor_payment_details[0]['bank_name'],'branch_name'=>$doctor_payment_details[0]['branch_name'],'cheque_no'=>$doctor_payment_details[0]['cheque_no']);
 
         $qualification_arr = [];
         foreach ($doctor_payment_details[0]['doctor_qualifications'] as $key => $value) {

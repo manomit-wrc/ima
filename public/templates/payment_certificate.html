@@ -20,8 +20,60 @@
                                         <span class="help-block" ng-show="frmUploadcertificate.payment.$error.required && (!frmUploadcertificate.$pristine || frmUploadcertificate.$submitted)">Please Enter The Payment</span>
                                     </div>
                                 </div>
+
+                                <div class="col-md-6">
+
+                                <div style=" width: 100%; display:  inline-block;">
+                                    <div class="fieldbox" ng-class="{
+                                            'has-error':!frmUploadcertificate.payment.$valid && (!frmUploadcertificate.$pristine || frmUploadcertificate.$submitted), 
+                                            'has-success': frmUploadcertificate.payment.$valid && (!frmUploadcertificate.$pristine || frmUploadcertificate.$submitted)
+                                            }">
+                                        <label>Payment Type</label>
+                                          <select ng-model="payment_type" class="editF" onchange="get_block()" id="payment_type" name="payment_type">
+                                            <option value="">Select</option>
+                                             <option value="cash">Cash</option>
+                                             <option value="cheque">Cheque</option>
+                                             <option value="draft">Draft</option>
+                                              
+                                          </select>
+                                        <span class="help-block" ng-show="frmUploadcertificate.payment.$error.required && (!frmUploadcertificate.$pristine || frmUploadcertificate.$submitted)">Please Enter The Payment</span>
+                                    </div>
+                                </div>
+                                
+
+                                <div id="show_payment" style=" width: 100%; display: none;">
+
+                                <div style=" width: 100%; display:  inline-block;">
+
+                                    <div class="form-group">
+                                      <label>Bank Name</label>
+                                      <input type="text" id="bank_name" ng-model="bank_name" name="bank_name" class="form-control editF" required="Enter Bank Name" placeholder="Enter Bank Name">
+                                    </div>
+                                
+                                        
+                                </div>
+                                <div style=" width: 100%; display:  inline-block;">
+                                
+
+                                        <div class="form-group">
+                                          <label>Branch Name</label>
+                                          <input type="text" class="form-control editF" id="branch_name" ng-model="branch_name" name="branch_name"  placeholder="Enter Branch Name">
+                                          
+                                        </div>
+                                </div>
+                                <div style=" width: 100%; display:  inline-block;">
                             
+
+                                    <div class="form-group">
+                                      <label>DD/Cheque No.</label>
+                                      <input type="text" class="form-control editF" id="cheque_no" ng-model="cheque_no" name="cheque_no" placeholder="Enter DD/Cheque No.">
+                                     
+                                    </div> 
+                                </div>
+
+                                </div>
                             
+                                </div>
                                 <div class="col-md-6">
                                     <div class="fieldbox" ng-class="{
                                             'has-error':!frmUploadcertificate.payment_date.$valid && (!frmUploadcertificate.$pristine || frmUploadcertificate.$submitted), 
@@ -80,10 +132,36 @@
 </div>
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
 
+<style type="text/css">
+    label {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: 100;
+}
+</style>
 
-
-  <script>
+<script>
 $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip(); 
 });
+
+
+</script>
+
+<script type="text/javascript">
+    
+function get_block()
+{
+    
+    var data=document.getElementById('payment_type').value;
+     if(data=='draft' || data=='cheque')
+     {
+        document.getElementById('show_payment').style.display='inline-block';
+     }
+     else if(data=='cash')
+     {
+        document.getElementById('show_payment').style.display='none';
+     }
+}
 </script>
