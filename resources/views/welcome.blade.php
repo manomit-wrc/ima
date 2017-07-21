@@ -333,7 +333,7 @@
              <script type="text/ng-template" id="myModalContent.html">
                 <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal"  aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <button type="button" class="close" data-dismiss="modal"  aria-label="Close"><span aria-hidden="true" ng-click="cancel();">&times;</span></button>
                             <h4 class="modal-title" id="myModalLabel"><i class="fa fa-user" aria-hidden="true"></i> Send Group Request</h4>
                             <div class="login registration-error" ng-show="code==1">@{{message}}</div>
                         </div>

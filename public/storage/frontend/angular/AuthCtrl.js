@@ -13,6 +13,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 	$scope.isDisabled = false;
 	$scope.contact_address = '';
 	$scope.footer_data='';
+	
     
 	//for paginations//
 	$scope.news_data = [];
@@ -26,9 +27,13 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 
     $scope.group_list = {};
     $scope.doctor_list = {};
+    $scope.request_group_list = {};
 
     $scope.onSubmit = false;
 
+    $scope.select = function() {
+    	alert("Hello");
+    };
 
     $scope.init = function () {
 		Auth.getUser().then(function(response){
@@ -113,10 +118,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
       		pageNumber = '1';
     	}
 
-		$http.get('/api/doctor-list?page='+pageNumber).then(function(response) {
-
-		
-    	  
+		$http.get('/api/doctor-list?page='+pageNumber).then(function(response) {	
     	  $scope.doctor_list = response.data.doctor_list.data;
 	      
       	  $scope.totalPages   = response.data.doctor_list.last_page;
@@ -125,6 +127,28 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
           var pages = [];
 
 	      for(var i=1;i<=response.data.doctor_list.last_page;i++) {          
+	        pages.push(i);
+	      }
+
+	      $scope.range = pages;
+		  
+	    });
+	};
+
+	$scope.getAllGroupRequest = function(pageNumber) {
+		if(pageNumber===undefined){
+      		pageNumber = '1';
+    	}
+
+		$http.get('/api/get-all-group-request?page='+pageNumber).then(function(response) {
+    	  $scope.request_group_list = response.data.group_list.data;
+	      
+      	  $scope.totalPages   = response.data.group_list.last_page;
+          $scope.currentPage  = response.data.group_list.current_page;
+
+          var pages = [];
+
+	      for(var i=1;i<=response.data.group_list.last_page;i++) {          
 	        pages.push(i);
 	      }
 
@@ -166,8 +190,6 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     	}
 
 		$http.get('/api/drug-list?page='+pageNumber).then(function(response){
-            
-            console.log(response.data.drug_list.data);
 			$scope.drug_list = response.data.drug_list.data;
             $scope.totalPages   = response.data.drug_list.last_page;
           $scope.currentPage  = response.data.drug_list.current_page;
@@ -277,6 +299,11 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 				else if(response.data.code == 200) {
 					$scope.code = 1;
 					$scope.message = response.data.message;
+					$scope.registration.first_name = null;
+					$scope.registration.last_name = null;
+					$scope.registration.email_id = null;
+					$scope.registration.mobile_no = null;
+					$scope.registration.password = null;
 				}
 				else {
 					$scope.code = 0;
@@ -425,7 +452,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 
 		Auth.get_journal_list($scope.doctor_id).then(function(response){
 			$scope.journal_list = response.data.journals[0];
-			console.log($scope.journal_list);
+			
 		});
 	};
 
@@ -503,6 +530,15 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
                     }
                 })
                 .then(function (response) {
+                	SweetAlert.swal({   
+				     title: "Thank You",   
+				     text: "Profile updated successfully",   
+				     type: "success",     
+				     confirmButtonColor: "#DD6B55",   
+				     confirmButtonText: "OK"
+				    },  function(){  
+				     window.location.reload();
+				    });
                 	$scope.status_code = 1;
                 	$scope.message = response.data.message;
                 })
@@ -643,7 +679,10 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 		$scope.location = $location;
 		$location.path("/doctor-list");
 	};
-	
+	$scope.groupRequest = function() {
+		$scope.location = $location;
+		$location.path("/group-request");
+	};
 
     $scope.doUploadJournal = function(valid) {
     	if(valid) {
@@ -954,6 +993,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 
 	$scope.doAddGroup = function(valid) {
 		if(valid) {
+			$scope.isDisabled = true;
 			$http.post('/api/add-group', {
 			name:$scope.name,
 			description:$scope.description,
@@ -982,6 +1022,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     
 	$scope.doEditGroup = function(valid) {
 		if(valid) {
+			$scope.isDisabled = true;
 			$http.post('/api/edit-group', {
 			name:$scope.name,
 			description:$scope.description,
@@ -1047,7 +1088,63 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 				}); 
 			}
 		});
-	}
+	};
+
+	$scope.accept_invitation = function(id) {
+		SweetAlert.swal({   
+			title: "Invitation!",
+			text: "Are you sure you want to accept this invitation?",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#DD6B55",
+			confirmButtonText: "Yes, accept it!",
+			closeOnConfirm: false
+		},  function(isConfirm){
+			if(isConfirm) {
+				$http.get('/api/accept-group-invitation',{
+				params: { id: id}
+				}).then(function(response){
+			SweetAlert.swal({   
+				     title: "Invitation!",   
+				     text: response.data.message,   
+				     type: "success",     
+				     confirmButtonColor: "#DD6B55",   
+				     confirmButtonText: "OK"
+				    },  function(){  
+				     $window.location.reload();
+				    });
+				}); 
+			}
+		});
+	};
+
+	$scope.reject_invitation = function(id) {
+		SweetAlert.swal({   
+			title: "Invitation!",
+			text: "Are you sure you want to reject this invitation?",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#DD6B55",
+			confirmButtonText: "Yes, accept it!",
+			closeOnConfirm: false
+		},  function(isConfirm){
+			if(isConfirm) {
+				$http.get('/api/reject-group-invitation',{
+				params: { id: id}
+				}).then(function(response){
+			SweetAlert.swal({   
+				     title: "Invitation!",   
+				     text: response.data.message,   
+				     type: "success",     
+				     confirmButtonColor: "#DD6B55",   
+				     confirmButtonText: "OK"
+				    },  function(){  
+				     $window.location.reload();
+				    });
+				}); 
+			}
+		});
+	};
 
 	$scope.removedrug = function(drug_id) {
        

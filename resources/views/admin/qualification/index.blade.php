@@ -50,7 +50,7 @@
                     <tr>
                       <td>{{$value->qualification_name}}</td>
                       <td>{{$value->status == '1'?'Active':'In-Active'}}</td>
-                      <td><a href="/admin/qualification/edit/{{$value->id}}" return confirm('Are you sure you want to delete?')>Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/admin/qualification/delete/{{$value->id}}" >Delete</a></td>
+                      <td><a href="/admin/qualification/edit/{{$value->id}}" return confirm('Are you sure you want to delete?')>Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/admin/qualification/delete/{{$value->id}}" onclick="return confirm('Are you sure?')">Delete</a></td>
                     </tr>
                      @endforeach
                 @endif

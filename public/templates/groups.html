@@ -37,11 +37,15 @@
                                             <a class="ed" href="/groups/edit/{{j.id}}"><i class="fa fa-pencil-square" aria-hidden="true"></i></a> | <a class="ed" href="javascript:void(0)" ng-click="removeGroup(j.id)" ><i class="fa fa-trash" aria-hidden="true"></i></a></td>
                                           </tr>
 
+                                          <tr ng-if="!(group_list).length">
+                                            <td colspan="5">NO DATA FOUND</td>
+                                          </tr>
+
                                         </table>
                                     </div>
                                 </div>
                                  <br clear="All">
-                                <groups-pagination></groups-pagination>
+                                <groups-pagination ng-show="(group_list).length"></groups-pagination>
                             </div>
                             
                         </div>

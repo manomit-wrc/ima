@@ -82,7 +82,7 @@
                     <label for="company_regsitration_no" class="col-sm-2 control-label">Company Registration</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="company_regsitration_no" placeholder="Company Registration" name="company_regsitration_no" value="{{ old('company_regsitration_no')}}">
+                      <input type="text" class="form-control" id="company_regsitration_no" placeholder="Company Registration" name="company_regsitration_no" minlength="15" maxlength="15" value="{{ old('company_regsitration_no')}}">
                       <span class="text-danger">{{ $errors->first('company_regsitration_no') }}</span>
                     </div>
                   </div>
@@ -186,7 +186,7 @@
     function readURL(input) {
          document.getElementById('hid_err').style.visibility='hidden';
          var mimeType=input.files[0]['type'];
-         alert(mimeType.split('/')[0]);
+         
          if (input.files && input.files[0] && mimeType.split('/')[0]=="image") {
 
             document.getElementById('pre_img').style.display='block';

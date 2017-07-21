@@ -1,0 +1,47 @@
+<div class="container"  ng-init='getAllGroupRequest(1);'>
+            <div class="row">
+                <div class="innertopB">
+                    <my-sidebar></my-sidebar>
+                    <div class="col-md-8 Clear-991">
+                        <div class="Rpanel">
+                            <h2 ng-controller="AuthController">Requested Groups
+                            <!-- <button type="button" class="btnsearch" ng-click="getAllGroupRequest(1);"><i class="fa fa-search" aria-hidden="true"></i></button>
+
+                            <input type="text" ng-model="term" placeholder="Search Doctor Details" name="term" id="term" autocomplete="true"  class="btn_right"> -->
+                            </h2>
+                            <div>{{message}}</div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="table-responsive">
+                                        <table width="100%" class="table table-bordered">
+                                          <tr class="tabletop">
+                                            <td>Image</td>
+                                            <td>Doctor Name</td>
+                                            <td>Group Name</td>
+                                            
+                                            <td>Action</td>
+                                          </tr>
+                                          
+                                          <tr ng-repeat="j in request_group_list track by $index">
+                                            <td><img class="img-thumbnail" img-check="{{j.groups.doctors.avators?j.groups.doctors.avators:'noimage_user.jpg'}}" width="100" height="100" />
+                                            <td>{{j.groups.doctors.first_name}} {{j.groups.doctors.last_name}}</td>
+                                            <td>{{j.groups.name}}</td>
+                                            <td><button type="button" class="sendrqst" ng-click="accept_invitation(j.id);" >Accept</button>&nbsp;|&nbsp;<button type="button" class="sendrqst" ng-click="reject_invitation(j.id);" >Reject</button></td>
+                                          </tr>
+                                          <tr ng-if="!(request_group_list).length">
+                                            <td colspan="4">NO DATA FOUND</td>
+                                          </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <br clear="All">
+                                <request-pagination ng-show="(request_group_list).length"></request-pagination>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+       

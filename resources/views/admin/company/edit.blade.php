@@ -73,7 +73,7 @@
                     <label for="company_regsitration_no" class="col-sm-2 control-label">Company Registration</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="company_regsitration_no" placeholder="Company Registration" name="company_regsitration_no" value="{{ $companies->company_regsitration_no}}">
+                      <input type="text" class="form-control" id="company_regsitration_no" placeholder="Company Registration" name="company_regsitration_no" minlength="15" maxlength="15" value="{{ $companies->company_regsitration_no}}">
                       <span class="text-danger">{{ $errors->first('company_regsitration_no') }}</span>
                     </div>
                   </div>

@@ -1042,7 +1042,7 @@ class PageController extends Controller
 
     public function doctor_list(Request $request) {
         $user = JWTAuth::toUser($request->header('token'));
-        $doctor_list = \App\Doctor::with('doctor_groups')->where('type','D')->where('id','<>',$user->id)->paginate(10);
+        $doctor_list = \App\Doctor::with('send_group_requests')->where('type','D')->where('id','<>',$user->id)->paginate(10);
         
         return response()->json(['doctor_list' => $doctor_list,'status_code'=>200]);
     }
@@ -1077,7 +1077,7 @@ class PageController extends Controller
 
     public function find_doctors(Request $request) {
         $user = JWTAuth::toUser($request->header('token'));
-        $receiver_details = \App\SendGroupRequest::select('receiver_id')->where('sender_id',$user->id)->get()->toArray();
+        $receiver_details = \App\SendGroupRequest::select('receiver_id')->where([['sender_id','=',$user->id],['status','=','0']])->get()->toArray();
         
         $find_doctors = \App\Doctor::where('type','D')->where('id','<>',$user->id)->get();
 
@@ -1163,15 +1163,10 @@ class PageController extends Controller
      {
         $drug_id=$request->drug_id;
 
-       
-       //$group_search=\App\Group::where('id',$drug_id)->get()->toArray();
        $drug_search=\App\Drug::where('id',$drug_id)->paginate(10);
       
        return response()->json(['drug_search' => $drug_search,'status_code'=>200]);
-        /*return response()->json(['error' => false,
-                'message' => "Data Found",
-                'group_search' => $group_search,
-                'code' => 200]);*/
+        
     }
 
     public function check_doctor_image(Request $request) {
@@ -1208,18 +1203,29 @@ class PageController extends Controller
         try {
             $doctor_details = \App\Doctor::where('email',$receiver_email_id)->get()->toArray();
 
+            $already_sent_request = \App\SendGroupRequest::where([['receiver_id','=',$doctor_details[0]['id']],
+                ['group_id','=',$group_id],['sender_id','=',$user->id]])->get()->toArray();
 
-            $insert_data = new \App\SendGroupRequest();
-            $insert_data->group_id = $group_id;
-            $insert_data->sender_id = $user->id;
-            $insert_data->receiver_id = $doctor_details[0]['id'];
-            $insert_data->description = $description;
+            if($already_sent_request) {
+                return response()->json(['error' => false,
+                    'message' => "You already sent request to this user",
+                    'code' => 200]);
+            }
+            else {
+                $insert_data = new \App\SendGroupRequest();
+                $insert_data->group_id = $group_id;
+                $insert_data->sender_id = $user->id;
+                $insert_data->receiver_id = $doctor_details[0]['id'];
+                $insert_data->description = $description;
 
-            $insert_data->save();
+                $insert_data->save();
 
-            return response()->json(['error' => false,
-                'message' => "Request send successfully",
-                'code' => 200]);
+                return response()->json(['error' => false,
+                    'message' => "Request send successfully",
+                    'code' => 200]);
+            }
+
+            
         }
         catch(Exception $e) {
             return response()->json(['error' => true,
@@ -1228,6 +1234,45 @@ class PageController extends Controller
         }
         
 
+    }
+
+    public function get_all_group_request(Request $request) {
+        $user = JWTAuth::toUser($request->header('token'));
+        $group_list = \App\SendGroupRequest::with('groups.doctors')->where([['receiver_id','=',$user->id],['status','=','0']])->paginate(10);
+        
+        return response()->json(['group_list' => $group_list,'status_code'=>200]);
+    }
+
+    public function accept_group_invitation(Request $request) {
+        $user = JWTAuth::toUser($request->header('token'));
+        $user_request_exists = \App\SendGroupRequest::where([['id','=',$request->id],['receiver_id','=',$user->id]])->get()->toArray();
+        if($user_request_exists) {
+            $update_group = \App\SendGroupRequest::find($request->id);
+            $update_group->status = "1";
+            $update_group->save();
+
+            return response()->json(['message' => "Invitation accepted successfully",'status_code'=>200]);
+
+        }
+        else {
+            return response()->json(['message' => "Un-authorized access",'status_code'=>200]);
+        }
+    }
+
+    public function reject_group_invitation(Request $request) {
+        $user = JWTAuth::toUser($request->header('token'));
+        $user_request_exists = \App\SendGroupRequest::where([['id','=',$request->id],['receiver_id','=',$user->id]])->get()->toArray();
+        if($user_request_exists) {
+            $update_group = \App\SendGroupRequest::find($request->id);
+            $update_group->status = "2";
+            $update_group->save();
+
+            return response()->json(['message' => "Invitation rejected successfully",'status_code'=>200]);
+
+        }
+        else {
+            return response()->json(['message' => "Un-authorized access",'status_code'=>200]);
+        }
     }
 
 }

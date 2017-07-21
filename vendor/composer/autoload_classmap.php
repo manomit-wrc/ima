@@ -14,6 +14,7 @@ return array(
     'AddPaymentToQualificationsTable' => $baseDir . '/database/migrations/2017_07_04_124141_add_payment_to_qualifications_table.php',
     'AddSomeFieldsToUsersTable' => $baseDir . '/database/migrations/2017_05_23_073322_add_some_fields_to_users_table.php',
     'AddStateIdToDoctorsTabel' => $baseDir . '/database/migrations/2017_06_05_131649_add_state_id_to_doctors_tabel.php',
+    'AddStatusToSendGroupRequestsTable' => $baseDir . '/database/migrations/2017_07_18_110243_add_status_to_send_group_requests_table.php',
     'AddTestimonialToDoctorsTable' => $baseDir . '/database/migrations/2017_06_27_063545_add_testimonial_to_doctors_table.php',
     'AddTypeToDoctorsTable' => $baseDir . '/database/migrations/2017_06_28_094948_add_type_to_doctors_table.php',
     'CategoryTableSeeder' => $baseDir . '/database/seeds/CategoryTableSeeder.php',

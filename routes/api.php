@@ -87,4 +87,10 @@ Route::group(['middleware' => 'jwt.auth'], function () {
 
     Route::post('/send-group-request','PageController@send_group_request');
 
+    Route::get('/get-all-group-request','PageController@get_all_group_request');
+
+    Route::get('/accept-group-invitation','PageController@accept_group_invitation');
+
+    Route::get('/reject-group-invitation','PageController@reject_group_invitation');
+
 });
