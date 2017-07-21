@@ -37,9 +37,6 @@ class QualificationController extends Controller
     public function edit($id) {
 
     	$qualificationedit = Qualification::find($id);
-
-    	 
-
         return view('admin.qualification.edit')->with('qualificationedit',$qualificationedit);
     }
 
