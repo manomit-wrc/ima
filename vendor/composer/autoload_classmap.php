@@ -7,15 +7,22 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'AddActiveTokenToDoctorsTable' => $baseDir . '/database/migrations/2017_06_07_094832_add_active_token_to_doctors_table.php',
+    'AddBankNameToDoctorsTable' => $baseDir . '/database/migrations/2017_07_21_093733_add_bank_name_to_doctors_table.php',
+    'AddHospitalNameToDoctorsTable' => $baseDir . '/database/migrations/2017_07_21_103430_add_hospital_name_to_doctors_table.php',
     'AddIsPublishedToJournalsTable' => $baseDir . '/database/migrations/2017_06_07_093040_add_is_published_to_journals_table.php',
     'AddOnlyTypeToDoctorsTable' => $baseDir . '/database/migrations/2017_06_28_095816_add_only_type_to_doctors_table.php',
     'AddOtherFieldsToDoctorsTable' => $baseDir . '/database/migrations/2017_06_01_125543_add_other_fields_to_doctors_table.php',
     'AddPaymentToDoctorsTable' => $baseDir . '/database/migrations/2017_07_04_124542_add_payment_to_doctors_table.php',
     'AddPaymentToQualificationsTable' => $baseDir . '/database/migrations/2017_07_04_124141_add_payment_to_qualifications_table.php',
+    'AddPaymentTypeToDoctorsTable' => $baseDir . '/database/migrations/2017_07_21_094322_add_payment_type_to_doctors_table.php',
     'AddReplayIdToComments' => $baseDir . '/database/migrations/2017_07_19_091425_add_replay_id_to_comments.php',
     'AddSomeFieldsToUsersTable' => $baseDir . '/database/migrations/2017_05_23_073322_add_some_fields_to_users_table.php',
     'AddStateIdToDoctorsTabel' => $baseDir . '/database/migrations/2017_06_05_131649_add_state_id_to_doctors_tabel.php',
+
     'AddStatusToSendGroupRequestsTable' => $baseDir . '/database/migrations/2017_07_18_110243_add_status_to_send_group_requests_table.php',
+
+    'AddStatusToSpecialistsTable' => $baseDir . '/database/migrations/2017_07_21_065447_add_status_to_specialists_table.php',
+
     'AddTestimonialToDoctorsTable' => $baseDir . '/database/migrations/2017_06_27_063545_add_testimonial_to_doctors_table.php',
     'AddTypeToDoctorsTable' => $baseDir . '/database/migrations/2017_06_28_094948_add_type_to_doctors_table.php',
     'CategoryTableSeeder' => $baseDir . '/database/seeds/CategoryTableSeeder.php',
@@ -43,6 +50,7 @@ return array(
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
     'CreateQualificationsTable' => $baseDir . '/database/migrations/2017_07_04_094523_create_qualifications_table.php',
     'CreateSendGroupRequestsTable' => $baseDir . '/database/migrations/2017_07_17_122221_create_send_group_requests_table.php',
+    'CreateSpecialistsTable' => $baseDir . '/database/migrations/2017_07_21_063338_create_specialists_table.php',
     'CreateStatesTable' => $baseDir . '/database/migrations/2017_06_05_054329_create_states_table.php',
     'CreateTagsTable' => $baseDir . '/database/migrations/2017_05_25_110222_create_tags_table.php',
     'CreateTeamsTable' => $baseDir . '/database/migrations/2017_05_24_045605_create_teams_table.php',

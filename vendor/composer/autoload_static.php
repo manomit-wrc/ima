@@ -347,15 +347,22 @@ class ComposerStaticInit26ac6f531c7dc343a38a6557cc1ca91b
 
     public static $classMap = array (
         'AddActiveTokenToDoctorsTable' => __DIR__ . '/../..' . '/database/migrations/2017_06_07_094832_add_active_token_to_doctors_table.php',
+        'AddBankNameToDoctorsTable' => __DIR__ . '/../..' . '/database/migrations/2017_07_21_093733_add_bank_name_to_doctors_table.php',
+        'AddHospitalNameToDoctorsTable' => __DIR__ . '/../..' . '/database/migrations/2017_07_21_103430_add_hospital_name_to_doctors_table.php',
         'AddIsPublishedToJournalsTable' => __DIR__ . '/../..' . '/database/migrations/2017_06_07_093040_add_is_published_to_journals_table.php',
         'AddOnlyTypeToDoctorsTable' => __DIR__ . '/../..' . '/database/migrations/2017_06_28_095816_add_only_type_to_doctors_table.php',
         'AddOtherFieldsToDoctorsTable' => __DIR__ . '/../..' . '/database/migrations/2017_06_01_125543_add_other_fields_to_doctors_table.php',
         'AddPaymentToDoctorsTable' => __DIR__ . '/../..' . '/database/migrations/2017_07_04_124542_add_payment_to_doctors_table.php',
         'AddPaymentToQualificationsTable' => __DIR__ . '/../..' . '/database/migrations/2017_07_04_124141_add_payment_to_qualifications_table.php',
+        'AddPaymentTypeToDoctorsTable' => __DIR__ . '/../..' . '/database/migrations/2017_07_21_094322_add_payment_type_to_doctors_table.php',
         'AddReplayIdToComments' => __DIR__ . '/../..' . '/database/migrations/2017_07_19_091425_add_replay_id_to_comments.php',
         'AddSomeFieldsToUsersTable' => __DIR__ . '/../..' . '/database/migrations/2017_05_23_073322_add_some_fields_to_users_table.php',
         'AddStateIdToDoctorsTabel' => __DIR__ . '/../..' . '/database/migrations/2017_06_05_131649_add_state_id_to_doctors_tabel.php',
+
         'AddStatusToSendGroupRequestsTable' => __DIR__ . '/../..' . '/database/migrations/2017_07_18_110243_add_status_to_send_group_requests_table.php',
+
+        'AddStatusToSpecialistsTable' => __DIR__ . '/../..' . '/database/migrations/2017_07_21_065447_add_status_to_specialists_table.php',
+
         'AddTestimonialToDoctorsTable' => __DIR__ . '/../..' . '/database/migrations/2017_06_27_063545_add_testimonial_to_doctors_table.php',
         'AddTypeToDoctorsTable' => __DIR__ . '/../..' . '/database/migrations/2017_06_28_094948_add_type_to_doctors_table.php',
         'CategoryTableSeeder' => __DIR__ . '/../..' . '/database/seeds/CategoryTableSeeder.php',
@@ -383,6 +390,7 @@ class ComposerStaticInit26ac6f531c7dc343a38a6557cc1ca91b
         'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
         'CreateQualificationsTable' => __DIR__ . '/../..' . '/database/migrations/2017_07_04_094523_create_qualifications_table.php',
         'CreateSendGroupRequestsTable' => __DIR__ . '/../..' . '/database/migrations/2017_07_17_122221_create_send_group_requests_table.php',
+        'CreateSpecialistsTable' => __DIR__ . '/../..' . '/database/migrations/2017_07_21_063338_create_specialists_table.php',
         'CreateStatesTable' => __DIR__ . '/../..' . '/database/migrations/2017_06_05_054329_create_states_table.php',
         'CreateTagsTable' => __DIR__ . '/../..' . '/database/migrations/2017_05_25_110222_create_tags_table.php',
         'CreateTeamsTable' => __DIR__ . '/../..' . '/database/migrations/2017_05_24_045605_create_teams_table.php',

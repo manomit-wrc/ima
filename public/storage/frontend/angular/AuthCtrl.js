@@ -61,7 +61,10 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 			$scope.avators = $scope.user.avators;
 			$scope.address = $scope.user.address;
 
-			
+			$scope.hospital_name = $scope.user.hospital_name;
+			$scope.doj = $scope.user.doj;
+			$scope.speciality_id = $scope.user.specialist_id;
+
 
 			if($scope.user.type == "C") {
 				$scope.company_registration_no = $scope.user.company_regsitration_no;
@@ -85,7 +88,11 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 
 		});
 
-		
+		Auth.getSpeciality().then(function(response){
+			
+			$scope.speciality_list = response.data.speciality_list;
+
+		});
 		
 	};
 	$scope.init();
@@ -445,11 +452,15 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 			
 			$scope.payment = response.data.payment_details.payment;
 			$scope.payment_date = response.data.payment_details.date_of_payment;
+			$scope.payment_type = response.data.payment_details.payment_type;
+			$scope.bank_name = response.data.payment_details.bank_name;
+			$scope.branch_name = response.data.payment_details.branch_name;
+			$scope.cheque_no = response.data.payment_details.cheque_no;
 			$scope.certificates_arr = response.data.certificates_arr;
 			$scope.qualification_arr = response.data.qualification_arr;
 			
 			$scope.qualification_id = $scope.qualification_arr;
-
+               
 		});
 	};
 
@@ -503,6 +514,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 	};
 
 	$scope.doProfile = function(valid) {
+
 		if(valid) {
 			
 			$http({
@@ -525,7 +537,10 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
                         biography: $scope.biography,
                         address: $scope.address,
                         doctor_id: $scope.auth_id,
-                        testimonial: $scope.testimonial
+                        testimonial: $scope.testimonial,
+                        hospital_name: $scope.hospital_name,
+                        doj: $scope.doj,
+                        speciality_id: $scope.speciality_id
                     },
                     transformRequest: function (data, headersGetter) {
                         var formData = new FormData();

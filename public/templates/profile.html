@@ -59,6 +59,52 @@
                                     </div>
                                 </div>
                             </div>
+                             
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="fieldbox" ng-class="{
+                                            'has-error':!frmProfile.hospital_name.$valid && (!frmProfile.$pristine || frmProfile.$submitted), 
+                                            'has-success': frmProfile.hospital_name.$valid && (!frmProfile.$pristine || frmProfile.$submitted)
+                                            }">
+                                        <label>Hospital Name</label>
+                                          <input type="text" ng-model="hospital_name" id="hospital_name" name="hospital_name" class="editF" required="required">
+                                          <span class="help-block" ng-show="frmProfile.hospital_name.$error.required && (!frmProfile.$pristine || frmProfile.$submitted)">Enter Hospital Name</span>
+                                    </div>
+                                </div>
+
+                                
+
+                                
+
+                                <div class="col-md-3">
+                                    <div class="fieldbox date" ng-class="{
+                                            'has-error':!frmProfile.doj.$valid && (!frmProfile.$pristine || frmProfile.$submitted), 
+                                            'has-success': frmProfile.doj.$valid && (!frmProfile.$pristine || frmProfile.$submitted)
+                                            }">
+                                        <label>Date Of Joining</label>
+                                        <input type="text" name="doj" class="editF" ng-model="doj" placeholder="DD/MM/YYYY" jqdatepicker required="required">
+
+                                        <span class="help-block" ng-show="frmProfile.doj.$error.required && (!frmProfile.$pristine || frmProfile.$submitted)">Please Enter Date Of Joining</span>
+                                        
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="fieldbox" ng-class="{
+                                            'has-error':!frmProfile.speciality_id.$valid && (!frmProfile.$pristine || frmProfile.$submitted), 
+                                            'has-success': frmProfile.speciality_id.$valid && (!frmProfile.$pristine || frmProfile.$submitted)
+                                            }">
+                                        <label>Speciality</label>
+                                        <select ng-model="speciality_id" id="speciality_id" name="speciality_id" required="required" class="editF">
+                                          <option value="" disabled="">Select Speciality</option>
+                                          <option ng-repeat="(key, value) in speciality_list" value="{{key}}" >{{value}}</option>
+                                        </select>
+                                        <span class="help-block" ng-show="frmProfile.speciality_id.$error.required && (!frmProfile.$pristine || frmProfile.$submitted)">Please Select Speciality</span>
+                                    </div>
+                                </div>
+                                
+                            </div>
+
 
                             <div class="row">
                                 <div class="col-md-3">

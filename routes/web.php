@@ -236,4 +236,13 @@ Route::group(['middleware'=>['admin']], function(){
     Route::post('/admin/department/update/{id}','DepartmentController@update');
     Route::get('/admin/department/delete/{id}','DepartmentController@delete');
 
+    
+
+    Route::get('/admin/specialist','specialistController@index');
+    Route::get('/admin/specialist/add','specialistController@add');
+    Route::post('/admin/specialist/store','specialistController@store');
+    Route::get('/admin/specialist/edit/{id}','specialistController@edit');
+    Route::post('/admin/specialist/update','specialistController@update');
+    Route::get('/admin/specialist/delete/{id}','specialistController@delete');
+
 });

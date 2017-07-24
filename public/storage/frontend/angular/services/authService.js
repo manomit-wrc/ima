@@ -194,6 +194,17 @@ authService.factory('Auth', function($http,$q,AuthToken,$cookieStore){
 		return defer.promise;
 	};
 
+	authFactory.getSpeciality = function() {
+		var defer = $q.defer();
+		$http.get('/api/speciality-list').then(function(response){
+			defer.resolve(response);
+		}).catch(function(reason){
+			defer.resolve(reason);
+		});
+
+		return defer.promise;
+	};
+
 	authFactory.getqualification = function() {
 		var defer = $q.defer();
 		$http.get('/api/qualification-list').then(function(response){
@@ -274,7 +285,7 @@ authService.factory('Auth', function($http,$q,AuthToken,$cookieStore){
 
 
     authFactory.submit_doctorcertificate = function(doctor) {
-
+        console.log(doctor.payment_date);
 		var defer = $q.defer();
 
        var formData = new FormData();
@@ -287,6 +298,10 @@ authService.factory('Auth', function($http,$q,AuthToken,$cookieStore){
        formData.append("payment", doctor.payment);
        formData.append("payment_date", doctor.payment_date);
        formData.append("qualification_id", doctor.qualification_id);
+       formData.append("payment_type", doctor.payment_type);
+       formData.append("bank_name", doctor.bank_name);
+       formData.append("branch_name", doctor.branch_name);
+       formData.append("cheque_no", doctor.cheque_no);
        
 		$http.post('api/submit-doctorcertificate', formData, {
             transformRequest: angular.identity,

@@ -7,7 +7,7 @@
        <!--  <li class="header">MAIN NAVIGATION</li> -->
         <li><a href="{!!URL::to('/admin/dashboard')!!}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
 
-        <li class="treeview {{ Request::segment(2) === 'organization' || Request::segment(2) === 'designation' || Request::segment(2) === 'team' || Request::segment(2) === 'banner' || Request::segment(2) === 'bulletin' || Request::segment(2) === 'local-branch' || Request::segment(2) === 'cms' || Request::segment(2) === 'accomodation' || Request::segment(2) === 'cuisine' || Request::segment(2) === 'paymenttype' || Request::segment(2) === 'connectivity' || Request::segment(2) === 'connectivityservices' || Request::segment(2) === 'accrediation' || Request::segment(2) === 'specificservice' || Request::segment(2) === 'medicalfacility' || Request::segment(2) === 'banner' || Request::segment(2) === 'doctor' || Request::segment(2) === 'company' || Request::segment(2) === 'qualification' ? 'active' : null || Request::segment(2) === 'department' ? 'active' : null }}">
+        <li class="treeview {{ Request::segment(2) === 'organization' || Request::segment(2) === 'designation' || Request::segment(2) === 'team' || Request::segment(2) === 'banner' || Request::segment(2) === 'bulletin' || Request::segment(2) === 'local-branch' || Request::segment(2) === 'cms' || Request::segment(2) === 'accomodation' || Request::segment(2) === 'cuisine' || Request::segment(2) === 'paymenttype' || Request::segment(2) === 'connectivity' || Request::segment(2) === 'connectivityservices' || Request::segment(2) === 'accrediation' || Request::segment(2) === 'specificservice' || Request::segment(2) === 'medicalfacility' || Request::segment(2) === 'banner' || Request::segment(2) === 'doctor' || Request::segment(2) === 'company' || Request::segment(2) === 'specialist' || Request::segment(2) === 'qualification' ? 'active' : null || Request::segment(2) === 'department' ? 'active' : null }}">
           <a href="javascript:void(0)">
             <i class="fa fa-cog"></i> <span>Settings management</span>
             <span class="pull-right-container">
@@ -37,6 +37,8 @@
             <li class="{{ Request::segment(2) === 'qualification' ? 'active' : null }}"><a href="{!!URL::to('/admin/qualification')!!}"><i class="fa fa-language"></i>Qualification Master</a></li>
             
             <li class="{{ Request::segment(2) === 'department' ? 'active' : null }}"><a href="{!!URL::to('/admin/department')!!}"><i class="fa fa-language"></i>Department Master</a></li>
+
+            <li class="{{ Request::segment(2) === 'specialist' ? 'active' : null }}"><a href="{!!URL::to('/admin/specialist')!!}"><i class="fa fa-language"></i>Doctor specialty</a></li>
                                 
           </ul>
         </li>
