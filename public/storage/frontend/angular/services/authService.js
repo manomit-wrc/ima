@@ -247,6 +247,32 @@ authService.factory('Auth', function($http,$q,AuthToken,$cookieStore){
        return defer.promise;
 	};
 
+    authFactory.submit_replay = function(commentReplay,group_id,reply_id) {
+    	//console.log(commentReplay.main_post);
+    	//console.log(commentReplay.main_comment_file);
+		var defer = $q.defer();
+		 var formData = new FormData();
+
+		 //formData.append("comment_file", commentReplay.main_comment_file);  
+         formData.append("comment", commentReplay.main_post);
+         formData.append("group_id",group_id);
+         formData.append("reply_id",reply_id);
+
+		$http.post('/api/comment-data', formData, {
+            transformRequest: angular.identity,
+            headers: {'Content-Type': undefined}
+        }).then(function (response) {
+        	  
+	   		defer.resolve(response);
+       }).catch(function(reason){
+       		defer.resolve(reason);
+       });
+
+       return defer.promise;
+	};
+
+
+
     authFactory.submit_doctorcertificate = function(doctor) {
 
 		var defer = $q.defer();

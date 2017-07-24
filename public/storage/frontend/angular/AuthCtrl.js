@@ -1,6 +1,6 @@
 var AuthCtrl = angular.module('AuthCtrl',['oitozero.ngSweetAlert','ui.bootstrap','ngSlimScroll']);
 
-AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$routeParams,$cookieStore,$window,SweetAlert,$modal){
+AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$routeParams,$cookieStore,$window,SweetAlert,$modal,$sce){
 	$scope.code = '';
 	$scope.message = '';
 	$scope.user = {};
@@ -10,6 +10,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 	$scope.events = {};
 	$scope.doctor_id = '';
 	$scope.journal_file = {};
+	$scope.comment_file={};
 	$scope.isDisabled = false;
 	$scope.contact_address = '';
 	$scope.footer_data='';
@@ -30,6 +31,10 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     $scope.request_group_list = {};
 
     $scope.onSubmit = false;
+
+    $scope.reply_comment = 0;
+
+    $scope.comment_list = '';
 
     $scope.select = function() {
     	alert("Hello");
@@ -190,6 +195,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     	}
 
 		$http.get('/api/drug-list?page='+pageNumber).then(function(response){
+
 			$scope.drug_list = response.data.drug_list.data;
             $scope.totalPages   = response.data.drug_list.last_page;
           $scope.currentPage  = response.data.drug_list.current_page;
@@ -679,10 +685,19 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 		$scope.location = $location;
 		$location.path("/doctor-list");
 	};
+
 	$scope.groupRequest = function() {
 		$scope.location = $location;
 		$location.path("/group-request");
 	};
+
+
+	$scope.loadComments = function() {
+		$scope.location = $location;
+		$location.path("/comment-list/1");
+	};
+	
+
 
     $scope.doUploadJournal = function(valid) {
     	if(valid) {
@@ -701,7 +716,22 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     		});
     	}
     };
+    
+    $scope.mainpost = function(reply_id) {
+		 
+       Auth.submit_replay($scope,$routeParams.id,reply_id).then(function(response){
+    			$scope.message = response.data.message;
+				$scope.status_code = response.data.code;
+                // $window.location.href = "/comment-list/1";
+				if($scope.status_code != 500) {
+					$scope.main_post = null;
+					$scope.main_comment_file = null;
+				}
+				
+    		});
 
+          //$location.path("/comment-list");
+    };		  
 
     $scope.getFileDetails = function (e) {
 
@@ -871,8 +901,20 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     	  $scope.branch_data = response.data.branch_item;
 	   });
 	    
+	}
+
+	$scope.getPostData = function() {
+
+          $http.get('/api/get-post-data',{params:{group_id:$routeParams.id}}).then(function(response) {
+          	console.log(response.data.getpostdata);
+          	$scope.IsVisible=true
+    	    $scope.getpostdata = response.data.getpostdata;
+    	    $scope.comment_list = $sce.trustAsHtml("<i>Hello</i> <b>World!</b>");
+	   });
 	    
-    }
+	};
+
+
     $scope.getCMS = function() {
 
           $http.get('/api/cms/',{
@@ -904,7 +946,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
              
              //alert('doctor');
             $http.get('/api/doctor_data').then(function(response){
-            	//console.log(response.data);
+            	
     		$scope.doctor_content = response.data.doctor_item;
     		//$scope.footer_description = response.data.footer_des;
     	});
@@ -1295,6 +1337,9 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     	
     };
 
+    $scope.get_block = function(show) {
+    	$scope[show] ? $scope[show] = false: $scope[show]= true; 
+    };
 
 });
 

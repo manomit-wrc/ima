@@ -186,7 +186,7 @@
     function readURL(input) {
          document.getElementById('hid_err').style.visibility='hidden';
          var mimeType=input.files[0]['type'];
-         
+
          if (input.files && input.files[0] && mimeType.split('/')[0]=="image") {
 
             document.getElementById('pre_img').style.display='block';

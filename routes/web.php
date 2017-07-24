@@ -56,7 +56,13 @@ Route::get('/doctor-list', function(){
     return view('welcome');
 });
 
+
 Route::get('/group-request', function(){
+    return view('welcome');
+});
+
+Route::get('/comment-list/{id}', function(){
+
     return view('welcome');
 });
 

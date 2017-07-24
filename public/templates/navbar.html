@@ -25,7 +25,7 @@
 
                                 <div slim-scroll>
                                 
-                                <div class="col-xs-12" data-loading>
+                                <div class="col-xs-12" data-loading style="position: absolute; top: 45%; text-align: center;">
                                     <img src="/uploads/load.gif">
                                 </div>
                                 <li ng-repeat="fn in find_doctors">
@@ -38,6 +38,46 @@
                                             <h5>{{fn.license}}</h5>
                                             <button type="button" class="sendrqst" ng-click="open(fn.id);">Send Request</button>
                                         </div>
+                                    </span>
+                                </li>
+
+                                
+
+                                </div>
+                                
+                              </ul>
+                        </li>
+
+
+                        <li class="dropdown newli" ng-show="user.id" >
+                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 
+
+                        <i class="fa fa-bell" aria-hidden="true" ng-click="findDoctors();"></i>
+
+                            </a>
+
+                            
+                            
+                            <ul class="dropdown-menu" ng-click="$event.stopPropagation(); ">
+
+                                <div slim-scroll>
+                                
+                                <div class="col-xs-12" data-loading style="position: absolute; top: 45%; text-align: center;">
+                                    <img src="/uploads/load.gif">
+                                </div>
+                                <li ng-repeat="fn in find_doctors">
+                                    <span class="group_inner">
+                                        <a href="#">
+                                        <div class="col-xs-4">
+                                            <img src="{{fn.avators}}">
+                                        </div>
+                                        <div class="col-xs-8">
+                                            <h4>Dr. {{fn.name}}</h4>
+                                            <h6>18/07/2017 2:16 PM</h6>
+                                            <p>sdfvdsgfdsgdfsg sdfvsdf vds</p>
+                                            
+                                        </div>
+                                        </a>
                                     </span>
                                 </li>
 

@@ -14,6 +14,7 @@ use App\LocalBranch;
 use Validator;
 use App\Doctor;
 use App\Drug;
+use App\Comment;
 use App\State;
 use App\CMS;
 use App\Qualification;
@@ -1273,6 +1274,55 @@ class PageController extends Controller
         else {
             return response()->json(['message' => "Un-authorized access",'status_code'=>200]);
         }
+    }
+
+    public function comment_data(Request $request) {
+
+          /*if($request->hasFile('comment_file')) {
+            $file = $request->file('comment_file') ;
+
+            $filename= time().'_'.$file->getClientOriginalName() ;
+                $destinationPath = public_path().'/uploads/doctors/postnotification/' ;
+                $file->move($destinationPath,$filename);
+
+            }
+            else {
+                $filename='';
+            }*/
+         
+        $user = JWTAuth::toUser($request->header('token'));
+        $comments = new \App\Comment();
+        $comment = $request->comment;
+        $group_id = $request->group_id;
+        
+        $doctor_id=$user->id;
+        
+        //echo 'file'.$filename;die();
+        $comments->doctor_id=$doctor_id;
+        $comments->comment=$request->comment;
+        $comments->group_id=$group_id;
+        $comments->replay_id=$request->reply_id;
+        $comments->file="";
+        //$comments->created_at=time();
+        //$comments->updated_at=time();
+        $comments->save();
+    }
+
+    public function get_post_data(Request $request)
+    {
+        $user = JWTAuth::toUser($request->header('token'));
+        $doctor_id=$user->id;
+        $group_id = $request->group_id;
+        
+        $getpostdata = \App\Comment::with('doctors')->where('group_id',$group_id)->orderBy('id', 'desc')->get()->toArray();
+        $html = "";
+        foreach ($getpostdata as $key => $value) {
+           $html.= '<div class="media"><div class="media-left"><a href="#"> <img alt="64x64" class="media-object" src="" style="width: 64px; height: 64px;"> </a></div><div class="media-body">
+<h4 class="media-heading">'.$value['doctors']['first_name'].' '.$value['doctors']['last_name'].'</h4>'.$value['comment'].'<br clear="all"><font style=""><a href="#" ng-click="get_block(div3);">Reply <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></font><br clear="all"><div class="row ng-cloak" ng-show="div3"><div class="col-md-9"><textarea rows="1" class="postfields" ng-model="commit" ng-keyup="$event.keyCode == 13 && replayFunction()" id="commit" name="commit"></textarea></div><div class="col-md-3"><div class="filebox"><i class="fa fa-paperclip" aria-hidden="true"></i><input type="file" name="comment_file" ng-model="comment_file"  onchange="angular.element(this).scope().uploadedCommentDocs(this)" accept="image/jpg" class="postattach"></div></div></div></div></div>';
+        }
+        
+        return response()->json(['getpostdata' => $getpostdata,'status_code'=>200,'comment_list'=>$html]);
+
     }
 
 }

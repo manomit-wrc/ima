@@ -93,4 +93,7 @@ Route::group(['middleware' => 'jwt.auth'], function () {
 
     Route::get('/reject-group-invitation','PageController@reject_group_invitation');
 
+    Route::post('/comment-data','PageController@comment_data');
+    Route::get('/get-post-data','PageController@get_post_data');
+
 });
