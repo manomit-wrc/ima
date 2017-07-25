@@ -44,6 +44,10 @@ imaRoute.config(function($routeProvider,$locationProvider,$qProvider){
 		templateUrl: '/templates/group-request.html',
 		authenticated: true,
 		type: "D"
+	}).when('/doctor-details',{
+		templateUrl: '/templates/doctor-details.html',
+		authenticated: true,
+		type: "D"
 	}).when('/comment-list/:id',{
 		templateUrl: '/templates/comment.html',
 		authenticated: true,

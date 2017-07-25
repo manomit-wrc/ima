@@ -1,0 +1,139 @@
+
+<div class="container">
+    <div class="row">
+        <div class="innertopB" ng-controller="AuthController">
+            <my-sidebar></my-sidebar>
+            <div class="col-md-8 Clear-991" >
+                <div class="Rpanel">
+                    <h2>Doctor Details</h2>
+
+                    <div class="row">
+
+                        <div class="col-md-4">
+                            <div class="docimg"><img img-check="{{viewdoctor[0].avators?viewdoctor[0].avators:'noimage_user.jpg'}}" alt="{{$viewdoctor[0]['avators']}}"></div>
+                        </div>
+
+                        <div class="col-md-8">
+                            <div class="doctable">
+                                <div class="table-responsive">
+                                <table width="100%">
+                                    <tr>
+                                        <td><b>First Name</b></td>
+                                        <td>{{viewdoctor[0].first_name}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Last Name</b></td>
+                                        <td>{{viewdoctor[0].last_name}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Email</b></td>
+                                        <td>{{viewdoctor[0].email}}
+</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Mobile No</b></td>
+                                        <td>{{viewdoctor[0].mobile}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Date of birth</b></td>
+                                        <td>{{viewdoctor[0].dob}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Qualification</b></td>
+                                        <td>
+                                            <div ng-repeat="x in doctor_qualifs[0]['doctor_qualifications']">
+
+                                             {{x.qualification_name}}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Paid Amount</b></td>
+                                        <td>{{viewdoctor[0].payment}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Licence</b></td>
+                                        <td>{{viewdoctor[0].license}}</td>
+                                    </tr>
+                                </table>
+                                </div>
+                            </div>
+                        </div>
+                        <br clear="all">
+                        <div>&nbsp;</div>
+                        <div class="col-md-12">
+                            <h4>Doctor Certificate</h4>
+
+                            <table id="" class="table table-bordered table-striped">
+                              <thead>
+                              <tr>
+                                <th>Sl.No</th>
+                                <th>Certificates</th>
+                                
+                              </tr>
+                              </thead>
+                              <tbody>
+                                
+                                                                   
+                                   <tr ng-repeat="x in doctor_certificates">
+                                     <td>1</td>
+                                   <td><a data-toggle="tooltip" data-placement="top" title="{{x}}" href="/uploads/doctors/qualification/{{x}}" target="_blank"><i class="fa fa-paperclip" aria-hidden="true"></i></td>
+                                   
+                                   
+                                   </tr>
+                                   
+                                    </tbody>
+                              </table>
+                        </div>
+
+                        <br clear="all">
+                         <div>&nbsp;</div>
+                        <div class="col-md-12">
+
+                        <h4>Journal</h4>
+
+                        <table id="" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Publised Date</th>
+                  <th>Journal File</th>
+                  
+                  <th>Category Name</th>
+                </tr>
+                </thead>
+                <tbody>
+                
+                    <tr ng-repeat="j in viewdoctor[0].journal">
+                      <td>{{j.title}}</td>
+
+                      <td>{{j.published_date }}</td>
+                      <td><a data-toggle="tooltip" data-placement="top" title="{{ j.journal_file }}" href="/uploads/doctors/journal/{{ j.journal_file}}" target="_blank"><i class="fa fa-paperclip" aria-hidden="true"></i></td>
+
+                      
+
+
+                      <td>{{ j.categories.name}}</td>
+                      
+                    </tr>
+                                      
+                     
+                                 
+                
+                </tbody>
+                
+              </table>
+
+                        </div>
+
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

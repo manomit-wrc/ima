@@ -464,7 +464,13 @@ class PageController extends Controller
             
             $doctors->payment = $request->payment;
             $doctors->date_of_payment =date('Y-m-d',strtotime($request->payment_date));
-            $doctors->certificate = implode(',',$filedata);
+            if(empty($filedata))
+            {
+              $doctors->certificate=$doctors->certificate;
+            }
+            else{
+                $doctors->certificate = implode(',',$filedata);
+            } 
             
             $doctors->payment_type = $request->payment_type;
             $doctors->bank_name = $request->bank_name;
@@ -1343,6 +1349,30 @@ class PageController extends Controller
             $data[] = array('name'=>$value['doctors']['first_name']." ".$value['doctors']['last_name'],'comment'=>$value['comment'],'image'=>$avators,'doctor_id'=>$value['doctors']['id']);
         }
         return response()->json(['getpostdata' => $data,'status_code'=>200]);
+
+    }
+
+    public function doctor_content(Request $request)
+    {
+      $doctor_id=$request->doctor_id;
+
+      $doctor = Doctor::with('journal.categories')->where('id',$doctor_id)->get()->toArray();
+      
+      $doctor_qualifs = Doctor::with('doctor_qualifications')->where('id',$doctor_id)->get()->toArray();
+      
+
+      $doctor_certificates = explode(",", $doctor_qualifs[0]['certificate']);
+      
+      return response()->json(['viewdoctor'=>$doctor,'doctor_qualifs'=>$doctor_qualifs,'doctor_certificates'=>$doctor_certificates,'status_code'=>200]);
+    }
+
+    public function download_journal(Request $request)
+    {
+      $journal_file=$request->journal_file;
+     
+      $file=public_path("/uploads/doctors/journal/".$journal_file);
+      return response()->download($file);
+
 
     }
 

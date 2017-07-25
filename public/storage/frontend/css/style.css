@@ -2746,6 +2746,18 @@ a.btn:focus {
     cursor: pointer;
 }
 
+.Pfields {
+    border: 1px solid #fff;
+    background: #e7e7e7;
+    padding: 8px 15px !important;
+    width: 100%;
+    resize: none;
+    cursor: pointer;
+    border-radius: 0;
+    height: auto;
+    line-height:normal !important;
+}
+
 .fieldbox .editF:focus {
     border: 1px solid #ccc;
     background: #fff;
@@ -3334,4 +3346,37 @@ a.btn:focus {
     cursor: pointer;
     display: block;
     position: absolute;
+}
+
+.docimg{
+    width: 100%;
+    float: left;
+}
+
+.docimg img{
+    width: 100%;
+    float: left;
+    border: 2px solid #ccc;
+}
+
+
+.doctable{
+    width: 100%;
+    float: left;
+    background: #f2f2f2;
+    padding: 15px 0;
+}
+
+.doctable table td{
+    padding: 8px 20px;
+}
+
+
+
+.doctable table td:first-child{
+    padding-top: 0;
+}
+
+.doctable table td:last-child{
+    padding-top: 0;
 }
