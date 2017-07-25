@@ -37,6 +37,8 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     $scope.comment_list = '';
     $scope.getpostdata = {};
 
+    $scope.tab = 1;
+
     $scope.select = function() {
     	alert("Hello");
     };

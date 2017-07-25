@@ -3,29 +3,26 @@
             <div class="row">
                 <div class="innertopB">
                     <my-sidebar></my-sidebar>
-                    <div class="col-md-8 Clear-991" ng-controller="AuthController">
-                       <form name="frmAddGroup" ng-submit="doAddGroup(frmAddGroup.$valid)" method="post" novalidate="novalidate" enctype="multipart/form-data">
-                        <tabset>
-                          <tab heading="Add Members" active="tabs[0].active">
-                            <div ng-form="emailForm">
-                              <input type="email" name="emailFrom" class="input-xsmall" placeholder="From email address" ng-model="campaign.info.emailFrom" required />
-                              <span ng-show="emailForm.emailFrom.$dirty && emailForm.emailFrom.$error.required" class="help-inline">
-                                Required
-                              </span>
-                            </div>
-                          </tab>
-
-                          <tab heading="Create Group" active="tabs[1].active">
-                            <div ng-form="subjectForm">
-                              <input type="text" name="emailSubject" class="input-xxlarge" ng-model="campaign.info.emailSubject" placeholder="Please enter email subject" required/>
-                              <span ng-show="subjectForm.emailSubject.$dirty && subjectForm.emailSubject.$error.required" class="help-inline">
-                                Required
-                              </span>
-                            </div>
-                          </tab>
-                        </tabset>
-                      </form>
-                    </div>
+                    <form name="frmAddGroup"  method="post" novalidate="novalidate" >
+                    <div class="col-md-8">
+                      <div class="panel with-nav-tabs panel-default">
+                          <div class="panel-heading">
+                                  <ul class="nav nav-tabs">
+                                      <li class="active"><a href="javascript:void(0)" data-toggle="tab" ng-click="tab=1">Default 1</a></li>
+                                      <li><a href="javascript:void(0)" data-toggle="tab" ng-click="tab=2">Default 2</a></li>
+                                     
+                                  </ul>
+                          </div>
+                          <div class="panel-body">
+                              <div class="tab-content">
+                                  <div class="tab-pane fade in active" ng-show="tab==1">Default 1</div>
+                                  <div class="tab-pane fade in active" ng-show="tab==2">Default 2</div>
+                                  
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  </form>
                 </div>
             </div>
         </div>
