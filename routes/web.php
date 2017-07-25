@@ -56,6 +56,9 @@ Route::get('/doctor-list', function(){
     return view('welcome');
 });
 
+Route::get('/doctor-details', function(){
+    return view('welcome');
+});
 
 Route::get('/group-request', function(){
     return view('welcome');
@@ -104,6 +107,7 @@ Route::get('/groups/add', function(){
 Route::get('/groups/edit/{id}', function(){
     return view('welcome');
 });
+
 
 Route::get('/admin', 'LoginController@index');
 Route::post('/admin/login', 'LoginController@checkLogin');

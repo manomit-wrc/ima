@@ -71,7 +71,8 @@ Route::group(['middleware' => 'jwt.auth'], function () {
     Route::get('/doctor-search','PageController@doctor_search');
 
     Route::get('/find-doctors','PageController@find_doctors');
-
+    Route::get('/doctor-content','PageController@doctor_content');
+    Route::get('/download-journal','PageController@download_journal');
 
 
     Route::get('/groups/search','PageController@search_group');

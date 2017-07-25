@@ -41,39 +41,51 @@
                                 </div>
                                 
 
+                                
+                            
+                                </div>
+
                                 <div id="show_payment" style=" width: 100%; display: none;">
 
-                                <div style=" width: 100%; display:  inline-block;">
-
+                                
+                                    <div class="col-md-6">
                                     <div class="form-group">
                                       <label>Bank Name</label>
-                                      <input type="text" id="bank_name" ng-model="bank_name" name="bank_name" class="form-control editF" required="Enter Bank Name" placeholder="Enter Bank Name">
+                                      <input type="text" id="bank_name" ng-model="bank_name" name="bank_name" class="form-control Pfields" required="Enter Bank Name" placeholder="Enter Bank Name">
                                     </div>
                                 
-                                        
-                                </div>
-                                <div style=" width: 100%; display:  inline-block;">
+                                      </div>  
                                 
-
+                                
+                                
+                                        <div class="col-md-6">
                                         <div class="form-group">
                                           <label>Branch Name</label>
-                                          <input type="text" class="form-control editF" id="branch_name" ng-model="branch_name" name="branch_name"  placeholder="Enter Branch Name">
+                                          <input type="text" class="form-control Pfields" id="branch_name" ng-model="branch_name" name="branch_name"  placeholder="Enter Branch Name">
                                           
                                         </div>
-                                </div>
-                                <div style=" width: 100%; display:  inline-block;">
+                                        </div>
+                                
+                                
                             
-
+                                    <div class="col-md-6">
                                     <div class="form-group">
                                       <label>DD/Cheque No.</label>
-                                      <input type="text" class="form-control editF" id="cheque_no" ng-model="cheque_no" name="cheque_no" placeholder="Enter DD/Cheque No.">
+                                      <input type="text" class="form-control Pfields" id="cheque_no" ng-model="cheque_no" name="cheque_no" placeholder="Enter DD/Cheque No.">
                                      
                                     </div> 
-                                </div>
+                                    </div>
+                                
+
+
+
 
                                 </div>
-                            
-                                </div>
+
+
+
+
+
                                 <div class="col-md-6">
                                     <div class="fieldbox" ng-class="{
                                             'has-error':!frmUploadcertificate.payment_date.$valid && (!frmUploadcertificate.$pristine || frmUploadcertificate.$submitted), 
@@ -83,22 +95,7 @@
                                         <input type="text" name="payment_date" class="editF" ng-model="payment_date" placeholder="DD/MM/YYYY" jqdatepicker required="required">
                                          <span class="help-block" ng-show="frmUploadcertificate.payment_date.$error.required && (!frmUploadcertificate.$pristine || frmUploadcertificate.$submitted)">Please Enter The payment date</span>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="fieldbox" ng-class="{
-                                            'has-error':!frmUploadcertificate.qualification_id.$valid && (!frmUploadcertificate.$pristine || frmUploadcertificate.$submitted), 
-                                            'has-success': frmUploadcertificate.qualification_id.$valid && (!frmUploadcertificate.$pristine || frmUploadcertificate.$submitted)
-                                            }">
-                                        <label>Select Qualification</label>
-                                        <select name="qualification_id[]" ng-model="qualification_id" class="fieldboxSelM" required="required" multiple="true">
-                                            <option value="">Select</option>
-                                            <option ng-repeat="(key, value) in qualification_list" value="{{key}}">{{value}}</option>
-                                        </select>
-                                        <span class="help-block" ng-show="frmUploadcertificate.qualification_id.$error.required && (!frmUploadcertificate.$pristine || frmUploadcertificate.$submitted)">Please Select Qualification</span>
-                                    </div>
-                                </div>
-                            
-                                <div class="col-md-6">
+
                                     <div class="fieldbox">
                                         <label>Certificate Upload</label>
                                         <span>
@@ -115,8 +112,25 @@
                                          
                                     </div>
                                 </div>
-                                <!--<p><progress id="pro" value="0"></progress></p>-->
+                                <div class="col-md-6">
+                                    <div class="fieldbox" ng-class="{
+                                            'has-error':!frmUploadcertificate.qualification_id.$valid && (!frmUploadcertificate.$pristine || frmUploadcertificate.$submitted), 
+                                            'has-success': frmUploadcertificate.qualification_id.$valid && (!frmUploadcertificate.$pristine || frmUploadcertificate.$submitted)
+                                            }">
+                                        <label>Select Qualification</label>
+                                        <select name="qualification_id[]" ng-model="qualification_id" class="fieldboxSelM" required="required" multiple="true">
+                                            <option value="">Select</option>
+                                            <option ng-repeat="(key, value) in qualification_list" value="{{key}}">{{value}}</option>
+                                        </select>
+                                        <span class="help-block" ng-show="frmUploadcertificate.qualification_id.$error.required && (!frmUploadcertificate.$pristine || frmUploadcertificate.$submitted)">Please Select Qualification</span>
+                                    </div>
+                                </div>
                                 <br clear="all">
+                                <div class="col-md-6">
+                                    
+                                </div>
+                                <!--<p><progress id="pro" value="0"></progress></p>-->
+                                
                                 <div class="col-md-6">
                                     <div class="fieldbox">
                                         <button class="button1" type="submit">SAVE</button>

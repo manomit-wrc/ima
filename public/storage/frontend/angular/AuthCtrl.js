@@ -692,6 +692,48 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     	$scope.location = $location;
     	$location.path("/journal-list");
     };
+    $scope.loadDoctorDetails = function($id) {
+    	
+        var id=$id;
+        $http.get('/api/doctor-content/',{
+    		params: { doctor_id:id}
+    		
+    		
+    	}).then(function(response){
+    		console.log(response.data.viewdoctor);
+    		$scope.viewdoctor = response.data.viewdoctor;
+    		$scope.doctor_qualifs = response.data.doctor_qualifs;
+    		$scope.doctor_certificates = response.data.doctor_certificates;
+    		
+    	});
+
+        $scope.location = $location;
+    	$location.path("/doctor-details");
+    };
+
+     $scope.download_journal = function($file) {
+    	
+
+        var file_name=$file;
+        
+        $http.get('/api/download-journal/',{
+    		params: { journal_file:file_name}
+    		
+    		
+    	}).then(function(response){
+    		//console.log(response.data.viewdoctor);
+    		//$scope.viewdoctor = response.data.viewdoctor;
+    		//$scope.doctor_qualifs = response.data.doctor_qualifs;
+    		//$scope.doctor_certificates = response.data.doctor_certificates;
+    		
+    	});
+
+        //$scope.location = $location;
+    	//$location.path("/doctor-details");
+    };
+
+
+
      $scope.uploadcertificate = function() {
      	$scope.location = $location;
     	$location.path("/payment-certificate");
