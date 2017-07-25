@@ -35,6 +35,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     $scope.reply_comment = 0;
 
     $scope.comment_list = '';
+    $scope.getpostdata = {};
 
     $scope.select = function() {
     	alert("Hello");
@@ -921,14 +922,25 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 	$scope.getPostData = function() {
 
           $http.get('/api/get-post-data',{params:{group_id:$routeParams.id}}).then(function(response) {
-          	console.log(response.data.getpostdata);
-          	$scope.IsVisible=true
     	    $scope.getpostdata = response.data.getpostdata;
-    	    $scope.comment_list = $sce.trustAsHtml("<i>Hello</i> <b>World!</b>");
+    	    
 	   });
 	    
 	};
 
+	$scope.postComment = function(keyEvent) {
+		if (keyEvent.which === 13) {
+			$http.post('/api/comment-data',{
+				comment: $scope.post_comment,
+				group_id: $routeParams.id
+			}).then(function(response) {
+				$scope.post_comment = null;
+				$scope.getpostdata = response.data.getpostdata;
+				
+			});
+		}
+		
+	};
 
     $scope.getCMS = function() {
 
@@ -1590,7 +1602,17 @@ AuthCtrl.directive('drugAutocomplete', function($http,$localStorage) {
                 
             }
         };
-}]);;
+}]).directive('ngHtmlCompile', function($compile) {
+	return {
+	    restrict: 'A',
+	    link: function(scope, element, attrs) {
+		scope.$watch(attrs.ngHtmlCompile, function(newValue, oldValue) {
+		    element.html(newValue);
+		    $compile(element.contents())(scope);
+		}, true);
+	    }
+	}
+    });
 
 
 

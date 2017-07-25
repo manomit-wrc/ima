@@ -1,0 +1,148 @@
+<div class="container">
+    <div class="row">
+        <div class="innertopB">
+            <my-sidebar></my-sidebar>
+            <div class="col-md-8 Clear-991">
+                <div class="Rpanel">
+                    <h2>Comments
+
+                   </h2>
+
+                    <div class="row" ng-controller="AuthController">
+                        <div class="col-md-12">
+                            <div class="">
+                                        <div class="media-left">
+                                            <a href="#"> <img alt="64x64" class="media-object" style="width: 64px; height: 64px;"> </a>
+                                        </div>
+                                        <div class="media-body">
+                                            <h4 class="media-heading">Media heading</h4>
+                                            <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.</p>
+                                            <a href="#" ng-click="get_block('div1');">Reply <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+
+                                            <br clear="all">
+                                            <form>
+                                            
+                                              <div class="row ng-cloack" ng-show="div1">
+                                              <div class="col-md-9">
+                                                  <textarea rows="1" class="postfields" ng-model="commit" ng-keyup="$event.keyCode == 13 && myFunc()" id="commit" name="commit"></textarea>
+                                              </div>
+
+                                              <div class="col-md-3">
+                                                  <div class="filebox">
+                                                      <i class="fa fa-paperclip" aria-hidden="true"></i>
+                                                  <input type="file" name="comment_file" ng-model="comment_file" id="comment_file" class="postattach" onchange="angular.element(this).scope().uploadedCommentDoc(this)">
+                                                  </div>
+                                              </div>
+                                              </div>
+                                           
+                                          </form>
+                              <div class="media">
+                                  <div class="media-left">
+                                      <a href="#"> <img alt="64x64" class="media-object" style="width: 64px; height: 64px;"> </a>
+                                  </div>
+                                  <div class="media-body">
+                                      <h4 class="media-heading">Media heading</h4>
+                                        <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.</p>
+                                        <a href="#" ng-click="get_block('div2');">Reply <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+
+                                        <br clear="all">
+                                        <form>
+                                        
+                                          <div class="row ng-cloack" ng-show="div2">
+                                          <div class="col-md-9">
+                                              <textarea rows="1" class="postfields" ng-model="commit" ng-keyup="$event.keyCode == 13 && myFunc()" id="commit" name="commit"></textarea>
+                                          </div>
+
+                                          <div class="col-md-3">
+                                              <div class="filebox">
+                                                  <i class="fa fa-paperclip" aria-hidden="true"></i>
+                                              <input type="file" name="comment_file" ng-model="comment_file" id="comment_file" class="postattach" onchange="angular.element(this).scope().uploadedCommentDoc(this)">
+                                              </div>
+                                          </div>
+                                          </div>
+                                       
+                                      </form>
+                                      <div class="media">
+                                          <div class="media-left">
+                                              <a href="#"> <img alt="64x64" class="media-object"  style="width: 64px; height: 64px;"> </a>
+                                          </div>
+                                          <div class="media-body">
+                                              <h4 class="media-heading">Media heading</h4>
+                                            <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.</p>
+                                            <a href="#" ng-click="get_block('div3');">Reply <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+
+                                            <br clear="all">
+                                            <form>
+                                            
+                                              <div class="row ng-cloack" ng-show="div3">
+                                              <div class="col-md-9">
+                                                  <textarea rows="1" class="postfields" ng-model="commit" ng-keyup="$event.keyCode == 13 && myFunc()" id="commit" name="commit"></textarea>
+                                              </div>
+
+                                              <div class="col-md-3">
+                                                  <div class="filebox">
+                                                      <i class="fa fa-paperclip" aria-hidden="true"></i>
+                                                  <input type="file" name="comment_file" ng-model="comment_file" id="comment_file" class="postattach" onchange="angular.element(this).scope().uploadedCommentDoc(this)">
+                                                  </div>
+                                              </div>
+                                              </div>
+                                           
+                                          </form>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="media">
+                                  <div class="media-left">
+                                      <a href="#"> <img alt="64x64" class="media-object"  style="width: 64px; height: 64px;"> </a>
+                                  </div>
+                                  <div class="media-body">
+                                      <h4 class="media-heading">Media heading</h4>
+                                            <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.</p>
+                                            <a href="#" ng-click="get_block('div4');">Reply <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+
+                                            <br clear="all">
+                                            <form>
+                                            
+                                              <div class="row ng-cloack" ng-show="div4">
+                                              <div class="col-md-9">
+                                                  <textarea rows="1" class="postfields" ng-model="commit" ng-keyup="$event.keyCode == 13 && myFunc()" id="commit" name="commit"></textarea>
+                                              </div>
+
+                                              <div class="col-md-3">
+                                                  <div class="filebox">
+                                                      <i class="fa fa-paperclip" aria-hidden="true"></i>
+                                                  <input type="file" name="comment_file" ng-model="comment_file" id="comment_file" class="postattach" onchange="angular.element(this).scope().uploadedCommentDoc(this)">
+                                                  </div>
+                                              </div>
+                                              </div>
+                                           
+                                          </form>
+                                  </div>
+                              </div>
+                              </div>
+                    <br clear="all">
+
+                    <div class="row">
+                        <div class="col-md-9">
+                            <textarea name="" rows="1" class="postfields"></textarea>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="filebox">
+                                <i class="fa fa-paperclip" aria-hidden="true"></i>
+                                <input type="file" name="" class="postattach">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
