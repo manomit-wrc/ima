@@ -1,42 +1,52 @@
-<div class="container" ng-init='getPostData();'>
-            <div class="row">
-                <div class="innertopB">
-                    <my-sidebar></my-sidebar>
-                    <div class="col-md-8 Clear-991">
-                        <div class="Rpanel">
-                            <h2 >Comments
+<div class="container">
+    <div class="row">
+        <div class="innertopB">
+            <my-sidebar></my-sidebar>
+            <div class="col-md-8 Clear-991">
+                <div class="Rpanel">
+                    <h2>Comments
 
-                             </h2>
-                            
-                            <div class="row" ng-controller="AuthController">
-                                <div class="col-md-12">
-                                    <span ng-bind-html="comment_list| safeHtml"></span>
+                   </h2>
 
-                                    <br clear="all">
-                                     <font id="main_block">
-                                     <form enctype="multipart/form-data">
-                                      <div class="row">
-                                      <div class="col-md-9">
-                                          <textarea name="" rows="1" class="postfields" ng-keyup="$event.keyCode == 13 && mainpost('0')" ng-model="main_post" id="main_post" name="main_post"></textarea>
-                                      </div>
+                    <div class="row" ng-controller="AuthController">
+                        <div class="col-md-12">
+                            <div class="" ng-init="getPostData();">
+                                      
+                              <div class="media" ng-repeat="value in getpostdata">
+                                  <div class="media-left">
+                                      <a href="#"> <img alt="64x64" ng-src="{{value['image']}}"  class="media-object" style="width: 64px; height: 64px;"> </a>
+                                  </div>
+                                  <div class="media-body">
+                                      <h4 class="media-heading">{{value['name']}}</h4>
+                                        <p>{{value['comment']}}</p>
+                                        
+                                    
+                                  </div>
+                              </div>
+                              
+                         </div>
+                    <br clear="all">
 
-                                      <div class="col-md-3">
-                                          <div class="filebox">
-                                              <i class="fa fa-paperclip" aria-hidden="true"></i>
-                                          <input type="file" class="postattach" name="main_comment_file" ng-model="main_comment_file" id="main_comment_file" onchange="angular.element(this).scope().uploadedCommentDoc(this)" accept="image/jpg">
-                                          </div>
-                                      </div>
-                                      </div>
-                                      </form>
-                                      </font>
-
-                                    </div>
-                                </div>
-                                 
-                            </div>
-                            
+                    <div class="row">
+                        <div class="col-md-12">
+                            <textarea name="post_comment" ng-model="post_comment" ng-keyup="postComment($event);" rows="3" class="postfields" placeholder="Enter your comments"></textarea>
                         </div>
+
+                        <!-- <div class="col-md-3">
+                            <div class="filebox">
+                                <i class="fa fa-paperclip" aria-hidden="true"></i>
+                                <input type="file" name="" class="postattach">
+                            </div>
+                        </div> -->
                     </div>
+
+                </div>
+            </div>
+
+        </div>
+
                 </div>
             </div>
         </div>
+    </div>
+</div>
