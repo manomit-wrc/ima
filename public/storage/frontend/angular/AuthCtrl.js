@@ -1412,6 +1412,10 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     	$scope[show] ? $scope[show] = false: $scope[show]= true; 
     };
 
+    $scope.check_selected_doctors = function() {
+    	console.log($scope.chk_doctor_id);
+    };
+
 });
 
 AuthCtrl.directive('addressBasedGoogleMap', function () {
