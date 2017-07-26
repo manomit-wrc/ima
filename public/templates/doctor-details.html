@@ -80,7 +80,7 @@
                                 
                                                                    
                                    <tr ng-repeat="x in doctor_certificates">
-                                     <td>1</td>
+                                     <td>{{ $index+1 }}</td>
                                    <td><a data-toggle="tooltip" data-placement="top" title="{{x}}" href="/uploads/doctors/qualification/{{x}}" target="_blank"><i class="fa fa-paperclip" aria-hidden="true"></i></td>
                                    
                                    
@@ -113,9 +113,6 @@
 
                       <td>{{j.published_date }}</td>
                       <td><a data-toggle="tooltip" data-placement="top" title="{{ j.journal_file }}" href="/uploads/doctors/journal/{{ j.journal_file}}" target="_blank"><i class="fa fa-paperclip" aria-hidden="true"></i></td>
-
-                      
-
 
                       <td>{{ j.categories.name}}</td>
                       

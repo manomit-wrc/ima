@@ -3380,3 +3380,9 @@ a.btn:focus {
 .doctable table td:last-child{
     padding-top: 0;
 }
+
+.tab-pane h2 {
+    color: #34b5ba;
+    font-weight: bold;
+    font-size: 26px;
+}
