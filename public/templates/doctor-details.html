@@ -41,9 +41,13 @@
                                     <tr>
                                         <td><b>Qualification</b></td>
                                         <td>
-                                            <div ng-repeat="x in doctor_qualifs[0]['doctor_qualifications']">
-
-                                             {{x.qualification_name}}
+                                            <div ng-repeat="x in doctor_qualifs[0]['doctor_qualifications'] track by $index" style="display:inline-block;">
+                                            <span ng-if="$index=='0'">
+                                            {{x.qualification_name}}
+                                             </span>
+                                             <span ng-if="$index!='0'">
+                                            ,&nbsp;{{x.qualification_name}}
+                                             </span>
                                             </div>
                                         </td>
                                     </tr>
