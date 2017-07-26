@@ -3351,6 +3351,7 @@ a.btn:focus {
 .docimg{
     width: 100%;
     float: left;
+    margin-bottom: 25px;
 }
 
 .docimg img{
@@ -3365,10 +3366,12 @@ a.btn:focus {
     float: left;
     background: #f2f2f2;
     padding: 15px 0;
+    border-radius: 15px;
 }
 
 .doctable table td{
     padding: 8px 20px;
+    border-right: 1px solid #ccc;
 }
 
 
@@ -3379,10 +3382,25 @@ a.btn:focus {
 
 .doctable table td:last-child{
     padding-top: 0;
+    border-right: 0;
 }
 
 .tab-pane h2 {
     color: #34b5ba;
     font-weight: bold;
     font-size: 26px;
+}
+
+.btnD{
+    padding: 8px 0;
+    margin-top: 20px;
+    width: 100%;
+    border-radius: 15px;
+    border: 0;
+    background: #40bbc0;
+    color: #fff;
+    font-size: 14px;
+    display: block;
+    float: left;
+    text-align: center;
 }
