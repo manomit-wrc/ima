@@ -388,6 +388,16 @@
                         </form>
                         </div>
             </script>
+                    
+                <!--post model-->
+  <script type="text/ng-template" id="myModalPost.html">
+                 
+            <div class="modal-content">
+
+            </div>
+
+  </script>
+                <!--end post model-->
     </div>
     <a href="javascript:void(0)" class="scrollup"><i class="fa fa-angle-up active"></i></a>
     <!-- Core JavaScript Files -->
