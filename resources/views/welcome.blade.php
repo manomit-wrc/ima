@@ -392,7 +392,69 @@
                 <!--post model-->
   <script type="text/ng-template" id="myModalPost.html">
                  
-            <div class="modal-content">
+            <div class="modal-content" ng-controller="AuthController">
+               <div class="modal-body">
+                    <div class="row">
+
+                        <div class="col-md-6 col-md-offset-3">
+                            <div class="docimg"> <img img-check="@{{doctorpostview[0].avators?doctorpostview[0].avators:'noimage_user.jpg'}}" alt="@{{$doctorpostview[0]['avators']}}"> </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="doctable">
+                                <div class="table-responsive">
+                                <table width="100%">
+                                    <tr>
+                                        <td><b>First Name</b></td>
+                                        <td>@{{doctorpostview[0].first_name}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Last Name</b></td>
+                                        <td>@{{doctorpostview[0].last_name}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Email</b></td>
+                                        <td>@{{doctorpostview[0].email}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Mobile No</b></td>
+                                        <td>@{{doctorpostview[0].mobile}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Date of birth</b></td>
+                                        <td>@{{doctorpostview[0].dob}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Qualification</b></td>
+                                        <td>
+                                           <div ng-repeat="x in doctorpostview[0]['doctor_qualifications'] track by $index" style="display:inline-block;">
+                                            <span ng-if="$index=='0'">
+                                            @{{x.qualification_name}}
+                                             </span>
+                                             <span ng-if="$index!='0'">
+                                            ,&nbsp;@{{x.qualification_name}}
+                                             </span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Paid Amount</b></td>
+                                        <td>@{{doctorpostview[0].payment}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Licence</b></td>
+                                        <td>@{{doctorpostview[0].license}}</td>
+                                    </tr>
+                                </table>
+                                </div>
+
+                            </div>
+                            <div class="col-md-4 col-md-offset-4">
+                            <a href="#" class="btnD" ng-click="getPostDoctorDetail(doctorpostview[0].id)" >Links</a>
+                            </div>
+                        </div>
+                        </div>
+               </div>
 
             </div>
 

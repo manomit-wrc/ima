@@ -1376,4 +1376,14 @@ class PageController extends Controller
 
     }
 
+    public function post_doctor_detail(Request $request)
+    {
+       $doctor_id=$request->doctor_id;
+       $doctor_data = Doctor::with('doctor_qualifications')->where('id',$doctor_id)->get()->toArray();
+
+       //$doctor_qualifs = Doctor::with('doctor_qualifications')->where('id',$doctor_id)->get()->toArray();
+       
+       return response()->json(['doctor_data'=>$doctor_data,'status_code'=>200]);
+    }
+
 }

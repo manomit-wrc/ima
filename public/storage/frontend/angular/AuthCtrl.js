@@ -698,12 +698,13 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     $scope.loadDoctorDetails = function($id) {
     	
         var id=$id;
+        //console.log(id);
         $http.get('/api/doctor-content/',{
     		params: { doctor_id:id}
     		
     		
     	}).then(function(response){
-    		console.log(response.data.viewdoctor);
+    		//console.log(response.data.viewdoctor);
     		$scope.viewdoctor = response.data.viewdoctor;
     		$scope.doctor_qualifs = response.data.doctor_qualifs;
     		$scope.doctor_certificates = response.data.doctor_certificates;
@@ -1370,15 +1371,50 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 
     $scope.comment_model=function($id){
     	var doctor_id=$id;
+    	
     	angular.element(document.querySelector(".newli")).removeClass("open");
     	$modal.open({
             templateUrl: 'myModalPost.html',
             backdrop: true, 
             windowClass: 'modal',
+            controller : function($scope,$modalInstance){
+                
+                $http.get('/api/post-doctor-detail' ,{
+                params: {doctor_id:doctor_id}
+              }).then(function(response){
+              	console.log(response.data.doctor_data);
+                 $scope.doctorpostview = response.data.doctor_data;
+	  			})
+				.catch(function(reason){
 
-        });    
-    	
-    };
+				}); 
+            },
+         }); 
+      };
+
+      $scope.getPostDoctorDetail=function($id)
+      {
+
+      	 
+         var doctor_id=$id;
+         //console.log(doctor_id);
+          $http.get('/api/doctor-content/',{
+    		params: { doctor_id:doctor_id}
+    		
+    		
+    	}).then(function(response){
+    		console.log(response.data.viewdoctor);
+    		
+    		$scope.viewdoctor = response.data.viewdoctor;
+    		$scope.doctor_qualifs = response.data.doctor_qualifs;
+    		$scope.doctor_certificates = response.data.doctor_certificates;
+    		
+    	});
+
+        $scope.location = $location;
+    	$location.path("/doctor-details");
+
+      };
 
     $scope.sendRequest = function() {
     	if(!$scope.sendGroupRequest.$valid)
