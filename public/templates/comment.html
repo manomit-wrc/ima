@@ -4,9 +4,7 @@
             <my-sidebar></my-sidebar>
             <div class="col-md-8 Clear-991">
                 <div class="Rpanel">
-                    <h2>Comments
-
-                   </h2>
+                    <h2>Comments</h2>
 
                     <div class="row" ng-controller="AuthController">
                         <div class="col-md-12">
@@ -14,7 +12,7 @@
                                       
                               <div class="media" ng-repeat="value in getpostdata">
                                   <div class="media-left">
-                                      <a href="#"> <img alt="64x64" ng-src="{{value['image']}}"  class="media-object" style="width: 64px; height: 64px;"> </a>
+                                      <a href="#" ng-click="comment_model(value['doctor_id']);"> <img alt="64x64" ng-src="{{value['image']}}"  class="media-object" style="width: 64px; height: 64px;"> </a>
                                   </div>
                                   <div class="media-body">
                                       <h4 class="media-heading">{{value['name']}}</h4>

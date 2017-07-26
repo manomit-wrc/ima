@@ -1368,6 +1368,18 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
         });
     };
 
+    $scope.comment_model=function($id){
+    	var doctor_id=$id;
+    	angular.element(document.querySelector(".newli")).removeClass("open");
+    	$modal.open({
+            templateUrl: 'myModalPost.html',
+            backdrop: true, 
+            windowClass: 'modal',
+
+        });    
+    	
+    };
+
     $scope.sendRequest = function() {
     	if(!$scope.sendGroupRequest.$valid)
     	{
