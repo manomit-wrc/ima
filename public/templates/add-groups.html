@@ -5,20 +5,20 @@
           <my-sidebar></my-sidebar>
           
           <div class="col-md-8">
-            <div class="panel with-nav-tabs panel-default">
+            <div class="panel with-nav-tabs panel-default" ng-controller="AuthController">
                 <div class="panel-heading" style="padding-bottom: 0;">
-                        <ul class="nav nav-tabs" style="border-bottom: 0;">
-                            <li class="active"><a href="javascript:void(0)" data-toggle="tab" ng-click="tab=1">Default 1</a></li>
-                            <li><a href="javascript:void(0)" data-toggle="tab" ng-click="tab=2">Default 2</a></li>
+                        <ul class="nav nav-tabs" style="border-bottom: 0;" >
+                            <li ng-class="{'active': tab==1}"><a href="javascript:void(0)">Select Doctors</a></li>
+                            <li ng-class="{'active': tab==2}"><a href="javascript:void(0)">Add Group</a></li>
                            
                         </ul>
                 </div>
-                <div class="panel-body" style="padding-top: 0" ng-controller="AuthController">
-                    <form name="frmSearchDoctor"  method="post" novalidate="novalidate" >
+                <div class="panel-body" style="padding-top: 0" >
+                    
 
                     <div class="tab-content">
-                        
-                        <div class="tab-pane fade in active" ng-show="tab==1" ng-init="getAllDoctors(1);">
+                        <form name="frmSearchDoctor"  method="post" novalidate="novalidate">
+                        <div class="tab-pane fade in" ng-class="{'active': tab==1}" ng-show="tab==1" ng-init="getAllDoctors(1);">
                           <input type="text" name="search_doctor" id="search_doctor" ng-model="search_doctor" placeholder="Search Doctor..">
                           <div class="table-responsive">
                               <table width="100%" class="table table-bordered">
@@ -32,9 +32,9 @@
                                   
                                 </tr>
                                 
-                                <tr ng-repeat="j in doctor_list | filter : search_doctor" ng-click="loadDoctorDetails(j.id)" style="cursor: pointer;">
-                                  <td><input type="checkbox" name="chk_doctor_id[]" ng-model="chk_doctor_id" value="{{j.id}}"></td>
-                                  <td><img class="img-thumbnail" img-check="{{j.avators?j.avators:'noimage_user.jpg'}}" width="100" height="100" />
+                                <tr ng-repeat="j in doctor_list | filter : search_doctor" style="cursor: pointer;">
+                                  <td><input type="checkbox"  ng-model="j.selected" value="{{j.id}}"></td>
+                                  <td ng-click="loadDoctorDetails(j.id)"><img class="img-thumbnail" img-check="{{j.avators?j.avators:'noimage_user.jpg'}}" width="100" height="100" />
                                   <td>{{j.first_name}} {{j.last_name}}{{j.doctor_groups[0].sender_id}}</td>
                                   <td>{{j.email}}</td>
                                   <td>{{j.mobile}}</td>
@@ -52,7 +52,7 @@
                             <div class="row">
                         <div class="col-md-4">
                         <div class="fieldbox">
-                                <button class="button1" type="submit" ng-click="check_selected_doctors()">SAVE</button>
+                                <button class="button1" type="button" ng-click="check_selected_doctors()">SAVE</button>
                         </div>
                         </div>
                         </div>
@@ -60,10 +60,10 @@
                         </div>
                         </form>
                         <form name="frmAddGroup"  method="post" novalidate="novalidate" >
-                        <div class="tab-pane fade in active" ng-show="tab==2">
+                        <div class="tab-pane fade in" ng-class="{'active': tab==2}" ng-show="tab==2">
                           <div class="Clear-991">
                             <div class="">
-                                <h2>Upload Journal</h2>
+                                <h2>Add Group</h2>
                         
                                 
                                 <div style="margin:0 auto!important;" ng-show="status_code">{{message}}</div>
@@ -129,6 +129,12 @@
                         </div>
                         <div class="row">
                         <div class="col-md-4">
+                        <div class="fieldbox">
+                          <button class="button1" type="submit" ng-click="back_to_list()">Back</button>
+                        </div>
+                        </div>
+                        <div class="col-md-4">
+                        
                         <div class="fieldbox">
                           <button class="button1" type="submit">SAVE</button>
                         </div>

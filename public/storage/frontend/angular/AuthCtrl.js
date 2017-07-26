@@ -1,6 +1,6 @@
-var AuthCtrl = angular.module('AuthCtrl',['oitozero.ngSweetAlert','ui.bootstrap','ngSlimScroll']);
+var AuthCtrl = angular.module('AuthCtrl',['oitozero.ngSweetAlert','ui.bootstrap','ngSlimScroll','ngCookies']);
 
-AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$routeParams,$cookieStore,$window,SweetAlert,$modal,$sce){
+AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$routeParams,$cookieStore,$window,SweetAlert,$modal,$sce,$cookies){
 	$scope.code = '';
 	$scope.message = '';
 	$scope.user = {};
@@ -1425,7 +1425,31 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     };
 
     $scope.check_selected_doctors = function() {
-    	console.log($scope.chk_doctor_id);
+    	$scope.doctorArray = [];
+	    angular.forEach($scope.doctor_list, function(j){
+	      if (j.selected) $scope.doctorArray.push(j.id);
+	    });
+	    if($scope.doctorArray.length <= 0) {
+	    	SweetAlert.swal({   
+		     title: "Doctors",   
+		     text: "Please select atleast one doctor",   
+		     type: "warning",     
+		     confirmButtonColor: "#DD6B55",   
+		     confirmButtonText: "OK",
+		     closeOnConfirm: true
+		    });
+	    }
+	    else {
+	    	$cookies.put('doctor_id_array',$scope.doctorArray);
+	    	$scope.tab = 2;
+	    }
+	    
+    	
+    };
+
+    $scope.back_to_list = function() {
+    	console.log($cookies.get('doctor_id_array'));
+    	$scope.tab = 1;
     };
 
 });
