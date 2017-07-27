@@ -1,3 +1,4 @@
+
 <div class="container"  ng-init='getAllDoctors(1);'>
             <div class="row">
                 <div class="innertopB">
@@ -29,7 +30,7 @@
                                           </tr>
                                           
                                           <tr ng-repeat="j in doctor_list track by $index" >
-                                            <td ng-click="loadDoctorDetails(j.id)" style="cursor: pointer;"><img class="img-thumbnail" img-check="{{j.avators?j.avators:'noimage_user.jpg'}}" width="100" height="100" />
+                                            <td  style="cursor: pointer;"><a href="/doctor-details/{{j.id}}" ><img class="img-thumbnail" img-check="{{j.avators?j.avators:'noimage_user.jpg'}}" width="100" height="100" /></a></td>
                                             <td>{{j.first_name}} {{j.last_name}}{{j.doctor_groups[0].sender_id}}</td>
                                             <td>{{j.email}}</td>
                                             <td>{{j.mobile}}</td>
