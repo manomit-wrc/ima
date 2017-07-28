@@ -59,7 +59,7 @@
                         
                         </div>
                         </form>
-                        <form name="frmAddGroup"  method="post" novalidate="novalidate" >
+                        <form name="frmAddGroup"  method="post" ng-submit="doAddGroup(frmAddGroup.$valid)" novalidate="novalidate" enctype="multipart/form-data">
                         <div class="tab-pane fade in" ng-class="{'active': tab==2}" ng-show="tab==2">
                           <div class="Clear-991">
                             <div class="">
@@ -70,57 +70,58 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="fieldbox" ng-class="{
-                                                'has-error':!frmUploadJournal.title.$valid && (!frmUploadJournal.$pristine || frmUploadJournal.$submitted), 
-                                                'has-success': frmUploadJournal.title.$valid && (!frmUploadJournal.$pristine || frmUploadJournal.$submitted)
+                                                'has-error':!frmAddGroup.name.$valid && (!frmAddGroup.$pristine || frmAddGroup.$submitted), 
+                                                'has-success': frmAddGroup.name.$valid && (!frmAddGroup.$pristine || frmAddGroup.$submitted)
                                                 }">
                                             <label>Title</label>
-                                            <input type="text" name="title" id="title" ng-model="title" class="editF" required="required">
-                                            <span class="help-block" ng-show="frmUploadJournal.title.$error.required && (!frmUploadJournal.$pristine || frmUploadJournal.$submitted)">Please Enter Journal Title</span>
+                                            <input type="text" name="name" id="name" ng-model="name" class="editF" required="required" placeholder="Enter group name">
+                                            <span class="help-block" ng-show="frmAddGroup.name.$error.required && (!frmAddGroup.$pristine || frmAddGroup.$submitted)">Please Enter Group Name</span>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="fieldbox" ng-class="{
-                                                'has-error':!frmUploadJournal.description.$valid && (!frmUploadJournal.$pristine || frmUploadJournal.$submitted), 
-                                                'has-success': frmUploadJournal.description.$valid && (!frmUploadJournal.$pristine || frmUploadJournal.$submitted)
+                                                'has-error':!frmAddGroup.description.$valid && (!frmAddGroup.$pristine || frmAddGroup.$submitted), 
+                                                'has-success': frmAddGroup.description.$valid && (!frmAddGroup.$pristine || frmAddGroup.$submitted)
                                                 }">
                                             <label>Description</label>
-                                            <textarea name="description" ng-model="description" cols="" rows="5" class="editF" required="required"></textarea>
-                                            <span class="help-block" ng-show="frmUploadJournal.description.$error.required && (!frmUploadJournal.$pristine || frmUploadJournal.$submitted)">Please Enter Journal Description</span>
+                                            <textarea name="description" ng-model="description" cols="" rows="5" class="editF" required="required" placeholder="Please enter group description"></textarea>
+                                            <span class="help-block" ng-show="frmAddGroup.description.$error.required && (!frmAddGroup.$pristine || frmAddGroup.$submitted)">Please Enter Description</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="fieldbox" ng-class="{
-                                                'has-error':!frmUploadJournal.published_date.$valid && (!frmUploadJournal.$pristine || frmUploadJournal.$submitted), 
-                                                'has-success': frmUploadJournal.published_date.$valid && (!frmUploadJournal.$pristine || frmUploadJournal.$submitted)
+                                                'has-error':!frmAddGroup.no_of_people.$valid && (!frmAddGroup.$pristine || frmAddGroup.$submitted), 
+                                                'has-success': frmAddGroup.no_of_people.$valid && (!frmAddGroup.$pristine || frmAddGroup.$submitted)
                                                 }">
-                                            <label>Published Date</label>
-                                            <input type="text" name="published_date" class="editF" ng-model="published_date" placeholder="DD/MM/YYYY" jqdatepicker required="required">
+                                            <label>No of people</label>
+                                            <input type="text" name="no_of_people" class="editF" ng-model="no_of_people" placeholder="Please enter no of people" required="required">
 
-                                            <span class="help-block" ng-show="frmUploadJournal.published_date.$error.required && (!frmUploadJournal.$pristine || frmUploadJournal.$submitted)">Please Enter Date Of Published</span>
+                                            <span class="help-block" ng-show="frmAddGroup.no_of_people.$error.required && (!frmAddGroup.$pristine || frmAddGroup.$submitted)">Please Enter No Of People</span>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="fieldbox"  ng-class="{
-                                                'has-error':!frmUploadJournal.category_id.$valid && (!frmUploadJournal.$pristine || frmUploadJournal.$submitted), 
-                                                'has-success': frmUploadJournal.category_id.$valid && (!frmUploadJournal.$pristine || frmUploadJournal.$submitted)
+                                                'has-error':!frmAddGroup.status.$valid && (!frmAddGroup.$pristine || frmAddGroup.$submitted), 
+                                                'has-success': frmAddGroup.status.$valid && (!frmAddGroup.$pristine || frmAddGroup.$submitted)
                                                 }">
-                                            <label>Category</label>
-                                            <select name="category_id" ng-model="category_id" class="fieldboxSel" required="required">
-                                                <option value="">Select</option>
-                                                <option ng-repeat="item in categories" value="{{item.value}}">{{item.label}}</option>
+                                            <label>Status</label>
+                                            <select name="status" ng-model="status" class="fieldboxSel" required="required">
+                                                <option value="" disabled="disabled">Select Status</option>
+                                                <option value="1">Active</option>
+                                                <option value="0">In-Active</option>
                                             </select>
-                                            <span class="help-block" ng-show="frmUploadJournal.category_id.$error.required && (!frmUploadJournal.$pristine || frmUploadJournal.$submitted)">Please Select Journal Category</span>
+                                            <span class="help-block" ng-show="frmAddGroup.status.$error.required && (!frmAddGroup.$pristine || frmAddGroup.$submitted)">Please Select Status</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
                                       <div class="fieldbox">
-                                        <label>File Upload</label>
+                                        <label>Image</label>
                                         <span>
-                                            <input type="file" ng-model="journal_file" name="journal_file" onchange="angular.element(this).scope().uploadedJournalDoc(this)" class="" accept="image/jpeg,image/png,application/pdf,image/x-eps">
+                                            <input type="file" ng-model="group_image" name="group_image" onchange="angular.element(this).scope().uploadedGroupImage(this)" class="" accept="image/jpeg,image/png,image/x-eps">
                                         </span>
                                       </div>
                                     </div>

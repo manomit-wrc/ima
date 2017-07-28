@@ -29,7 +29,7 @@
                                           
                                           <tr ng-repeat="j in group_list track by $index">
                                             <td>{{j.name}}</td>
-                                            <td>{{j.description}}</td>
+                                            <td>{{j.description | limitTo: 150}}</td>
                                             <td>{{j.no_of_people}}</td>
                                             <td>{{j.status == '1'? 'Active':'Inactive'}}</td>
                                             

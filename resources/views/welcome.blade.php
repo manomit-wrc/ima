@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="imaApp">
+<html lang="en" ng-cloak ng-app="imaApp">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -74,7 +74,7 @@
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
-    <div id="wrapper" ng-controller="AuthController" ng-init="loadPath();">
+    <div id="wrapper" ng-controller="AuthController" ng-init="loadPath();" >
     
         <my-navbar></my-navbar>
         <!-- Section: intro -->
