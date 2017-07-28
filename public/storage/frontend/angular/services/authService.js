@@ -258,22 +258,23 @@ authService.factory('Auth', function($http,$q,AuthToken,$cookieStore){
        return defer.promise;
 	};
 
-    authFactory.submit_replay = function(commentReplay,group_id,reply_id) {
-    	//console.log(commentReplay.main_post);
-    	//console.log(commentReplay.main_comment_file);
+    authFactory.submit_replay = function(commentReplay) {
+    	console.log(commentReplay.main_post);
+    	console.log(commentReplay.main_comment_file);
 		var defer = $q.defer();
 		 var formData = new FormData();
 
-		 //formData.append("comment_file", commentReplay.main_comment_file);  
+		 formData.append("comment_file", commentReplay.main_comment_file);  
          formData.append("comment", commentReplay.main_post);
-         formData.append("group_id",group_id);
-         formData.append("reply_id",reply_id);
 
-		$http.post('/api/comment-data', formData, {
+		$http.post('api/comment-data', formData, {
             transformRequest: angular.identity,
             headers: {'Content-Type': undefined}
         }).then(function (response) {
-        	  
+        	  reload: true;
+        	 //$scope.mainpostdiv=true;  
+        	 //$window.location.href = "/comment-list";
+			//$location.path("/comment-list");
 	   		defer.resolve(response);
        }).catch(function(reason){
        		defer.resolve(reason);
@@ -285,7 +286,7 @@ authService.factory('Auth', function($http,$q,AuthToken,$cookieStore){
 
 
     authFactory.submit_doctorcertificate = function(doctor) {
-        console.log(doctor.payment_date);
+        
 		var defer = $q.defer();
 
        var formData = new FormData();

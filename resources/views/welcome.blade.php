@@ -40,7 +40,7 @@
     {!! Html::script('storage/frontend/angular/services/authService.js') !!}
     
     {!! Html::script('storage/frontend/angular/AuthCtrl.js') !!}
-   
+     
     
     {!! Html::script('storage/frontend/angular/appRoutes.js') !!}
    
@@ -74,7 +74,11 @@
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
+<<<<<<< HEAD
     <div id="wrapper" ng-controller="AuthController" ng-init="loadPath();" >
+=======
+    <div id="wrapper" ng-controller="AuthController" ng-init="loadPath();" ng-cloak>
+>>>>>>> e172e209031424389b07d104e5e094fee4aa0627
     
         <my-navbar></my-navbar>
         <!-- Section: intro -->
@@ -390,14 +394,18 @@
             </script>
                     
                 <!--post model-->
-  <script type="text/ng-template" id="myModalPost.html">
-                 
-            <div class="modal-content" ng-controller="AuthController">
+<script type="text/ng-template" id="myModalPost.html">
+
+             <div class="modal-content" tabindex="-1" ng-controller="AuthController">
+            <!--<div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"></h4>
+            </div>-->
                <div class="modal-body">
                     <div class="row">
 
                         <div class="col-md-6 col-md-offset-3">
-                            <div class="docimg"> <img img-check="@{{doctorpostview[0].avators?doctorpostview[0].avators:'noimage_user.jpg'}}" alt="@{{$doctorpostview[0]['avators']}}"> </div>
+                            <div class="docimg"> <img ng-src="@{{doctorpostview[0].avators}}" alt=""></div>
                         </div>
 
                         <div class="col-md-12">
@@ -428,8 +436,8 @@
                                         <td><b>Qualification</b></td>
                                         <td>
                                            <div ng-repeat="x in doctorpostview[0]['doctor_qualifications'] track by $index" style="display:inline-block;">
-                                            <span ng-if="$index=='0'">
-                                            @{{x.qualification_name}}
+                                             <span ng-if="$index=='0'">
+                                              @{{x.qualification_name}}
                                              </span>
                                              <span ng-if="$index!='0'">
                                             ,&nbsp;@{{x.qualification_name}}
@@ -449,14 +457,20 @@
                                 </div>
 
                             </div>
-                            <div class="col-md-4 col-md-offset-4">
-                            <a href="#" class="btnD" ng-click="getPostDoctorDetail(doctorpostview[0].id)" >Links</a>
+                            <div class="col-md-4 col-md-offset-2">
+                            <a href="/doctor-details/@{{doctorpostview[0].doctor_id}}" class="btnD" >Links</a>
+                            </div>
+                            <div class="col-md-4">
+                            <a href="#" class="btnD" ng-click="cancel()">Cancel</a>
                             </div>
                         </div>
                         </div>
                </div>
 
             </div>
+
+           
+            
 
   </script>
                 <!--end post model-->

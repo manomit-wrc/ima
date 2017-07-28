@@ -56,7 +56,7 @@ Route::get('/doctor-list', function(){
     return view('welcome');
 });
 
-Route::get('/doctor-details', function(){
+Route::get('/doctor-details/{id}', function(){
     return view('welcome');
 });
 

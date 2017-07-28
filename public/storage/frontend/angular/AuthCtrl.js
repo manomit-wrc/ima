@@ -150,6 +150,15 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 	    });
 	};
 
+	$scope.getPostData = function() {
+
+          $http.get('/api/get-post-data',{params:{group_id:$routeParams.id}}).then(function(response) {
+    	  $scope.getpostdata = response.data.getpostdata;
+    	    
+	   });
+	    
+	};
+
 	$scope.getAllGroupRequest = function(pageNumber) {
 		if(pageNumber===undefined){
       		pageNumber = '1';
@@ -702,12 +711,10 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     	$scope.location = $location;
     	$location.path("/journal-list");
     };
-    $scope.loadDoctorDetails = function($id) {
-    	
-        var id=$id;
-        //console.log(id);
+
+    $scope.loadDoctorDetails = function($modalInstance) {
         $http.get('/api/doctor-content/',{
-    		params: { doctor_id:id}
+    		params: { doctor_id:$routeParams.id}
     		
     		
     	}).then(function(response){
@@ -715,11 +722,12 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     		$scope.viewdoctor = response.data.viewdoctor;
     		$scope.doctor_qualifs = response.data.doctor_qualifs;
     		$scope.doctor_certificates = response.data.doctor_certificates;
+
+    		 
+               //$scope.modalInstance.hide();
+            
     		
     	});
-
-        $scope.location = $location;
-    	$location.path("/doctor-details");
     };
 
      $scope.download_journal = function($file) {
@@ -971,14 +979,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 	    
 	}
 
-	$scope.getPostData = function() {
-
-          $http.get('/api/get-post-data',{params:{group_id:$routeParams.id}}).then(function(response) {
-    	    $scope.getpostdata = response.data.getpostdata;
-    	    
-	   });
-	    
-	};
+	
 
 	$scope.postComment = function(keyEvent) {
 		if (keyEvent.which === 13) {
@@ -1419,12 +1420,18 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
                 $http.get('/api/post-doctor-detail' ,{
                 params: {doctor_id:doctor_id}
               }).then(function(response){
-              	console.log(response.data.doctor_data);
+              	//console.log(response.data.doctor_data);
                  $scope.doctorpostview = response.data.doctor_data;
+
+                       
+
 	  			})
 				.catch(function(reason){
 
-				}); 
+				});
+				$scope.cancel = function () {
+                    $modalInstance.dismiss('cancel'); 
+                }; 
             },
          }); 
       };
@@ -1436,11 +1443,11 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
          var doctor_id=$id;
          //console.log(doctor_id);
           $http.get('/api/doctor-content/',{
-    		params: { doctor_id:doctor_id}
+    	  params: { doctor_id:doctor_id}
     		
     		
     	}).then(function(response){
-    		console.log(response.data.viewdoctor);
+    		//console.log(response.data.viewdoctor);
     		
     		$scope.viewdoctor = response.data.viewdoctor;
     		$scope.doctor_qualifs = response.data.doctor_qualifs;

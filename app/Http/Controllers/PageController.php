@@ -151,7 +151,7 @@ class PageController extends Controller
         $first_name=$request->firstname;
         $emailfrom=$request->email_id;
         $comment=$request->comment;
-        //echo $first_name.'-'.$emailfrom.'-'.$comment.'-'.$emailto;
+        
         if ($validator->fails()) {
             return response()->json(['error' => true,
                 'message' => $validator->messages()->first(),
@@ -1412,11 +1412,20 @@ class PageController extends Controller
     public function post_doctor_detail(Request $request)
     {
        $doctor_id=$request->doctor_id;
+       $data = array();
        $doctor_data = Doctor::with('doctor_qualifications')->where('id',$doctor_id)->get()->toArray();
 
-       //$doctor_qualifs = Doctor::with('doctor_qualifications')->where('id',$doctor_id)->get()->toArray();
-       
-       return response()->json(['doctor_data'=>$doctor_data,'status_code'=>200]);
+       foreach ($doctor_data as $value) {
+       if(file_exists( public_path() . '/uploads/doctors/thumb/'.$value['avators']) && $value['avators']) {
+                $avators =  '/uploads/doctors/thumb/'.$value['avators'];
+            } else {
+                $avators =  '/uploads/doctors/noimage_user.jpg';
+            }
+
+        $data[] = array('first_name'=>$value['first_name'],'last_name'=>$value['last_name'],'email'=>$value['email'],'dob'=>date('d-m-Y',strtotime($value['dob'])),'mobile'=>$value['mobile'],'payment'=>$value['payment'],'license'=>$value['license'],'doctor_qualifications'=>$value['doctor_qualifications'],'avators'=>$avators,'doctor_id'=>$value['id']);
+       }
+
+      return response()->json(['doctor_data'=>$data,'status_code'=>200]);
     }
 
 }
