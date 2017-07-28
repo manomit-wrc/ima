@@ -24,7 +24,7 @@
                                             <td>Description</td>
                                             <td>No of people</td>
                                             <td>Status</td>
-                                            <td>Action</td>
+                                            <td colspan="3">Action</td>
                                           </tr>
                                           
                                           <tr ng-repeat="j in group_list track by $index">
@@ -33,8 +33,8 @@
                                             <td>{{j.no_of_people}}</td>
                                             <td>{{j.status == '1'? 'Active':'Inactive'}}</td>
                                             
-                                            <td>
-                                            <a class="ed" href="/groups/edit/{{j.id}}"><i class="fa fa-pencil-square" aria-hidden="true"></i></a> | <a class="ed" href="javascript:void(0)" ng-click="removeGroup(j.id)" ><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                                            <td colspan="3">
+                                            <a class="ed" href="/groups/edit/{{j.id}}"><i class="fa fa-pencil-square" aria-hidden="true"></i></a> | <a class="ed" href="javascript:void(0)" ng-click="removeGroup(j.id)" ><i class="fa fa-trash" aria-hidden="true"></i></a> | <a href="/comment-list/1/">Post</a></td>
                                           </tr>
 
                                           <tr ng-if="!(group_list).length">
