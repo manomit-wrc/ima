@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddHospitalNameToDoctorsTable extends Migration
+class AddGroupImageToGroupsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class AddHospitalNameToDoctorsTable extends Migration
      */
     public function up()
     {
-        Schema::table('doctors', function (Blueprint $table) {
-            
-            $table->integer('specialist_id')->unsigned();
-            $table->foreign('specialist_id')->references('id')->on('specialists')->after('doj')->nullable();
+        Schema::table('groups', function (Blueprint $table) {
+            $table->string('group_image')->after('no_of_people')->default('');
         });
     }
 
@@ -27,6 +25,8 @@ class AddHospitalNameToDoctorsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('groups', function (Blueprint $table) {
+            //
+        });
     }
 }

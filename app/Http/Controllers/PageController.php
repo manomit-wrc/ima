@@ -960,10 +960,11 @@ class PageController extends Controller
 
     public function add_group(Request $request) {
         $validator = Validator::make($request->all(),[
-            'name' => 'required|max:20',
+            'name' => 'required|max:20|unique:groups,name',
             'description' => 'required',
             'no_of_people' => 'required|numeric|min:1|max:100',
-            'status' => 'required'
+            'status' => 'required',
+            'group_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ],[
             'name.required' => 'Please enter group name',
             'name.max:20' => 'Group name should not be more than 20 characters',
@@ -972,7 +973,10 @@ class PageController extends Controller
             'no_of_people.numeric' => 'It should be only number',
             'no_of_people.min:1' => 'It should have minimum 1 member',
             'no_of_people.max:100' => 'It should have maximum 100 member',
-            'status.required' => 'Please select status'
+            'status.required' => 'Please select status',
+            'group_image.required' => 'Please select group image',
+            'group_image.image|mimes:jpeg,png,jpg,gif,svg' => 'Should be valid image',
+            'group_image.max:2048' => 'Maximum image size should be 2 MB'
         ]);
 
         if ($validator->fails()) {
@@ -981,6 +985,23 @@ class PageController extends Controller
                 'code' => 500]);
         }
         else {
+            if($request->hasFile('group_image')) {
+                $file = $request->file('group_image');
+
+                $fileName = time().'_'.$file->getClientOriginalName() ;
+                $destinationPath = public_path().'/uploads/groups/thumb' ;
+
+                $img = Image::make($file->getRealPath());
+
+                $img->resize(200, 200, function ($constraint){
+                    $constraint->aspectRatio();
+                })->save($destinationPath.'/'.$fileName);
+
+                //original destination path
+                $destinationPath = public_path().'/uploads/groups/' ;
+                $file->move($destinationPath,$fileName);
+            }
+
             $user = JWTAuth::toUser($request->header('token'));
             $group = new \App\Group();
             $group->name = $request->name;
@@ -988,11 +1009,23 @@ class PageController extends Controller
             $group->no_of_people = $request->no_of_people;
             $group->status = $request->status;
             $group->doctor_id = $user->id;
+            $group->group_image = $fileName;
 
             $group->save();
 
+            $doctor_ids = explode(",", $request->doctor_ids);
+            foreach ($doctor_ids as $value) {
+                $insert_data = new \App\SendGroupRequest();
+                $insert_data->group_id = $group->id;
+                $insert_data->sender_id = $user->id;
+                $insert_data->receiver_id = $value;
+                $insert_data->description = $request->description;
+
+                $insert_data->save();
+            }
+
             return response()->json(['error' => false,
-                'message' => 'Group addedd successfully',
+                'message' => "Group added and request sent successfully",
                 'code' => 200]);
         }
     }
@@ -1105,7 +1138,7 @@ class PageController extends Controller
         $find_doctors = \App\Doctor::where('type','D')->where('id','<>',$user->id)->get();
 
         $doctor_arr = array();
-
+        $data = array();
         foreach ($receiver_details as $key => $value) {
            $doctor_arr[] = $value['receiver_id'];
         }

@@ -1,6 +1,6 @@
-var AuthCtrl = angular.module('AuthCtrl',['oitozero.ngSweetAlert','ui.bootstrap','ngSlimScroll']);
+var AuthCtrl = angular.module('AuthCtrl',['oitozero.ngSweetAlert','ui.bootstrap','ngSlimScroll','ngCookies']);
 
-AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$routeParams,$cookieStore,$window,SweetAlert,$modal,$sce){
+AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$routeParams,$cookieStore,$window,SweetAlert,$modal,$sce,$cookies){
 	$scope.code = '';
 	$scope.message = '';
 	$scope.user = {};
@@ -664,6 +664,13 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 	      });
 	};
 
+	$scope.uploadedGroupImage = function(element) {
+		 $scope.$apply(function($scope) {
+	       $scope.group_image = element.files[0];
+	       
+	      });
+	};
+
 	$scope.uploadedImage = function(element) {
 		 $scope.$apply(function($scope) {
 	       $scope.image = element.files[0];
@@ -1101,7 +1108,6 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 	};
 
 	$scope.loadAddNewGroup = function() {
-		//$scope.activeClass = LeftBtnActive;
 		$window.location.href = "/groups/add";
 	};
 
@@ -1111,29 +1117,60 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 	$scope.doAddGroup = function(valid) {
 		if(valid) {
 			$scope.isDisabled = true;
-			$http.post('/api/add-group', {
-			name:$scope.name,
-			description:$scope.description,
-			no_of_people:$scope.no_of_people,
-			status:$scope.status
-			}).then(function(response){
-				$scope.message = response.data.message;
-				$scope.code = response.data.code;
-				if($scope.code == 200) {
-					//
-					 SweetAlert.swal({   
-				     title: "Thank You",   
-				     text: response.data.message,   
-				     type: "success",     
+			$http({
+                    method: 'POST',
+                    url: '/api/add-group',
+                    headers: {
+                		'Content-Type': undefined
+            		},
+                    data: {
+                        name:$scope.name,
+						description:$scope.description,
+						no_of_people:$scope.no_of_people,
+						status:$scope.status,
+						group_image:$scope.group_image,
+						doctor_ids:$cookies.get('doctor_id_array')
+                    },
+                    transformRequest: function (data, headersGetter) {
+                        var formData = new FormData();
+                        angular.forEach(data, function (value, key) {
+                            formData.append(key, value);
+                        });
+                        return formData;
+                    }
+                })
+                .then(function (response) {
+                	if(response.data.code == 200) {
+						 SweetAlert.swal({   
+					     title: "Thank You",   
+					     text: response.data.message,   
+					     type: "success",     
+					     confirmButtonColor: "#DD6B55",   
+					     confirmButtonText: "OK"
+					    },  function(){  
+					     $window.location.href = "/groups";
+					    });
+					}
+					else {
+						SweetAlert.swal({   
+					     title: response.data.message,  
+					     type: "warning",     
+					     confirmButtonColor: "#DD6B55",   
+					     confirmButtonText: "OK",
+					     closeOnConfirm: true
+					    });
+					}
+                	
+                })
+                .catch(function (reason) {
+                	SweetAlert.swal({   
+				     title: "Please try again",  
+				     type: "warning",     
 				     confirmButtonColor: "#DD6B55",   
-				     confirmButtonText: "OK"
-				    },  function(){  
-				     $window.location.href = "/groups";
+				     confirmButtonText: "OK",
+				     closeOnConfirm: true
 				    });
-				}
-			}).catch(function(reason){
-				
-			});
+                });
 		}
 	};
     
@@ -1467,6 +1504,34 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 
     $scope.get_block = function(show) {
     	$scope[show] ? $scope[show] = false: $scope[show]= true; 
+    };
+
+    $scope.check_selected_doctors = function() {
+    	$scope.doctorArray = [];
+	    angular.forEach($scope.doctor_list, function(j){
+	      if (j.selected) $scope.doctorArray.push(j.id);
+	    });
+	    if($scope.doctorArray.length <= 0) {
+	    	SweetAlert.swal({   
+		     title: "Doctors",   
+		     text: "Please select atleast one doctor",   
+		     type: "warning",     
+		     confirmButtonColor: "#DD6B55",   
+		     confirmButtonText: "OK",
+		     closeOnConfirm: true
+		    });
+	    }
+	    else {
+	    	$cookies.put('doctor_id_array',$scope.doctorArray);
+	    	$scope.tab = 2;
+	    }
+	    
+    	
+    };
+
+    $scope.back_to_list = function() {
+    	console.log($cookies.get('doctor_id_array'));
+    	$scope.tab = 1;
     };
 
 });
