@@ -715,9 +715,11 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     		$scope.viewdoctor = response.data.viewdoctor;
     		$scope.doctor_qualifs = response.data.doctor_qualifs;
     		$scope.doctor_certificates = response.data.doctor_certificates;
-
-    		 
-               //$scope.modalInstance.hide();
+            $scope.modal.hide();
+              //var myl = modal.scope.modalInstance;
+              //myl.dismiss('cancel');
+              //$modalInstance.close();
+    		  //$scope.modalInstance.hide();
             
     		
     	});
