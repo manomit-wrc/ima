@@ -26,7 +26,7 @@
                                             <td>Email</td>
                                             <td>Mobile</td>
                                             <td>License Number</td>
-                                            <td>Action</td>
+                                            <td colspan="2">Action</td>
                                           </tr>
                                           
                                           <tr ng-repeat="j in doctor_list track by $index" >
@@ -39,8 +39,16 @@
                                             <td>{{j.mobile}}</td>
                                             <td>{{j.license}}</td>
                                             <td ng-if="(j.send_group_requests).length && j.send_group_requests[0].sender_id==user.id"><button type="button" class="sendrqst" >Request Sent</button></td>
-                                            <td ng-if="(j.send_group_requests).length && j.send_group_requests[0].sender_id!=user.id"><button type="button" class="sendrqst" ng-click="open(j.id);" >Send Request</button></td>
+                                            <td ng-if="(j.send_group_requests).length && j.send_group_requests[0].sender_id!=user.id"><button type="button" class="sendrqst" ng-click="open(j.id);" >Send Request</button>
+                                            
+                                            
+
+                                            </td>
                                              <td ng-if="!(j.send_group_requests).length"><button type="button" class="sendrqst" ng-click="open(j.id);" >Send Request</button></td>
+                                             <td>
+                                                 <button type="button" class="sendrqst" ng-click="open_message(j.id);" >Send Message</button>
+
+                                             </td>
 
                                           </tr>
                                           <tr ng-if="!(doctor_list).length">

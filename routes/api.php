@@ -91,6 +91,8 @@ Route::group(['middleware' => 'jwt.auth'], function () {
 
     Route::post('/send-group-request','PageController@send_group_request');
 
+    Route::post('/send-doctor-message','PageController@send_doctor_message');
+
     Route::get('/get-all-group-request','PageController@get_all_group_request');
 
     Route::get('/accept-group-invitation','PageController@accept_group_invitation');

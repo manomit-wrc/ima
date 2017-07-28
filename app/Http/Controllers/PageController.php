@@ -13,6 +13,7 @@ use App\Event;
 use App\LocalBranch;
 use Validator;
 use App\Doctor;
+use App\Message;
 use App\Drug;
 use App\Comment;
 use App\State;
@@ -1291,6 +1292,31 @@ class PageController extends Controller
         
 
     }
+
+
+    public function send_doctor_message(Request $request) 
+    {
+        
+        $user = JWTAuth::toUser($request->header('token'));
+        $replay_doctor_id = $request->msg_doctor_id;
+        $message_description = $request->doctormessage;
+         
+        //echo $replay_doctor_id.'#'.$message_description;die();
+                
+
+                $messages= new Message();
+                $messages->doctor_id =$user->id;
+                $messages->replay_id =$replay_doctor_id;
+                $messages->message =$message_description;
+                
+
+                $messages->save();
+
+                return response()->json(['error' => false,
+                    'message' => "Message send successfully",
+                    'code' => 200]);
+      }
+  
 
     public function get_all_group_request(Request $request) {
         $user = JWTAuth::toUser($request->header('token'));

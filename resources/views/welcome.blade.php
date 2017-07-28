@@ -74,11 +74,9 @@
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
-<<<<<<< HEAD
+
     <div id="wrapper" ng-controller="AuthController" ng-init="loadPath();" >
-=======
-    <div id="wrapper" ng-controller="AuthController" ng-init="loadPath();" ng-cloak>
->>>>>>> e172e209031424389b07d104e5e094fee4aa0627
+
     
         <my-navbar></my-navbar>
         <!-- Section: intro -->
@@ -474,6 +472,47 @@
 
   </script>
                 <!--end post model-->
+
+                <!--start message modal-->
+                   <script type="text/ng-template" id="myModalMessage.html">
+                <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"  aria-label="Close"><span aria-hidden="true" ng-click="cancel();">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel"><i class="fa fa-user" aria-hidden="true"></i> Send Message</h4>
+                            <div class="login registration-error" ng-show="code==1">@{{message}}</div>
+                        </div>
+                <form name="sendDoctorMessage" id="sendDoctorMessage" ng-controller="AuthController">
+                            <div class="modal-body">
+                              
+                                
+                                
+
+                                
+                                <div class="infbox22" ng-class="{
+                                            'has-error':!sendDoctorMessage.doctormessage.$valid && (!sendDoctorMessage.$pristine || sendDoctorMessage.$submitted), 
+                                            'has-success': sendDoctorMessage.doctormessage.$valid && (!sendDoctorMessage.$pristine || sendDoctorMessage.$submitted)
+                                            }">
+                                   
+                                    <textarea name="doctormessage" ng-model="doctormessage" class="Massageuser" required="required" cols="" rows="" placeholder="Write Your Massage"></textarea>
+                                    <span class="help-block" ng-show="sendDoctorMessage.group_id.$error.required && (!sendDoctorMessage.$pristine || sendDoctorMessage.$submitted)">Please Write Message</span>
+
+                                    
+                                </div>
+
+                                <div class="modal-footer" style="text-align: center;">
+                            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+                            <input type="button" class="btn primary-btn" value="Submit" ng-click="sendMessageDoctor()" />
+                              <input type="hidden" ng-model="msg_doctor_id" id="msg_doctor_id" name="msg_doctor_id">
+                            </div>
+                            
+                        </div>
+                        </form>
+                        </div>
+            </script>
+
+                <!--end message modal-->
+
+
     </div>
     <a href="javascript:void(0)" class="scrollup"><i class="fa fa-angle-up active"></i></a>
     <!-- Core JavaScript Files -->

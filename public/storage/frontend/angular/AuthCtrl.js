@@ -1438,6 +1438,26 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
          }); 
       };
 
+      $scope.open_message=function($id){
+    	var doctor_id=$id;
+    	
+    	angular.element(document.querySelector(".newli")).removeClass("open");
+    	$modal.open({
+            templateUrl: 'myModalMessage.html',
+            backdrop: true, 
+            windowClass: 'modal',
+
+              controller : function($scope){
+                  
+                  $scope.msg_doctor_id=doctor_id;
+              },
+         }); 
+      };
+
+
+
+
+
       $scope.getPostDoctorDetail=function($id)
       {
 
@@ -1500,6 +1520,53 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
     		});
     	}
     	
+    };
+
+    $scope.sendMessageDoctor=function()
+    {
+       var doctor_id=$scope.msg_doctor_id;
+       var doctor_massage=$scope.doctormessage;
+       //console.log(doctor_id);
+        if(!$scope.sendDoctorMessage.$valid)
+    	{
+    		SweetAlert.swal({   
+		     title: "Please enter Message to send Doctor",  
+		     type: "warning",     
+		     confirmButtonColor: "#DD6B55",
+		     showCancelButton: true,   
+		     confirmButtonText: "OK",
+		     closeOnConfirm: true
+		    });
+    	}
+    	else{
+    		$http.post('/api/send-doctor-message',{
+				msg_doctor_id: $scope.msg_doctor_id,
+				doctormessage: $scope.doctormessage
+				
+    		}).then(function(response){
+    			SweetAlert.swal({   
+				     title: "Thank You",   
+				     text: response.data.message,   
+				     type: "success",     
+				     confirmButtonColor: "#DD6B55",   
+				     confirmButtonText: "OK"
+				    },  function(){  
+				     window.location.reload();
+				    });
+    		}).catch(function(reason){
+    			SweetAlert.swal({   
+				     title: "Thank You",   
+				     text: response.data.message,   
+				     type: "warning",     
+				     confirmButtonColor: "#DD6B55",   
+				     confirmButtonText: "OK",
+				     closeOnConfirm: true
+				    });
+    		});
+    	}
+
+
+
     };
 
     $scope.get_block = function(show) {

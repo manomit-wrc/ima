@@ -1197,6 +1197,13 @@ hr.bold {
     width: 70%;
 }
 
+.modal-body .infbox22 {
+    border: 1px solid #ccc;
+    height: 80px;
+    margin: 2px auto 15px auto;
+    width: 70%;
+}
+
 .userid {
     border-right: 1px solid #ccc;
     color: #ccc;
@@ -1216,6 +1223,18 @@ hr.bold {
     line-height: 38px;
     padding-left: 10px;
     width: 80%;
+}
+
+.Massageuser {
+    background: transparent none repeat scroll 0 0;
+    border: medium none;
+    float: left;
+    height: 80px;
+    line-height: 38px;
+    padding-left: 10px;
+    width: 100%;
+    border: none;
+    resize: none;
 }
 
 .modal-title {
