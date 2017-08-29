@@ -244,7 +244,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
             //console.log(response.data.group_list.data);
 			$scope.$parent.group_list = response.data.group_list.data;
             $scope.$parent.totalPages   = response.data.group_list.last_page;
-          $scope.$parent.currentPage  = response.data.group_list.current_page;
+            $scope.$parent.currentPage  = response.data.group_list.current_page;
             var pages = [];
 
 	      for(var i=1;i<=response.data.group_list.last_page;i++) {          
@@ -292,8 +292,10 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 	//end paginations//
 
 	$scope.homeContent = function() {
-		$http.get('/api/home-content').then(function(response){
 
+		$http.get('/api/home-content').then(function(response){
+             
+            
 			$scope.banners = response.data.banners;
 			$scope.teams = response.data.teams;
 			

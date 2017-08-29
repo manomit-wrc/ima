@@ -50,7 +50,7 @@
                     <tr>
                       <td>{{$value->name}}</td>
                       <td>{{$value->status == '1'?'Active':'In-Active'}}</td>
-                      <td><img src="{{ url('uploads/bulletin/thumb/' .$value->bulletin_image)}}" alt="{{$value->bulletin_image}}"></td>
+                      <td><img src="{{ url('uploads/bulletin/thumb/' .$value->bulletin_image)}}" alt="{{$value->bulletin_image}}" height="70" width="70"></td>
                       
                       </td>
                       <td><a href="/admin/bulletin/edit/{{$value->id}}" >Edit</a>&nbsp;|&nbsp;<a href="/admin/bulletin/delete/{{$value->id}}" onclick="return confirm('Are you sure?')">Delete</a></td>

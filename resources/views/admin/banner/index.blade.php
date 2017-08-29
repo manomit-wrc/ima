@@ -50,7 +50,7 @@
                     <tr>
                       <td>{{$value->name}}</td>
                       <td>{{$value->short_description}}</td>
-                      <td><img src="{{ url('uploads/banner/thumb/' .$value->banner_image)}}" alt="{{$value->banner_image}}"></td>
+                      <td><img src="{{ url('uploads/banner/thumb/' .$value->banner_image)}}" alt="{{$value->banner_image}}" height="70" width="70"></td>
                       
                       </td>
                       <td><a href="/admin/banner/edit/{{$value->id}}" >Edit</a>&nbsp;|&nbsp;<a href="/admin/banner/delete/{{$value->id}}" onclick="return confirm('Are you sure?')">Delete</a></td>

@@ -89,8 +89,12 @@
 
                     <div class="col-sm-10">
                       <input type="file" class="form-control" id="inputAvators" name="avators" >
-                      <span class="text-danger">{{ $errors->first('avators') }}</span>
+                      <span class="text-danger" id="hid_err">{{ $errors->first('avators') }}</span>
                     </div>
+
+                     <font id="pre_img" style="display:none">
+                      <div class="col-md-10 col-md-offset-2"><img src="" id="profile-img-tag" width="100px" style="margin-top:1%" /></div>
+                     </font>
                   </div>
 
                   <div class="form-group {{ $errors->has('designation_id') ? 'has-error' : '' }}">
@@ -142,4 +146,32 @@
     </section>
     <!-- /.content -->
   </div>
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+  <script type="text/javascript">
+    function readURL(input) {
+         document.getElementById('hid_err').style.visibility='hidden';
+         var mimeType=input.files[0]['type'];
+
+         if (input.files && input.files[0] && mimeType.split('/')[0]=="image") {
+
+            document.getElementById('pre_img').style.display='block';
+            var reader = new FileReader();
+            
+            reader.onload = function (e) {
+                $('#profile-img-tag').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+        else
+        {
+          
+          document.getElementById('pre_img').style.display='none';
+          alert("Not A image file");
+        }
+    }
+    $("#inputAvators").change(function(){
+        readURL(this);
+    });
+</script>
 @stop

@@ -41,6 +41,7 @@
                   <th>Last Name</th>
                   <th>Email</th>
                   <th>Designation</th>
+                  <th>Image</th>
                   <th>Status</th>
                   <th>Action</th>
                   
@@ -54,6 +55,7 @@
                       <td>{{$value->last_name}}</td>
                       <td>{{$value->email}}</td>
                       <td>{{$value->designations->name}}</td>
+                      <td><img src="{{ url('uploads/teams/thumb/'.$value->avators)}}" alt="{{$value->avators}}" height="50" width="50"></td>
                       <td>{{$value->status == '1'?'Active':'In-Active'}}
                       </td>
                       <td><a href="/admin/team/edit/{{$value->id}}" >Edit</a>&nbsp;|&nbsp;<a href="/admin/team/delete/{{$value->id}}" onclick="return confirm('Are you sure?')">Delete</a></td>

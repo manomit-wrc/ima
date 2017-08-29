@@ -42,6 +42,7 @@
                   <th>Email</th>
                   <th>Mobile</th>
                   <th>Designation</th>
+                  <th>Image</th>
                   <th>Status</th>
                   <th>Action</th>
                   
@@ -56,6 +57,7 @@
                       <td>{{$value->email_id}}</td>
                       <td>{{$value->mobile_no}}</td>
                       <td>{{$value->designations->name}}</td>
+                      <td><img src="{{ url('uploads/local_branch/thumb/'.$value->branch_image)}}" alt="{{$value->branch_image}}" height="50" width="50"></td>
                       <td>{{$value->status == '1'?'Active':'In-Active'}}
                       </td>
                       <td><a href="/admin/local-branch/edit/{{$value->id}}" >Edit</a>&nbsp;|&nbsp;<a href="/admin/local-branch/delete/{{$value->id}}" onclick="return confirm('Are you sure?')">Delete</a></td>

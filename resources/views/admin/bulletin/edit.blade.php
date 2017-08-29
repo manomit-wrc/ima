@@ -45,10 +45,23 @@
 
                     <div class="col-sm-10">
                       <input type="file" class="form-control" id="bulletin_image" name="bulletin_image" >
-                      <span class="text-danger">{{ $errors->first('bulletin_image') }}</span>
-                      <img src="{{ url('uploads/bulletin/thumb/' .$bulletin_list->bulletin_image)}}" alt="{{$bulletin_list->bulletin_image}}">
+                      <span class="text-danger" id="hid_err">{{ $errors->first('bulletin_image') }}</span>
+                     
                     </div>
                   </div>
+
+                   <font id="shw_img" >
+                     <div class="form-group" class="col-md-2 control-label">
+                     <div class="col-sm-10 col-md-offset-2">
+                         <img src="{{ url('uploads/bulletin/thumb/'.$bulletin_list->bulletin_image)}}" alt="{{$bulletin_list->bulletin_image}}" height="70" width="70">
+                     </div>
+                     </div>
+                   </font>
+                   <font id="pre_img" style="display:none">
+                     <div class="form-group" class="col-md-2 control-label">
+                     <div class="col-md-10 col-md-offset-2"><img src="" id="profile-img-tag" width="100px" /></div>
+                     </div>
+                   </font>
 
                   <div class="form-group {{ $errors->has('bulletin_file') ? 'has-error' : '' }}">
                     <label for="bulletin_file" class="col-sm-2 control-label">File</label>
@@ -93,4 +106,30 @@
     </section>
     <!-- /.content -->
   </div>
+
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+  <script type="text/javascript">
+    function readURL(input) {
+          var mimeType=input.files[0]['type'];
+          document.getElementById('hid_err').style.visibility='hidden';
+          document.getElementById('shw_img').style.display='none';
+          document.getElementById('pre_img').style.display='block';
+        if (input.files && input.files[0] && mimeType.split('/')[0]=="image") {
+            var reader = new FileReader();
+            
+            reader.onload = function (e) {
+                $('#profile-img-tag').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+        else
+        {
+          document.getElementById('pre_img').style.display='none';
+          alert("Not A image file");
+        }
+    }
+    $("#bulletin_image").change(function(){
+        readURL(this);
+    });
+</script>
 @stop
