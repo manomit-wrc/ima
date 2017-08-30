@@ -21,11 +21,11 @@ authService.factory('Auth', function($http,$q,AuthToken,$cookieStore){
 		return defer.promise;
 	};
 	authFactory.do_contact = function(firstname,lastname,email_id,phone,comment) {
-		/*console.log(firstname);
+		console.log(firstname);
 		console.log(lastname);
 		console.log(email_id);
 		console.log(phone);
-		console.log(comment);*/
+		console.log(comment);
 		var defer = $q.defer();
 		$http.post('/api/contactsave', {
 			firstname:firstname,

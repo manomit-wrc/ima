@@ -54,7 +54,7 @@
 
                     <div class="col-sm-10">
                       <input type="file" class="form-control" id="file_name"  name="file_name" >
-                      <span class="text-danger" >{{ $errors->first('file_name') }}</span>
+                      <span class="text-danger">{{ $errors->first('file_name') }}</span>
                     </div>
 
                     

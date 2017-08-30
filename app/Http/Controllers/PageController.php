@@ -96,7 +96,7 @@ class PageController extends Controller
     }
 
     public function registration(Request $request) {
-        
+          
         $validator = Validator::make($request->all(),[
             'first_name' => 'required|max:40',
             'last_name' => 'required|max:40',
@@ -122,7 +122,7 @@ class PageController extends Controller
             
             $doctor->active_token = str_replace("/","",Hash::make(str_random(30)));
             $doctor->status = "0";
-            
+            //die();
             if($doctor->save()) {
                 $activation_link = config('app.url').'activate/'.$doctor->active_token."/".time();
                 Mail::to($request->input('email'))->send(new RegistrationEmail($activation_link));
@@ -135,7 +135,7 @@ class PageController extends Controller
     }
 
     public function contact_save(Request $request) {
-       
+      
          $validator = Validator::make($request->all(),[
             'firstname' => 'required|max:40',
             'lastname' => 'required|max:40',
@@ -437,13 +437,9 @@ class PageController extends Controller
         }
         else {
  
-            //$doctor_id = $request->doctor_id;
-            //echo $doctor_id;die();
+           
             $filedata=array();
-            //$filedata=$request->file('doctor_file');
-            /*echo "<pre>";
-            print_r($filedata);
-            echo "</pre>";die();*/
+           
 
             if($request->hasFile('doctor_file')) {
                 foreach ($request->file('doctor_file') as $key => $value) {
@@ -457,10 +453,6 @@ class PageController extends Controller
                     $filedata[]=$fileName;
                 }
             
-            
-             //$a=$request->payment_type;
-             //echo $a;die();
-
             $doctors =  Doctor::find($request->doctor_id);
             
             $doctors->payment = $request->payment;
@@ -497,16 +489,17 @@ class PageController extends Controller
         }
 
   }
-
-
-
+   
     public function get_news(Request $request) {
         $news_id = $request->news_id;
         $news_slug = $request->slug;
+
         $news_arr = array();
         $tags_arr = array();
         $news_details = \App\News::with('tags')->where('id',$news_id)->get()->toArray();
-        
+
+           
+      
         foreach ($news_details as $value) {
            $news_arr[] = array('title'=>$value['title'],'description'=>$value['description'],'published_date'=>date('d-m-Y',strtotime($value['published_date'])));
            foreach ($value['tags'] as  $value1) {
@@ -514,8 +507,9 @@ class PageController extends Controller
            }
 
         }
+       
 
-        return response()->json(['tags_arr' => $tags_arr,
+         return response()->json(['tags_arr' => $tags_arr,
                 'news_arr' => $news_arr]);
     }
 
@@ -527,8 +521,8 @@ class PageController extends Controller
         $events_details = \App\Event::find($events_id);
         return response()->json(['events_arr'=> $events_details]);
     }
-
-    public function check_user_email(Request $request) {
+ 
+   public function check_user_email(Request $request) {
         $email = $request->email;
         $check_email = Doctor::where('email',$email)->get();
         if($check_email) {

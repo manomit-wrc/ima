@@ -192,7 +192,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 
 			$scope.group_list = response.data.group_list.data;
             $scope.totalPages   = response.data.group_list.last_page;
-          $scope.currentPage  = response.data.group_list.current_page;
+            $scope.currentPage  = response.data.group_list.current_page;
             var pages = [];
 
 	      for(var i=1;i<=response.data.group_list.last_page;i++) {          
@@ -311,6 +311,8 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 		});
 	}
 	$scope.doRegistration = function(valid) {
+		//alert('ok');
+		//console.log($scope.registration.first_name);
 		if(valid) {
 				$scope.isDisabled = true;
 				Auth.do_registration($scope.registration.first_name, 
@@ -343,8 +345,7 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
 	};
 	$scope.doContact=function(valid) {
 		
-		        //console.log($scope.registration.firstname);
-		        //console.log('hello');
+		        
 		       if(valid) {
 				$scope.isDisabled = true;
 				Auth.do_contact($scope.registration.firstname, 
@@ -861,7 +862,6 @@ AuthCtrl.controller('AuthController',function($scope,$http,Auth,$location,$route
      $scope.getEventsDetails = function() {
     	$http.get('/api/get-events/',{
     		params: { events_id:$routeParams.events_id,slug: $routeParams.slug}
-    		
     		
     	}).then(function(response){
     		
